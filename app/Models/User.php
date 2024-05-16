@@ -32,6 +32,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'asociacion',
+        'especialidad',
+        'cedula',
+        'clave',
+        'ap_materno',
+        'ap_paterno',
+        'status'
     ];
 
     /**

@@ -15,10 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('status');
             $table->string('name');
-            $table->string('ap_paterno');
-            $table->string('ap_materno');
+            $table->string('ap_paterno')->nullable();
+            $table->string('ap_materno')->nullable();
             $table->string('clave')->nullable();
             $table->string('email')->unique();
+            $table->string('cedula')->nullable();
+            $table->string('especialidad')->nullable();
+            $table->string('asociacion')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

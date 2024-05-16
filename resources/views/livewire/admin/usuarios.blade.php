@@ -47,6 +47,7 @@
                 <x-table.heading sortable wire:click="sortBy('name')" :direction="$sort === 'name' ? $direction : null">Nombre</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('email')" :direction="$sort === 'email' ? $direction : null">Correo</x-table.heading>
                 <x-table.heading >Rol</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('asociacion')" :direction="$sort === 'asociacion' ? $direction : null">Asociación</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('status')" :direction="$sort === 'status' ? $direction : null">Estado</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
@@ -91,6 +92,14 @@
                                 {{ $usuario->getRoleNames()->first() }}
 
                             @endif
+
+                        </x-table.cell>
+
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Asociación</span>
+
+                            {{ $usuario->asociacion ?? 'N/A' }}
 
                         </x-table.cell>
 
@@ -237,9 +246,61 @@
 
                 </x-input-group>
 
+                <x-input-group for="modelo_editar.ap_paterno" label="Apellido paterno" :error="$errors->first('modelo_editar.ap_paterno')" class="w-full">
+
+                    <x-input-text id="modelo_editar.ap_paterno" wire:model="modelo_editar.ap_paterno" />
+
+                </x-input-group>
+
+                <x-input-group for="modelo_editar.ap_materno" label="Apellido materno" :error="$errors->first('modelo_editar.ap_materno')" class="w-full">
+
+                    <x-input-text id="modelo_editar.ap_materno" wire:model="modelo_editar.ap_materno" />
+
+                </x-input-group>
+
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between gap-3 mb-3">
+
                 <x-input-group for="modelo_editar.email" label="Email" :error="$errors->first('modelo_editar.email')" class="w-full">
 
                     <x-input-text id="modelo_editar.email" wire:model="modelo_editar.email" />
+
+                </x-input-group>
+
+                <x-input-group for="modelo_editar.clave" label="Clave del perito" :error="$errors->first('modelo_editar.clave')" class="w-full">
+
+                    <x-input-text id="modelo_editar.clave" wire:model="modelo_editar.clave" />
+
+                </x-input-group>
+
+                <x-input-group for="modelo_editar.cedula" label="Cédula profesional" :error="$errors->first('modelo_editar.cedula')" class="w-full">
+
+                    <x-input-text id="modelo_editar.cedula" wire:model="modelo_editar.cedula" />
+
+                </x-input-group>
+
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between gap-3 mb-3">
+
+                <x-input-group for="modelo_editar.especialidad" label="Especialidad en valuación" :error="$errors->first('modelo_editar.especialidad')" class="w-full">
+
+                    <x-input-text id="modelo_editar.especialidad" wire:model="modelo_editar.especialidad" />
+
+                </x-input-group>
+
+                <x-input-group for="modelo_editar.asociacion" label="Asociación" :error="$errors->first('modelo_editar.asociacion')" class="w-full">
+
+                    <x-input-select id="modelo_editar.asociacion" wire:model="modelo_editar.asociacion" class="w-full">
+
+                        <option value="">Seleccione una opción</option>
+
+                        @foreach ($asociaciones as $asociacion)
+                            <option value="{{ $asociacion }}">{{ $asociacion }}</option>
+                        @endforeach
+
+                    </x-input-select>
 
                 </x-input-group>
 

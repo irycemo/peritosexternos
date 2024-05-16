@@ -1,7 +1,9 @@
 <?php
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\AvaluoApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::get('consulta_avaluo', [AvaluoApiController::class, 'consultarAvaluo']);
+
+    Route::get('consulta_avaluo_id', [AvaluoApiController::class, 'consultarAvaluoId']);
+
+    Route::get('reactivar_avaluo', [AvaluoApiController::class, 'reactivarAvaluo']);
+
+    Route::get('operar_avaluo', [AvaluoApiController::class, 'operarAvaluo']);
+
 });

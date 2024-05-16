@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Constantes\Constantes;
 use App\Models\Role;
 use App\Models\User;
 use Livewire\Component;
@@ -18,6 +19,7 @@ class Usuarios extends Component
     public $roles;
     public $ubicaciones;
     public $areas_adscripcion;
+    public $asociaciones;
 
     public User $modelo_editar;
     public $role;
@@ -25,9 +27,15 @@ class Usuarios extends Component
     protected function rules(){
         return [
             'modelo_editar.name' => 'required',
+            'modelo_editar.ap_paterno' => 'required',
+            'modelo_editar.ap_materno' => 'required',
             'modelo_editar.email' => 'required|email|unique:users,email,' . $this->modelo_editar->id,
             'modelo_editar.status' => 'required|in:activo,inactivo',
-            'role' => 'required'
+            'role' => 'required',
+            'modelo_editar.clave' => 'required',
+            'modelo_editar.cedula' => 'required',
+            'modelo_editar.especialidad' => 'required',
+            'modelo_editar.asociacion' => 'required',
          ];
     }
 
@@ -70,7 +78,7 @@ class Usuarios extends Component
 
             DB::transaction(function () {
 
-                $this->modelo_editar->password = 'sistema';
+                $this->modelo_editar->password = bcrypt('sistema');
                 $this->modelo_editar->creado_por = auth()->user()->id;
                 $this->modelo_editar->save();
 
@@ -148,6 +156,8 @@ class Usuarios extends Component
 
         $this->roles = Role::where('id', '!=', 1)->select('id', 'name')->orderBy('name')->get();
 
+        $this->asociaciones = Constantes::ASOCIACIONES;
+
     }
 
     public function render()
@@ -156,6 +166,7 @@ class Usuarios extends Component
         $usuarios = User::with('creadoPor', 'actualizadoPor')->where('name', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('email', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('status', 'LIKE', '%' . $this->search . '%')
+                            ->orWhere('asociacion', 'LIKE', '%' . $this->search . '%')
                             ->orWhere(function($q){
                                 return $q->whereHas('roles', function($q){
                                     return $q->where('name', 'LIKE', '%' . $this->search . '%');

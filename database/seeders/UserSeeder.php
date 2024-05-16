@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'ap_paterno' => 'Robledo',
             'ap_materno' => 'Camacho',
             'status' => 'activo',
-            'email' => 'correo@correo.com',
+            'email' => 'enrique_j_@hotmail.com',
             'password' => bcrypt('sistema'),
         ])->assignRole('Administrador');
 
@@ -70,22 +70,20 @@ class UserSeeder extends Seeder
         ])->assignRole('Administrador');
 
         User::create([
-            'name' => 'Sergio Arturo',
-            'ap_paterno' => 'Calvillo',
-            'ap_materno' => 'Corral',
+            'clave' => 11,
+            'name' => 'Sistema trámites en línea',
             'status' => 'activo',
-            'email' => 'correo2@correo.com',
+            'email' => 'sistematramiteslinea@gmail.com',
             'password' => Hash::make('12345678'),
-        ])->assignRole('Director');
+        ])->assignRole('Sistemas');
 
         User::create([
-            'name' => 'Martin',
-            'ap_paterno' => 'Calvillo',
-            'ap_materno' => 'Corral',
+            'clave' => 12,
+            'name' => 'Sistema de Gestión Catastral',
             'status' => 'activo',
-            'email' => 'correo3@correo.com',
+            'email' => 'sgc@gmail.com',
             'password' => Hash::make('12345678'),
-        ])->assignRole('Jefe de departamento');
+        ])->assignRole('Sistemas');
 
     }
 }
