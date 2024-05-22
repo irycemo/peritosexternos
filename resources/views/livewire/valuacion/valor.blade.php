@@ -1059,18 +1059,28 @@
 
     @endif
 
+    @if(count($errors) > 0)
+
+        <div class="mb-5 bg-white rounded-lg p-2 shadow-lg flex gap-2 flex-wrap ">
+
+            <ul class="flex gap-2 felx flex-wrap list-disc ml-5">
+            @foreach ($errors->all() as $error)
+
+                <li class="text-red-500 text-xs md:text-sm ml-5">
+                    {{ $error }}
+                </li>
+
+            @endforeach
+
+        </ul>
+
+        </div>
+
+    @endif
+
     @if($predio && in_array($predio->avaluo->estado, ['nuevo', 'impreso']))
 
         <div class="bg-white rounded-lg p-3 flex justify-end mt-5">
-
-            @if(count($errors) > 0)
-
-                <span class="bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-red-700 flex items-center justify-center focus:outline-none ">
-                    Campos incorrectos
-                    @error('predio') <span class="error text-sm text-white">{{ $message }}</span> @enderror
-                </span>
-
-            @endif
 
             @if($predio && $predio->avaluo && $predio->avaluo->estado === 'nuevo')
 

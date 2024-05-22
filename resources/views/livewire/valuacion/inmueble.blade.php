@@ -4,7 +4,7 @@
 
         <div class="space-y-2 mb-5 bg-white rounded-lg p-2 text-right">
 
-            <span class="bg-blue-400 text-white text-sm rounded-full px-2 py-1">Folio de avaluo: {{ $predio->avaluo->año }}-{{ $predio->avaluo->folio }}</span>
+            <span class="bg-blue-400 text-white text-sm rounded-full px-2 py-1">Avalúo: {{ $predio->avaluo->año }}-{{ $predio->avaluo->folio }} / Predio: {{ $predio->cuentaPredial() }}</span>
 
         </div>
 
@@ -516,7 +516,7 @@
 
                 <div>
 
-                    <input type="number" class="bg-white rounded text-xs w-full" wire:model="predio.lote_fraccionador">
+                    <input type="text" class="bg-white rounded text-xs w-full" wire:model="predio.lote_fraccionador">
 
                 </div>
 
@@ -538,7 +538,7 @@
 
                 <div>
 
-                    <input type="number" class="bg-white rounded text-xs w-full" wire:model="predio.manzana_fraccionador">
+                    <input type="text" class="bg-white rounded text-xs w-full" wire:model="predio.manzana_fraccionador">
 
                 </div>
 
@@ -560,7 +560,7 @@
 
                 <div>
 
-                    <input type="number" class="bg-white rounded text-xs w-full" wire:model="predio.etapa_fraccionador">
+                    <input type="text" class="bg-white rounded text-xs w-full" wire:model="predio.etapa_fraccionador">
 
                 </div>
 
@@ -728,15 +728,26 @@
 
     </div>
 
+    @if(count($errors) > 0)
+
+        <div class="mb-5 bg-white rounded-lg p-2 shadow-lg flex gap-2 flex-wrap ">
+
+            <ul class="flex gap-2 felx flex-wrap list-disc ml-5">
+            @foreach ($errors->all() as $error)
+
+                <li class="text-red-500 text-xs md:text-sm ml-5">
+                    {{ $error }}
+                </li>
+
+            @endforeach
+
+        </ul>
+
+        </div>
+
+    @endif
+
     <div class="bg-white rounded-lg p-3 flex justify-end">
-
-        @if(count($errors) > 0)
-
-            <span class="bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-red-700 flex items-center justify-center focus:outline-none ">
-                Campos incorrectos {{ $errors }}
-            </span>
-
-        @endif
 
         @if(!$editar)
 

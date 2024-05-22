@@ -43,7 +43,7 @@ class Caracteristicas extends Component
         return [
             'avaluo' => 'required',
             'avaluo.clasificacion_zona' => 'required',
-            'avaluo.construccion_dominante' => 'required',
+            'avaluo.construccion_dominante' => 'nullable',
             'avaluo.agua' => 'nullable',
             'avaluo.drenaje' => 'nullable',
             'avaluo.pavimento' => 'nullable',
@@ -89,11 +89,32 @@ class Caracteristicas extends Component
 
         $this->avaluo = $this->predio->avaluo;
 
+        $this->avaluo->construccion_dominante = $this->avaluo->construccion_dominante ?? 'NO APLICA';
+        $this->avaluo->cimentacion = $this->avaluo->cimentacion ?? 'NO APLICA';
+        $this->avaluo->estructura = $this->avaluo->estructura ?? 'NO APLICA';
+        $this->avaluo->muros = $this->avaluo->muros ?? 'NO APLICA';
+        $this->avaluo->entrepiso = $this->avaluo->entrepiso ?? 'NO APLICA';
+        $this->avaluo->techo = $this->avaluo->techo ?? 'NO APLICA';
+        $this->avaluo->plafones = $this->avaluo->plafones ?? 'NO APLICA';
+        $this->avaluo->vidrieria = $this->avaluo->vidrieria ?? 'NO APLICA';
+        $this->avaluo->lambrines = $this->avaluo->lambrines ?? 'NO APLICA';
+        $this->avaluo->pisos = $this->avaluo->pisos ?? 'NO APLICA';
+        $this->avaluo->herreria = $this->avaluo->herreria ?? 'NO APLICA';
+        $this->avaluo->pintura = $this->avaluo->pintura ?? 'NO APLICA';
+        $this->avaluo->carpinteria = $this->avaluo->carpinteria ?? 'NO APLICA';
+        $this->avaluo->recubrimiento_especial = $this->avaluo->recubrimiento_especial ?? 'NO APLICA';
+        $this->avaluo->aplanados = $this->avaluo->aplanados ?? 'NO APLICA';
+        $this->avaluo->hidraulica = $this->avaluo->hidraulica ?? 'NO APLICA';
+        $this->avaluo->sanitaria = $this->avaluo->sanitaria ?? 'NO APLICA';
+        $this->avaluo->electrica = $this->avaluo->electrica ?? 'NO APLICA';
+        $this->avaluo->gas = $this->avaluo->gas ?? 'NO APLICA';
+        $this->avaluo->especiales = $this->avaluo->especiales ?? 'NO APLICA';
+
     }
 
     public function guardar(){
 
-        $this->authorize('update',$this->predio->avaluo);
+        $this->authorize('update', $this->predio->avaluo);
 
         $this->validate();
 
@@ -164,6 +185,9 @@ class Caracteristicas extends Component
 
             $this->cargarPredio($avaluo->predio->id);
 
+        }else{
+
+            $this->avaluo = Avaluo::make();
         }
 
     }
