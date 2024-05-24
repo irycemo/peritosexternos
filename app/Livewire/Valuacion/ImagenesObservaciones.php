@@ -32,14 +32,14 @@ class ImagenesObservaciones extends Component
 
     protected function rules(){
         return [
-            'fachada' => 'image|max:5000',
-            'foto2' => 'image|max:5000',
-            'foto3' => 'image|max:5000',
-            'foto4' => 'image|max:5000',
-            'macrolocalizacion' => 'image|max:5000',
-            'microlocalizacion' => 'image|max:5000',
+            'fachada' => 'nullable,image|max:5000',
+            'foto2' => 'nullable,image|max:5000',
+            'foto3' => 'nullable,image|max:5000',
+            'foto4' => 'nullable,image|max:5000',
+            'macrolocalizacion' => 'nullable,image|max:5000',
+            'microlocalizacion' => 'nullable,image|max:5000',
             'poligonoDwg' => 'nullable|mimes:dwg',
-            'poligonoImagen' => 'image|max:5000',
+            'poligonoImagen' => 'nullable,image|max:5000',
             'predio' => 'required',
             'predio.avaluo.observaciones' => 'nullable|' . utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.()\/\-," ]*$/'),
          ];
@@ -66,6 +66,70 @@ class ImagenesObservaciones extends Component
         $this->authorize('update',$this->predio->avaluo);
 
         $this->validate();
+
+        if($this->imagenes()->where('descripcion', 'encabezado')->first()){
+
+            $this->dispatch('mostrarMensaje', ['error', "El encabezado es obligatorio."]);
+
+            return;
+
+        }
+
+        if($this->imagenes()->where('descripcion', 'fachada')->first()){
+
+            $this->dispatch('mostrarMensaje', ['error', "La fachada es obligatoria."]);
+
+            return;
+
+        }
+
+        if($this->imagenes()->where('descripcion', 'foto2')->first()){
+
+            $this->dispatch('mostrarMensaje', ['error', "La foto2 es obligatoria."]);
+
+            return;
+
+        }
+
+        if($this->imagenes()->where('descripcion', 'foto3')->first()){
+
+            $this->dispatch('mostrarMensaje', ['error', "La foto3 es obligatoria."]);
+
+            return;
+
+        }
+
+        if($this->imagenes()->where('descripcion', 'foto4')->first()){
+
+            $this->dispatch('mostrarMensaje', ['error', "La foto4 es obligatoria."]);
+
+            return;
+
+        }
+
+        if($this->imagenes()->where('descripcion', 'macrolocalizacion')->first()){
+
+            $this->dispatch('mostrarMensaje', ['error', "La macrolocalizacion es obligatoria."]);
+
+            return;
+
+        }
+
+        if($this->imagenes()->where('descripcion', 'microlocalizacion')->first()){
+
+            $this->dispatch('mostrarMensaje', ['error', "La microlocalizacion es obligatoria."]);
+
+            return;
+
+        }
+
+        if($this->imagenes()->where('descripcion', 'poligonoImagen')->first()){
+
+            $this->dispatch('mostrarMensaje', ['error', "EL poligonoImagen es obligatorio."]);
+
+            return;
+
+        }
 
         try {
 
