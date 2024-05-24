@@ -140,7 +140,7 @@ class Avaluos extends Component
 
         }
 
-        if($this->avaluo->valor_catastral == null){
+        if($this->avaluo->predio->valor_catastral == null){
 
             $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene valor catastral."]);
 
