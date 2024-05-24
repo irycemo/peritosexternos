@@ -140,6 +140,31 @@ class Avaluos extends Component
 
         }
 
+        if($this->avaluo->valor_catastral == null){
+
+            $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene valor catastral."]);
+
+            return true;
+
+        }
+
+    }
+
+    public function reactivar(Avaluo $avaluo){
+
+        try{
+
+            $avaluo->update(['estado' => 'nuevo']);
+
+            $this->dispatch('mostrarMensaje', ['success', "El avalúo se reactivó con éxito."]);;
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al actualizar usuario por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+            $this->resetearTodo();
+        }
+
 
 
     }
