@@ -57,7 +57,8 @@ class AvaluoResource extends JsonResource
             'cuenta_predial' => $this->predio->cuentaPredial(),
             'clave_catastral' => $this->predio->claveCatastral(),
             'propietario' => $this->predio->primerPropietario(),
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at,
+            'croquis' => $this->macrolocalizacion()
         ];
 
     }
