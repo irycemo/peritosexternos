@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Avaluo</title>
 </head>
 <style>
@@ -30,24 +28,30 @@
         margin-right: auto;
     }
 
-
     body{
         margin-top: 120px;
+        margin-bottom: 20px;
         counter-reset: page;
         height: 100%;
         background-image: url("storage/img/escudo_fondo.png");
         background-size: cover;
+        font-family: sans-serif;
+        font-weight: normal;
+        line-height: 1.5;
+        text-transform: uppercase;
+        font-size: 9px;
     }
 
     .titulo{
         text-align: center;
-        font-size: 14px;
+        font-size: 11px;
         font-weight: bold;
+        margin: 0;
     }
 
     .fundamento{
         text-align: justify;
-        font-size: 10px;
+        font-size: 9px;
     }
 
     .separador{
