@@ -64,12 +64,6 @@
         margin: 0 0 5px 0;
     }
 
-    .informacion{
-        padding: 0 20px 0 20px;
-        font-size: 12px;
-        margin-bottom: 10px;
-    }
-
     .informacion p{
         margin: 0;
     }
@@ -88,7 +82,7 @@
         background: #5E1D45;
         color: white;
         font-size: 12px;
-
+        text-transform: lowercase;
     }
 
     .fot{
@@ -924,11 +918,11 @@
 
                     <tbody>
                         <tr>
-                            <td style="font-size:12px; padding-right: 40px;">
+                            <td style="padding-right: 40px;">
 
                                 <img class="qr" src="{{ $qr }}" alt="QR">
                             </td>
-                            <td style="font-size:12px; padding-right: 40px;">
+                            <td style="padding-right: 40px;">
 
                                 <p><strong>Elaborado por el perito valuador:</strong> {{ $predio->avaluo->creadoPor->name }} {{ $predio->avaluo->creadoPor->ap_paterno }} {{ $predio->avaluo->creadoPor->ap_materno }}, con clave: {{ $predio->avaluo->creadoPor->clave }}, ante la Secretaría de Finanzas y Administración. Asociación: {{ $predio->avaluo->creadoPor->asociacion }}, cédula profesional: {{ $predio->avaluo->creadoPor->cedula }}, @if($predio->avaluo->creadoPor->especialidad) especialidad: {{ $predio->avaluo->creadoPor->especialidad }} @endif</p>
 
