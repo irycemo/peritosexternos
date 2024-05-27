@@ -67,15 +67,7 @@ class ImagenesObservaciones extends Component
 
         $this->validate();
 
-        if($this->predio->avaluo->imagenes()->where('descripcion', 'encabezado')->first()){
-
-            $this->dispatch('mostrarMensaje', ['error', "El encabezado es obligatorio."]);
-
-            return;
-
-        }
-
-        if($this->predio->avaluo->imagenes()->where('descripcion', 'fachada')->first()){
+        if(!$this->fachada && $this->predio->avaluo->imagenes()->where('descripcion', 'fachada')->first()){
 
             $this->dispatch('mostrarMensaje', ['error', "La fachada es obligatoria."]);
 
@@ -83,7 +75,7 @@ class ImagenesObservaciones extends Component
 
         }
 
-        if($this->predio->avaluo->imagenes()->where('descripcion', 'foto2')->first()){
+        if(!$this->foto2 && $this->predio->avaluo->imagenes()->where('descripcion', 'foto2')->first()){
 
             $this->dispatch('mostrarMensaje', ['error', "La foto2 es obligatoria."]);
 
@@ -91,7 +83,7 @@ class ImagenesObservaciones extends Component
 
         }
 
-        if($this->predio->avaluo->imagenes()->where('descripcion', 'foto3')->first()){
+        if(!$this->foto3 && $this->predio->avaluo->imagenes()->where('descripcion', 'foto3')->first()){
 
             $this->dispatch('mostrarMensaje', ['error', "La foto3 es obligatoria."]);
 
@@ -99,7 +91,7 @@ class ImagenesObservaciones extends Component
 
         }
 
-        if($this->predio->avaluo->imagenes()->where('descripcion', 'foto4')->first()){
+        if(!$this->foto4 && $this->predio->avaluo->imagenes()->where('descripcion', 'foto4')->first()){
 
             $this->dispatch('mostrarMensaje', ['error', "La foto4 es obligatoria."]);
 
@@ -107,7 +99,7 @@ class ImagenesObservaciones extends Component
 
         }
 
-        if($this->predio->avaluo->imagenes()->where('descripcion', 'macrolocalizacion')->first()){
+        if(!$this->macrolocalizacion && $this->predio->avaluo->imagenes()->where('descripcion', 'macrolocalizacion')->first()){
 
             $this->dispatch('mostrarMensaje', ['error', "La macrolocalizacion es obligatoria."]);
 
@@ -115,7 +107,7 @@ class ImagenesObservaciones extends Component
 
         }
 
-        if($this->predio->avaluo->imagenes()->where('descripcion', 'microlocalizacion')->first()){
+        if(!$this->microlocalizacion && $this->predio->avaluo->imagenes()->where('descripcion', 'microlocalizacion')->first()){
 
             $this->dispatch('mostrarMensaje', ['error', "La microlocalizacion es obligatoria."]);
 
@@ -123,7 +115,7 @@ class ImagenesObservaciones extends Component
 
         }
 
-        if($this->predio->avaluo->imagenes()->where('descripcion', 'poligonoImagen')->first()){
+        if(!$this->poligonoImagen && $this->predio->avaluo->imagenes()->where('descripcion', 'poligonoImagen')->first()){
 
             $this->dispatch('mostrarMensaje', ['error', "EL poligonoImagen es obligatorio."]);
 
