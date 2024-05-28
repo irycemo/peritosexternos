@@ -989,7 +989,7 @@
                                 <td>Superficie de terreno</td>
                                 <td><input readonly class="bg-white rounded text-xs w-full" type="text" wire:model.live="predio.superficie_terreno"></td>
                                 <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $predio->area_comun_terreno}}"></td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $predio->area_comun_terreno}}"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $predio->area_comun_terreno  + $predio->superficie_terreno}}"></td>
                             </tr>
 
                             <tr>

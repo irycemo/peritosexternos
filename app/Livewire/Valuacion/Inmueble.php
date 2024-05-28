@@ -280,11 +280,12 @@ class Inmueble extends Component
 
         $this->validate();
 
-        if($this->predio->avaluo->estado == "concluido"){
+        if($this->predio->avaluo->estado != "nuevo"){
 
-            $this->dispatch('mostrarMensaje', ['error', "El avalúo esta concluido no se puede editar"]);
+            $this->dispatch('mostrarMensaje', ['error', "El avalúo solo se puede editar en estado de nuevo."]);
 
             return;
+
         }
 
         try {
