@@ -7,25 +7,25 @@ use App\Models\Predio;
 use App\Models\Persona;
 use Livewire\Component;
 use App\Constantes\Constantes;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Http\Services\Coordenadas\Coordenadas;
 use Illuminate\Support\Facades\Http;
+use App\Http\Services\Coordenadas\Coordenadas;
 
 class Inmueble extends Component
 {
 
     public $avaluo_id;
 
-    public $tipoPropietarios;
     public $tipoVialidades;
     public $tipoAsentamientos;
     public $ap_paterno;
     public $ap_materno;
     public $nombre;
     public $tipo_persona;
-    public $tipo_propietario;
     public $porcentaje;
+    public $razon_social;
 
     public $predio_padron;
     public $flag = false;
@@ -36,18 +36,18 @@ class Inmueble extends Component
     protected function rules(){
         return [
             'predio.sociedad' => 'nullable',
-            'predio.numero_registro' => 'required|min:1',
-            'predio.region_catastral' => 'required|min:1',
-            'predio.municipio' => 'required|min:1',
-            'predio.localidad' => 'required|min:1',
-            'predio.sector' => 'required|min:1',
-            'predio.zona_catastral' => 'required|min:1,|same:predio.localidad',
-            'predio.manzana' => 'required|min:1',
-            'predio.predio' => 'required|min:1',
-            'predio.edificio' => 'required|min:1',
-            'predio.departamento' => 'required|min:1',
-            'predio.tipo_predio' => 'required|min:1|max:2',
-            'predio.oficina' => 'required|min:1',
+            'predio.numero_registro' => 'required|numeric|min:1',
+            'predio.region_catastral' => 'required|numeric|min:1',
+            'predio.municipio' => 'required|numeric|min:1',
+            'predio.localidad' => 'required|numeric|min:1',
+            'predio.sector' => 'required|numeric|min:1',
+            'predio.zona_catastral' => 'required|numeric|min:1,|same:predio.localidad',
+            'predio.manzana' => 'required|numeric|min:0',
+            'predio.predio' => 'required|numeric|min:1',
+            'predio.edificio' => 'required|numeric|min:1',
+            'predio.departamento' => 'required|numeric|min:1',
+            'predio.tipo_predio' => 'required|numeric|min:1|max:2',
+            'predio.oficina' => 'required|numeric|min:1',
             'predio.estado' => 'required',
             'predio.tipo_asentamiento' => 'required',
             'predio.nombre_asentamiento' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
@@ -72,11 +72,11 @@ class Inmueble extends Component
             'predio.lat' => 'required',
             'predio.lon' => 'required',
             'predio.predio_sgc' => 'required',
-            'ap_paterno' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
-            'ap_materno' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
-            'nombre' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
-            'tipo_persona' => 'required',
-            'tipo_propietario' => 'required',
+            'ap_paterno' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
+            'ap_materno' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
+            'nombre' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
+            'razon_social' => [Rule::requiredIf($this->tipo_persona === 'MORAL')],
+            'tipo_persona' => 'required|'. Rule::in(['FISICA', 'MORAL']),
             'porcentaje' => 'required|numeric|max:100',
          ];
     }
@@ -85,7 +85,6 @@ class Inmueble extends Component
         'ap_paterno' => 'apellido paterno',
         'ap_materno' => 'apellido materno',
         'tipo_persona' => 'tipo de persona',
-        'tipo_propietario' => 'tipo de propietario',
     ];
 
     public function crearModeloVacio(){
@@ -113,6 +112,20 @@ class Inmueble extends Component
 
     public function updatedPredioLon(){
         $this->convertirCoordenadas();
+    }
+
+    public function updatedTipoPersona(){
+
+        if($this->tipo_persona == 'FISICA'){
+
+            $this->reset(['razon_social', 'nombre', 'ap_paterno', 'ap_materno']);
+
+        }elseif($this->tipo_persona == 'MORAL'){
+
+            $this->reset(['razon_social', 'nombre', 'ap_paterno', 'ap_materno']);
+
+        }
+
     }
 
     public function buscarCuentaPredial(){
@@ -242,7 +255,7 @@ class Inmueble extends Component
 
                 $this->predio->propietarios()->create([
                     'persona_id' => $persona->id,
-                    'tipo' => $this->tipo_propietario,
+                    'tipo' => 'PROPIETARIO',
                     'porcentaje' => $this->porcentaje,
                 ]);
 
@@ -312,7 +325,7 @@ class Inmueble extends Component
 
                 $this->predio->propietarios()->first()->update([
                     'persona_id' => $persona->id,
-                    'tipo' => $this->tipo_propietario,
+                    'tipo' => 'PROPIETARIO',
                     'porcentaje' => $this->porcentaje,
                 ]);
 
@@ -338,8 +351,6 @@ class Inmueble extends Component
 
     public function mount(){
 
-        $this->tipoPropietarios = Constantes::TIPO_PROPIETARIO;
-
         $this->tipoVialidades = Constantes::TIPO_VIALIDADES;
 
         $this->tipoAsentamientos = Constantes::TIPO_ASENTAMIENTO;
@@ -356,7 +367,6 @@ class Inmueble extends Component
             $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;
             $this->nombre = $this->predio->propietarios()->first()->persona->nombre;
             $this->tipo_persona = $this->predio->propietarios()->first()->persona->tipo;
-            $this->tipo_propietario = $this->predio->propietarios()->first()->tipo;
             $this->porcentaje = $this->predio->propietarios()->first()->porcentaje;
 
             $this->editar = true;

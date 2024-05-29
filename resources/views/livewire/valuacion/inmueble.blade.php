@@ -107,76 +107,12 @@
 
                 <div>
 
-                    <label class="text-sm" >Apellido Paterno</label>
-
-                </div>
-
-                <div>
-
-                    <input type="text" class="bg-white rounded text-xs w-full" wire:model="ap_paterno" @if($flag) readonly @endif>
-
-                </div>
-
-                <div>
-
-                    @error('ap_paterno') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                </div>
-
-            </div>
-
-            <div class="flex-auto ">
-
-                <div>
-
-                    <Label class="text-sm">Apellido Materno</Label>
-                </div>
-
-                <div>
-
-                    <input type="text" class="bg-white rounded text-xs w-full" wire:model="ap_materno" @if($flag) readonly @endif>
-
-                </div>
-
-                <div>
-
-                    @error('ap_materno') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                </div>
-
-            </div>
-
-            <div class="flex-auto ">
-
-                <div>
-
-                    <Label class="text-sm">Nombre</Label>
-                </div>
-
-                <div>
-
-                    <input type="text" class="bg-white rounded text-xs w-full" wire:model="nombre" @if($flag) readonly @endif>
-
-                </div>
-
-                <div>
-
-                    @error('nombre') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                </div>
-
-            </div>
-
-            <div class="flex-auto ">
-
-                <div>
-
                     <Label class="text-sm">Tipo de persona</Label>
                 </div>
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model="tipo_persona" @if($flag) disabled @endif>
+                    <select class="bg-white rounded text-xs w-full" wire:model.live="tipo_persona" @if($flag) disabled @endif>
 
                         <option value="" selected>Seleccione una opción</option>
                         <option value="FISICA" selected>Fisica</option>
@@ -194,35 +130,96 @@
 
             </div>
 
-            <div class="flex-auto ">
+            @if($tipo_persona == 'FISICA')
 
-                <div>
+                <div class="flex-auto ">
 
-                    <Label class="text-sm">Tipo de propietario</Label>
-                </div>
+                    <div>
 
-                <div>
+                        <label class="text-sm" >Apellido Paterno</label>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model="tipo_propietario" @if($flag) disabled @endif>
-                        <option value="" selected>Seleccione una opción</option>
+                    </div>
 
-                        @foreach ($tipoPropietarios as $item)
+                    <div>
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                        <input type="text" class="bg-white rounded text-xs w-full" wire:model="ap_paterno" @if($flag) readonly @endif>
 
-                        @endforeach
+                    </div>
 
-                    </select>
+                    <div>
 
-                </div>
+                        @error('ap_paterno') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
-                <div>
-
-                    @error('tipo_propietario') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                    </div>
 
                 </div>
 
-            </div>
+                <div class="flex-auto ">
+
+                    <div>
+
+                        <Label class="text-sm">Apellido Materno</Label>
+                    </div>
+
+                    <div>
+
+                        <input type="text" class="bg-white rounded text-xs w-full" wire:model="ap_materno" @if($flag) readonly @endif>
+
+                    </div>
+
+                    <div>
+
+                        @error('ap_materno') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                    </div>
+
+                </div>
+
+                <div class="flex-auto ">
+
+                    <div>
+
+                        <Label class="text-sm">Nombre</Label>
+                    </div>
+
+                    <div>
+
+                        <input type="text" class="bg-white rounded text-xs w-full" wire:model="nombre" @if($flag) readonly @endif>
+
+                    </div>
+
+                    <div>
+
+                        @error('nombre') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                    </div>
+
+                </div>
+
+            @elseif($tipo_persona == 'MORAL')
+
+                <div class="flex-auto ">
+
+                    <div>
+
+                        <Label class="text-sm">Razón social</Label>
+                    </div>
+
+                    <div>
+
+                        <input type="text" class="bg-white rounded text-xs w-full" wire:model="razon_social" @if($flag) readonly @endif>
+
+                    </div>
+
+                    <div>
+
+                        @error('razon_social') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                    </div>
+
+                </div>
+
+            @endif
 
             <div class="flex-auto ">
 
