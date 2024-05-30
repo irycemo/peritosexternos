@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('condominioconstruccions', function (Blueprint $table) {
+        Schema::table('condominiocontruccions', function (Blueprint $table) {
             $table->unsignedDecimal('superficie_proporcional', 10, 2)->nullable()->after('indiviso_construccion');
         });
     }
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('condominioconstruccions', function (Blueprint $table) {
+        Schema::table('condominiocontruccions', function (Blueprint $table) {
             //
         });
     }
