@@ -606,6 +606,7 @@
                                 <tr>
                                     <th style="padding: 0 5px 0 5px;">Área común de terreno</th>
                                     <th style="padding: 0 5px 0 5px;">Indiviso de terreno</th>
+                                    <th style="padding: 0 5px 0 5px;">Superficie proporcional</th>
                                     <th style="padding: 0 5px 0 5px;">Valor unitario</th>
                                     <th style="padding: 0 5px 0 5px;">Valor de terreno común</th>
                                 </tr>
@@ -622,6 +623,9 @@
                                         </td>
                                         <td style="padding-right: 40px; font-size:10px; border: 1px solid black;">
                                             <p>{{ $constr->indiviso_terreno }}</p>
+                                        </td>
+                                        <td style="padding-right: 40px; font-size:10px; border: 1px solid black;">
+                                            <p>{{ $constr->superficie_proporcional }}</p>
                                         </td>
                                         <td style="padding-right: 40px; font-size:10px; border: 1px solid black;">
                                             <p>{{ $constr->valor_unitario }}</p>
@@ -652,6 +656,7 @@
                                     <tr>
                                         <th style="padding: 0 5px 0 5px;">Área común de construcción</th>
                                         <th style="padding: 0 5px 0 5px;">Indiviso de construcción</th>
+                                        <th style="padding: 0 5px 0 5px;">Superficie proporcional</th>
                                         <th style="padding: 0 5px 0 5px;">Clasificación de construccion</th>
                                         <th style="padding: 0 5px 0 5px;">Valor de construcción común</th>
                                     </tr>
@@ -668,6 +673,9 @@
                                             </td>
                                             <td style="padding-right: 40px; font-size:10px; border: 1px solid black;">
                                                 <p>{{ $constr->indiviso_construccion }}</p>
+                                            </td>
+                                            <td style="padding-right: 40px; font-size:10px; border: 1px solid black;">
+                                                <p>{{ $constr->superficie_proporcional }}</p>
                                             </td>
                                             <td style="padding-right: 40px; font-size:10px; border: 1px solid black;">
                                                 <p>{{ $constr->valor_clasificacion_construccion }}</p>

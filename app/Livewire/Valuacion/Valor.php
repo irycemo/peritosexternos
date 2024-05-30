@@ -263,7 +263,7 @@ class Valor extends Component
                 'id' => $terreno->id,
                 'area_terreno_comun' => $terreno->area_terreno_comun,
                 'indiviso_terreno' => $terreno->indiviso_terreno,
-                'superficie_proporcional' => $construccion->superficie_proporcional,
+                'superficie_proporcional' => $terreno->superficie_proporcional,
                 'valor_unitario' => $terreno->valor_unitario,
                 'valor_terreno_comun' => $terreno->valor_terreno_comun,
             ];
@@ -275,7 +275,7 @@ class Valor extends Component
                 'id' => $construccion->id,
                 'area_comun_construccion' => $construccion->area_comun_construccion,
                 'indiviso_construccion' => $construccion->indiviso_construccion,
-                'superficie_proporcional' => $terreno->superficie_proporcional,
+                'superficie_proporcional' => $construccion->superficie_proporcional,
                 'valor_clasificacion_construccion' => $construccion->valor_clasificacion_construccion,
                 'valor_construccion_comun' => $construccion->valor_construccion_comun,
             ];
