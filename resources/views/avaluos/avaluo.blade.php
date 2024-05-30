@@ -720,7 +720,7 @@
                                             <p>{{ $predio->superficie_terreno }}</p>
                                         </td>
                                         <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">
-                                            <p>{{ $predio->area_comun_terreno }}</p>
+                                            <p>{{ collect($predio->condominioTerrenos)->sum('superficie_proporcional') }}</p>
                                         </td>
                                         <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">
                                             <p>{{ $predio->area_comun_terreno + $predio->superficie_terreno}}</p>
@@ -735,7 +735,7 @@
                                             <p>{{ $predio->superficie_construccion }}</p>
                                         </td>
                                         <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">
-                                            <p>{{ $predio->area_comun_construccion }}</p>
+                                            <p>{{ collect($predio->condominioConstrucciones)->sum('superficie_proporcional') }}</p>
                                         </td>
                                         <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">
                                             <p>{{ $predio->area_comun_construccion + $predio->superficie_construccion }}</p>
