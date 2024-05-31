@@ -682,6 +682,28 @@
 
                             <div>
 
+                                <label class="text-sm" >Superficie proporcional</label>
+
+                            </div>
+
+                            <div>
+
+                                <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.blur="terrenosCondominio.{{ $index }}.superficie_proporcional" readonly>
+
+                            </div>
+
+                            <div>
+
+                                @error('terrenosCondominio.' . $index . '.superficie_proporcional') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                            </div>
+
+                        </div>
+
+                        <div class="flex-auto lg:col-span-1">
+
+                            <div>
+
                                 <label class="text-sm" >Valor unitario</label>
 
                             </div>
@@ -835,6 +857,28 @@
                             <div>
 
                                 @error('construccionesCondominio.' . $index . '.indiviso_construccion') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                            </div>
+
+                        </div>
+
+                        <div class="flex-auto lg:col-span-1">
+
+                            <div>
+
+                                <label class="text-sm" >Superficie proporcional</label>
+
+                            </div>
+
+                            <div>
+
+                                <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.blur="construccionesCondominio.{{ $index }}.superficie_proporcional" readonly>
+
+                            </div>
+
+                            <div>
+
+                                @error('construccionesCondominio.' . $index . '.superficie_proporcional') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                             </div>
 

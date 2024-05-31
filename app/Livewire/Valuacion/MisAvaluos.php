@@ -69,14 +69,14 @@ class MisAvaluos extends Component
 
         }
 
-        /* Construcciones comun*/
+        /* Construcciones comun*//*
         if($this->avaluo->predio->edificio != 0 && $this->avaluo->predio->condominioConstrucciones->count() === 0){
 
             $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene construcciones de área común."]);
 
             return true;
 
-        }
+        } */
 
 
         /* Fotos */
