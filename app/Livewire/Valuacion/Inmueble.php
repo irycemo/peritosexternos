@@ -293,9 +293,9 @@ class Inmueble extends Component
 
         $this->validate();
 
-        if($this->predio->avaluo->estado != "nuevo"){
+        if(!in_array($this->predio->avaluo->estado, ["nuevo", "impreso"])){
 
-            $this->dispatch('mostrarMensaje', ['error', "El avalúo solo se puede editar en estado de nuevo."]);
+            $this->dispatch('mostrarMensaje', ['error', "El avalúo no se puede ditar."]);
 
             return;
 

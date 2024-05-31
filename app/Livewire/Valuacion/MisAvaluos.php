@@ -60,25 +60,6 @@ class MisAvaluos extends Component
 
         }
 
-        /* Terrenos  comun*/
-        /* if($this->avaluo->predio->edificio != 0 && $this->avaluo->predio->condominioTerrenos->count() === 0){
-
-            $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene terrenos de área común."]);
-
-            return true;
-
-        } */
-
-        /* Construcciones comun*//*
-        if($this->avaluo->predio->edificio != 0 && $this->avaluo->predio->condominioConstrucciones->count() === 0){
-
-            $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene construcciones de área común."]);
-
-            return true;
-
-        } */
-
-
         /* Fotos */
         $fachada = File::where('fileable_type', 'App\Models\Avaluo')->where('descripcion', 'fachada')->where('fileable_id', $this->avaluo->id)->get();
 
