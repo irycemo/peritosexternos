@@ -52,22 +52,22 @@ class MisAvaluos extends Component
         }
 
         /* Terrenos */
-        if($this->avaluo->predio->edificio == 0 && $this->avaluo->predio->terrenos->count() == 0){
+        if($this->avaluo->predio->condominioTerrenos->count() === 0 && $this->avaluo->predio->terrenos->count() == 0){
 
-            $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene terrenos."]);
+            $this->dispatch('mostrarMensaje', ['error', "El avalúo debe tener un terreno."]);
 
             return true;
 
         }
 
         /* Terrenos  comun*/
-        if($this->avaluo->predio->edificio != 0 && $this->avaluo->predio->condominioTerrenos->count() === 0){
+        /* if($this->avaluo->predio->edificio != 0 && $this->avaluo->predio->condominioTerrenos->count() === 0){
 
             $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene terrenos de área común."]);
 
             return true;
 
-        }
+        } */
 
         /* Construcciones comun*//*
         if($this->avaluo->predio->edificio != 0 && $this->avaluo->predio->condominioConstrucciones->count() === 0){
