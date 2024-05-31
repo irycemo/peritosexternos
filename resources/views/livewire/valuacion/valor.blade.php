@@ -1033,14 +1033,14 @@
                                 <td>Superficie de terreno</td>
                                 <td><input readonly class="bg-white rounded text-xs w-full" type="text" wire:model.live="predio.superficie_terreno"></td>
                                 <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ collect($terrenosCondominio)->sum('superficie_proporcional') }}"></td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $predio->area_comun_terreno  + $predio->superficie_terreno}}"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $predio->area_comun_terreno  + collect($terrenosCondominio)->sum('superficie_proporcional')}}"></td>
                             </tr>
 
                             <tr>
                                 <td>Superficie de construcción</td>
                                 <td><input readonly class="bg-white rounded text-xs w-full" type="text" wire:model.live="predio.superficie_construccion"></td>
                                 <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ collect($construccionesCondominio)->sum('superficie_proporcional') }}"></td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $predio->area_comun_construccion  + $predio->superficie_construccion }}"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $predio->area_comun_construccion  + collect($terrenosCondominio)->sum('superficie_proporcional') }}"></td>
                             </tr>
 
                         </tbody>
