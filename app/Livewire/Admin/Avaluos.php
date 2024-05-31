@@ -38,7 +38,7 @@ class Avaluos extends Component
 
             $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene colindacias."]);
 
-            return;
+            return true;
 
         }
 
@@ -47,37 +47,18 @@ class Avaluos extends Component
 
             $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene definidas la clasificación de zona o el tipo de contrucción dominante."]);
 
-            return;
+            return true;
 
         }
 
         /* Terrenos */
-        if($this->avaluo->predio->terrenos->count() === 0){
+        if($this->avaluo->predio->condominioTerrenos->count() === 0 && $this->avaluo->predio->terrenos->count() == 0){
 
-            $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene terrenos."]);
+            $this->dispatch('mostrarMensaje', ['error', "El avalúo debe tener un terreno."]);
 
-            return;
-
-        }
-
-        /* Terrenos  comun*/
-        if($this->avaluo->predio->edificio != 0 && $this->avaluo->predio->condominioTerrenos->count() === 0){
-
-            $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene terrenos de área común."]);
-
-            return;
+            return true;
 
         }
-
-        /* Construcciones comun*/
-        if($this->avaluo->predio->edificio != 0 && $this->avaluo->predio->condominioConstrucciones->count() === 0){
-
-            $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene construcciones de área común."]);
-
-            return;
-
-        }
-
 
         /* Fotos */
         $fachada = File::where('fileable_type', 'App\Models\Avaluo')->where('descripcion', 'fachada')->where('fileable_id', $this->avaluo->id)->get();
@@ -86,7 +67,7 @@ class Avaluos extends Component
 
             $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene imagen de fachada."]);
 
-            return;
+            return true;
 
         }
 
@@ -96,7 +77,7 @@ class Avaluos extends Component
 
             $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene imagen en la fotografía 2."]);
 
-            return;
+            return true;
 
         }
 
@@ -106,7 +87,7 @@ class Avaluos extends Component
 
             $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene imagen en la fotografía 3."]);
 
-            return;
+            return true;
 
         }
 
@@ -116,7 +97,7 @@ class Avaluos extends Component
 
             $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene imagen en la fotografía 4."]);
 
-            return;
+            return true;
 
         }
 
@@ -126,7 +107,7 @@ class Avaluos extends Component
 
             $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene imagen de la macrolocalización."]);
 
-            return;
+            return true;
 
         }
 
@@ -136,7 +117,7 @@ class Avaluos extends Component
 
             $this->dispatch('mostrarMensaje', ['error', "El avalúo no tiene imagen de la microlocalización."]);
 
-            return;
+            return true;
 
         }
 
