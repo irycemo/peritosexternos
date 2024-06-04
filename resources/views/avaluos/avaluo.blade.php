@@ -513,6 +513,7 @@
 
                                 <tr>
                                     <th style="padding: 0 5px 0 5px;">Superficie</th>
+                                    <th style="padding: 0 5px 0 5px;">Valor unitario</th>
                                     <th style="padding: 0 5px 0 5px;">Valor del terreno</th>
                                 </tr>
 
@@ -525,6 +526,9 @@
                                     <tr>
                                         <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right">
                                             <p>{{ $terreno->superficie }}</p>
+                                        </td>
+                                        <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right">
+                                            <p>${{ number_format($terreno->valor_unitario, 2) }}</p>
                                         </td>
                                         <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right">
                                             <p>${{ number_format($terreno->valor_terreno, 2) }}</p>
@@ -557,6 +561,7 @@
                                     <th style="padding: 0 5px 0 5px;">Valor unitario</th>
                                     <th style="padding: 0 5px 0 5px;">Niveles</th>
                                     <th style="padding: 0 5px 0 5px;">Superficie</th>
+                                    <th style="padding: 0 5px 0 5px;">Valor de construcción</th>
                                 </tr>
 
                             </thead>
@@ -580,6 +585,9 @@
                                         </td>
                                         <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right">
                                             <p>{{ $construccion->superficie }}</p>
+                                        </td>
+                                        <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right">
+                                            <p>${{ number_format($construccion->valor_construccion, 2) }}</p>
                                         </td>
                                     </tr>
 
