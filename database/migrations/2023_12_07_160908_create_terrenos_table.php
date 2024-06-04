@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('terrenos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('predio_id')->constrained();
-            $table->unsignedDecimal('superficie', 10, 4);
-            $table->unsignedDecimal('demerito', 10, 4)->nullable();
-            $table->unsignedDecimal('valor_demeritado', 10, 4)->nullable();
-            $table->unsignedDecimal('valor_unitario', 10, 4);
-            $table->unsignedDecimal('valor_terreno', 10, 4);
+            $table->unsignedDecimal('superficie', 15, 4);
+            $table->unsignedDecimal('demerito', 15, 4)->nullable();
+            $table->unsignedDecimal('valor_demeritado', 15, 4)->nullable();
+            $table->unsignedDecimal('valor_unitario', 15, 4);
+            $table->unsignedDecimal('valor_terreno', 15, 4);
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
