@@ -17,6 +17,7 @@ class TerrenoComunResource extends JsonResource
         return [
             'area_terreno_comun' => $this->area_terreno_comun,
             'indiviso_terreno' => $this->indiviso_terreno,
+            'superficie_proporcional' => $this->superficie_proporcional,
             'valor_unitario' => $this->valor_unitario,
             'valor_terreno_comun' => $this->valor_terreno_comun,
         ];

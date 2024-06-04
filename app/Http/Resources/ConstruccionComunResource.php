@@ -17,6 +17,7 @@ class ConstruccionComunResource extends JsonResource
         return [
             'area_comun_construccion' => $this->area_comun_construccion,
             'indiviso_construccion' => $this->indiviso_construccion,
+            'superficie_proporcional' => $this->superficie_proporcional,
             'valor_clasificacion_construccion' => $this->valor_clasificacion_construccion,
             'valor_construccion_comun' => $this->valor_construccion_comun,
         ];
