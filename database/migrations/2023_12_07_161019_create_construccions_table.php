@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('estado');
             $table->string('calidad');
             $table->unsignedInteger('niveles');
-            $table->unsignedDecimal('superficie', 15,2);
-            $table->unsignedDecimal('valor_unitario', 15,2);
-            $table->unsignedDecimal('valor_construccion', 15,2);
+            $table->unsignedDecimal('superficie', 10,4);
+            $table->unsignedDecimal('valor_unitario', 10,4);
+            $table->unsignedDecimal('valor_construccion', 10,4);
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
