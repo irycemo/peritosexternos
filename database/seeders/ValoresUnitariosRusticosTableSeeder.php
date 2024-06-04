@@ -14,93 +14,103 @@ class ValoresUnitariosRusticosTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('valores_unitarios_rusticos')->delete();
-
+        
         \DB::table('valores_unitarios_rusticos')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
                 'concepto' => 'TEMPORAL DE PRIMERA',
-                'valor' => '8084.00',
+                'valor' => '8434.00',
+                'valor_aterior' => '8084.00',
                 'created_at' => NULL,
-                'updated_at' => NULL,
+                'updated_at' => '2024-06-04 15:20:50',
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 2,
                 'concepto' => 'MONTE BAJO',
-                'valor' => '2020.00',
+                'valor' => '2108.00',
+                'valor_aterior' => '2020.00',
                 'created_at' => NULL,
-                'updated_at' => NULL,
+                'updated_at' => '2024-06-04 15:20:50',
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 3,
                 'concepto' => 'HUMEDAD',
-                'valor' => '13468.00',
+                'valor' => '14050.00',
+                'valor_aterior' => '13468.00',
                 'created_at' => NULL,
-                'updated_at' => NULL,
+                'updated_at' => '2024-06-04 15:20:50',
             ),
-            3 =>
+            3 => 
             array (
                 'id' => 4,
                 'concepto' => 'RIEGO MECANICO',
-                'valor' => '20212.00',
+                'valor' => '21086.00',
+                'valor_aterior' => '20212.00',
                 'created_at' => NULL,
-                'updated_at' => NULL,
+                'updated_at' => '2024-06-04 15:20:50',
             ),
-            4 =>
+            4 => 
             array (
                 'id' => 5,
                 'concepto' => 'TEMPORAL DE SEGUNDA',
-                'valor' => '5388.00',
+                'valor' => '5621.00',
+                'valor_aterior' => '5388.00',
                 'created_at' => NULL,
-                'updated_at' => NULL,
+                'updated_at' => '2024-06-04 15:20:50',
             ),
-            5 =>
+            5 => 
             array (
                 'id' => 6,
                 'concepto' => 'TEMPORAL DE TERCERA',
-                'valor' => '3360.00',
+                'valor' => '3506.00',
+                'valor_aterior' => '3360.00',
                 'created_at' => NULL,
-                'updated_at' => NULL,
+                'updated_at' => '2024-06-04 15:20:50',
             ),
-            6 =>
+            6 => 
             array (
                 'id' => 7,
                 'concepto' => 'ERIAZO',
-                'valor' => '668.00',
+                'valor' => '697.00',
+                'valor_aterior' => '668.00',
                 'created_at' => NULL,
-                'updated_at' => NULL,
+                'updated_at' => '2024-06-04 15:20:50',
             ),
-            7 =>
+            7 => 
             array (
                 'id' => 8,
                 'concepto' => 'MONTE ALTO',
-                'valor' => '6742.00',
+                'valor' => '7034.00',
+                'valor_aterior' => '6742.00',
                 'created_at' => NULL,
-                'updated_at' => NULL,
+                'updated_at' => '2024-06-04 15:20:50',
             ),
-            8 =>
+            8 => 
             array (
                 'id' => 9,
                 'concepto' => 'RIEGO POR GRAVEDAD',
-                'valor' => '26933.00',
+                'valor' => '28097.00',
+                'valor_aterior' => '26933.00',
                 'created_at' => NULL,
-                'updated_at' => NULL,
+                'updated_at' => '2024-06-04 15:20:50',
             ),
-            9 =>
+            9 => 
             array (
                 'id' => 10,
                 'concepto' => 'AGOSTADERO',
-                'valor' => '2020.00',
+                'valor' => '2108.00',
+                'valor_aterior' => '2020.00',
                 'created_at' => NULL,
-                'updated_at' => NULL,
+                'updated_at' => '2024-06-04 15:20:50',
             ),
         ));
-
-
+        
+        
     }
 }
