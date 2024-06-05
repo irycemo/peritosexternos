@@ -29,7 +29,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '1007.00',
                 'valor_aterior' => '965.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             1 =>
             array (
@@ -41,7 +41,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '1519.00',
                 'valor_aterior' => '1456.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             2 =>
             array (
@@ -53,7 +53,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '2026.00',
                 'valor_aterior' => '1942.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             3 =>
             array (
@@ -62,10 +62,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'uso' => 1,
                 'calidad' => 3,
                 'estado' => 2,
-                'valor' => '3052.00',
+                'valor' => '3051.00',
                 'valor_aterior' => '2925.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             4 =>
             array (
@@ -77,7 +77,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '3549.00',
                 'valor_aterior' => '3402.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             5 =>
             array (
@@ -89,7 +89,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '1007.00',
                 'valor_aterior' => '965.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             6 =>
             array (
@@ -101,7 +101,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '1519.00',
                 'valor_aterior' => '1456.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             7 =>
             array (
@@ -113,7 +113,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '2026.00',
                 'valor_aterior' => '1942.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             8 =>
             array (
@@ -122,10 +122,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'uso' => 2,
                 'calidad' => 3,
                 'estado' => 2,
-                'valor' => '3052.00',
+                'valor' => '3051.00',
                 'valor_aterior' => '2925.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             9 =>
             array (
@@ -137,7 +137,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '3549.00',
                 'valor_aterior' => '3402.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             10 =>
             array (
@@ -149,7 +149,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '1519.00',
                 'valor_aterior' => '1456.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             11 =>
             array (
@@ -161,7 +161,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '2026.00',
                 'valor_aterior' => '1942.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             12 =>
             array (
@@ -170,10 +170,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'uso' => 1,
                 'calidad' => 2,
                 'estado' => 3,
-                'valor' => '3052.00',
+                'valor' => '3051.00',
                 'valor_aterior' => '2925.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             13 =>
             array (
@@ -185,7 +185,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '4050.00',
                 'valor_aterior' => '3882.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             14 =>
             array (
@@ -194,10 +194,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'uso' => 1,
                 'calidad' => 3,
                 'estado' => 4,
-                'valor' => '6069.00',
+                'valor' => '6068.00',
                 'valor_aterior' => '5817.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             15 =>
             array (
@@ -209,7 +209,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '1519.00',
                 'valor_aterior' => '1456.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             16 =>
             array (
@@ -221,7 +221,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '2026.00',
                 'valor_aterior' => '1942.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             17 =>
             array (
@@ -230,10 +230,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'uso' => 2,
                 'calidad' => 2,
                 'estado' => 3,
-                'valor' => '3052.00',
+                'valor' => '3051.00',
                 'valor_aterior' => '2925.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             18 =>
             array (
@@ -245,7 +245,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '4050.00',
                 'valor_aterior' => '3882.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             19 =>
             array (
@@ -254,10 +254,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'uso' => 2,
                 'calidad' => 3,
                 'estado' => 4,
-                'valor' => '6069.00',
+                'valor' => '6068.00',
                 'valor_aterior' => '5817.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             20 =>
             array (
@@ -269,7 +269,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '1007.00',
                 'valor_aterior' => '965.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             21 =>
             array (
@@ -281,7 +281,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '1519.00',
                 'valor_aterior' => '1456.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             22 =>
             array (
@@ -293,7 +293,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '2026.00',
                 'valor_aterior' => '1942.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             23 =>
             array (
@@ -305,7 +305,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '2026.00',
                 'valor_aterior' => '1942.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             24 =>
             array (
@@ -317,7 +317,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '2623.00',
                 'valor_aterior' => '2514.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             25 =>
             array (
@@ -326,10 +326,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'uso' => 3,
                 'calidad' => 2,
                 'estado' => 3,
-                'valor' => '3052.00',
+                'valor' => '3051.00',
                 'valor_aterior' => '2925.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             26 =>
             array (
@@ -338,10 +338,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'uso' => 3,
                 'calidad' => 3,
                 'estado' => 1,
-                'valor' => '3047.00',
+                'valor' => '3046.00',
                 'valor_aterior' => '2920.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             27 =>
             array (
@@ -353,7 +353,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '3549.00',
                 'valor_aterior' => '3402.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
             28 =>
             array (
@@ -365,7 +365,7 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'valor' => '4050.00',
                 'valor_aterior' => '3882.00',
                 'created_at' => '2023-10-05 10:02:22',
-                'updated_at' => '2024-06-04 15:20:50',
+                'updated_at' => '2024-06-04 16:54:14',
             ),
         ));
 
