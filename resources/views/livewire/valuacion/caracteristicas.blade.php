@@ -588,7 +588,7 @@
 
                 <div>
 
-                    <label class="text-sm" >Hidáulica</label>
+                    <label class="text-sm" >Hidráulica</label>
 
                 </div>
 

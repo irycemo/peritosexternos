@@ -378,7 +378,7 @@
 
                         <div>
 
-                            <label class="text-sm" >Clasificación de construccion</label>
+                            <label class="text-sm" >Clasificación de construcción</label>
 
                         </div>
 
@@ -1058,35 +1058,35 @@
                         <tbody>
 
                             <tr>
-                                <td class="text-sm">Privatio + Proporcional</td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_terreno + $predio->valor_terreno_comun, 2) }}"></td>
+                                <td class="text-sm">Privativa + Proporcional</td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_terreno + $predio->valor_terreno_comun, 4) }}"></td>
                             </tr>
                             <tr>
-                                <td class="text-sm">Privatio + Proporcional</td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_construccion + $predio->valor_construccion_comun, 2) }}"></td>
+                                <td class="text-sm">Privativa + Proporcional</td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_construccion + $predio->valor_construccion_comun, 4) }}"></td>
                             </tr>
                             @if($this->predio->ubicacion_en_manzana == 'ESQUINA')
 
                                 <tr>
                                     <td class="text-sm">Sub Total</td>
-                                    <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun, 2) }}"></td>
+                                    <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun, 4) }}"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="text-sm">Ubicación en esquina</td>
-                                    <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format(($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun) * 0.15, 2) }}"></td>
+                                    <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format(($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun) * 0.15, 4) }}"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="text-sm">Total</td>
-                                    <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format(($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun) + ($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun) * 0.15, 2) }}"></td>
+                                    <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format(($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun) + ($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun) * 0.15, 4) }}"></td>
                                 </tr>
 
                             @else
 
                                 <tr>
                                     <td class="text-sm">Total</td>
-                                    <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun, 2) }}"></td>
+                                    <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format(ceil($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun), 2) }}"></td>
                                 </tr>
 
                             @endif

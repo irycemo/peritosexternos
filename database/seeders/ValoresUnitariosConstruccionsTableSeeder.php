@@ -367,6 +367,20 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'created_at' => '2023-10-05 10:02:22',
                 'updated_at' => '2024-06-04 16:54:14',
             ),
+
+            29 =>
+            array (
+                'id' => 59,
+                'tipo' => 2,
+                'uso' => 1,
+                'calidad' => 3,
+                'estado' => 3,
+                'valor' => '4846.00',
+                'valor_aterior' => '3882.00',
+                'created_at' => '2023-10-05 10:02:22',
+                'updated_at' => '2024-06-04 16:54:14',
+            ),
+
         ));
 
 
