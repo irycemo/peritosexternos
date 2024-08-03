@@ -163,6 +163,8 @@ class Inmueble extends Component
 
             $data = json_decode($response, true);
 
+            info($data);
+
             $this->dispatch('mostrarMensaje', ['error', $data['error']]);
 
         }else{
