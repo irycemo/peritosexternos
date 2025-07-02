@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Avaluo;
-use Illuminate\Http\Request;
 
 class ValuacionController extends Controller
 {

@@ -4,16 +4,20 @@ namespace App\Livewire\Valuacion;
 
 use App\Models\Avaluo;
 use App\Models\Predio;
+use App\Models\Persona;
 use Livewire\Component;
 use App\Constantes\Constantes;
 use App\Traits\CoordenadasTrait;
+use App\Traits\BuscarPersonaTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Http;
+use App\Exceptions\GeneralException;
+use App\Services\SGCService\SGCService;
 
 class Valuacion extends Component
 {
     use CoordenadasTrait;
+    use BuscarPersonaTrait;
 
     public $avaluo_id;
 
@@ -22,6 +26,7 @@ class Valuacion extends Component
 
     public $predio_padron;
     public $editar = false;
+    public $propietarios;
 
     public Predio $predio;
 
@@ -85,57 +90,24 @@ class Valuacion extends Component
 
         try {
 
-            $response = Http::withToken(config('services.sgc.token'))
-                                ->accept('application/json')
-                                ->asForm()
-                                ->post(
-                                        config('services.sgc.consulta_cuenta_predial'),
-                                        [
-                                            'localidad' => $this->predio->localidad,
-                                            'oficina' => $this->predio->oficina,
-                                            'tipo_predio' => $this->predio->tipo_predio,
-                                            'numero_registro' => $this->predio->numero_registro
-                                        ]);
+            $data = (new SGCService())->consultarPredio($this->predio->localidad, $this->predio->oficina, $this->predio->tipo_predio,$this->predio->numero_registro);
 
-            if($response->status() == 200){
+            $this->predio->sgc_id = $data['data']['id'];
+            $this->predio->region_catastral = $data['data']['region_catastral'];
+            $this->predio->municipio = $data['data']['municipio'];
+            $this->predio->zona_catastral = $data['data']['zona_catastral'];
+            $this->predio->localidad = $data['data']['localidad'];
+            $this->predio->sector = $data['data']['sector'];
+            $this->predio->manzana = $data['data']['manzana'];
+            $this->predio->predio = $data['data']['predio'];
+            $this->predio->edificio = $data['data']['edificio'];
+            $this->predio->departamento = $data['data']['departamento'];
 
-                $data = json_decode($response, true);
+            $this->propietarios = $data['data']['propietarios'];
 
-                $this->predio->sgc_id = $data['data']['id'];
-                $this->predio->region_catastral = $data['data']['region_catastral'];
-                $this->predio->municipio = $data['data']['municipio'];
-                $this->predio->zona_catastral = $data['data']['zona_catastral'];
-                $this->predio->localidad = $data['data']['localidad'];
-                $this->predio->sector = $data['data']['sector'];
-                $this->predio->manzana = $data['data']['manzana'];
-                $this->predio->predio = $data['data']['predio'];
-                $this->predio->edificio = $data['data']['edificio'];
-                $this->predio->departamento = $data['data']['departamento'];
+        } catch (GeneralException $ex) {
 
-            }elseif($response->status() == 401){
-
-                $data = json_decode($response, true);
-
-                if($data['message'] == 'Unauthenticated.'){
-
-                    Log::error("API: " . $data['message']. $response);
-
-                }
-
-                $this->dispatch('mostrarMensaje', ['warning', $data['error'] ?? 'No ha sido posible hacer la consulta']);
-
-            }elseif($response->status() == 404){
-
-                $this->dispatch('mostrarMensaje', ['warning', "No se encontro registro en el padrón catastral con la cuenta predial ingresada."]);
-
-            }else{
-
-                $this->dispatch('mostrarMensaje', ['warning', "La consulta no pudo ser procesada correctamente"]);
-
-                Log::error("Error al buscar predio por cuenta predial en valuación por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
-
-            }
-
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
 
         } catch (\Throwable $th) {
 
@@ -156,6 +128,8 @@ class Valuacion extends Component
 
                 $this->predio->actualizado_por = auth()->user()->id;
                 $this->predio->save();
+
+                if(isset($this->propietarios)) $this->cargarPropietarios();
 
                 $avaluo = Avaluo::create([
                     'año' => now()->format('Y'),
@@ -180,6 +154,58 @@ class Valuacion extends Component
 
             Log::error("Error al crear avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+    }
+
+    public function cargarPropietarios(){
+
+        foreach($this->propietarios as $propietario){
+
+            $persona = $this->buscarPersona(
+                                                $propietario['persona']['rfc'],
+                                                $propietario['persona']['curp'],
+                                                $propietario['persona']['tipo'],
+                                                $propietario['persona']['nombre'],
+                                                $propietario['persona']['ap_materno'],
+                                                $propietario['persona']['ap_paterno'],
+                                                $propietario['persona']['razon_social']
+
+                                            );
+
+            if(!$persona){
+
+                $persona = Persona::create([
+                    'tipo' => $propietario['persona']['tipo'],
+                    'nombre' => $propietario['persona']['nombre'],
+                    'multiple_nombre' => $propietario['persona']['multiple_nombre'],
+                    'ap_paterno' => $propietario['persona']['ap_paterno'],
+                    'ap_materno' => $propietario['persona']['ap_materno'],
+                    'curp' => $propietario['persona']['curp'],
+                    'rfc' => $propietario['persona']['rfc'],
+                    'razon_social' => $propietario['persona']['razon_social'],
+                    'fecha_nacimiento' => $propietario['persona']['fecha_nacimiento'],
+                    'nacionalidad' => $propietario['persona']['nacionalidad'],
+                    'estado_civil' => $propietario['persona']['estado_civil'],
+                    'calle' => $propietario['persona']['calle'],
+                    'numero_exterior' => $propietario['persona']['numero_exterior'],
+                    'numero_interior' => $propietario['persona']['numero_interior'],
+                    'colonia' => $propietario['persona']['colonia'],
+                    'entidad' => $propietario['persona']['entidad'],
+                    'municipio' => $propietario['persona']['municipio'],
+                    'ciudad' => $propietario['persona']['ciudad'],
+                    'cp' => $propietario['persona']['cp']
+                ]);
+
+            }
+
+            $this->predio->propietarios()->create([
+                'persona_id' => $persona->id,
+                'porcentaje_propiedad' => $propietario['porcentaje_propiedad'],
+                'porcentaje_nuda' => $propietario['porcentaje_nuda'],
+                'porcentaje_usufructo' => $propietario['porcentaje_usufructo'],
+            ]);
 
         }
 

@@ -40,5 +40,17 @@ class AppServiceProvider extends ServiceProvider
 
         }
 
+        if(app()->environment('staging')){
+
+            Livewire::setScriptRoute(function ($handle) {
+                return Route::get('/peritosexternos/public/vendor/livewire/livewire.js', $handle);
+            });
+
+            Livewire::setUpdateRoute(function ($handle) {
+                return Route::post('/peritosexternos/livewire/update', $handle);
+            });
+
+        }
+
     }
 }
