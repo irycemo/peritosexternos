@@ -137,6 +137,12 @@
         margin: 0;
     }
 
+    .imagenes{
+
+        max-width: 100%;
+
+    }
+
 </style>
 
 <body>

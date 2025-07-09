@@ -13,4 +13,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('operar_avaluo', [AvaluoApiController::class, 'operarAvaluo']);
 
+    Route::post('generar_avaluo_pdf', [AvaluoApiController::class, 'generarPdf']);
+
 });

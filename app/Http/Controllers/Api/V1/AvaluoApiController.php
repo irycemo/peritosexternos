@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Avaluo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AvaluoRequest;
 use App\Http\Resources\AvaluoResource;
+use App\Http\Controllers\AvaluoController;
 
 class AvaluoApiController extends Controller
 {
@@ -127,6 +129,34 @@ class AvaluoApiController extends Controller
 
             return response()->json([
                 'error' => "Error al operar el avalúo.",
+            ], 500);
+
+        }
+
+    }
+
+    public function generarPdf(Request $request){
+
+        $validated = $request->validate(['id' => 'required|numeric|min:1']);
+
+        $avaluo = Avaluo::find($validated['id']);
+
+        try {
+
+            $pdf = (new AvaluoController())->avaluo($avaluo->predio);
+
+            return response()->json([
+                'data' => [
+                    'pdf' => base64_encode($pdf->stream())
+                ]
+            ], 200);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al generar pdf desde SGC en Lína." . $th);
+
+            return response()->json([
+                'error' => 'Hubo un error al generar el pdf.',
             ], 500);
 
         }
