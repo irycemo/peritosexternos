@@ -529,7 +529,7 @@
 
                 <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                Guardar colindancias
+                Guardar características
 
             </x-button-green>
 

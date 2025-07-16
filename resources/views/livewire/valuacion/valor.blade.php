@@ -146,7 +146,7 @@
                         <tbody>
 
                             <tr>
-                                <td class="text-sm text-right">Privativa + Proporcional Terrno</td>
+                                <td class="text-sm text-right">Privativa + Proporcional Terreno</td>
                                 <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_total_terreno + $predio->valor_terreno_comun, 2) }}"></td>
                             </tr>
                             <tr>

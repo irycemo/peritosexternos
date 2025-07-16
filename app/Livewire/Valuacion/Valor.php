@@ -99,15 +99,13 @@ class Valor extends Component
         $this->validate();
 
         $this->validate([
-            'predio.area_comun_terreno' => Rule::requiredIf($this->predio->edificio === 1),
-            'predio.area_comun_construccion' => Rule::requiredIf($this->predio->edificio === 1),
-            'predio.valor_terreno_comun' => Rule::requiredIf($this->predio->edificio === 1),
-            'predio.valor_construccion_comun' => Rule::requiredIf($this->predio->edificio === 1),
+            'predio.area_comun_terreno' => Rule::requiredIf($this->predio->valor_total_terreno == null),
+            'predio.area_comun_construccion' => 'nullable',
         ]);
 
         try {
 
-            $this->predio->valor_catastral = $this->predio->valor_total_terreno +
+            $this->predio->valor_catastral =    $this->predio->valor_total_terreno +
                                                 $this->predio->valor_total_construccion +
                                                 $this->predio->valor_terreno_comun +
                                                 $this->predio->valor_construccion_comun;
