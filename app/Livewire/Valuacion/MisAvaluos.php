@@ -45,8 +45,30 @@ class MisAvaluos extends Component
 
             return response()->streamDownload(
                 fn () => print($pdf->output()),
-                'avaluo.pdf'
+                'avalúo ' .$this->avaluo->predio->localidad . '-' . $this->avaluo->predio->oficina. '-' . $this->avaluo->predio->tipo_predio . '-'. $this->avaluo->predio->numero_registro. '.pdf'
             );
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al crear avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+    }
+
+    public function reactivarAvaluo(Avaluo $avaluo){
+
+        try {
+
+            $avaluo->update(['estado' => 'nuevo']);
+
+            $this->dispatch('mostrarMensaje', ['success', 'Avalúo reactivado']);
 
         } catch (GeneralException $ex) {
 
