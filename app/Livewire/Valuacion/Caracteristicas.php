@@ -111,6 +111,48 @@ class Caracteristicas extends Component
 
     }
 
+    public function revisarDemerito(){
+
+        $demerito = 30;
+
+        if($this->avaluo->agua){
+
+            $demerito = $demerito - 5;
+
+        }
+
+        if($this->avaluo->drenaje){
+
+            $demerito = $demerito - 5;
+
+        }
+
+        if($this->avaluo->pavimento){
+
+            $demerito = $demerito - 5;
+
+        }
+
+        if($this->avaluo->energia_electrica){
+
+            $demerito = $demerito - 5;
+
+        }
+
+        if($this->avaluo->alumbrado_publico){
+
+            $demerito = $demerito - 5;
+
+        }
+
+        if($this->avaluo->banqueta){
+
+            $demerito = $demerito - 5;
+
+        }
+
+    }
+
     public function guardar(){
 
         $this->validate();
@@ -123,6 +165,8 @@ class Caracteristicas extends Component
             $this->avaluo->audits()->latest()->first()->update(['tags' => 'Actualizó caracteristicas']);
 
             $this->dispatch('mostrarMensaje', ['success', "Las caracteristicas se guardaron con éxito"]);
+
+            $this->revisarDemerito();
 
         } catch (\Throwable $th) {
 

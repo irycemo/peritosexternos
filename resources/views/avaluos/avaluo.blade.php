@@ -183,92 +183,106 @@
 
         <p class="separador">Imágenes</p>
 
-            <div class="informacion">
+        <div class="informacion">
 
-                <table>
+            <table>
 
-                    <tbody>
-                            <tr>
-                                <td style="font-size:12px;">
+                <tbody>
+                        <tr>
+                            <td style="font-size:12px;">
 
-                                    <div>
+                                <div>
 
-                                       <p style="margin-bottom: 10px;">Fachada</p>
+                                    <p style="margin-bottom: 10px;">Fachada</p>
 
-                                        <img class="imagenes" src="{{ public_path($predio->avaluo->fachada_pdf()) }}" alt="Fachada">
+                                    <img class="imagenes" src="{{ public_path($predio->avaluo->fachada_pdf()) }}" alt="Fachada">
 
-                                    </div>
+                                </div>
 
-                                </td>
-                                <td style="font-size:12px;">
-                                    <div>
+                            </td>
+                            <td style="font-size:12px;">
+                                <div>
 
-                                        <p style="margin-bottom: 10px;">Fotografía 2</p>
+                                    <p style="margin-bottom: 10px;">Fotografía 2</p>
 
-                                        <img class="imagenes" src="{{ public_path($predio->avaluo->foto2_pdf()) }}" alt="Fotografia 2">
+                                    <img class="imagenes" src="{{ public_path($predio->avaluo->foto2_pdf()) }}" alt="Fotografia 2">
 
-                                    </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
 
-                            <tr>
-                                <td style="font-size:12px;">
-                                    <div>
+                        <tr>
+                            <td style="font-size:12px;">
+                                <div>
 
-                                        <p style="margin-bottom: 10px;">Fotografía 3</p>
+                                    <p style="margin-bottom: 10px;">Fotografía 3</p>
 
-                                        <img class="imagenes" src="{{ public_path($predio->avaluo->foto3_pdf()) }}" alt="Fotografia 3">
+                                    <img class="imagenes" src="{{ public_path($predio->avaluo->foto3_pdf()) }}" alt="Fotografia 3">
 
-                                    </div>
-                                </td>
-                                <td style="font-size:12px;">
-                                    <div>
+                                </div>
+                            </td>
+                            <td style="font-size:12px;">
+                                <div>
 
-                                        <p style="margin-bottom: 10px;">Fotografía 4</p>
+                                    <p style="margin-bottom: 10px;">Fotografía 4</p>
 
-                                        <img class="imagenes" src="{{ public_path($predio->avaluo->foto4_pdf()) }}" alt="Fotografia 4">
+                                    <img class="imagenes" src="{{ public_path($predio->avaluo->foto4_pdf()) }}" alt="Fotografia 4">
 
-                                    </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
 
-                            <tr>
-                                <td style="font-size:12px;">
-                                    <div>
+                        <tr>
+                            <td style="font-size:12px;">
+                                <div>
 
-                                        <p style="margin-bottom: 10px;">Macrolocalización</p>
+                                    <p style="margin-bottom: 10px;">Macrolocalización</p>
 
-                                        <img class="imagenes" src="{{ public_path($predio->avaluo->macrolocalizacion_pdf()) }}" alt="Macrolocalización">
+                                    <img class="imagenes" src="{{ public_path($predio->avaluo->macrolocalizacion_pdf()) }}" alt="Macrolocalización">
 
-                                    </div>
-                                </td>
-                                <td style="font-size:12px;">
-                                    <div>
+                                </div>
+                            </td>
+                            <td style="font-size:12px;">
+                                <div>
 
-                                        <p style="margin-bottom: 10px;">Microlocalización</p>
+                                    <p style="margin-bottom: 10px;">Microlocalización</p>
 
-                                        <img class="imagenes" src="{{ public_path($predio->avaluo->microlocalizacion_pdf()) }}" alt="Microlocalización">
+                                    <img class="imagenes" src="{{ public_path($predio->avaluo->microlocalizacion_pdf()) }}" alt="Microlocalización">
 
-                                    </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
 
-                            <tr>
-                                <td style="font-size:12px;">
-                                    <div>
+                        <tr>
+                            <td style="font-size:12px;">
+                                <div>
 
-                                        <p style="margin-bottom: 10px;">Representación del polígono</p>
+                                    <p style="margin-bottom: 10px;">Representación del polígono</p>
 
-                                        <img class="imagenes" src="{{ public_path($predio->avaluo->poligonoImagen_pdf()) }}" alt="Representación del polígono">
+                                    <img class="imagenes" src="{{ public_path($predio->avaluo->poligonoImagen_pdf()) }}" alt="Representación del polígono">
 
-                                    </div>
-                                </td>
-                            </tr>
-                    </tbody>
+                                </div>
+                            </td>
+                        </tr>
+                </tbody>
 
-                </table>
+            </table>
+
+        </div>
+
+        @if($predio->avaluo->observaciones)
+
+            <div class="caracteristicas-tabla">
+
+                <p class="separador">Observaciones</p>
+
+                <div class="informacion">
+                    @if($predio->avaluo->observaciones)<p style="text-align: justify">{{ $predio->avaluo->observaciones }}</p>@endif
+                </div>
 
             </div>
+
+        @endif
 
         <p class="fundamento">
             AVALÚO CATASTRAL PARA EFECTOS DE DETERMINAR LA BASE GRAVABLE DEL IMPUESTO SOBRE ADQUISICIÓN DE INMUEBLES Y DEL IMPUESTO PREDIAL, DE CONFORMIDAD CON LOS ARTÍCULOS 20  FRACCIÓN I INCISO B Y 53 DE LA LEY DE HACIENDA MUNICIPAL DEL ESTADO DE MICHOACÁN DE OCAMPO
