@@ -86,6 +86,19 @@ class Valor extends Component
 
     }
 
+    #[On('valorDemerito')]
+    public function valorDemerito($valor){
+
+        $this->porcentajeDemerito = $valor;
+
+        foreach ($this->terrenos as &$terreno) {
+
+            $terreno['demerito'] = $this->porcentajeDemerito;
+
+        }
+
+    }
+
     public function guardar(){
 
         if($this->predio?->avaluo?->estado == 'notificado'){

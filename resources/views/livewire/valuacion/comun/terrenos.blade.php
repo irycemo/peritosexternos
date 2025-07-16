@@ -98,7 +98,7 @@
 
                     <div>
 
-                        <input type="number" min="0" class="bg-white rounded text-xs w-full" wire:model.blur="terrenos.{{ $index }}.demerito">
+                        <input type="number" min="0" class="bg-white rounded text-xs w-full" wire:model.blur="terrenos.{{ $index }}.demerito" readonly>
 
                     </div>
 

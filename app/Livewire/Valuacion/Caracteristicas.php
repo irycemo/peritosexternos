@@ -151,6 +151,8 @@ class Caracteristicas extends Component
 
         }
 
+        $this->dispatch('valorDemerito', $demerito);
+
     }
 
     public function guardar(){

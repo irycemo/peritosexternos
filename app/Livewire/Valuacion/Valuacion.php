@@ -26,7 +26,7 @@ class Valuacion extends Component
 
     public $predio_padron;
     public $editar = false;
-    public $propietarios;
+    public $propietarios = [];
 
     public Predio $predio;
 
@@ -129,7 +129,7 @@ class Valuacion extends Component
                 $this->predio->actualizado_por = auth()->user()->id;
                 $this->predio->save();
 
-                if(isset($this->propietarios)) $this->cargarPropietarios();
+                if(count($this->propietarios)) $this->cargarPropietarios();
 
                 $avaluo = Avaluo::create([
                     'año' => now()->format('Y'),
@@ -171,7 +171,6 @@ class Valuacion extends Component
                                                 $propietario['persona']['ap_materno'],
                                                 $propietario['persona']['ap_paterno'],
                                                 $propietario['persona']['razon_social']
-
                                             );
 
             if(!$persona){

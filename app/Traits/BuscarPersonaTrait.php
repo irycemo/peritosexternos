@@ -39,7 +39,7 @@ trait BuscarPersonaTrait
 
         }else{
 
-            if($tipo_persona == 'FISICA'){
+            if(in_array($tipo_persona, ['FISICA', 'FÍSICA'])){
 
                 $persona = Persona::query()
                             ->where('nombre', $nombre)
