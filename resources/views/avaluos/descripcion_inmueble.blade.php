@@ -2,11 +2,11 @@
 
 <p class="parrafo">
 
-    <strong>Superficie de terreno total:</strong>  {{ $predio->superficie_terreno }}
+    <strong>Superficie de terreno total:</strong>  {{ $predio->superficie_terreno + $predio->area_comun_terreno}}
 
     @if ($predio->superficie_construccion)
 
-        <strong>Superficie de construcción total:</strong> {{ $predio->superficie_construccion }} Metros cuadrados
+        <strong>Superficie de construcción total:</strong> {{ $predio->superficie_construccion + $predio->area_comun_construccion }} Metros cuadrados
 
     @endif
 
@@ -19,11 +19,11 @@
     @endif
 
     @if ($predio->valor_total_terreno)
-        <strong>valor total de terreno:</strong> {{ number_format($predio->valor_total_terreno, 2) }};
+        <strong>valor total de terreno:</strong> {{ number_format($predio->valor_total_terreno + $predio->valor_terreno_comun, 2) }};
     @endif
 
     @if ($predio->valor_total_construccion)
-        <strong>valor total de construcción:</strong> {{ number_format($predio->valor_total_construccion, 2) }};
+        <strong>valor total de construcción:</strong> {{ number_format($predio->valor_total_construccion + $predio->valor_construccion_comun, 2) }};
     @endif
 
 </p>
