@@ -129,9 +129,6 @@ trait ConstruccionesComunTrait
 
                 }
 
-                $this->predio->superficie_construccion = $this->predio->superficie_construccion + $sum2;
-                $this->predio->valor_total_construccion = $this->predio->valor_total_construccion + $sum;
-
                 $this->predio->area_comun_construccion = $sum2;
                 $this->predio->valor_construccion_comun = $sum;
 
