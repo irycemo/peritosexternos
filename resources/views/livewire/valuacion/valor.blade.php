@@ -121,14 +121,14 @@
                                 <td class="text-right">Superficie de terreno</td>
                                 <td><input readonly class="bg-white rounded text-xs w-full text-right" type="text" value="{{ $predio->superficie_terreno }}"></td>
                                 <td><input readonly class="bg-white rounded text-xs w-full text-right" type="text" value="{{ $predio->terrenosComun->sum('superficie_proporcional') }}"></td>
-                                <td><input readonly class="bg-white rounded text-xs w-full text-right" type="text" value="{{ $predio->area_comun_terreno + $predio->superficie_terreno}}"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full text-right" type="text" value="{{ $predio->superficie_terreno + $predio->terrenosComun->sum('superficie_proporcional')}}"></td>
                             </tr>
 
                             <tr>
                                 <td class="text-right">Superficie de construcción</td>
                                 <td><input readonly class="bg-white rounded text-xs w-full text-right" type="text" value="{{ $predio->superficie_construccion }}"></td>
                                 <td><input readonly class="bg-white rounded text-xs w-full text-right" type="text" value="{{ $predio->construccionesComun->sum('superficie_proporcional') }}"></td>
-                                <td><input readonly class="bg-white rounded text-xs w-full text-right" type="text" value="{{ $predio->area_comun_construccion  + $predio->superficie_construccion }}"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full text-right" type="text" value="{{ $predio->superficie_construccion  + $predio->construccionesComun->sum('superficie_proporcional') }}"></td>
                             </tr>
 
                         </tbody>
