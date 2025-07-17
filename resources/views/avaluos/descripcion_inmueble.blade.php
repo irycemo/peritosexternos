@@ -2,11 +2,11 @@
 
 <p class="parrafo">
 
-    <strong>Superficie de terreno total:</strong>  {{ $predio->superficie_terreno + $predio->area_comun_terreno}}
+    <strong>Superficie de terreno total:</strong>  {{ $predio->superficie_terreno + $predio->terrenosComun->sum('superficie_proporcional') }}
 
     @if ($predio->superficie_construccion)
 
-        <strong>Superficie de construcción total:</strong> {{ $predio->superficie_construccion + $predio->area_comun_construccion }} Metros cuadrados
+        <strong>Superficie de construcción total:</strong> {{ $predio->superficie_construccion  + $predio->construccionesComun->sum('superficie_proporcional') }} Metros cuadrados
 
     @endif
 
