@@ -8,6 +8,7 @@ use Livewire\Component;
 use App\Models\Permission;
 use Livewire\WithPagination;
 use App\Constantes\Constantes;
+use Illuminate\Validation\Rule;
 use App\Traits\ComponentesTrait;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\DB;
@@ -40,10 +41,10 @@ class Usuarios extends Component
             'modelo_editar.email' => 'required|email|unique:users,email,' . $this->modelo_editar->id,
             'modelo_editar.status' => 'required|in:activo,inactivo',
             'role' => 'required',
-            'modelo_editar.clave' => 'required',
-            'modelo_editar.cedula' => 'required',
-            'modelo_editar.especialidad' => 'required',
-            'modelo_editar.asociacion' => 'required',
+            'modelo_editar.clave' => Rule::requiredIf($this->role != 4),
+            'modelo_editar.cedula' => Rule::requiredIf($this->role != 4),
+            'modelo_editar.especialidad' => Rule::requiredIf($this->role != 4),
+            'modelo_editar.asociacion' => Rule::requiredIf($this->role != 4),
          ];
     }
 
