@@ -65,6 +65,7 @@ class AvaluoResource extends JsonResource
             'superficie_construccion' => $this->predio->superficie_construccion,
             'area_comun_construccion' => $this->predio->area_comun_construccion,
             'valor_total_terreno' => $this->predio->valor_total_terreno,
+            'valor_total_construccion' => $this->predio->valor_total_construccion,
             'superficie_total_terreno' => $this->predio->superficie_total_terreno,
             'superficie_total_construccion' => $this->predio->superficie_total_construccion,
             'valor_catastral' => $this->predio->valor_catastral,
