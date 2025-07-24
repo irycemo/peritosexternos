@@ -32,7 +32,7 @@
 
     @if($predio->ubicacion_en_manzana == 'ESQUINA')
 
-        <strong>Ubicación en esquina:</strong> ${{ number_format($predio->valor_catastral * (1 + 15 / 100)) }}
+        <strong>Ubicación en esquina:</strong> ${{ number_format(number_format(($predio->valor_total_terreno + $predio->valor_total_construccion) * 0.15, 2)) }}
 
     @endif
 
