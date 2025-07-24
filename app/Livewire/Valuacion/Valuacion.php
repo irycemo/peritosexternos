@@ -228,7 +228,7 @@ class Valuacion extends Component
 
                 $this->predio->save();
 
-                $avaluo = Avaluo::where('predio', $this->predio->id)->first();
+                $avaluo = Avaluo::where('predio_id', $this->predio->id)->first();
 
                 $avaluo->update([
                     'actualizado_por' => auth()->user()->id,

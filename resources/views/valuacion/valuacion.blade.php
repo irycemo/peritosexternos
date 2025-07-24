@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <x-header>Valuación y desglose</x-header>
+    <x-header>Valuación</x-header>
 
     <div class="tab-wrapper" x-data="{ activeTab:  0 }">
 
