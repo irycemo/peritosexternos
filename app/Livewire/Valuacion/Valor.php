@@ -122,9 +122,7 @@ class Valor extends Component
             $this->predio->superficie_total_construccion = $this->predio->superficie_construccion  + $this->predio->construccionesComun->sum('superficie_proporcional');
 
             $this->predio->valor_catastral =    $this->predio->valor_total_terreno +
-                                                $this->predio->valor_total_construccion +
-                                                $this->predio->valor_terreno_comun +
-                                                $this->predio->valor_construccion_comun;
+                                                $this->predio->valor_total_construccion;
 
             if($this->predio->ubicacion_en_manzana == 'ESQUINA'){
 
