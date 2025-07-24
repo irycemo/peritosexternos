@@ -126,9 +126,8 @@ class Valor extends Component
 
             if($this->predio->ubicacion_en_manzana == 'ESQUINA'){
 
-                $esquina = $this->predio->valor_total_terreno + $this->predio->valor_total_construccion * 0.15;
-
-                $this->predio->valor_catastral = $this->predio->valor_catastral  + $esquina;
+                $this->predio->valor_catastral = ($this->predio->valor_total_terreno + $this->predio->valor_total_construccion) +
+                                                    ($this->predio->valor_total_terreno + $this->predio->valor_total_construccion) * 0.15;
 
             }
 
