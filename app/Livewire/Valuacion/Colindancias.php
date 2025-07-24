@@ -67,7 +67,7 @@ class Colindancias extends Component
 
             });
 
-            $this->dispatch('mostrarMensaje', ['success', "La información de las colindancias guardó con éxito."]);
+            $this->dispatch('mostrarMensaje', ['success', "La información de las colindancias se guardó con éxito."]);
 
         } catch (\Throwable $th) {
 

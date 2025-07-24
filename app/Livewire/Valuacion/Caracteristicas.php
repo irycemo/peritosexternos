@@ -166,7 +166,7 @@ class Caracteristicas extends Component
 
             $this->avaluo->audits()->latest()->first()->update(['tags' => 'Actualizó caracteristicas']);
 
-            $this->dispatch('mostrarMensaje', ['success', "Las caracteristicas se guardaron con éxito"]);
+            $this->dispatch('mostrarMensaje', ['success', "Las características se guardaron con éxito"]);
 
             $this->revisarDemerito();
 
