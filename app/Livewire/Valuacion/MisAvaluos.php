@@ -45,7 +45,7 @@ class MisAvaluos extends Component
 
             return response()->streamDownload(
                 fn () => print($pdf->output()),
-                'avalúo ' .$this->avaluo->predio->localidad . '-' . $this->avaluo->predio->oficina. '-' . $this->avaluo->predio->tipo_predio . '-'. $this->avaluo->predio->numero_registro. '.pdf'
+                'avalúo-' .$this->avaluo->predio->localidad . '-' . $this->avaluo->predio->oficina. '-' . $this->avaluo->predio->tipo_predio . '-'. $this->avaluo->predio->numero_registro. '.pdf'
             );
 
         } catch (GeneralException $ex) {
