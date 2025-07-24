@@ -149,10 +149,12 @@
                                 <td class="text-sm text-right">Privativa + Proporcional Terreno</td>
                                 <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_total_terreno, 2) }}"></td>
                             </tr>
+
                             <tr>
                                 <td class="text-sm text-right">Privativa + Proporcional Construcción</td>
                                 <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_total_construccion, 2) }}"></td>
                             </tr>
+
                             @if($this->predio->ubicacion_en_manzana == 'ESQUINA')
 
                                 <tr>
