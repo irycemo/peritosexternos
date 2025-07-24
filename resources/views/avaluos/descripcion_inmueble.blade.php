@@ -23,11 +23,11 @@
 <p>
 
     @if ($predio->valor_total_terreno)
-        <strong>valor total de terreno:</strong> {{ number_format($predio->valor_total_terreno, 2) }};
+        <strong>valor total de terreno:</strong> ${{ number_format($predio->valor_total_terreno, 2) }};
     @endif
 
     @if ($predio->valor_total_construccion)
-        <strong>valor total de construcción:</strong> {{ number_format($predio->valor_total_construccion, 2) }};
+        <strong>valor total de construcción:</strong> ${{ number_format($predio->valor_total_construccion, 2) }};
     @endif
 
     @if($predio->ubicacion_en_manzana == 'ESQUINA')
