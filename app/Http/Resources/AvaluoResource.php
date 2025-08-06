@@ -75,7 +75,7 @@ class AvaluoResource extends JsonResource
             'construcciones' => ConstruccionResource::collection($this->predio->construcciones),
             'construcciones_comun' => ConstruccionComunResource::collection($this->predio->construccionesComun),
             'predio_sgc' => $this->predio->sgc_id,
-            'propietarios' => PropietariosResource::collection($this->predio->propietarios),
+            'propietarios' => PropietariosResource::collection($this->predio->propietarios->sortBy('persona.nombre')),
             'created_at' => $this->created_at,
             'croquis' => $this->macrolocalizacion()
         ];
