@@ -32,14 +32,14 @@ class Imagenes extends Component
 
     protected function rules(){
         return [
-            'fachada' => 'nullable|image|max:5000',
-            'foto2' => 'nullable|image|max:5000',
-            'foto3' => 'nullable|image|max:5000',
-            'foto4' => 'nullable|image|max:5000',
-            'macrolocalizacion' => 'nullable|image|max:5000',
-            'microlocalizacion' => 'nullable|image|max:5000',
-            'poligonoDwg' => 'nullable|mimes:dwg',
-            'poligonoImagen' => 'nullable|image|max:5000',
+            'fachada' => 'required|image|max:5000',
+            'foto2' => 'required|image|max:5000',
+            'foto3' => 'required|image|max:5000',
+            'foto4' => 'required|image|max:5000',
+            'macrolocalizacion' => 'required|image|max:5000',
+            'microlocalizacion' => 'required|image|max:5000',
+            'poligonoDwg' => 'required|mimes:dwg',
+            'poligonoImagen' => 'required|image|max:5000',
             'predio' => 'required',
             'predio.avaluo.observaciones' => 'nullable',
          ];

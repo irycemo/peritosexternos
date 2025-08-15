@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('folio');
             $table->unsignedInteger('usuario');
             $table->string('estado');
+            $table->boolean('cartografia_validada')->default(0);
             $table->string('clasificacion_zona')->nullable();
             $table->string('construccion_dominante')->nullable();
             $table->boolean('agua')->default(0);

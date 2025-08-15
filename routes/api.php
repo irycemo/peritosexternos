@@ -15,4 +15,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('generar_avaluo_pdf', [AvaluoApiController::class, 'generarPdf']);
 
+    Route::post('generar_avaluo_pdf', [AvaluoApiController::class, 'generarPdf']);
+
+    Route::post('consultar_cartografia', [AvaluoApiController::class, 'consultarCartografia']);
+
+    Route::post('validar_cartografia', [AvaluoApiController::class, 'validarCartografia']);
+
 });

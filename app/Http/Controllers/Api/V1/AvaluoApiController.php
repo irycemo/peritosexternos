@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AvaluoRequest;
 use App\Http\Resources\AvaluoResource;
 use App\Http\Controllers\AvaluoController;
+use App\Http\Requests\ConsultarCartografiaRequest;
+use App\Http\Resources\AvaluoCartografiaResource;
 
 class AvaluoApiController extends Controller
 {
@@ -157,6 +159,55 @@ class AvaluoApiController extends Controller
 
             return response()->json([
                 'error' => 'Hubo un error al generar el pdf.',
+            ], 500);
+
+        }
+
+    }
+
+    public function consultarCartografia(ConsultarCartografiaRequest $request){
+
+        $validated = $request->validated();
+
+        $valuos = Avaluo::with('imagenes', 'creadoPor:id,name')
+                            ->where('estado', 'operado')
+                            ->where('cartografia_validada', false)
+                            ->when(isset($validated['año']), fn($q) => $q->where('año', $validated['año']))
+                            ->when(isset($validated['folio']), fn($q) => $q->where('folio', $validated['folio']))
+                            ->when(isset($validated['usuario']), fn($q) => $q->where('usuario', $validated['usuario']))
+                            ->orderBy('id', 'desc')
+                            ->paginate($validated['pagination'], ['*'], 'page', $validated['pagina']);
+
+        return AvaluoCartografiaResource::collection($valuos)->response()->setStatusCode(200);
+
+    }
+
+    public function validarCartografia(Request $request){
+
+        $validated = $request->validate(['id' => 'required|numeric|min:1']);
+
+        $avaluo = Avaluo::find($validated['id']);
+
+        if(!$avaluo){
+
+            return response()->json([
+                'error' => "No se encontró el avalúo.",
+            ], 404);
+
+        }
+
+        try {
+
+            $avaluo->update(['cartografia_validada' => true]);
+
+            return response()->json([
+                'data' => "Operación exitosa.",
+            ], 200);
+
+        } catch (\Throwable $th) {
+
+            return response()->json([
+                'error' => "Error al validar la cartografía.",
             ], 500);
 
         }

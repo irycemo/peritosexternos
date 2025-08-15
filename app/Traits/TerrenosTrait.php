@@ -91,7 +91,7 @@ trait TerrenosTrait
             'terrenos.*' => 'required',
             'terrenos.*.superficie' => 'required',
             'terrenos.*.valor_unitario' => 'required',
-            'terrenos.*.demerito' => 'nullable|numeric|min:0',
+            'terrenos.*.demerito' => 'nullable|numeric|min:0|max:65',
         ]);
 
         try {
@@ -136,7 +136,7 @@ trait TerrenosTrait
 
                 $this->predio->update([
                     'superficie_terreno' => $sum2,
-                    'valor_total_terreno' => $sum
+                    'valor_total_terreno' => $sum + $this->predio->terrenos->sum('valor_terreno'),
                 ]);
 
                 $this->dispatch('mostrarMensaje', ['success', "Los terrenos se guardaron con éxito"]);

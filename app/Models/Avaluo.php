@@ -356,4 +356,23 @@ class Avaluo extends Model implements Auditable
 
     }
 
+    public function poligonoDwg(){
+
+        $poligonoDwg = $this->imagenes()->where('descripcion', 'poligonoDwg')->first();
+
+        if(config('services.ses.flag')){
+
+            Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $poligonoDwg->url, now()->addMinutes(10));
+
+        }else{
+
+            return $poligonoDwg
+                ? Storage::disk('avaluos')->url($poligonoDwg->url)
+                : Storage::disk('public')->url('img/logo.png');
+            ;
+
+        }
+
+    }
+
 }
