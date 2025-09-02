@@ -77,7 +77,14 @@ class AvaluoResource extends JsonResource
             'predio_sgc' => $this->predio->sgc_id,
             'propietarios' => PropietariosResource::collection($this->predio->propietarios->sortBy('persona.nombre')),
             'created_at' => $this->created_at,
-            'croquis' => $this->macrolocalizacion()
+            'croquis' => $this->macrolocalizacion(),
+            'fachada' => $this->fachada(),
+            'foto2' => $this->foto2(),
+            'foto3' => $this->foto3(),
+            'foto4' => $this->foto4(),
+            'microlocalizacion' => $this->microlocalizacion(),
+            'poligonoImagen' => $this->poligonoImagen(),
+            'poligonoDwg' => $this->poligonoDwg(),
         ];
 
     }
