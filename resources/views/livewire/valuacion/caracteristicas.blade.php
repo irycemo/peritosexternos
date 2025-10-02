@@ -2,15 +2,13 @@
 
     @include('livewire.valuacion.comun.avaluo-folio')
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2">
+    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl">
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-start md:w-2/3 mx-auto mb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-start md:w-2/3 mx-auto mb-4">
 
             <x-input-group for="avaluo.clasificacion_zona" label="Clasificación de la zona" :error="$errors->first('avaluo.clasificacion_zona')" class="w-full">
 
                 <x-input-select id="avaluo.clasificacion_zona" wire:model="avaluo.clasificacion_zona" class="w-full">
-
-                    <option value="">Seleccione una opción</option>
 
                     @foreach ($zonas as $item)
 
@@ -26,11 +24,25 @@
 
                 <x-input-select id="avaluo.construccion_dominante" wire:model="avaluo.construccion_dominante" class="w-full">
 
-                    <option value="">Seleccione una opción</option>
-
                     @foreach ($construcciones as $item)
 
                         <option value="{{ $item }}">{{ $item }}</option>
+
+                    @endforeach
+
+                </x-input-select>
+
+            </x-input-group>
+
+            <x-input-group for="predio.ubicacion_en_manzana" label="Ubicación del predio en la manzana" :error="$errors->first('predio.ubicacion_en_manzana')" class="w-full">
+
+                <x-input-select id="predio.ubicacion_en_manzana" wire:model="predio.ubicacion_en_manzana" class="w-full">
+
+                    <option value="">Seleccione una opción</option>
+
+                    @foreach ($ubicaciones as $item)
+
+                        <option value="{{ $item }}" selected>{{ $item }}</option>
 
                     @endforeach
 
@@ -182,343 +194,352 @@
 
     </div>
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2">
+    <div class="flex justify-end lg:col-span-3 mb-5">
 
-        <h4 class="text-lg mb-5 text-center">Obra negra</h4>
+        <x-button-blue
+            wire:click="agregarBloque"
+            wire:loading.attr="disabled"
+        >
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-3 items-end mx-auto">
+            <img wire:loading wire:target="agregarBloque" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-            <x-input-group for="avaluo.cimentacion" label="Cimentación" :error="$errors->first('avaluo.cimentacion')" class="w-full">
+            Agregar bloque
 
-                <x-input-select id="avaluo.cimentacion" wire:model="avaluo.cimentacion" class="w-full">
-
-                    <option value="">Seleccione una opción</option>
-
-                    @foreach ($cimentaciones as $item)
-
-                        <option value="{{ $item }}">{{ $item }}</option>
-
-                    @endforeach
-
-                </x-input-select>
-
-            </x-input-group>
-
-            <x-input-group for="avaluo.estructura" label="Estructura" :error="$errors->first('avaluo.estructura')" class="w-full">
-
-                <x-input-select id="avaluo.estructura" wire:model="avaluo.estructura" class="w-full">
-
-                    <option value="">Seleccione una opción</option>
-
-                    @foreach ($estructuras as $item)
-
-                        <option value="{{ $item }}">{{ $item }}</option>
-
-                    @endforeach
-
-                </x-input-select>
-
-            </x-input-group>
-
-            <x-input-group for="avaluo.muros" label="Muros" :error="$errors->first('avaluo.muros')" class="w-full">
-
-                <x-input-select id="avaluo.muros" wire:model="avaluo.muros" class="w-full">
-
-                    <option value="">Seleccione una opción</option>
-
-                    @foreach ($muros as $item)
-
-                        <option value="{{ $item }}">{{ $item }}</option>
-
-                    @endforeach
-
-                </x-input-select>
-
-            </x-input-group>
-
-            <x-input-group for="avaluo.entrepiso" label="Entrepisos" :error="$errors->first('avaluo.entrepiso')" class="w-full">
-
-                <x-input-select id="avaluo.entrepiso" wire:model="avaluo.entrepiso" class="w-full">
-
-                    <option value="">Seleccione una opción</option>
-
-                    @foreach ($entrepisos as $item)
-
-                        <option value="{{ $item }}">{{ $item }}</option>
-
-                    @endforeach
-
-                </x-input-select>
-
-            </x-input-group>
-
-            <x-input-group for="avaluo.techo" label="Techo" :error="$errors->first('avaluo.techo')" class="w-full">
-
-                <x-input-select id="avaluo.techo" wire:model="avaluo.techo" class="w-full">
-
-                    <option value="">Seleccione una opción</option>
-
-                    @foreach ($techos as $item)
-
-                        <option value="{{ $item }}">{{ $item }}</option>
-
-                    @endforeach
-
-                </x-input-select>
-
-            </x-input-group>
-
-        </div>
+        </x-button-blue>
 
     </div>
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2">
+    @foreach ($bloques as $index => $bloque)
 
-        <h4 class="text-lg mb-5 text-center">Acabados</h4>
+       {{--  <div class="mb-5 bg-white rounded-lg p-4 shadow-xl ">
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-9 gap-3 items-end mx-auto">
+            <span class="p-2 bg-blue-400 text-white text-sm rounded-full">Bloque {{ $loop->iteration }}</span>
 
-            <x-input-group for="avaluo.plafones" label="Plafones" :error="$errors->first('avaluo.plafones')" class="w-full">
+        </div> --}}
 
-                <x-input-select id="avaluo.plafones" wire:model="avaluo.plafones" class="w-full">
+        <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl">
 
-                    <option value="">Seleccione una opción</option>
+            <h4 class="text-lg mb-5 text-center">Bloque {{ $loop->iteration }}</h4>
 
-                    @foreach ($plafones as $item)
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-end  mx-auto">
 
-                        <option value="{{ $item }}">{{ $item }}</option>
+                <x-input-group for="bloques.{{ $index }}.uso" label="Uso del bloque" :error="$errors->first('bloques.' . $index . '.uso')" class="w-full">
 
-                    @endforeach
+                    <x-input-select id="bloques.{{ $index }}.uso" wire:model="bloques.{{ $index }}.uso" class="w-full">
 
-                </x-input-select>
+                        <option value="">Seleccione una opción</option>
 
-            </x-input-group>
+                        @foreach ($usos as $item)
 
-            <x-input-group for="avaluo.vidrieria" label="Vidriería" :error="$errors->first('avaluo.vidrieria')" class="w-full">
+                            <option value="{{ $item }}" selected>{{ $item }}</option>
 
-                <x-input-select id="avaluo.vidrieria" wire:model="avaluo.vidrieria" class="w-full">
+                        @endforeach
 
-                    <option value="">Seleccione una opción</option>
+                    </x-input-select>
 
-                    @foreach ($vidrieria as $item)
+                </x-input-group>
 
-                        <option value="{{ $item }}">{{ $item }}</option>
+            </div>
 
-                    @endforeach
+            <h4 class="text-lg mb-5 text-center">Obra negra</h4>
 
-                </x-input-select>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-3 items-end mx-auto">
 
-            </x-input-group>
+                <x-input-group for="bloques.{{ $index }}.cimentacion" label="Cimentación" :error="$errors->first('bloques.' . $index . '.viento')" class="w-full">
 
-            <x-input-group for="avaluo.lambrines" label="Lambrines" :error="$errors->first('avaluo.lambrines')" class="w-full">
+                    <x-input-select id="bloques.{{ $index }}.cimentacion" wire:model="bloques.{{ $index }}.cimentacion" class="w-full" multiple>
 
-                <x-input-select id="avaluo.lambrines" wire:model="avaluo.lambrines" class="w-full">
+                        @foreach ($cimentaciones as $item)
 
-                    <option value="">Seleccione una opción</option>
+                            <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
 
-                    @foreach ($lambrines as $item)
+                        @endforeach
 
-                        <option value="{{ $item }}">{{ $item }}</option>
+                    </x-input-select>
 
-                    @endforeach
+                </x-input-group>
 
-                </x-input-select>
+                <x-input-group for="bloques.{{ $index }}.estructura" label="Estructura" :error="$errors->first('bloques.' . $index . '.estructura')" class="w-full">
 
-            </x-input-group>
+                    <x-input-select id="bloques.{{ $index }}.estructura" wire:model="bloques.{{ $index }}.estructura" class="w-full" multiple>
 
-            <x-input-group for="avaluo.pisos" label="Pisos" :error="$errors->first('avaluo.pisos')" class="w-full">
+                        @foreach ($estructuras as $item)
 
-                <x-input-select id="avaluo.pisos" wire:model="avaluo.pisos" class="w-full">
+                            <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
 
-                    <option value="">Seleccione una opción</option>
+                        @endforeach
 
-                    @foreach ($pisos as $item)
+                    </x-input-select>
 
-                        <option value="{{ $item }}">{{ $item }}</option>
+                </x-input-group>
 
-                    @endforeach
+                <x-input-group for="bloques.{{ $index }}.muros" label="Muros" :error="$errors->first('bloques.' . $index . '.muros')" class="w-full">
 
-                </x-input-select>
+                    <x-input-select id="bloques.{{ $index }}.muros" wire:model="bloques.{{ $index }}.muros" class="w-full" multiple>
 
-            </x-input-group>
+                        @foreach ($muros as $item)
 
-            <x-input-group for="avaluo.herreria" label="Herrería" :error="$errors->first('avaluo.herreria')" class="w-full">
+                            <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
 
-                <x-input-select id="avaluo.herreria" wire:model="avaluo.herreria" class="w-full">
+                        @endforeach
 
-                    <option value="">Seleccione una opción</option>
+                    </x-input-select>
 
-                    @foreach ($herreria as $item)
+                </x-input-group>
 
-                        <option value="{{ $item }}">{{ $item }}</option>
+                <x-input-group for="bloques.{{ $index }}.entrepiso" label="Entrepisos" :error="$errors->first('bloques.' . $index . '.entrepiso')" class="w-full">
 
-                    @endforeach
+                    <x-input-select id="bloques.{{ $index }}.entrepiso" wire:model="bloques.{{ $index }}.entrepiso" class="w-full" multiple>
 
-                </x-input-select>
+                        @foreach ($entrepisos as $item)
 
-            </x-input-group>
+                            <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
 
-            <x-input-group for="avaluo.pintura" label="Pintura" :error="$errors->first('avaluo.pintura')" class="w-full">
+                        @endforeach
 
-                <x-input-select id="avaluo.pintura" wire:model="avaluo.pintura" class="w-full">
+                    </x-input-select>
 
-                    <option value="">Seleccione una opción</option>
+                </x-input-group>
 
-                    @foreach ($pintura as $item)
+                <x-input-group for="bloques.{{ $index }}.techo" label="Techo" :error="$errors->first('bloques.' . $index . '.techo')" class="w-full">
 
-                        <option value="{{ $item }}">{{ $item }}</option>
+                    <x-input-select id="bloques.{{ $index }}.techo" wire:model="bloques.{{ $index }}.techo" class="w-full" multiple>
 
-                    @endforeach
+                        @foreach ($techos as $item)
 
-                </x-input-select>
+                            <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
 
-            </x-input-group>
+                        @endforeach
 
-            <x-input-group for="avaluo.carpinteria" label="Carpintería" :error="$errors->first('avaluo.carpinteria')" class="w-full">
+                    </x-input-select>
 
-                <x-input-select id="avaluo.carpinteria" wire:model="avaluo.carpinteria" class="w-full">
+                </x-input-group>
 
-                    <option value="">Seleccione una opción</option>
-
-                    @foreach ($carpinteria as $item)
-
-                        <option value="{{ $item }}">{{ $item }}</option>
-
-                    @endforeach
-
-                </x-input-select>
-
-            </x-input-group>
-
-            <x-input-group for="avaluo.aplanados" label="Aplanados" :error="$errors->first('avaluo.aplanados')" class="w-full">
-
-                <x-input-select id="avaluo.aplanados" wire:model="avaluo.aplanados" class="w-full">
-
-                    <option value="">Seleccione una opción</option>
-
-                    @foreach ($aplanados as $item)
-
-                        <option value="{{ $item }}">{{ $item }}</option>
-
-                    @endforeach
-
-                </x-input-select>
-
-            </x-input-group>
-
-            <x-input-group for="avaluo.recubrimiento_especial" label="Recubrimiento especial" :error="$errors->first('avaluo.recubrimiento_especial')" class="w-full">
-
-                <x-input-select id="avaluo.recubrimiento_especial" wire:model="avaluo.recubrimiento_especial" class="w-full">
-
-                    <option value="">Seleccione una opción</option>
-
-                    @foreach ($rec_especial as $item)
-
-                        <option value="{{ $item }}">{{ $item }}</option>
-
-                    @endforeach
-
-                </x-input-select>
-
-            </x-input-group>
+            </div>
 
         </div>
 
-    </div>
+        <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl">
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2">
+            <h4 class="text-lg mb-5 text-center">Acabados</h4>
 
-        <h4 class="text-lg mb-5 text-center">Instalaciones</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-3 items-end mx-auto">
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-3 items-end mx-auto">
+                <x-input-group for="bloques.{{ $index }}.plafones" label="Plafones" :error="$errors->first('bloques.' . $index . '.plafones')" class="w-full">
 
-            <x-input-group for="avaluo.hidraulica" label="Hidráulica" :error="$errors->first('avaluo.hidraulica')" class="w-full">
+                    <x-input-select id="bloques.{{ $index }}.plafones" wire:model="bloques.{{ $index }}.plafones" class="w-full" multiple>
 
-                <x-input-select id="avaluo.hidraulica" wire:model="avaluo.hidraulica" class="w-full">
+                        @foreach ($plafones as $item)
 
-                    <option value="">Seleccione una opción</option>
+                            <option value="{{ $item }}"  title="{{ $item }}">{{ $item }}</option>
 
-                    @foreach ($hidraulica as $item)
+                        @endforeach
 
-                        <option value="{{ $item }}">{{ $item }}</option>
+                    </x-input-select>
 
-                    @endforeach
+                </x-input-group>
 
-                </x-input-select>
+                <x-input-group for="bloques.{{ $index }}.vidrieria" label="Vidriería" :error="$errors->first('bloques.' . $index . '.vidrieria')" class="w-full">
 
-            </x-input-group>
+                    <x-input-select id="bloques.{{ $index }}.vidrieria" wire:model="bloques.{{ $index }}.vidrieria" class="w-full" multiple>
 
-            <x-input-group for="avaluo.sanitaria" label="Sanitaria" :error="$errors->first('avaluo.sanitaria')" class="w-full">
+                        @foreach ($vidrieria as $item)
 
-                <x-input-select id="avaluo.sanitaria" wire:model="avaluo.sanitaria" class="w-full">
+                            <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
 
-                    <option value="">Seleccione una opción</option>
+                        @endforeach
 
-                    @foreach ($sanitaria as $item)
+                    </x-input-select>
 
-                        <option value="{{ $item }}">{{ $item }}</option>
+                </x-input-group>
 
-                    @endforeach
+                <x-input-group for="bloques.{{ $index }}.lambrines" label="Lambrines" :error="$errors->first('bloques.' . $index . '.lambrines')" class="w-full">
 
-                </x-input-select>
+                    <x-input-select id="bloques.{{ $index }}.lambrines" wire:model="bloques.{{ $index }}.lambrines" class="w-full" multiple>
 
-            </x-input-group>
+                        @foreach ($lambrines as $item)
 
-            <x-input-group for="avaluo.electrica" label="Eléctrica" :error="$errors->first('avaluo.electrica')" class="w-full">
+                            <option value="{{ $item }}"  title="{{ $item }}">{{ $item }}</option>
 
-                <x-input-select id="avaluo.electrica" wire:model="avaluo.electrica" class="w-full">
+                        @endforeach
 
-                    <option value="">Seleccione una opción</option>
+                    </x-input-select>
 
-                    @foreach ($electrica as $item)
+                </x-input-group>
 
-                        <option value="{{ $item }}">{{ $item }}</option>
+                <x-input-group for="bloques.{{ $index }}.pisos" label="Pisos" :error="$errors->first('bloques.' . $index . '.pisos')" class="w-full">
 
-                    @endforeach
+                    <x-input-select id="bloques.{{ $index }}.pisos" wire:model="bloques.{{ $index }}.pisos" class="w-full" multiple>
 
-                </x-input-select>
+                        @foreach ($pisos as $item)
 
-            </x-input-group>
+                            <option value="{{ $item }}"  title="{{ $item }}">{{ $item }}</option>
 
-            <x-input-group for="avaluo.gas" label="Gas" :error="$errors->first('avaluo.gas')" class="w-full">
+                        @endforeach
 
-                <x-input-select id="avaluo.gas" wire:model="avaluo.gas" class="w-full">
+                    </x-input-select>
 
-                    <option value="">Seleccione una opción</option>
+                </x-input-group>
 
-                    @foreach ($gas as $item)
+                <x-input-group for="bloques.{{ $index }}.herreria" label="Herrería" :error="$errors->first('bloques.' . $index . '.herreria')" class="w-full">
 
-                        <option value="{{ $item }}">{{ $item }}</option>
+                    <x-input-select id="bloques.{{ $index }}.herreria" wire:model="bloques.{{ $index }}.herreria" class="w-full" multiple>
 
-                    @endforeach
+                        @foreach ($herreria as $item)
 
-                </x-input-select>
+                            <option value="{{ $item }}"  title="{{ $item }}">{{ $item }}</option>
 
-            </x-input-group>
+                        @endforeach
 
-            <x-input-group for="avaluo.especiales" label="Especiales" :error="$errors->first('avaluo.especiales')" class="w-full">
+                    </x-input-select>
 
-                <x-input-select id="avaluo.especiales" wire:model="avaluo.especiales" class="w-full">
+                </x-input-group>
 
-                    <option value="">Seleccione una opción</option>
+                <x-input-group for="bloques.{{ $index }}.pintura" label="Pintura" :error="$errors->first('bloques.' . $index . '.pintura')" class="w-full">
 
-                    @foreach ($especiales as $item)
+                    <x-input-select id="bloques.{{ $index }}.pintura" wire:model="bloques.{{ $index }}.pintura" class="w-full" multiple>
 
-                        <option value="{{ $item }}">{{ $item }}</option>
+                        @foreach ($pintura as $item)
 
-                    @endforeach
+                            <option value="{{ $item }}"  title="{{ $item }}">{{ $item }}</option>
 
-                </x-input-select>
+                        @endforeach
 
-            </x-input-group>
+                    </x-input-select>
+
+                </x-input-group>
+
+                <x-input-group for="bloques.{{ $index }}.carpinteria" label="Carpintería" :error="$errors->first('bloques.' . $index . '.carpinteria')" class="w-full">
+
+                    <x-input-select id="bloques.{{ $index }}.carpinteria" wire:model="bloques.{{ $index }}.carpinteria" class="w-full" multiple>
+
+                        @foreach ($carpinteria as $item)
+
+                            <option value="{{ $item }}"  title="{{ $item }}">{{ $item }}</option>
+
+                        @endforeach
+
+                    </x-input-select>
+
+                </x-input-group>
+
+                <x-input-group for="bloques.{{ $index }}.aplanados" label="Aplanados" :error="$errors->first('bloques.' . $index . '.aplanados')" class="w-full">
+
+                    <x-input-select id="bloques.{{ $index }}.aplanados" wire:model="bloques.{{ $index }}.aplanados" class="w-full" multiple>
+
+                        @foreach ($aplanados as $item)
+
+                            <option value="{{ $item }}"  title="{{ $item }}">{{ $item }}</option>
+
+                        @endforeach
+
+                    </x-input-select>
+
+                </x-input-group>
+
+                <x-input-group for="bloques.{{ $index }}.recubrimiento_especial" label="Recubrimiento especial" :error="$errors->first('bloques.' . $index . '.recubrimiento_especial')" class="w-full">
+
+                    <x-input-select id="bloques.{{ $index }}.recubrimiento_especial" wire:model="bloques.{{ $index }}.recubrimiento_especial" class="w-full" multiple>
+
+                        @foreach ($rec_especial as $item)
+
+                            <option value="{{ $item }}"  title="{{ $item }}">{{ $item }}</option>
+
+                        @endforeach
+
+                    </x-input-select>
+
+                </x-input-group>
+
+            </div>
 
         </div>
 
-    </div>
+        <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl">
+
+            <h4 class="text-lg mb-5 text-center">Instalaciones</h4>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-3 items-end mx-auto">
+
+                <x-input-group for="bloques.{{ $index }}.hidraulica" label="Hidráulica" :error="$errors->first('bloques.' . $index . '.hidraulica')" class="w-full">
+
+                    <x-input-select id="bloques.{{ $index }}.hidraulica" wire:model="bloques.{{ $index }}.hidraulica" class="w-full" multiple>
+
+                        @foreach ($hidraulica as $item)
+
+                            <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
+
+                        @endforeach
+
+                    </x-input-select>
+
+                </x-input-group>
+
+                <x-input-group for="bloques.{{ $index }}.sanitaria" label="Sanitaria" :error="$errors->first('bloques.' . $index . '.sanitaria')" class="w-full">
+
+                    <x-input-select id="bloques.{{ $index }}.sanitaria" wire:model="bloques.{{ $index }}.sanitaria" class="w-full" multiple>
+
+                        @foreach ($sanitaria as $item)
+
+                            <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
+
+                        @endforeach
+
+                    </x-input-select>
+
+                </x-input-group>
+
+                <x-input-group for="bloques.{{ $index }}.electrica" label="Eléctrica" :error="$errors->first('bloques.' . $index . '.electrica')" class="w-full">
+
+                    <x-input-select id="bloques.{{ $index }}.electrica" wire:model="bloques.{{ $index }}.electrica" class="w-full" multiple>
+
+                        @foreach ($electrica as $item)
+
+                            <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
+
+                        @endforeach
+
+                    </x-input-select>
+
+                </x-input-group>
+
+                <x-input-group for="bloques.{{ $index }}.gas" label="Gas" :error="$errors->first('bloques.' . $index . '.gas')" class="w-full">
+
+                    <x-input-select id="bloques.{{ $index }}.gas" wire:model="bloques.{{ $index }}.gas" class="w-full" multiple>
+
+                        @foreach ($gas as $item)
+
+                            <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
+
+                        @endforeach
+
+                    </x-input-select>
+
+                </x-input-group>
+
+                <x-input-group for="bloques.{{ $index }}.especiales" label="Especiales" :error="$errors->first('bloques.' . $index . '.especiales')" class="w-full">
+
+                    <x-input-select id="bloques.{{ $index }}.especiales" wire:model="bloques.{{ $index }}.especiales" class="w-full" multiple>
+
+                        @foreach ($especiales as $item)
+
+                            <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
+
+                        @endforeach
+
+                    </x-input-select>
+
+                </x-input-group>
+
+            </div>
+
+        </div>
+
+    @endforeach
 
     @include('livewire.valuacion.comun.errores')
 
-    <div class="bg-white rounded-lg p-4 flex justify-end">
+    <div class="bg-white rounded-lg p-4 flex justify-end shadow-xl">
 
         @if($predio?->avaluo?->estado === 'nuevo')
 

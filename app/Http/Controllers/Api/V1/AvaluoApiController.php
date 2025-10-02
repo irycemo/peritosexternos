@@ -9,8 +9,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AvaluoRequest;
 use App\Http\Resources\AvaluoResource;
 use App\Http\Controllers\AvaluoController;
+use App\Http\Requests\ConsultarAvaluosConcilar;
 use App\Http\Requests\ConsultarCartografiaRequest;
 use App\Http\Resources\AvaluoCartografiaResource;
+use App\Http\Resources\AvaluosConcilarResource;
 
 class AvaluoApiController extends Controller
 {
@@ -169,7 +171,7 @@ class AvaluoApiController extends Controller
 
         $validated = $request->validated();
 
-        $valuos = Avaluo::with('imagenes', 'creadoPor:id,name')
+        $avaluos = Avaluo::with('imagenes', 'creadoPor:id,name')
                             ->where('estado', 'operado')
                             ->where('cartografia_validada', false)
                             ->when(isset($validated['año']), fn($q) => $q->where('año', $validated['año']))
@@ -178,7 +180,27 @@ class AvaluoApiController extends Controller
                             ->orderBy('id', 'desc')
                             ->paginate($validated['pagination'], ['*'], 'page', $validated['pagina']);
 
-        return AvaluoCartografiaResource::collection($valuos)->response()->setStatusCode(200);
+        return AvaluoCartografiaResource::collection($avaluos)->response()->setStatusCode(200);
+
+    }
+
+    public function consultarAvaluosConciliar(ConsultarAvaluosConcilar $request){
+
+        $validated = $request->validated();
+
+        $avaluos = Avaluo::with('imagenes', 'creadoPor:id,name', 'predio')
+                            ->whereHas('predio', function($q){
+                                $q->whereIn('sector', [88,99]);
+                            })
+                            ->where('estado', 'operado')
+                            ->where('cartografia_validada', false)
+                            ->when(isset($validated['año']), fn($q) => $q->where('año', $validated['año']))
+                            ->when(isset($validated['folio']), fn($q) => $q->where('folio', $validated['folio']))
+                            ->when(isset($validated['usuario']), fn($q) => $q->where('usuario', $validated['usuario']))
+                            ->orderBy('id', 'desc')
+                            ->paginate($validated['pagination'], ['*'], 'page', $validated['pagina']);
+
+        return AvaluosConcilarResource::collection($avaluos)->response()->setStatusCode(200);
 
     }
 

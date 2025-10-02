@@ -88,43 +88,47 @@
 
                 </div>
 
-                <div class="flex-auto lg:col-span-2 xl:col-span-1">
+                @if(auth()->user()->hasRole('Jefe departamento'))
 
-                    <div>
+                    <div class="flex-auto lg:col-span-2 xl:col-span-1">
 
-                        <label class="text-sm" >Demérito</label>
+                        <div>
 
-                    </div>
+                            <label class="text-sm" >Demérito</label>
 
-                    <div>
+                        </div>
 
-                        <input type="number" min="0" class="bg-white rounded text-xs w-full" wire:model.blur="terrenos.{{ $index }}.demerito">
+                        <div>
 
-                    </div>
+                            <input type="number" min="0" class="bg-white rounded text-xs w-full" wire:model.blur="terrenos.{{ $index }}.demerito">
 
-                    <div>
+                        </div>
 
-                        @error('terrenos.' . $index . '.demerito') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                        <div>
 
-                    </div>
+                            @error('terrenos.' . $index . '.demerito') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
-                </div>
-
-                <div class="flex-auto lg:col-span-2">
-
-                    <div>
-
-                        <label class="text-sm" >Valor demeritado</label>
+                        </div>
 
                     </div>
 
-                    <div>
+                    <div class="flex-auto lg:col-span-2">
 
-                        <input type="number" class="bg-white rounded text-xs w-full" wire:model="terrenos.{{ $index }}.valor_demeritado" readonly>
+                        <div>
+
+                            <label class="text-sm" >Valor demeritado</label>
+
+                        </div>
+
+                        <div>
+
+                            <input type="number" class="bg-white rounded text-xs w-full" wire:model="terrenos.{{ $index }}.valor_demeritado" readonly>
+
+                        </div>
 
                     </div>
 
-                </div>
+                @endif
 
                 <div class="flex-auto lg:col-span-2">
 
@@ -163,16 +167,20 @@
 
     </div>
 
-    <x-button-blue
-        wire:click="agregarTerreno"
-        wire:loading.attr="disabled"
-        wire:target="agregarTerreno">
+    @if(auth()->user()->hasRole('Jefe departamento'))
 
-        <img wire:loading wire:target="agregarTerreno" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+        <x-button-blue
+            wire:click="agregarTerreno"
+            wire:loading.attr="disabled"
+            wire:target="agregarTerreno">
 
-        Agregar nuevo
+            <img wire:loading wire:target="agregarTerreno" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-    </x-button-blue>
+            Agregar nuevo
+
+        </x-button-blue>
+
+    @endif
 
     <div class="flex justify-end">
 

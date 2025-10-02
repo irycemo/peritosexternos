@@ -28,20 +28,14 @@ class Valor extends Component
     public $predio;
     public $avaluo_id;
 
-    public $usos;
-    public $ubicaciones;
     public $valores_rusticos;
     public $valores_construccion;
 
     protected function rules(){
         return [
             'predio' => 'required',
-            'predio.uso_1' => 'required',
-            'predio.uso_2' => 'nullable',
-            'predio.uso_3' => 'nullable',
             'predio.superficie_terreno' => 'nullable',
             'predio.superficie_construccion' => 'nullable',
-            'predio.ubicacion_en_manzana' => 'required',
             'predio.valor_catastral' => 'nullable',
          ];
     }
@@ -51,7 +45,6 @@ class Valor extends Component
     ];
 
     protected $validationAttributes  = [
-        'predio.uso_1' => 'uso de predio',
         'predio.ubicacion_en_manzana' => 'ubicación en manzana',
         'predio.area_comun_terreno' => 'No se han guardado los terrenos de área común',
         'predio.area_comun_construccion' => 'No se han guardado las construcciones de área común',
@@ -161,10 +154,6 @@ class Valor extends Component
     }
 
     public function mount(){
-
-        $this->usos = Constantes::USO_PREDIO;
-
-        $this->ubicaciones = Constantes::UBICACION_PREDIO;
 
         $this->valores_rusticos = ValorUnitarioRustico::all();
 

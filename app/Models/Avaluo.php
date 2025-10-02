@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\File;
 use App\Models\User;
+use App\Models\Bloque;
 use App\Models\Predio;
 use Illuminate\Support\Str;
 use App\Traits\ModelosTrait;
@@ -74,6 +75,10 @@ class Avaluo extends Model implements Auditable
 
     public function imagenes(){
         return $this->hasMany(File::class);
+    }
+
+    public function bloques(){
+        return $this->hasMany(Bloque::class);
     }
 
     public function encabezado(){

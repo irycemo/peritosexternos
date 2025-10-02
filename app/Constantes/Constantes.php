@@ -180,6 +180,7 @@ class Constantes{
         'TABIQUE Y/O TABICON',
         'TABIQUE Y CONCRETO',
         'COCRETO ARMADO',
+        'MAMPOSTERÍA'
     ];
 
     const ENTREPISOS = [
@@ -203,6 +204,9 @@ class Constantes{
         'LAMINA GALVANIZADA',
         'LAMINA DE ASBESTO-CEMENTO',
         'LAMINA DE CARTON-ASBESTO-CEMENTO',
+        'LOZA MACIZA',
+        'LOZA RETICULAR',
+        'ESTRUCTURA METALICA'
     ];
 
     const PLAFONES = [
@@ -210,7 +214,6 @@ class Constantes{
         'MANTA DE CIELO',
         'MEZCLA DE MORTERO',
         'YESO Y/O PASTA',
-        'FLASO PLAFON',
         'TABLAROCA',
     ];
 
@@ -286,7 +289,9 @@ class Constantes{
         'NO APLICA',
         'GALVANIZADA',
         'GALVANIZADA, COBRE',
-        'COBRE Y/O PVC',
+        'COBRE',
+        'PVC',
+        'CPVC'
     ];
 
     const SANITARIA = [
@@ -313,6 +318,9 @@ class Constantes{
         'GAS ESTACIONARIO',
         'INTERFON',
         'CIRCUITO CERRADO DE TV',
+        'SISTEMA DE CALEFACCÓN',
+        'CALENTADOR SOLAR',
+        'AIRE ACONDICIONADO'
     ];
 
     const USO_PREDIO = [

@@ -27,6 +27,7 @@ class Valuacion extends Component
     public $predio_padron;
     public $editar = false;
     public $propietarios = [];
+    public $colindancias = [];
 
     public Predio $predio;
 
@@ -105,6 +106,8 @@ class Valuacion extends Component
 
             $this->propietarios = $data['data']['propietarios'];
 
+            $this->colindancias = $data['data']['colindancias'];
+
         } catch (GeneralException $ex) {
 
             $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
@@ -131,6 +134,8 @@ class Valuacion extends Component
 
                 if(count($this->propietarios)) $this->cargarPropietarios();
 
+                if(count($this->colindancias)) $this->cargarColindancias();
+
                 $avaluo = Avaluo::create([
                     'año' => now()->format('Y'),
                     'folio' => (Avaluo::where('año', now()->format('Y'))->where('usuario', auth()->user()->clave)->max('folio') ?? 0) + 1,
@@ -154,6 +159,21 @@ class Valuacion extends Component
 
             Log::error("Error al crear avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+    }
+
+    public function cargarColindancias(){
+
+        foreach($this->colindancias as $colindancia){
+
+            $this->predio->colindancias()->create([
+                'viento' => $colindancia['viento'],
+                'longitud' => $colindancia['longitud'],
+                'descripcion' => $colindancia['descripcion'],
+                'creado_por' => auth()->id()
+            ]);
 
         }
 

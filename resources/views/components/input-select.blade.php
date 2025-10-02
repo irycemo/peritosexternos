@@ -1,11 +1,12 @@
 @props([
     'placeholder' => null,
     'trailingAddOn' => null,
+    'multiple' => null,
 ])
 
 <div class="flex">
 
-  <select {{ $attributes->merge(['class' => 'bg-white rounded text-sm w-full' . ($trailingAddOn ? ' rounded-r-none' : '')]) }}>
+  <select {{ $attributes->merge(['class' => 'bg-white rounded text-sm w-full' . ($trailingAddOn ? ' rounded-r-none' : '')]) }} @if($multiple) multiple @endif>
 
     @if ($placeholder)
 

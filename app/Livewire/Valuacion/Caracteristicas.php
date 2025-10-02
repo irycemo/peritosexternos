@@ -3,9 +3,11 @@
 namespace App\Livewire\Valuacion;
 
 use App\Models\Avaluo;
+use App\Models\Bloque;
 use App\Models\Predio;
 use Livewire\Component;
 use App\Constantes\Constantes;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class Caracteristicas extends Component
@@ -36,6 +38,10 @@ class Caracteristicas extends Component
     public $electrica;
     public $gas;
     public $especiales;
+    public $usos;
+    public $ubicaciones;
+
+    public $bloques = [];
 
     protected $listeners = ['cargarPredio'];
 
@@ -50,38 +56,200 @@ class Caracteristicas extends Component
             'avaluo.energia_electrica' => 'nullable',
             'avaluo.alumbrado_publico' => 'nullable',
             'avaluo.banqueta' => 'nullable',
-            'avaluo.cimentacion' => 'required',
-            'avaluo.estructura' => 'required',
-            'avaluo.muros' => 'required',
-            'avaluo.entrepiso' => 'required',
-            'avaluo.techo' => 'required',
-            'avaluo.plafones' => 'required',
-            'avaluo.vidrieria' => 'required',
-            'avaluo.lambrines' => 'required',
-            'avaluo.pisos' => 'required',
-            'avaluo.herreria' => 'required',
-            'avaluo.pintura' => 'required',
-            'avaluo.carpinteria' => 'required',
-            'avaluo.recubrimiento_especial' => 'required',
-            'avaluo.aplanados' => 'required',
-            'avaluo.hidraulica' => 'required',
-            'avaluo.sanitaria' => 'required',
-            'avaluo.electrica' => 'required',
-            'avaluo.gas' => 'required',
-            'avaluo.especiales' => 'required',
-            'predio' => 'required'
+            'bloques' => 'array|required',
+            'bloques.*.cimentacion' => 'required',
+            'bloques.*.estructura' => 'required',
+            'bloques.*.muros' => 'required',
+            'bloques.*.entrepiso' => 'required',
+            'bloques.*.techo' => 'required',
+            'bloques.*.plafones' => 'required',
+            'bloques.*.vidrieria' => 'required',
+            'bloques.*.lambrines' => 'required',
+            'bloques.*.pisos' => 'required',
+            'bloques.*.herreria' => 'required',
+            'bloques.*.pintura' => 'required',
+            'bloques.*.carpinteria' => 'required',
+            'bloques.*.recubrimiento_especial' => 'required',
+            'bloques.*.aplanados' => 'required',
+            'bloques.*.hidraulica' => 'required',
+            'bloques.*.sanitaria' => 'required',
+            'bloques.*.electrica' => 'required',
+            'bloques.*.gas' => 'required',
+            'bloques.*.especiales' => 'required',
+            'bloques.*.uso' => 'required',
+            'predio' => 'required',
+            'predio.ubicacion_en_manzana' => 'required',
          ];
     }
 
     protected $messages = [
         'predio.required' => 'Primero debe cargar el avaluo',
-
+        'bloques.required' => 'Debe haber al menos un bloque'
     ];
 
     protected $validationAttributes  = [
         'avaluo.clasificacion_zona' => 'clasificación de la zona',
-        'avaluo.construccion_dominante' => 'tipo de construcción dominante'
+        'avaluo.construccion_dominante' => 'tipo de construcción dominante',
+        'predio.ubicacion_en_manzana' => 'ubicación en manzana',
+        'bloques.*.uso' => 'El uso del bloque es obligatorio'
     ];
+
+    public function agregarBloque(){
+
+        $this->bloques[] = ['id' => null, 'uso' => null, 'cimentacion' => null, 'estructura' => null, 'muros' => null, 'entrepiso' => null, 'techo' => null, 'plafones' => null, 'vidrieria' => null, 'lambrines' => null, 'pisos' => null, 'herreria' => null, 'pintura' => null, 'carpinteria' => null, 'recubrimiento_especial' => null, 'aplanados' => null, 'hidraulica' => null, 'sanitaria' => null, 'electrica' => null, 'gas' => null, 'especiales' => null];
+
+    }
+
+    public function borrarBloque($index){
+
+        unset($this->bloques[$index]);
+
+        $this->bloques = array_values($this->bloques);
+
+    }
+
+    public function cargarBloques($avaluo){
+
+        $this->reset('bloques');
+
+        foreach ($avaluo->bloques as $bloque) {
+
+            $this->bloques[] = [
+                'id' => $bloque->id,
+                'uso' => $bloque->uso,
+                'cimentacion' => $this->stringToArray($bloque->cimentacion),
+                'estructura' => $this->stringToArray($bloque->estructura),
+                'muros' => $this->stringToArray($bloque->muros),
+                'entrepiso' => $this->stringToArray($bloque->entrepiso),
+                'techo' => $this->stringToArray($bloque->techo),
+                'plafones' => $this->stringToArray($bloque->plafones),
+                'vidrieria' => $this->stringToArray($bloque->vidrieria),
+                'lambrines' => $this->stringToArray($bloque->lambrines),
+                'pisos' => $this->stringToArray($bloque->pisos),
+                'herreria' => $this->stringToArray($bloque->herreria),
+                'pintura' => $this->stringToArray($bloque->pintura),
+                'carpinteria' => $this->stringToArray($bloque->carpinteria),
+                'recubrimiento_especial' => $this->stringToArray($bloque->recubrimiento_especial),
+                'aplanados' => $this->stringToArray($bloque->aplanados),
+                'hidraulica' => $this->stringToArray($bloque->hidraulica),
+                'sanitaria' => $this->stringToArray($bloque->sanitaria),
+                'electrica' => $this->stringToArray($bloque->electrica),
+                'gas' => $this->stringToArray($bloque->gas),
+                'especiales' => $this->stringToArray($bloque->especiales),
+            ];
+
+        }
+
+    }
+
+    public function guardarBloques($avaluo){
+
+        $ids = collect($this->bloques)->whereNotNull('id')->pluck('id');
+
+        if(count($ids) == 0){
+
+            $bloquesBorrar = $avaluo->bloques()->delete();
+
+        }else{
+
+            $bloquesBorrar = $avaluo->bloques()->whereNotIn('id', $ids)->get();
+
+            foreach ($bloquesBorrar as $bloque) {
+
+                $bloque->delete();
+
+            }
+
+        }
+
+        foreach ($this->bloques as $key =>$bloque) {
+
+            if($bloque['id'] == null){
+
+                $aux = $avaluo->bloques()->create([
+                    'uso' => $bloque['uso'],
+                    'cimentacion' => $this->arrayToString($bloque['cimentacion']),
+                    'estructura' => $this->arrayToString($bloque['estructura']),
+                    'muros' => $this->arrayToString($bloque['muros']),
+                    'entrepiso' => $this->arrayToString($bloque['entrepiso']),
+                    'techo' => $this->arrayToString($bloque['techo']),
+                    'plafones' => $this->arrayToString($bloque['plafones']),
+                    'vidrieria' => $this->arrayToString($bloque['vidrieria']),
+                    'lambrines' => $this->arrayToString($bloque['lambrines']),
+                    'pisos' => $this->arrayToString($bloque['pisos']),
+                    'herreria' => $this->arrayToString($bloque['herreria']),
+                    'pintura' => $this->arrayToString($bloque['pintura']),
+                    'carpinteria' => $this->arrayToString($bloque['carpinteria']),
+                    'recubrimiento_especial' => $this->arrayToString($bloque['recubrimiento_especial']),
+                    'aplanados' => $this->arrayToString($bloque['aplanados']),
+                    'hidraulica' => $this->arrayToString($bloque['hidraulica']),
+                    'sanitaria' => $this->arrayToString($bloque['sanitaria']),
+                    'electrica' => $this->arrayToString($bloque['electrica']),
+                    'gas' => $this->arrayToString($bloque['gas']),
+                    'especiales' => $this->arrayToString($bloque['especiales']),
+                ]);
+
+                $this->bloques[$key]['id'] = $aux->id;
+
+            }else{
+
+                Bloque::find($bloque['id'])->update([
+                    'uso' => $bloque['uso'],
+                    'cimentacion' => $this->arrayToString($bloque['cimentacion']),
+                    'estructura' => $this->arrayToString($bloque['estructura']),
+                    'muros' => $this->arrayToString($bloque['muros']),
+                    'entrepiso' => $this->arrayToString($bloque['entrepiso']),
+                    'techo' => $this->arrayToString($bloque['techo']),
+                    'plafones' => $this->arrayToString($bloque['plafones']),
+                    'vidrieria' => $this->arrayToString($bloque['vidrieria']),
+                    'lambrines' => $this->arrayToString($bloque['lambrines']),
+                    'pisos' => $this->arrayToString($bloque['pisos']),
+                    'herreria' => $this->arrayToString($bloque['herreria']),
+                    'pintura' => $this->arrayToString($bloque['pintura']),
+                    'carpinteria' => $this->arrayToString($bloque['carpinteria']),
+                    'recubrimiento_especial' => $this->arrayToString($bloque['recubrimiento_especial']),
+                    'aplanados' => $this->arrayToString($bloque['aplanados']),
+                    'hidraulica' => $this->arrayToString($bloque['hidraulica']),
+                    'sanitaria' => $this->arrayToString($bloque['sanitaria']),
+                    'electrica' => $this->arrayToString($bloque['electrica']),
+                    'gas' => $this->arrayToString($bloque['gas']),
+                    'especiales' => $this->arrayToString($bloque['especiales']),
+                    'avaluo_id' => $avaluo->id
+                ]);
+
+            }
+
+        }
+
+    }
+
+    public function arrayToString($array){
+
+        return implode(', ', array_values($array));
+
+    }
+
+    public function stringToArray($string){
+
+        $array_original =  explode(",", $string);
+
+        $solo_valores = array_values($array_original);
+
+        return array_map('trim', $solo_valores);
+
+    }
+
+    public function copiarBloques($avaluo, $id){
+
+        foreach ($avaluo->bloques as $bloque) {
+
+            $bloque->update(['avaluo_id' => $id]);
+
+        }
+
+        $this->cargarBloques($avaluo);
+
+    }
 
     public function cargarPredio($id){
 
@@ -89,25 +257,7 @@ class Caracteristicas extends Component
 
         $this->avaluo = $this->predio->avaluo;
 
-        $this->avaluo->cimentacion ?? 'NO APLICA';
-        $this->avaluo->estructura ?? 'NO APLICA';
-        $this->avaluo->muros ?? 'NO APLICA';
-        $this->avaluo->entrepiso ?? 'NO APLICA';
-        $this->avaluo->techo ?? 'NO APLICA';
-        $this->avaluo->plafones ?? 'NO APLICA';
-        $this->avaluo->vidrieria ?? 'NO APLICA';
-        $this->avaluo->lambrines ?? 'NO APLICA';
-        $this->avaluo->pisos ?? 'NO APLICA';
-        $this->avaluo->herreria ?? 'NO APLICA';
-        $this->avaluo->pintura ?? 'NO APLICA';
-        $this->avaluo->carpinteria ?? 'NO APLICA';
-        $this->avaluo->recubrimiento_especial ?? 'NO APLICA';
-        $this->avaluo->aplanados ?? 'NO APLICA';
-        $this->avaluo->hidraulica ?? 'NO APLICA';
-        $this->avaluo->sanitaria ?? 'NO APLICA';
-        $this->avaluo->electrica ?? 'NO APLICA';
-        $this->avaluo->gas ?? 'NO APLICA';
-        $this->avaluo->especiales ?? 'NO APLICA';
+        $this->cargarBloques($this->avaluo);
 
     }
 
@@ -161,10 +311,18 @@ class Caracteristicas extends Component
 
         try {
 
-            $this->avaluo->actualizado_por = auth()->id();
-            $this->avaluo->save();
+            DB::transaction(function () {
 
-            $this->avaluo->audits()->latest()->first()->update(['tags' => 'Actualizó caracteristicas']);
+                $this->avaluo->actualizado_por = auth()->id();
+                $this->avaluo->save();
+
+                $this->predio->save();
+
+                $this->guardarBloques($this->avaluo);
+
+                $this->avaluo->audits()->latest()->first()->update(['tags' => 'Actualizó caracteristicas']);
+
+            });
 
             $this->dispatch('mostrarMensaje', ['success', "Las características se guardaron con éxito"]);
 
@@ -222,6 +380,10 @@ class Caracteristicas extends Component
         $this->gas = Constantes::GAS;
 
         $this->especiales = Constantes::ESPECIALES;
+
+        $this->usos = Constantes::USO_PREDIO;
+
+        $this->ubicaciones = Constantes::UBICACION_PREDIO;
 
         if($this->avaluo_id){
 
