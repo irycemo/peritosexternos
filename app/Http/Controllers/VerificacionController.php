@@ -10,8 +10,6 @@ class VerificacionController extends Controller
 
     public function __invoke(FirmaElectronica $firma_electronica){
 
-        info($firma_electronica);
-
         if($firma_electronica->estado != 'activo'){
 
             $firma_electronica->load('avaluo.predio');

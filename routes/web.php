@@ -46,4 +46,4 @@ Route::post('setpassword', [SetPasswordController::class, 'store'])->name('setpa
 
 Route::get('manual', ManualController::class)->name('manual');
 
-Route::get('verificacion/{firmaElectronica:uuid}', VerificacionController::class)->name('verificacion');
+Route::get('verificacion/{firma_electronica:uuid}', VerificacionController::class)->name('verificacion');
