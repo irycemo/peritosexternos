@@ -87,7 +87,7 @@ class Avaluo extends Model implements Auditable
     }
 
     public function caratula(){
-        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'avaluo');
+        return $this->imagenes()->where('descripcion', 'avaluo')->first()->url;
     }
 
     public function encabezado(){

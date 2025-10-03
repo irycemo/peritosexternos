@@ -20,12 +20,12 @@ class VerificacionController extends Controller
 
         if(app()->isProduction()){
 
-            return redirect(Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_caratulas') . $firma_electronica->avaluo->caratula->url, now()->addMinutes(10)));
+            return redirect(Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_caratulas') . $firma_electronica->avaluo->caratula(), now()->addMinutes(10)));
 
 
         }else{
 
-            return redirect(Storage::disk('caratulas')->url($firma_electronica->avaluo->caratula->url));
+            return redirect(Storage::disk('caratulas')->url($firma_electronica->avaluo->caratula()));
 
         }
 
