@@ -167,7 +167,7 @@ trait TerrenosTrait
 
         $this->porcentajeDemerito = null;
 
-        if(!$this->predio->avaluo->agua)
+       /*  if(!$this->predio->avaluo->agua)
             $this->porcentajeDemerito = 5;
         if(!$this->predio->avaluo->drenaje)
             $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
@@ -184,7 +184,7 @@ trait TerrenosTrait
 
             $terreno['demerito'] = $this->porcentajeDemerito;
 
-        }
+        } */
 
         if(count($this->terrenos) == 0) $this->agregarTerreno();
 

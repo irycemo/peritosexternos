@@ -8,7 +8,6 @@ use App\Models\Predio;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use App\Traits\TerrenosTrait;
-use App\Constantes\Constantes;
 use Illuminate\Validation\Rule;
 use App\Traits\TerrenosComunTrait;
 use App\Traits\ConstruccionesTrait;
