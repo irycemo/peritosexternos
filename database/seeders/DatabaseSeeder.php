@@ -26,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ValoresUnitariosRusticosTableSeeder::class);
         $this->call(UmaSeeder::class);
 
+        $this->call(ValorUnitarioConstruccionsTableSeeder::class);
     }
 }
