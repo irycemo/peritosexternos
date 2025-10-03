@@ -326,7 +326,7 @@ class Caracteristicas extends Component
 
             $this->dispatch('mostrarMensaje', ['success', "Las características se guardaron con éxito"]);
 
-            $this->revisarDemerito();
+            /* $this->revisarDemerito(); */
 
         } catch (\Throwable $th) {
 
