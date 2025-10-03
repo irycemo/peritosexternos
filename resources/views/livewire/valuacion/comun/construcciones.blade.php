@@ -46,7 +46,7 @@
 
                                 @foreach ($valores_construccion as $item)
 
-                                    <option value="{{ $item }}" selected>{{ $item->tipo }}{{ $item->uso }}{{ $item->calidad }}{{ $item->estado }} - ${{ number_format($item->valor, 2) }}</option>
+                                    <option value="{{ $item }}" selected>{{ $item->tipo }}{{ $item->uso }}{{ $item->estado }}{{ $item->calidad }} - ${{ number_format($item->valor, 2) }}</option>
 
                                 @endforeach
 
@@ -62,7 +62,7 @@
 
                     </div>
 
-                    <div class="flex space-x-1 lg:col-span-2">
+                    {{-- <div class="flex space-x-1 lg:col-span-2">
 
                         <div class="flex-auto">
 
@@ -150,7 +150,7 @@
 
                         </div>
 
-                    </div>
+                    </div> --}}
 
                     <div class="flex-auto lg:col-span-1">
 
