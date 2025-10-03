@@ -106,7 +106,11 @@ class Valuacion extends Component
 
             $this->propietarios = $data['data']['propietarios'];
 
-            $this->colindancias = $data['data']['colindancias'];
+            if(isset($data['data']['colindancias'])){
+
+                $this->colindancias = $data['data']['colindancias'];
+
+            }
 
         } catch (GeneralException $ex) {
 
