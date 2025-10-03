@@ -2,15 +2,19 @@
 
 namespace App\Livewire\Valuacion;
 
-use App\Exceptions\GeneralException;
-use App\Http\Controllers\AvaluoController;
 use App\Models\Avaluo;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 use App\Traits\ComponentesTrait;
-use App\Traits\RevisarAvaluoTrait;
 use Livewire\Attributes\Computed;
+use App\Traits\RevisarAvaluoTrait;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Exceptions\GeneralException;
+use App\Http\Controllers\AvaluoController;
+use App\Http\Controllers\FirmaElectronicaController;
+use App\Models\FirmaElectronica;
 
 class MisAvaluos extends Component
 {
@@ -18,13 +22,29 @@ class MisAvaluos extends Component
     use ComponentesTrait;
     use WithPagination;
     use RevisarAvaluoTrait;
+    use WithFileUploads;
+
 
     public Avaluo $modelo_editar;
 
     public $avaluo;
 
+    public $modalConcluir = false;
+
+    public $contraseña;
+    public $cer;
+    public $key;
+
     public function crearModeloVacio(){
         return Avaluo::make();
+    }
+
+    public function abrirModalConcluir(Avaluo $avaluo){
+
+        $this->avaluo = $avaluo;
+
+        $this->modalConcluir = true;
+
     }
 
     public function imprimir(Avaluo $avaluo){
@@ -84,15 +104,53 @@ class MisAvaluos extends Component
 
     }
 
-    public function concluirAvaluo(Avaluo $avaluo){
+    public function reimprimir(FirmaElectronica $firma_electronica){
 
-        $this->avaluo = $avaluo;
+        try {
+
+            $pdf = (new FirmaElectronicaController())->reimprimirAvaluo($firma_electronica);
+
+            return response()->streamDownload(
+                fn () => print($pdf->output()),
+                $firma_electronica->avaluo->predio->cuentaPredial() . '-certificado_de_registro.pdf'
+            );
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al reimprimir avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+    }
+
+    public function concluirAvaluo(){
+
+        $this->validate([
+            'contraseña' => 'required',
+            'cer' => 'required',
+            'key' => 'required',
+        ]);
 
         try {
 
             $this->revisarAvaluoCompleto();
 
-            $this->avaluo->update(['estado' => 'concluido']);
+            $pdf = null;
+
+            DB::transaction(function () use(&$pdf){
+
+                $pdf = (new FirmaElectronicaController())->firmarElectronicamente($this->avaluo, $this->cer->getRealPath(), $this->key->getRealPath(), $this->contraseña);
+
+                $this->avaluo->update(['estado' => 'concluido']);
+
+            });
+
+            return response()->streamDownload(
+                fn () => print($pdf->output()),
+                $this->avaluo->predio->cuentaPredial() . '-certificado_de_registro.pdf'
+            );
 
         } catch (GeneralException $ex) {
 
@@ -111,7 +169,7 @@ class MisAvaluos extends Component
     #[Computed]
     public function avaluos(){
 
-        return Avaluo::with('predio.propietarios.persona', 'creadoPor', 'actualizadoPor')
+        return Avaluo::with('predio.propietarios.persona', 'creadoPor', 'actualizadoPor', 'firmaElectronica')
                             ->where('creado_por', auth()->id())
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);

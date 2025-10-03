@@ -12,6 +12,7 @@ use App\Http\Controllers\ManualController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ValuacionController;
 use App\Http\Controllers\SetPasswordController;
+use App\Http\Controllers\VerificacionController;
 
 Route::get('/', function () {
     return redirect('login');
@@ -44,3 +45,5 @@ Route::get('setpassword/{email}', [SetPasswordController::class, 'create'])->nam
 Route::post('setpassword', [SetPasswordController::class, 'store'])->name('setpassword.store');
 
 Route::get('manual', ManualController::class)->name('manual');
+
+Route::get('verificacion/{firmaElectronica:uuid}', VerificacionController::class)->name('verificacion');

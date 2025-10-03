@@ -171,15 +171,35 @@
 
         </div>
 
-        @include('avaluos.ubicacion_inmueble')
+        @if(isset($avaluo))
 
-        @include('avaluos.colindancias')
+            @include('avaluos.ubicacion_inmueble_firma')
 
-        @include('avaluos.descripcion_inmueble')
+            @include('avaluos.colindancias_firma')
 
-        @include('avaluos.terrenos_construcciones')
+            @include('avaluos.descripcion_inmueble_firma')
 
-        @include('avaluos.propietarios')
+            @include('avaluos.terrenos_construcciones_firma')
+
+            @include('avaluos.propietarios_firma')
+
+            @include('avaluos.bloques_firma')
+
+        @else
+
+            @include('avaluos.ubicacion_inmueble')
+
+            @include('avaluos.colindancias')
+
+            @include('avaluos.descripcion_inmueble')
+
+            @include('avaluos.terrenos_construcciones')
+
+            @include('avaluos.propietarios')
+
+            @include('avaluos.bloques')
+
+        @endif
 
         <p class="separador">Imágenes</p>
 
@@ -270,17 +290,39 @@
 
         </div>
 
-        @if($predio->avaluo->observaciones)
+        @if(isset($avaluo))
 
-            <div class="caracteristicas-tabla">
+            @if(isset($avaluo->observaciones))
 
-                <p class="separador">Observaciones</p>
+                <div class="caracteristicas-tabla">
 
-                <div class="informacion">
-                    @if($predio->avaluo->observaciones)<p style="text-align: justify">{{ $predio->avaluo->observaciones }}</p>@endif
+                    <p class="separador">Observaciones</p>
+
+                    <div class="informacion">
+
+                        <p style="text-align: justify">{{ $avaluo->observaciones }}</p>
+
+                    </div>
+
                 </div>
 
-            </div>
+            @endif
+
+        @else
+
+            @if($predio->avaluo->observaciones)
+
+                <div class="caracteristicas-tabla">
+
+                    <p class="separador">Observaciones</p>
+
+                    <div class="informacion">
+                        @if($predio->avaluo->observaciones)<p style="text-align: justify">{{ $predio->avaluo->observaciones }}</p>@endif
+                    </div>
+
+                </div>
+
+            @endif
 
         @endif
 
@@ -288,28 +330,78 @@
             AVALÚO CATASTRAL PARA EFECTOS DE DETERMINAR LA BASE GRAVABLE DEL IMPUESTO SOBRE ADQUISICIÓN DE INMUEBLES Y DEL IMPUESTO PREDIAL, DE CONFORMIDAD CON LOS ARTÍCULOS 20  FRACCIÓN I INCISO B Y 53 DE LA LEY DE HACIENDA MUNICIPAL DEL ESTADO DE MICHOACÁN DE OCAMPO
         </p>
 
-        <p class="separador">Datos de control</p>
+        @if(isset($firma_electronica))
 
-        <div>
+            <p class="separador">Datos de control</p>
 
-            <table style="margin-top: 10px">
+            <div class="informacion">
 
-                <tbody>
-                    <tr>
-                        <td style="padding-right: 40px;">
+                <div class="no-break">
 
-                            <p><strong>Impreso el: </strong> {{ $datos_control->impreso_en }}</p>
+                    <table style="margin-top: 20px">
 
-                            <p><strong>Impreso por: </strong> {{ $datos_control->impreso_por }}</p>
+                        <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $datos_control->valuador }}</p>
+                        <p style="text-align: center;" >Valuador</p>
 
-                            <p><strong>Firma del perito valuador:</strong> ___________________________________</p>
+                    </table>
 
-                        </td>
-                    </tr>
-                </tbody>
+                    <div style="page-break-inside: avoid;">
 
-            </table>
-        </div>
+                        <p style="text-align: center">Firma Electrónica:</p>
+                        <p style="overflow-wrap: break-word;">{{ $firma_electronica->cadena_encriptada }}</p>
+
+                    </div>
+
+                </div>
+
+                <table style="margin-top: 10px">
+
+                    <tbody>
+                        <tr>
+                            <td style="padding-right: 40px;">
+
+                                <img class="qr" src="{{ $qr }}" alt="QR">
+                            </td>
+                            <td style="padding-right: 40px;">
+
+                                <p><strong>Impreso el:</strong> {{ $datos_control->impreso_en }}</p>
+
+                                <p><strong>Impreso por:</strong> {{ $datos_control->valuador }}</p>
+
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        @else
+
+            <p class="separador">Datos de control</p>
+
+            <div>
+
+                <table style="margin-top: 10px">
+
+                    <tbody>
+                        <tr>
+                            <td style="padding-right: 40px;">
+
+                                <p><strong>Impreso el: </strong> {{ $datos_control->impreso_en }}</p>
+
+                                <p><strong>Impreso por: </strong> {{ $datos_control->impreso_por }}</p>
+
+                                <p><strong>Firma del perito valuador:</strong> ___________________________________</p>
+
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        @endif
 
     </main>
 

@@ -8,6 +8,7 @@ use App\Models\Bloque;
 use App\Models\Predio;
 use Illuminate\Support\Str;
 use App\Traits\ModelosTrait;
+use App\Models\FirmaElectronica;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -79,6 +80,10 @@ class Avaluo extends Model implements Auditable
 
     public function bloques(){
         return $this->hasMany(Bloque::class);
+    }
+
+    public function firmaElectronica(){
+        return $this->hasOne(FirmaElectronica::class);
     }
 
     public function encabezado(){

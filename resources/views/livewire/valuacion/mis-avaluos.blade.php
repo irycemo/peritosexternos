@@ -131,13 +131,27 @@
 
                                         @if($avaluo->predio)
 
-                                            <button
-                                                wire:click="imprimir({{ $avaluo->id }})"
-                                                wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                                role="menuitem">
-                                                Imprimir
-                                            </button>
+                                            @if($avaluo->firmaElectronica)
+
+                                                <button
+                                                    wire:click="reimprimir('{{ $avaluo->firmaElectronica->uuid }}')"
+                                                    wire:loading.attr="disabled"
+                                                    class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                    role="menuitem">
+                                                    Reimprimir
+                                                </button>
+
+                                            @else
+
+                                                <button
+                                                    wire:click="imprimir({{ $avaluo->id }})"
+                                                    wire:loading.attr="disabled"
+                                                    class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                    role="menuitem">
+                                                    Imprimir
+                                                </button>
+
+                                            @endif
 
                                             @if(in_array($avaluo->estado, ['impreso']))
 
@@ -156,7 +170,7 @@
                                                 <a href="{{ route('valuacion', $avaluo->id) }}" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100" role="menuitem">Ver</a>
 
                                                 <button
-                                                    wire:click="concluirAvaluo({{ $avaluo->id }})"
+                                                    wire:click="abrirModalConcluir({{ $avaluo->id }})"
                                                     wire:loading.attr="disabled"
                                                     class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                                     role="menuitem">
@@ -214,5 +228,139 @@
         </x-table>
 
     </div>
+
+    <x-dialog-modal wire:model="modalConcluir" maxWidth="sm">
+
+        <x-slot name="title">
+
+            Firma electrónica
+
+        </x-slot>
+
+        <x-slot name="content">
+
+            <div class="flex flex-col md:flex-row justify-between gap-3 mb-3">
+
+                <x-input-group for="contraseña" label="Contraseña" :error="$errors->first('contraseña')" class="w-full">
+
+                    <x-input-text  id="contraseña" wire:model="contraseña" />
+
+                </x-input-group>
+
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between gap-3 mb-3">
+
+                <x-input-group for="cer" label="Archio CER" :error="$errors->first('cer')" class="w-full">
+
+                    <div x-data="{ focused: false }" class="w-full">
+
+                        <span class="rounded-md shadow-sm w-full ">
+
+                            <input @focus="focused = true" @blur="focused = false" class="sr-only" type="file" wire:model.live="cer" id="cer">
+
+                            <label for="cer" :class="{ 'outline-none border-blue-300 shadow-outline-blue': focused }" class="relative flex items-center justify-between w-full cursor-pointer py-2 px-3 border border-gray-300 rounded-md text-sm leading-4 font-medium text-gray-700 hover:text-gray-500 active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
+                                Selecccione el archivo
+
+                                <div wire:loading.flex wire:target="cer" class="flex absolute top-1 right-1 items-center">
+                                    <svg class="animate-spin h-4 w-4 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                </div>
+
+                                @if($cer)
+
+                                    <span class=" text-blue-700">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rounded-full border border-blue-700">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                        </svg>
+
+                                    </span>
+
+                                @endif
+
+                            </label>
+
+                        </span>
+
+                    </div>
+
+                </x-input-group>
+
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between gap-3 mb-3">
+
+                <x-input-group for="key" label="Archio KEY" :error="$errors->first('key')" class="w-full">
+
+                    <div x-data="{ focused: false }" class="w-full">
+
+                        <span class="rounded-md shadow-sm w-full ">
+
+                            <input @focus="focused = true" @blur="focused = false" class="sr-only" type="file" wire:model.live="key" id="key">
+
+                            <label for="key" :class="{ 'outline-none border-blue-300 shadow-outline-blue': focused }" class="flex items-center relative justify-between w-full cursor-pointer py-2 px-3 border border-gray-300 rounded-md text-sm leading-4 font-medium text-gray-700 hover:text-gray-500 active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
+                                Selecccione el archivo
+
+                                <div wire:loading.flex wire:target="key" class="flex absolute top-1 right-1 items-center">
+                                    <svg class="animate-spin h-4 w-4 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                </div>
+
+                                @if($key)
+
+                                    <span class=" text-blue-700">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rounded-full border border-blue-700">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                        </svg>
+
+                                    </span>
+
+                                @endif
+
+                            </label>
+
+                        </span>
+
+                    </div>
+
+                </x-input-group>
+
+            </div>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <div class="flex gap-3">
+
+                <x-button-blue
+                    wire:click="concluirAvaluo"
+                    wire:loading.attr="disabled"
+                    wire:target="concluirAvaluo">
+
+                    <img wire:loading wire:target="concluirAvaluo" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    <span>Concluir avalúo</span>
+                </x-button-blue>
+
+                <x-button-red
+                    wire:click="$toggle('modalConcluir')"
+                    wire:loading.attr="disabled"
+                    wire:target="$toggle('modalConcluir')"
+                    type="button">
+                    Cerrar
+                </x-button-red>
+
+            </div>
+
+        </x-slot>
+
+    </x-dialog-modal>
 
 </div>

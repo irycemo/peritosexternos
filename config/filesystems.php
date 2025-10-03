@@ -68,6 +68,14 @@ return [
             'throw' => false,
         ],
 
+        'caratulas' => [
+            'driver' => 'local',
+            'root' => storage_path('app/caratulas'),
+            'url' => env('APP_URL').'/caratulas',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
     ],
 
     /*
@@ -84,6 +92,7 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
         public_path('avaluos') => storage_path('app/avaluos'),
+        public_path('caratulas') => storage_path('app/caratulas'),
     ],
 
 ];
