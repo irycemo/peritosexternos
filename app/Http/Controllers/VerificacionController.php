@@ -12,6 +12,8 @@ class VerificacionController extends Controller
 
         if($firma_electronica->estado != 'activo'){
 
+            $firma_electronica->load('avaluo.predio');
+
             return view('verificacion', compact('firma_electronica'));
 
         }
