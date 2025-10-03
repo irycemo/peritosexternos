@@ -83,7 +83,11 @@ class Avaluo extends Model implements Auditable
     }
 
     public function firmaElectronica(){
-        return $this->hasOne(FirmaElectronica::class);
+        return $this->hasMany(FirmaElectronica::class);
+    }
+
+    public function caratula(){
+        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'avaluo');
     }
 
     public function encabezado(){

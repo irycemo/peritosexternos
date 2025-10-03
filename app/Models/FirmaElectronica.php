@@ -35,8 +35,4 @@ class FirmaElectronica extends Model
         return $this->morphMany(File::class, 'fileable');
     }
 
-    public function archivo(){
-        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'avaluo');
-    }
-
 }
