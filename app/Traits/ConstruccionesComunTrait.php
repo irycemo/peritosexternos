@@ -83,10 +83,10 @@ trait ConstruccionesComunTrait
         $this->validate([
             'predio' => 'required',
             'construccionesComun.*' => 'required',
-            'construccionesComun.*.area_comun_construccion' => 'required',
-            'construccionesComun.*.indiviso_construccion' => 'required|max:100',
+            'construccionesComun.*.area_comun_construccion' => 'required|numeric|gt:0',
+            'construccionesComun.*.indiviso_construccion' => 'required|numeric|gt:0|max:100',
             'construccionesComun.*.valor_clasificacion_construccion' => 'required',
-            'construccionesComun.*.superficie_proporcional' => 'required',
+            'construccionesComun.*.superficie_proporcional' => 'required|numeric|gt:0',
         ]);
 
         try {

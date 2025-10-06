@@ -83,10 +83,10 @@ trait TerrenosComunTrait
         $this->validate([
             'predio' => 'required',
             'terrenosComun.*' => 'required',
-            'terrenosComun.*.area_terreno_comun' => 'required',
-            'terrenosComun.*.indiviso_terreno' => 'required|max:100',
-            'terrenosComun.*.superficie_proporcional' => 'nullable',
-            'terrenosComun.*.valor_unitario' => 'required',
+            'terrenosComun.*.area_terreno_comun' => 'required|numeric|gt:0',
+            'terrenosComun.*.indiviso_terreno' => 'required|numeric|gt:0|max:100',
+            'terrenosComun.*.superficie_proporcional' => 'required|numeric|gt:0',
+            'terrenosComun.*.valor_unitario' => 'required|numeric|gt:0',
         ]);
 
         /* if($this->revisarPorcentaje()) return; */
