@@ -83,7 +83,7 @@ class Avaluo extends Model implements Auditable
     }
 
     public function firmaElectronica(){
-        return $this->hasMany(FirmaElectronica::class);
+        return $this->hasOne(FirmaElectronica::class)->where('estado', 'activo');
     }
 
     public function caratula(){
