@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
 });
 
-/* Route::get('verificacion/{firma_electronica:uuid}', VerificacionController::class)->name('verificacion'); */
+Route::get('verificacion/{firma_electronica:uuid}', VerificacionController::class)->name('verificacion');
 
 Route::get('setpassword/{email}', [SetPasswordController::class, 'create'])->name('setpassword');
 Route::post('setpassword', [SetPasswordController::class, 'store'])->name('setpassword.store');
