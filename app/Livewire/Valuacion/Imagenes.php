@@ -71,7 +71,7 @@ class Imagenes extends Component
 
         if(app()->isProduction()){
 
-            Storage::disk('s3')->putFileAs('peritos_externos/imagenes/', $imagen, $url, 'public');
+            Storage::disk('s3')->putFileAs('peritos_externos/imagenes/', $imagen, $url, 'private');
 
         }else{
 
