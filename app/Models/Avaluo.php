@@ -115,14 +115,15 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $fachada->url, now()->addMinutes(10));
+            return $fachada
+                ? Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $fachada->url, now()->addMinutes(10))
+                : Storage::disk('public')->url('img/logo.png');
 
         }else{
 
             return $fachada
                 ? Storage::disk('avaluos')->url($fachada->url)
                 : Storage::disk('public')->url('img/logo.png');
-            ;
 
         }
 
@@ -134,7 +135,9 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $fachada->url, now()->addMinutes(10));
+            return $fachada
+                ? Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $fachada->url, now()->addMinutes(10))
+                : Storage::disk('public')->url('img/logo.png');
 
         }else{
 
@@ -153,7 +156,9 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $foto2->url, now()->addMinutes(10));
+            return $foto2
+                ? Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $foto2->url, now()->addMinutes(10))
+                : Storage::disk('public')->url('img/logo.png');
 
         }else{
 
@@ -172,7 +177,9 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $foto2->url, now()->addMinutes(10));
+            return $foto2
+                ? Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $foto2->url, now()->addMinutes(10))
+                : Storage::disk('public')->url('img/logo.png');
 
         }else{
 
@@ -190,7 +197,9 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $foto3->url, now()->addMinutes(10));
+            return $foto3
+                ? Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $foto3->url, now()->addMinutes(10))
+                : Storage::disk('public')->url('img/logo.png');
 
         }else{
 
@@ -210,7 +219,9 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $foto3->url, now()->addMinutes(10));
+            return $foto3
+                ? Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $foto3->url, now()->addMinutes(10))
+                : Storage::disk('public')->url('img/logo.png');
 
         }else{
 
@@ -228,7 +239,9 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $foto4->url, now()->addMinutes(10));
+            return $foto4
+                ? Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $foto4->url, now()->addMinutes(10))
+                : Storage::disk('public')->url('img/logo.png');
 
         }else{
 
@@ -247,7 +260,9 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $foto4->url, now()->addMinutes(10));
+            return $foto4
+                ? Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $foto4->url, now()->addMinutes(10))
+                : Storage::disk('public')->url('img/logo.png');
 
         }else{
 
@@ -265,7 +280,9 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $macrolocalizacion->url, now()->addMinutes(10));
+            return $macrolocalizacion
+                ? Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $macrolocalizacion->url, now()->addMinutes(10))
+                : Storage::disk('public')->url('img/logo.png');
 
         }else{
 
@@ -284,7 +301,9 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $macrolocalizacion->url, now()->addMinutes(10));
+            return $macrolocalizacion
+                ? Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $macrolocalizacion->url, now()->addMinutes(10))
+                : Storage::disk('public')->url('img/logo.png');
 
         }else{
 
@@ -302,7 +321,9 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $microlocalizacion->url, now()->addMinutes(10));
+            return $microlocalizacion
+                ? Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $microlocalizacion->url, now()->addMinutes(10))
+                : Storage::disk('public')->url('img/logo.png');
 
         }else{
 
@@ -321,7 +342,9 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $microlocalizacion->url, now()->addMinutes(10));
+            return $microlocalizacion
+                ? Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $microlocalizacion->url, now()->addMinutes(10))
+                : Storage::disk('public')->url('img/logo.png');
 
         }else{
 
@@ -339,7 +362,9 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $poligonoImagen->url, now()->addMinutes(10));
+            return $poligonoImagen
+                ? Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $poligonoImagen->url, now()->addMinutes(10))
+                : Storage::disk('public')->url('img/logo.png');
 
         }else{
 
@@ -358,7 +383,9 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $poligonoImagen->url, now()->addMinutes(10));
+            return $poligonoImagen
+                ? Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $poligonoImagen->url, now()->addMinutes(10))
+                : Storage::disk('public')->url('img/logo.png');
 
         }else{
 
@@ -376,7 +403,9 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $poligonoDwg->url, now()->addMinutes(10));
+            return $poligonoDwg
+                ? Storage::disk('s3')->temporaryUrl('peritosexternos/avaluos/' . $poligonoDwg->url, now()->addMinutes(10))
+                : Storage::disk('public')->url('img/logo.png');
 
         }else{
 
