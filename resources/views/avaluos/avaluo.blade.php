@@ -215,21 +215,7 @@
 
                                     <p style="margin-bottom: 10px;">Fachada</p>
 
-                                    @if(app()->isProduction())
-
-                                        @php
-                                            $content = $predio->avaluo->fachada();
-                                            $imageData = base64_encode($content);
-                                            $src = 'data:image/png;base64,' . $imageData;
-                                        @endphp
-
-                                        <img class="imagenes" src="{{$src}}" alt="Fachada">
-
-                                    @else
-
-                                        <img class="imagenes" src="{{ public_path($predio->avaluo->fachada_pdf()) }}" alt="Fachada">
-
-                                    @endif
+                                    <img class="imagenes" src="{{ public_path($predio->avaluo->fachada_pdf()) }}" alt="Fachada">
 
                                 </div>
 
