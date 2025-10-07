@@ -71,7 +71,7 @@ class Imagenes extends Component
 
         if(app()->isProduction()){
 
-            Storage::disk('s3')->put('peritos_externos/imagenes/' . $url, $imagen);
+            Storage::disk('s3')->putFileAs('peritos_externos/imagenes/' . $url, $imagen);
 
         }else{
 
