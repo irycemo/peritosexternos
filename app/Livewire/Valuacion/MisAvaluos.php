@@ -43,6 +43,14 @@ class MisAvaluos extends Component
 
         $this->avaluo = $avaluo;
 
+        if(in_array($this->avaluo->predio->sector, [88, 99])){
+
+            $this->dispatch('mostrarMensaje', ['warning', 'El predio debe ser conciliado comuniquese a la oficina rentistica correspondiente para solicitar la conciliación.']);
+
+            return;
+
+        }
+
         $this->modalConcluir = true;
 
     }

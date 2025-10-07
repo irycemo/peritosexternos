@@ -215,13 +215,17 @@
 
     @foreach ($bloques as $index => $bloque)
 
-       {{--  <div class="mb-5 bg-white rounded-lg p-4 shadow-xl ">
-
-            <span class="p-2 bg-blue-400 text-white text-sm rounded-full">Bloque {{ $loop->iteration }}</span>
-
-        </div> --}}
-
         <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl">
+
+            <div class="flex justify-end ">
+
+                <x-button-red
+                    wire:click="borrarBloque({{ $index }})"
+                    wire:loading.attr="disabled">
+                    X
+                </x-button-red>
+
+            </div>
 
             <h4 class="text-lg mb-5 text-center">Bloque {{ $loop->iteration }}</h4>
 

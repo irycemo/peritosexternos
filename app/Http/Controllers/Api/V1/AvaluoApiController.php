@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AvaluoRequest;
 use App\Http\Resources\AvaluoResource;
 use App\Http\Controllers\AvaluoController;
+use App\Http\Requests\ConciliarPredioRequest;
 use App\Http\Requests\ConsultarAvaluosConcilar;
 use App\Http\Requests\ConsultarCartografiaRequest;
 use App\Http\Resources\AvaluoCartografiaResource;
@@ -192,8 +193,6 @@ class AvaluoApiController extends Controller
                             ->whereHas('predio', function($q){
                                 $q->whereIn('sector', [88,99]);
                             })
-                            ->where('estado', 'operado')
-                            ->where('cartografia_validada', false)
                             ->when(isset($validated['año']), fn($q) => $q->where('año', $validated['año']))
                             ->when(isset($validated['folio']), fn($q) => $q->where('folio', $validated['folio']))
                             ->when(isset($validated['usuario']), fn($q) => $q->where('usuario', $validated['usuario']))
@@ -228,8 +227,50 @@ class AvaluoApiController extends Controller
 
         } catch (\Throwable $th) {
 
+            Log::error("Error al validar la cartografía." . $th);
+
             return response()->json([
                 'error' => "Error al validar la cartografía.",
+            ], 500);
+
+        }
+
+    }
+
+    public function conciliarPredio(ConciliarPredioRequest $request){
+
+        $validated = $request->validated();
+
+        $avaluo = Avaluo::find($validated['id']);
+
+        if(!$avaluo){
+
+            return response()->json([
+                'error' => "No se encontró el avalúo.",
+            ], 404);
+
+        }
+
+        try {
+
+            $avaluo->predio->update([
+                'sector' => $validated['sector'],
+                'manzana' => $validated['manzana'],
+                'predio' => $validated['predio'],
+                'edificio' => $validated['edificio'],
+                'departamento' => $validated['departamento'],
+            ]);
+
+            return response()->json([
+                'data' => "Operación exitosa.",
+            ], 200);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al conciliar predio." . $th);
+
+            return response()->json([
+                'error' => "Error al conciliar predio.",
             ], 500);
 
         }

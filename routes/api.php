@@ -21,4 +21,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('validar_cartografia', [AvaluoApiController::class, 'validarCartografia']);
 
+    Route::post('consultar_avaluos_conciliar', [AvaluoApiController::class, 'consultarAvaluosConciliar']);
+
+    Route::post('conciliar_predio', [AvaluoApiController::class, 'conciliarPredio']);
+
 });

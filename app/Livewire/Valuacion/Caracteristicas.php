@@ -91,7 +91,26 @@ class Caracteristicas extends Component
         'avaluo.clasificacion_zona' => 'clasificación de la zona',
         'avaluo.construccion_dominante' => 'tipo de construcción dominante',
         'predio.ubicacion_en_manzana' => 'ubicación en manzana',
-        'bloques.*.uso' => 'El uso del bloque es obligatorio'
+        'bloques.*.uso' => 'El uso del bloque es obligatorio',
+        'bloques.*.cimentacion' => 'cimentación',
+        'bloques.*.estructura' => 'estructura',
+        'bloques.*.muros' => 'muros',
+        'bloques.*.entrepiso' => 'entrepiso',
+        'bloques.*.techo' => 'techo',
+        'bloques.*.plafones' => 'plafones',
+        'bloques.*.vidrieria' => 'vidrieria',
+        'bloques.*.lambrines' => 'lambrines',
+        'bloques.*.pisos' => 'pisos',
+        'bloques.*.herreria' => 'herreria',
+        'bloques.*.pintura' => 'pintura',
+        'bloques.*.carpinteria' => 'carpinteria',
+        'bloques.*.recubrimiento_especial' => 'recubrimiento_especial',
+        'bloques.*.aplanados' => 'aplanados',
+        'bloques.*.hidraulica' => 'hidraulica',
+        'bloques.*.sanitaria' => 'sanitaria',
+        'bloques.*.electrica' => 'electrica',
+        'bloques.*.gas' => 'gas',
+        'bloques.*.especiales' => 'especiales',
     ];
 
     public function agregarBloque(){
