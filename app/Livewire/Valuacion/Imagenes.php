@@ -69,7 +69,7 @@ class Imagenes extends Component
 
         $extension = pathinfo($imagen, PATHINFO_EXTENSION);
 
-        $url = Str::random(40) . $extension;
+        $url = Str::random(40) . '.' . $extension;
 
         if(app()->isProduction()){
 
