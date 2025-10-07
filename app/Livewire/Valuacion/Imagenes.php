@@ -6,6 +6,7 @@ use App\Models\File;
 use App\Models\Avaluo;
 use App\Models\Predio;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
@@ -66,7 +67,17 @@ class Imagenes extends Component
                         ->where('descripcion' , $descripcion)
                         ->first();
 
-        $url = $imagen->store('/', 'avaluos');
+        $url = Str::random(40) . '.pdf';
+
+        if(app()->isProduction()){
+
+            Storage::disk('s3')->put('peritos_externos/imagenes/' . $url, $imagen);
+
+        }else{
+
+            $url = $imagen->store('/', 'avaluos');
+
+        }
 
         if(!$file)
 
@@ -78,7 +89,15 @@ class Imagenes extends Component
 
         else{
 
-            Storage::disk('avaluos')->delete($file->url);
+            if(app()->isProduction()){
+
+                Storage::disk('s3')->delete('peritos_externos/imagenes/' . $file->url);
+
+            }else{
+
+                Storage::disk('avaluos')->delete($file->url);
+
+            }
 
             $file->update(['url' => $url]);
 
