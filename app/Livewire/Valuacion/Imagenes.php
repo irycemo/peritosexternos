@@ -67,7 +67,9 @@ class Imagenes extends Component
                         ->where('descripcion' , $descripcion)
                         ->first();
 
-        $url = Str::random(40) . '.pdf';
+        $extension = pathinfo($imagen, PATHINFO_EXTENSION);
+
+        $url = Str::random(40) . $extension;
 
         if(app()->isProduction()){
 
