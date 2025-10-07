@@ -136,7 +136,7 @@ class Avaluo extends Model implements Auditable
         if(config('services.ses.flag')){
 
             return $fachada
-                ? 'data:' . $mimeType . ';base64, ' . base64_encode(file_get_contents($this->fachada()))
+                ? 'data:image/png;base64, ' . base64_encode(file_get_contents($this->fachada()))
                 : Storage::disk('public')->url('img/logo.png');
 
         }else{
