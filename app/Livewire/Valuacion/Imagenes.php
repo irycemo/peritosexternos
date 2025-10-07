@@ -67,9 +67,7 @@ class Imagenes extends Component
                         ->where('descripcion' , $descripcion)
                         ->first();
 
-        $extension = pathinfo($imagen, PATHINFO_EXTENSION);
-
-        $url = Str::random(40) . '.' . $extension;
+        $url = Str::random(40) . '.' . $imagen->getClientOriginalExtension();
 
         if(app()->isProduction()){
 
