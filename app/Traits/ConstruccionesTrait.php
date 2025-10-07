@@ -93,7 +93,7 @@ trait ConstruccionesTrait
 
         $this->validate([
             'predio' => 'required',
-            'construcciones.*'  => 'required',
+            'construcciones.*'  => 'nullable',
             'construcciones.*.referencia' => 'required',
             'construcciones.*.valor_unitario' => 'required|numeric|gt:0',
             'construcciones.*.niveles' => 'required|numeric|gt:0',

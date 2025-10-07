@@ -10,6 +10,8 @@
 
                 <x-input-select id="avaluo.clasificacion_zona" wire:model="avaluo.clasificacion_zona" class="w-full">
 
+                    <option value="">Seleccione una opción</option>
+
                     @foreach ($zonas as $item)
 
                         <option value="{{ $item }}">{{ $item }}</option>
@@ -23,6 +25,8 @@
             <x-input-group for="avaluo.construccion_dominante" label="Tipo de construcción dominante" :error="$errors->first('avaluo.construccion_dominante')" class="w-full">
 
                 <x-input-select id="avaluo.construccion_dominante" wire:model="avaluo.construccion_dominante" class="w-full">
+
+                    <option value="">Seleccione una opción</option>
 
                     @foreach ($construcciones as $item)
 
@@ -227,7 +231,7 @@
 
                     <x-input-select id="bloques.{{ $index }}.uso" wire:model="bloques.{{ $index }}.uso" class="w-full">
 
-                        <option value="">Seleccione una opción</option>
+                        <option value="">Seleccione las opciones</option>
 
                         @foreach ($usos as $item)
 
@@ -249,6 +253,8 @@
 
                     <x-input-select id="bloques.{{ $index }}.cimentacion" wire:model="bloques.{{ $index }}.cimentacion" class="w-full" multiple>
 
+                        <option value="">Seleccione las opciones</option>
+
                         @foreach ($cimentaciones as $item)
 
                             <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
@@ -262,6 +268,8 @@
                 <x-input-group for="bloques.{{ $index }}.estructura" label="Estructura" :error="$errors->first('bloques.' . $index . '.estructura')" class="w-full">
 
                     <x-input-select id="bloques.{{ $index }}.estructura" wire:model="bloques.{{ $index }}.estructura" class="w-full" multiple>
+
+                        <option value="">Seleccione las opciones</option>
 
                         @foreach ($estructuras as $item)
 
@@ -277,6 +285,8 @@
 
                     <x-input-select id="bloques.{{ $index }}.muros" wire:model="bloques.{{ $index }}.muros" class="w-full" multiple>
 
+                        <option value="">Seleccione las opciones</option>
+
                         @foreach ($muros as $item)
 
                             <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
@@ -291,6 +301,8 @@
 
                     <x-input-select id="bloques.{{ $index }}.entrepiso" wire:model="bloques.{{ $index }}.entrepiso" class="w-full" multiple>
 
+                        <option value="">Seleccione las opciones</option>
+
                         @foreach ($entrepisos as $item)
 
                             <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
@@ -304,6 +316,8 @@
                 <x-input-group for="bloques.{{ $index }}.techo" label="Techo" :error="$errors->first('bloques.' . $index . '.techo')" class="w-full">
 
                     <x-input-select id="bloques.{{ $index }}.techo" wire:model="bloques.{{ $index }}.techo" class="w-full" multiple>
+
+                        <option value="">Seleccione las opciones</option>
 
                         @foreach ($techos as $item)
 
@@ -329,6 +343,8 @@
 
                     <x-input-select id="bloques.{{ $index }}.plafones" wire:model="bloques.{{ $index }}.plafones" class="w-full" multiple>
 
+                        <option value="">Seleccione las opciones</option>
+
                         @foreach ($plafones as $item)
 
                             <option value="{{ $item }}"  title="{{ $item }}">{{ $item }}</option>
@@ -342,6 +358,8 @@
                 <x-input-group for="bloques.{{ $index }}.vidrieria" label="Vidriería" :error="$errors->first('bloques.' . $index . '.vidrieria')" class="w-full">
 
                     <x-input-select id="bloques.{{ $index }}.vidrieria" wire:model="bloques.{{ $index }}.vidrieria" class="w-full" multiple>
+
+                        <option value="">Seleccione las opciones</option>
 
                         @foreach ($vidrieria as $item)
 
@@ -357,6 +375,8 @@
 
                     <x-input-select id="bloques.{{ $index }}.lambrines" wire:model="bloques.{{ $index }}.lambrines" class="w-full" multiple>
 
+                        <option value="">Seleccione las opciones</option>
+
                         @foreach ($lambrines as $item)
 
                             <option value="{{ $item }}"  title="{{ $item }}">{{ $item }}</option>
@@ -370,6 +390,8 @@
                 <x-input-group for="bloques.{{ $index }}.pisos" label="Pisos" :error="$errors->first('bloques.' . $index . '.pisos')" class="w-full">
 
                     <x-input-select id="bloques.{{ $index }}.pisos" wire:model="bloques.{{ $index }}.pisos" class="w-full" multiple>
+
+                        <option value="">Seleccione las opciones</option>
 
                         @foreach ($pisos as $item)
 
@@ -385,6 +407,8 @@
 
                     <x-input-select id="bloques.{{ $index }}.herreria" wire:model="bloques.{{ $index }}.herreria" class="w-full" multiple>
 
+                        <option value="">Seleccione las opciones</option>
+
                         @foreach ($herreria as $item)
 
                             <option value="{{ $item }}"  title="{{ $item }}">{{ $item }}</option>
@@ -398,6 +422,8 @@
                 <x-input-group for="bloques.{{ $index }}.pintura" label="Pintura" :error="$errors->first('bloques.' . $index . '.pintura')" class="w-full">
 
                     <x-input-select id="bloques.{{ $index }}.pintura" wire:model="bloques.{{ $index }}.pintura" class="w-full" multiple>
+
+                        <option value="">Seleccione las opciones</option>
 
                         @foreach ($pintura as $item)
 
@@ -413,6 +439,8 @@
 
                     <x-input-select id="bloques.{{ $index }}.carpinteria" wire:model="bloques.{{ $index }}.carpinteria" class="w-full" multiple>
 
+                        <option value="">Seleccione las opciones</option>
+
                         @foreach ($carpinteria as $item)
 
                             <option value="{{ $item }}"  title="{{ $item }}">{{ $item }}</option>
@@ -427,6 +455,8 @@
 
                     <x-input-select id="bloques.{{ $index }}.aplanados" wire:model="bloques.{{ $index }}.aplanados" class="w-full" multiple>
 
+                        <option value="">Seleccione las opciones</option>
+
                         @foreach ($aplanados as $item)
 
                             <option value="{{ $item }}"  title="{{ $item }}">{{ $item }}</option>
@@ -440,6 +470,8 @@
                 <x-input-group for="bloques.{{ $index }}.recubrimiento_especial" label="Recubrimiento especial" :error="$errors->first('bloques.' . $index . '.recubrimiento_especial')" class="w-full">
 
                     <x-input-select id="bloques.{{ $index }}.recubrimiento_especial" wire:model="bloques.{{ $index }}.recubrimiento_especial" class="w-full" multiple>
+
+                        <option value="">Seleccione las opciones</option>
 
                         @foreach ($rec_especial as $item)
 
@@ -465,6 +497,8 @@
 
                     <x-input-select id="bloques.{{ $index }}.hidraulica" wire:model="bloques.{{ $index }}.hidraulica" class="w-full" multiple>
 
+                        <option value="">Seleccione las opciones</option>
+
                         @foreach ($hidraulica as $item)
 
                             <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
@@ -478,6 +512,8 @@
                 <x-input-group for="bloques.{{ $index }}.sanitaria" label="Sanitaria" :error="$errors->first('bloques.' . $index . '.sanitaria')" class="w-full">
 
                     <x-input-select id="bloques.{{ $index }}.sanitaria" wire:model="bloques.{{ $index }}.sanitaria" class="w-full" multiple>
+
+                        <option value="">Seleccione las opciones</option>
 
                         @foreach ($sanitaria as $item)
 
@@ -493,6 +529,8 @@
 
                     <x-input-select id="bloques.{{ $index }}.electrica" wire:model="bloques.{{ $index }}.electrica" class="w-full" multiple>
 
+                        <option value="">Seleccione las opciones</option>
+
                         @foreach ($electrica as $item)
 
                             <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
@@ -507,6 +545,8 @@
 
                     <x-input-select id="bloques.{{ $index }}.gas" wire:model="bloques.{{ $index }}.gas" class="w-full" multiple>
 
+                        <option value="">Seleccione las opciones</option>
+
                         @foreach ($gas as $item)
 
                             <option value="{{ $item }}" title="{{ $item }}">{{ $item }}</option>
@@ -520,6 +560,8 @@
                 <x-input-group for="bloques.{{ $index }}.especiales" label="Especiales" :error="$errors->first('bloques.' . $index . '.especiales')" class="w-full">
 
                     <x-input-select id="bloques.{{ $index }}.especiales" wire:model="bloques.{{ $index }}.especiales" class="w-full" multiple>
+
+                        <option value="">Seleccione las opciones</option>
 
                         @foreach ($especiales as $item)
 

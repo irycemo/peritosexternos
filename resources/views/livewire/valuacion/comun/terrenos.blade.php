@@ -146,24 +146,20 @@
 
                 </div>
 
-                @if(auth()->user()->hasRole('Jefe departamento'))
+                <div class="flex-auto lg:col-span-1 my-auto">
 
-                    <div class="flex-auto lg:col-span-1 my-auto">
+                    <x-button-red
+                        wire:click="borrarTerreno({{ $index }})"
+                        wire:loading.attr="disabled"
+                        wire:target="borrarTerreno({{ $index }})">
 
-                        <x-button-red
-                            wire:click="borrarTerreno({{ $index }})"
-                            wire:loading.attr="disabled"
-                            wire:target="borrarTerreno({{ $index }})">
+                        <img wire:loading wire:target="borrarTerreno({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                            <img wire:loading wire:target="borrarTerreno({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                        Borrar
 
-                            Borrar
+                    </x-button-red>
 
-                        </x-button-red>
-
-                    </div>
-
-                @endif
+                </div>
 
             </div>
 

@@ -88,7 +88,7 @@ trait TerrenosTrait
 
         $this->validate([
             'predio' => 'required',
-            'terrenos.*' => 'required',
+            'terrenos.*' => 'nullable',
             'terrenos.*.superficie' => 'required|numeric|gt:0',
             'terrenos.*.valor_unitario' => 'required|numeric|gt:0',
             'terrenos.*.demerito' => 'nullable|numeric|min:0|max:65',

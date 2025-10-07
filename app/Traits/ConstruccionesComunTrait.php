@@ -82,7 +82,7 @@ trait ConstruccionesComunTrait
 
         $this->validate([
             'predio' => 'required',
-            'construccionesComun.*' => 'required',
+            'construccionesComun.*' => 'nullable',
             'construccionesComun.*.area_comun_construccion' => 'required|numeric|gt:0',
             'construccionesComun.*.indiviso_construccion' => 'required|numeric|gt:0|max:100',
             'construccionesComun.*.valor_clasificacion_construccion' => 'required',

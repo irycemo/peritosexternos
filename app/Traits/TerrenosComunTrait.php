@@ -82,7 +82,7 @@ trait TerrenosComunTrait
 
         $this->validate([
             'predio' => 'required',
-            'terrenosComun.*' => 'required',
+            'terrenosComun.*' => 'nullable',
             'terrenosComun.*.area_terreno_comun' => 'required|numeric|gt:0',
             'terrenosComun.*.indiviso_terreno' => 'required|numeric|gt:0|max:100',
             'terrenosComun.*.superficie_proporcional' => 'required|numeric|gt:0',
