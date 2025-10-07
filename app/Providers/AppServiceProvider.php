@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
             });
 
             Livewire::setUpdateRoute(function ($handle) {
-                return Route::post('/peritosexternos/livewire/update', $handle);
+                return Route::post('/peritosexternos/livewire/update', $handle)->name('custom_update');
             });
 
         }
