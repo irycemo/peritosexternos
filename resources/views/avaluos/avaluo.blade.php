@@ -217,7 +217,7 @@
 
                                     @if(app()->isProduction())
 
-                                        <img class="imagenes" src="{{ $predio->avaluo->fachada_pdf() }}" alt="Fachada">
+                                        <img style="width: 200px; height: 200px;" class="imagenes" src="{{ $predio->avaluo->fachada_pdf() }}" alt="Fachada">
 
                                     @else
 
