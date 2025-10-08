@@ -146,7 +146,7 @@ class Avaluo extends Model implements Auditable
             info(Storage::path('livewire-tmp/'. $nombre_temp));
 
             return $fachada
-                ? 'storage/livewire-temp/' . $nombre_temp
+                ? 'storage/livewire-tmp/' . $nombre_temp
                 : 'storage/img/escudo_guinda.png';
 
         }else{
