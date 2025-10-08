@@ -40,6 +40,8 @@ class Avaluos extends Component
 
                 $this->resetCaratula($avaluo);
 
+                $avaluo->audits()->latest()->first()->update(['tags' => 'Reactivó avaluo']);
+
             });
 
             $this->dispatch('mostrarMensaje', ['success', "El avalúo se reactivó con éxito."]);;
