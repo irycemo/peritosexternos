@@ -189,7 +189,7 @@ class Avaluo extends Model implements Auditable
 
             return $foto2
                 ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $foto2->url, now()->addMinutes(10))
-                : Storage::disk('public')->url('img/logo.png');
+                : 'storage/img/escudo_guinda.png';
 
         }else{
 
@@ -231,7 +231,7 @@ class Avaluo extends Model implements Auditable
 
             return $foto3
                 ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $foto3->url, now()->addMinutes(10))
-                : Storage::disk('public')->url('img/logo.png');
+                : 'storage/img/escudo_guinda.png';
 
         }else{
 
@@ -272,8 +272,7 @@ class Avaluo extends Model implements Auditable
 
             return $foto4
                 ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $foto4->url, now()->addMinutes(10))
-                : Storage::disk('public')->url('img/logo.png');
-
+                : 'storage/img/escudo_guinda.png';
         }else{
 
             return $foto4
@@ -313,8 +312,7 @@ class Avaluo extends Model implements Auditable
 
             return $macrolocalizacion
                 ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $macrolocalizacion->url, now()->addMinutes(10))
-                : Storage::disk('public')->url('img/logo.png');
-
+                : 'storage/img/escudo_guinda.png';
         }else{
 
             return $macrolocalizacion
@@ -354,7 +352,7 @@ class Avaluo extends Model implements Auditable
 
             return $microlocalizacion
                 ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $microlocalizacion->url, now()->addMinutes(10))
-                : Storage::disk('public')->url('img/logo.png');
+                : 'storage/img/escudo_guinda.png';
 
         }else{
 
@@ -395,7 +393,7 @@ class Avaluo extends Model implements Auditable
 
             return $poligonoImagen
                 ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $poligonoImagen->url, now()->addMinutes(10))
-                : Storage::disk('public')->url('img/logo.png');
+                : 'storage/img/escudo_guinda.png';
 
         }else{
 
