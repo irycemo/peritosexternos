@@ -141,14 +141,14 @@ class Avaluo extends Model implements Auditable
 
             $nombre_temp = Str::random(40) . '.' . $extension;
 
-            Storage::put('livewire-tmp/'. $nombre_temp, file_get_contents($this->fachada()));
+            Storage::put('public/img/'. $nombre_temp, file_get_contents($this->fachada()));
 
             info(Storage::path('livewire-tmp/'. $nombre_temp));
 
             info(public_path('storage/img/escudo_guinda.png'));
 
             return $fachada
-                ? 'storage/livewire-tmp/' . $nombre_temp
+                ? 'storage/img/' . $nombre_temp
                 : 'storage/img/escudo_guinda.png';
 
         }else{
