@@ -135,9 +135,13 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            info(public_path(Storage::disk('public')->url('img/logo.png')));
+            $extension = pathinfo(Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $fachada->url, now()->addMinutes(10)), PATHINFO_EXTENSION);
 
-            return Storage::disk('public')->url('img/logo.png');
+            $nombre_temp = Str::random(40) . '.' . $extension;
+
+            info(Storage::path('livewire-tmp/'. $nombre_temp));
+
+            return Storage::path('livewire-tmp/'. $nombre_temp);
 
             return $fachada
                 ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $fachada->url, now()->addMinutes(10))
