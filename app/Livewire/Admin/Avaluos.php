@@ -5,6 +5,7 @@ namespace App\Livewire\Admin;
 use App\Models\Avaluo;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Models\FirmaElectronica;
 use App\Traits\ComponentesTrait;
 use App\Traits\AvaluoCadenaTrait;
 use Livewire\Attributes\Computed;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\AvaluoController;
+use App\Http\Controllers\FirmaElectronicaController;
 
 class Avaluos extends Component
 {
@@ -75,7 +77,7 @@ class Avaluos extends Component
 
             return response()->streamDownload(
                 fn () => print($pdf->output()),
-                'avaluo.pdf'
+                'avalúo-' .$this->avaluo->predio->localidad . '-' . $this->avaluo->predio->oficina. '-' . $this->avaluo->predio->tipo_predio . '-'. $this->avaluo->predio->numero_registro. '.pdf'
             );
 
         } catch (GeneralException $ex) {
@@ -85,6 +87,27 @@ class Avaluos extends Component
         } catch (\Throwable $th) {
 
             Log::error("Error al crear avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+    }
+
+    public function reimprimir(FirmaElectronica $firma_electronica){
+
+        try {
+
+            $pdf = (new FirmaElectronicaController())->reimprimirAvaluo($firma_electronica);
+
+            return response()->streamDownload(
+                fn () => print($pdf->output()),
+                $firma_electronica->avaluo->predio->cuentaPredial() . '-certificado_de_registro.pdf'
+            );
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al reimprimir avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
 
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
 

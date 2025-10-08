@@ -1,5 +1,7 @@
 <x-guest-layout>
-    <x-authentication-card>
+
+    <x-authentication-card >
+
         <x-slot name="logo">
             <x-authentication-card-logo />
         </x-slot>
@@ -12,7 +14,7 @@
             </div>
         @endsession
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('login') }}" >
             @csrf
 
             <div>

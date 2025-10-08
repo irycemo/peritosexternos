@@ -91,7 +91,7 @@ class Caracteristicas extends Component
         'avaluo.clasificacion_zona' => 'clasificación de la zona',
         'avaluo.construccion_dominante' => 'tipo de construcción dominante',
         'predio.ubicacion_en_manzana' => 'ubicación en manzana',
-        'bloques.*.uso' => 'El uso del bloque es obligatorio',
+        'bloques.*.uso' => 'El uso del bloque :position',
         'bloques.*.cimentacion' => 'cimentación del bloque :position',
         'bloques.*.estructura' => 'estructura del bloque :position',
         'bloques.*.muros' => 'muros del bloque :position',
