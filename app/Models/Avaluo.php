@@ -135,7 +135,7 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            inf(Storage::disk('public')->url('img/logo.png'));
+            info(Storage::disk('public')->url('img/logo.png'));
 
             return Storage::disk('public')->url('img/logo.png');
 
