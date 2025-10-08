@@ -143,17 +143,17 @@ class Avaluo extends Model implements Auditable
 
             info(Storage::path('livewire-tmp/'. $nombre_temp));
 
-            return Storage::disk('public')->url('img/logo.png');
+            return public_path('storage/img/escudo_guinda.png');;
 
             return $fachada
                 ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $fachada->url, now()->addMinutes(10))
-                : Storage::disk('public')->url('img/logo.png');
+                : public_path('storage/img/escudo_guinda.png');
 
         }else{
 
             return $fachada
                 ? Storage::disk('avaluos')->url($fachada->url)
-                : Storage::disk('public')->url('img/logo.png');
+                : public_path('storage/img/escudo_guinda.png');
             ;
 
         }
