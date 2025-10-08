@@ -141,9 +141,9 @@ class Avaluo extends Model implements Auditable
 
             Storage::put('livewire-tmp/'. $nombre_temp, $image);
 
-            info(Storage::path('livewire-tmp/'. $nombre_temp));
+            info(public_path('storage/img/escudo_guinda.png'));
 
-            return public_path('storage/img/escudo_guinda.png');;
+            return public_path('storage/img/escudo_guinda.png');
 
             return $fachada
                 ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $fachada->url, now()->addMinutes(10))
