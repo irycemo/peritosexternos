@@ -18,7 +18,8 @@ class AvaluoController extends Controller
 
         $pdf = Pdf::loadView('avaluos.avaluo', [
             'datos_control' => $datos_control,
-            'predio' => $predio
+            'predio' => $predio,
+            'fachada' => $predio->avaluo->fachada()
         ]);
 
         $pdf->render();
