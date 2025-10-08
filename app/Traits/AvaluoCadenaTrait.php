@@ -226,6 +226,14 @@ trait AvaluoCadenaTrait
         $object->predio = $predio;
         $object->bloques = $bloques;
 
+        $object->fachada = $avaluo->fachada();
+        $object->foto2 = $avaluo->foto2();
+        $object->foto3 = $avaluo->foto3();
+        $object->foto4 = $avaluo->foto4();
+        $object->macrolocalizacion = $avaluo->macrolocalizacion();
+        $object->microlocalizacion = $avaluo->microlocalizacion();
+        $object->poligonoImagen = $avaluo->poligonoImagen();
+
         return $object;
 
     }
@@ -240,17 +248,17 @@ trait AvaluoCadenaTrait
 
                 $firma->update(['estado' => 'cancelado']);
 
-                foreach($firma->avaluo->archivos as $archivo){
+                foreach($firma->avaluo->imagenes as $imagen){
 
-                    if($archivo->descripcion == 'avaluo'){
+                    if($imagen->descripcion == 'avaluo'){
 
                         if(app()->isProduction()){
 
-                            Storage::disk('s3')->delete($archivo->url);
+                            Storage::disk('s3')->delete($imagen->url);
 
                         }else{
 
-                            Storage::disk('caratulas')->delete($archivo->url);
+                            Storage::disk('caratulas')->delete($imagen->url);
 
                         }
 

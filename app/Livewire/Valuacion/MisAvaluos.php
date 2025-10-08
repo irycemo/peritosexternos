@@ -63,12 +63,6 @@ class MisAvaluos extends Component
 
             $this->revisarAvaluoCompleto();
 
-            if($this->avaluo->estado === 'nuevo'){
-
-                $this->avaluo->update(['estado' => 'impreso']);
-
-            }
-
             $pdf = (new AvaluoController())->avaluo($this->avaluo->predio);
 
             return response()->streamDownload(

@@ -123,7 +123,7 @@ class Avaluo extends Model implements Auditable
 
             return $fachada
                 ? Storage::disk('avaluos')->url($fachada->url)
-                : Storage::disk('public')->url('img/logo.png');
+                : Storage::disk('public')->url('img/escudo_guinda.png');
 
         }
 
