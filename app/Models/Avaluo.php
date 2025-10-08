@@ -61,7 +61,7 @@ class Avaluo extends Model implements Auditable
             'nuevo' => 'blue-400',
             'impreso' => 'red-400',
             'operado' => 'gray-400',
-            'recibido' => 'yellow-400',
+            'conciliar' => 'yellow-400',
             'concluido' => 'green-400',
         ][$this->estado] ?? 'gray-400';
     }

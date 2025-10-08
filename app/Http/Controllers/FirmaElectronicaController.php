@@ -157,9 +157,9 @@ class FirmaElectronicaController extends Controller
 
         Storage::disk('avaluos')->put($nombreFinal, $pdf->output());
 
-        $all = new Imagick();
-
         $pdfImagen = new \Spatie\PdfToImage\Pdf('avaluos/' . $nombreFinal);
+
+        $all = new Imagick();
 
         for ($i=1; $i <= $pdfImagen->pageCount(); $i++) {
 

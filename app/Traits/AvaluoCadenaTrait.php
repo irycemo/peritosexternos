@@ -269,6 +269,8 @@ trait AvaluoCadenaTrait
 
                         }
 
+                        $imagen->delete();
+
                     }
 
                 }

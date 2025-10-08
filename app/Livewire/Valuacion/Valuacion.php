@@ -140,12 +140,14 @@ class Valuacion extends Component
 
                 if(count($this->colindancias)) $this->cargarColindancias();
 
+
+
                 $avaluo = Avaluo::create([
                     'año' => now()->format('Y'),
                     'folio' => (Avaluo::where('año', now()->format('Y'))->where('usuario', auth()->user()->clave)->max('folio') ?? 0) + 1,
                     'usuario' => auth()->user()->clave,
                     'predio_id' => $this->predio->id,
-                    'estado' => 'nuevo',
+                    'estado' => in_array($this->predio->sector, [88,99]) ? 'conciliar' : 'nuevo',
                     'creado_por' => auth()->id()
                 ]);
 
