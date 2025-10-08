@@ -135,12 +135,16 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            $image = 'data:image/png;base64, ' . base64_encode(file_get_contents($this->fachada()));
+            $path = parse_url($this->fachada(), PHP_URL_PATH);
 
-            info($image);
+            $extension = pathinfo($path, PATHINFO_EXTENSION);
+
+            $nombre_temp = Str::random(40) . '.' . $extension;
+
+            Storage::put('livewire-tmp/'. $nombre_temp, file_get_contents($this->fachada()));
 
             return $fachada
-                ? $image
+                ? Storage::path('livewire-tmp/'. $nombre_temp)
                 : Storage::disk('public')->url('img/logo.png');
 
         }else{
