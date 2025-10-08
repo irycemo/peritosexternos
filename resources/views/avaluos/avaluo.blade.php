@@ -215,7 +215,7 @@
 
                                     <p style="margin-bottom: 10px;">Fachada</p>
 
-                                    @if(app()->isProduction())
+                                    {{-- @if(app()->isProduction())
 
                                         <img class="imagenes" src="{{ public_path($predio->avaluo->fachada_pdf()) }}" alt="Fachada">
 
@@ -223,7 +223,7 @@
 
                                         <img class="imagenes" src="{{ public_path($predio->avaluo->fachada_pdf()) }}" alt="Fachada">
 
-                                    @endif
+                                    @endif --}}
 
                                 </div>
 
