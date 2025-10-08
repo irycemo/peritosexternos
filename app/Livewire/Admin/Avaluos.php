@@ -84,7 +84,7 @@ class Avaluos extends Component
     #[Computed]
     public function avaluos(){
 
-        return Avaluo::with('predio.propietarios.persona', 'creadoPor', 'actualizadoPor')
+        return Avaluo::with('predio.propietarios.persona', 'creadoPor', 'actualizadoPor', 'firmaElectronica')
                         ->orderBy($this->sort, $this->direction)
                         ->paginate($this->pagination);
 
