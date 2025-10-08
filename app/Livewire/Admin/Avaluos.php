@@ -6,8 +6,10 @@ use App\Models\Avaluo;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Traits\ComponentesTrait;
+use App\Traits\AvaluoCadenaTrait;
 use Livewire\Attributes\Computed;
 use App\Traits\RevisarAvaluoTrait;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\AvaluoController;
@@ -18,6 +20,7 @@ class Avaluos extends Component
     use ComponentesTrait;
     use WithPagination;
     use RevisarAvaluoTrait;
+    use AvaluoCadenaTrait;
 
     public Avaluo $modelo_editar;
 
@@ -31,7 +34,13 @@ class Avaluos extends Component
 
         try{
 
-            $avaluo->update(['estado' => 'nuevo']);
+            DB::transaction(function () use($avaluo){
+
+                $avaluo->update(['estado' => 'nuevo']);
+
+                $this->resetCaratula($avaluo);
+
+            });
 
             $this->dispatch('mostrarMensaje', ['success', "El avalúo se reactivó con éxito."]);;
 
