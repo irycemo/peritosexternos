@@ -215,15 +215,7 @@
 
                                     <p style="margin-bottom: 10px;">Fachada</p>
 
-                                    @if(app()->isProduction())
-
-                                        <img class="imagenes" src="{{ public_path($predio->avaluo->fachada_pdf()) }}" alt="Fachada">
-
-                                    @else
-
-                                        <img class="imagenes" src="{{ public_path($predio->avaluo->fachada_pdf()) }}" alt="Fachada">
-
-                                    @endif
+                                    <img class="imagenes" src="{{ public_path($predio->avaluo->fachada_pdf()) }}" alt="Fachada">
 
                                 </div>
 
