@@ -225,7 +225,7 @@
 
                                     <p style="margin-bottom: 10px;">Fotografía 2</p>
 
-                                    <img class="imagenes" src="{{ public_path($predio->avaluo->foto2_pdf()) }}" alt="Fotografia 2">
+                                    <img class="imagenes" src="{{ $foto2 }}" alt="Fotografia 2">
 
                                 </div>
                             </td>
@@ -237,7 +237,7 @@
 
                                     <p style="margin-bottom: 10px;">Fotografía 3</p>
 
-                                    <img class="imagenes" src="{{ public_path($predio->avaluo->foto3_pdf()) }}" alt="Fotografia 3">
+                                    <img class="imagenes" src="{{ $foto3 }}" alt="Fotografia 3">
 
                                 </div>
                             </td>
@@ -246,7 +246,7 @@
 
                                     <p style="margin-bottom: 10px;">Fotografía 4</p>
 
-                                    <img class="imagenes" src="{{ public_path($predio->avaluo->foto4_pdf()) }}" alt="Fotografia 4">
+                                    <img class="imagenes" src="{{ $foto4 }}" alt="Fotografia 4">
 
                                 </div>
                             </td>
@@ -258,7 +258,7 @@
 
                                     <p style="margin-bottom: 10px;">Macrolocalización</p>
 
-                                    <img class="imagenes" src="{{ public_path($predio->avaluo->macrolocalizacion_pdf()) }}" alt="Macrolocalización">
+                                    <img class="imagenes" src="{{ $macrolocalizacion }}" alt="Macrolocalización">
 
                                 </div>
                             </td>
@@ -267,7 +267,7 @@
 
                                     <p style="margin-bottom: 10px;">Microlocalización</p>
 
-                                    <img class="imagenes" src="{{ public_path($predio->avaluo->microlocalizacion_pdf()) }}" alt="Microlocalización">
+                                    <img class="imagenes" src="{{ $microlocalizacion }}" alt="Microlocalización">
 
                                 </div>
                             </td>
@@ -279,7 +279,7 @@
 
                                     <p style="margin-bottom: 10px;">Representación del polígono</p>
 
-                                    <img class="imagenes" src="{{ public_path($predio->avaluo->poligonoImagen_pdf()) }}" alt="Representación del polígono">
+                                    <img class="imagenes" src="{{ $poligonoImagen }}" alt="Representación del polígono">
 
                                 </div>
                             </td>

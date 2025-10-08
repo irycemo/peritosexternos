@@ -129,36 +129,6 @@ class Avaluo extends Model implements Auditable
 
     }
 
-    public function fachada_pdf(){
-
-        $fachada = $this->imagenes()->where('descripcion', 'fachada')->first();
-
-        if(config('services.ses.flag')){
-
-            $image = file_get_contents(Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $fachada->url, now()->addMinutes(10)));
-
-            $nombre_temp = Str::random(40) . '.png';
-
-            Storage::put('livewire-tmp/'. $nombre_temp, $image);
-
-            return public_path('storage/img/escudo_guinda.png');
-
-            return $fachada
-                ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $fachada->url, now()->addMinutes(10))
-                : public_path('storage/img/escudo_guinda.png');
-
-        }else{
-
-            return $fachada
-                ? Storage::disk('avaluos')->url($fachada->url)
-                : public_path('storage/img/escudo_guinda.png');
-            ;
-
-        }
-
-
-    }
-
     public function foto2(){
 
         $foto2 = $this->imagenes()->where('descripcion', 'foto2')->first();
@@ -175,26 +145,6 @@ class Avaluo extends Model implements Auditable
                 ? Storage::disk('avaluos')->url($foto2->url)
                 : Storage::disk('public')->url('img/logo.png');
             ;
-
-        }
-
-    }
-
-    public function foto2_pdf(){
-
-        $foto2 = $this->imagenes()->where('descripcion', 'foto2')->first();
-
-        if(config('services.ses.flag')){
-
-            return $foto2
-                ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $foto2->url, now()->addMinutes(10))
-                : 'storage/img/escudo_guinda.png';
-
-        }else{
-
-            return $foto2
-                ? 'avaluos/' . $foto2->url
-                : 'storage/img/escudo_guinda.png';
 
         }
 
@@ -222,26 +172,6 @@ class Avaluo extends Model implements Auditable
 
     }
 
-    public function foto3_pdf(){
-
-        $foto3 = $this->imagenes()->where('descripcion', 'foto3')->first();
-
-        if(config('services.ses.flag')){
-
-            return $foto3
-                ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $foto3->url, now()->addMinutes(10))
-                : 'storage/img/escudo_guinda.png';
-
-        }else{
-
-            return $foto3
-                ? 'avaluos/' . $foto3->url
-                : 'storage/img/escudo_guinda.png';
-
-        }
-
-    }
-
     public function foto4(){
 
         $foto4 = $this->imagenes()->where('descripcion', 'foto4')->first();
@@ -258,25 +188,6 @@ class Avaluo extends Model implements Auditable
                 ? Storage::disk('avaluos')->url($foto4->url)
                 : Storage::disk('public')->url('img/logo.png');
             ;
-
-        }
-
-    }
-
-    public function foto4_pdf(){
-
-        $foto4 = $this->imagenes()->where('descripcion', 'foto4')->first();
-
-        if(config('services.ses.flag')){
-
-            return $foto4
-                ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $foto4->url, now()->addMinutes(10))
-                : 'storage/img/escudo_guinda.png';
-        }else{
-
-            return $foto4
-                ? 'avaluos/' . $foto4->url
-                : 'storage/img/escudo_guinda.png';
 
         }
 
@@ -303,25 +214,6 @@ class Avaluo extends Model implements Auditable
 
     }
 
-    public function macrolocalizacion_pdf(){
-
-        $macrolocalizacion = $this->imagenes()->where('descripcion', 'macrolocalizacion')->first();
-
-        if(config('services.ses.flag')){
-
-            return $macrolocalizacion
-                ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $macrolocalizacion->url, now()->addMinutes(10))
-                : 'storage/img/escudo_guinda.png';
-        }else{
-
-            return $macrolocalizacion
-                ? 'avaluos/' . $macrolocalizacion->url
-                : 'storage/img/escudo_guinda.png';
-
-        }
-
-    }
-
     public function microlocalizacion(){
 
         $microlocalizacion = $this->imagenes()->where('descripcion', 'microlocalizacion')->first();
@@ -343,26 +235,6 @@ class Avaluo extends Model implements Auditable
 
     }
 
-    public function microlocalizacion_pdf(){
-
-        $microlocalizacion = $this->imagenes()->where('descripcion', 'microlocalizacion')->first();
-
-        if(config('services.ses.flag')){
-
-            return $microlocalizacion
-                ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $microlocalizacion->url, now()->addMinutes(10))
-                : 'storage/img/escudo_guinda.png';
-
-        }else{
-
-            return $microlocalizacion
-                ? 'avaluos/' . $microlocalizacion->url
-                : 'storage/img/escudo_guinda.png';
-
-        }
-
-    }
-
     public function poligonoImagen(){
 
         $poligonoImagen = $this->imagenes()->where('descripcion', 'poligonoImagen')->first();
@@ -379,26 +251,6 @@ class Avaluo extends Model implements Auditable
                 ? Storage::disk('avaluos')->url($poligonoImagen->url)
                 : Storage::disk('public')->url('img/logo.png');
             ;
-
-        }
-
-    }
-
-    public function poligonoImagen_pdf(){
-
-        $poligonoImagen = $this->imagenes()->where('descripcion', 'poligonoImagen')->first();
-
-        if(config('services.ses.flag')){
-
-            return $poligonoImagen
-                ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $poligonoImagen->url, now()->addMinutes(10))
-                : 'storage/img/escudo_guinda.png';
-
-        }else{
-
-            return $poligonoImagen
-                ? 'avaluos/' . $poligonoImagen->url
-                : 'storage/img/escudo_guinda.png';
 
         }
 
