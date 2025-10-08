@@ -135,7 +135,9 @@ class Avaluo extends Model implements Auditable
 
         if(config('services.ses.flag')){
 
-            return Storage::disk('public')->url('img/logo.png');;
+            inf(Storage::disk('public')->url('img/logo.png'));
+
+            return Storage::disk('public')->url('img/logo.png');
 
             return $fachada
                 ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $fachada->url, now()->addMinutes(10))
