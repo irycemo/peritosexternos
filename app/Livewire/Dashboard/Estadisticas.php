@@ -33,6 +33,11 @@ class Estadisticas extends Component
 
     }
 
+    public function placeholder()
+    {
+        return view('livewire.dashboard.estadisticas_placeholder');
+    }
+
     public function render()
     {
         return view('livewire.dashboard.estadisticas');
