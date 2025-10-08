@@ -226,21 +226,28 @@ trait AvaluoCadenaTrait
         $object->predio = $predio;
         $object->bloques = $bloques;
 
-        $object->fachada = $avaluo->fachada();
-        $object->foto2 = $avaluo->foto2();
-        $object->foto3 = $avaluo->foto3();
-        $object->foto4 = $avaluo->foto4();
-        $object->macrolocalizacion = $avaluo->macrolocalizacion();
-        $object->microlocalizacion = $avaluo->microlocalizacion();
-        $object->poligonoImagen = $avaluo->poligonoImagen();
-
         return $object;
+
+    }
+
+    public function convertirABase64($url):string
+    {
+
+        $path = parse_url($url, PHP_URL_PATH);
+
+        $path_info = pathinfo($path);
+
+        $extension = $path_info['extension'];
+
+        $image = file_get_contents($url);
+
+        return 'data:image/' . $extension . ';base64,' . base64_encode($image);
 
     }
 
     public function resetCaratula(Avaluo $avaluo){
 
-        $firmas = FirmaElectronica::where('avaluo_id', $avaluo->id)->get();
+        $firmas = FirmaElectronica::with('avaluo')->where('avaluo_id', $avaluo->id)->get();
 
         foreach ($firmas as $firma) {
 

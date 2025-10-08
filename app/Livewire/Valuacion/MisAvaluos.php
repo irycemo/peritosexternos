@@ -149,6 +149,8 @@ class MisAvaluos extends Component
 
             });
 
+            $this->reset('modalConcluir', 'cer', 'key', 'contraseña');
+
             return response()->streamDownload(
                 fn () => print($pdf->output()),
                 $this->avaluo->predio->cuentaPredial() . '-certificado_de_registro.pdf'

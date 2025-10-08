@@ -215,7 +215,7 @@
 
     @foreach ($bloques as $index => $bloque)
 
-        <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl">
+        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl">
 
             <div class="flex justify-end ">
 
@@ -253,7 +253,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-3 items-end mx-auto">
 
-                <x-input-group for="bloques.{{ $index }}.cimentacion" label="Cimentación" :error="$errors->first('bloques.' . $index . '.viento')" class="w-full">
+                <x-input-group for="bloques.{{ $index }}.cimentacion" label="Cimentación" :error="$errors->first('bloques.' . $index . '.cimentacion')" class="w-full">
 
                     <x-input-select id="bloques.{{ $index }}.cimentacion" wire:model="bloques.{{ $index }}.cimentacion" class="w-full" multiple>
 
@@ -334,10 +334,6 @@
                 </x-input-group>
 
             </div>
-
-        </div>
-
-        <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl">
 
             <h4 class="text-lg mb-5 text-center">Acabados</h4>
 
@@ -488,10 +484,6 @@
                 </x-input-group>
 
             </div>
-
-        </div>
-
-        <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl">
 
             <h4 class="text-lg mb-5 text-center">Instalaciones</h4>
 

@@ -57,7 +57,14 @@ class FirmaElectronicaController extends Controller
             'avaluo' => $object->avaluo,
             'predio' => $avaluo->predio,
             'qr' => $qr,
-            'firma_electronica' => $firma_electronica
+            'firma_electronica' => $firma_electronica,
+            'fachada' => $avaluo->fachada(),
+            'foto2' => $avaluo->foto2(),
+            'foto3' => $avaluo->foto3(),
+            'foto4' => $avaluo->foto4(),
+            'macrolocalizacion' => $avaluo->macrolocalizacion(),
+            'microlocalizacion' => $avaluo->microlocalizacion(),
+            'poligonoImagen' => $avaluo->poligonoImagen(),
         ]);
 
         $pdf->render();
@@ -85,7 +92,14 @@ class FirmaElectronicaController extends Controller
             'qr' => $qr,
             'predio' => $firma_electronica->avaluo->predio,
             'avaluo' => $object->avaluo,
-            'firma_electronica' => $firma_electronica
+            'firma_electronica' => $firma_electronica,
+            'fachada' => $firma_electronica->avaluo->fachada(),
+            'foto2' => $firma_electronica->avaluo->foto2(),
+            'foto3' => $firma_electronica->avaluo->foto3(),
+            'foto4' => $firma_electronica->avaluo->foto4(),
+            'macrolocalizacion' => $firma_electronica->avaluo->macrolocalizacion(),
+            'microlocalizacion' => $firma_electronica->avaluo->microlocalizacion(),
+            'poligonoImagen' => $firma_electronica->avaluo->poligonoImagen(),
         ]);
 
         $pdf->render();
@@ -109,7 +123,14 @@ class FirmaElectronicaController extends Controller
             'qr' => $qr,
             'predio' => $firma_electronica->avaluo->predio,
             'avaluo' => $object->avaluo,
-            'firma_electronica' => $firma_electronica
+            'firma_electronica' => $firma_electronica,
+            'fachada' => $firma_electronica->avaluo->fachada(),
+            'foto2' => $firma_electronica->avaluo->foto2(),
+            'foto3' => $firma_electronica->avaluo->foto3(),
+            'foto4' => $firma_electronica->avaluo->foto4(),
+            'macrolocalizacion' => $firma_electronica->avaluo->macrolocalizacion(),
+            'microlocalizacion' => $firma_electronica->avaluo->microlocalizacion(),
+            'poligonoImagen' => $firma_electronica->avaluo->poligonoImagen(),
         ]);
 
         $pdf->render();
