@@ -215,7 +215,7 @@
 
                                     <p style="margin-bottom: 10px;">Fachada</p>
 
-                                    <img class="imagenes" src="{{ $predio->avaluo->fachada_pdf() }}" alt="Fachada">
+                                    <img class="imagenes" src="{{ public_path('storage/img/escudo_guinda.png') }}" alt="Fachada">
 
                                 </div>
 

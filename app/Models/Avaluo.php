@@ -151,6 +151,8 @@ class Avaluo extends Model implements Auditable
 
         }else{
 
+            info(public_path('storage/img/escudo_guinda.png'));
+
             return $fachada
                 ? Storage::disk('avaluos')->url($fachada->url)
                 : public_path('storage/img/escudo_guinda.png');
