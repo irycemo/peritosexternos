@@ -16,7 +16,15 @@
 
             </div>
 
-            <a href="{{ route('mis_avaluos') . "?estado=nuevo" }}" class="mx-auto rounded-full border border-blue-600 py-1 px-4 text-blue-500 hover:bg-blue-600 hover:text-white transition-all ease-in-out"> Ver avalúos</a>
+            @if(auth()->user()->hasRole('Valuador'))
+
+                <a href="{{ route('mis_avaluos') . "?estado=nuevo" }}" class="mx-auto rounded-full border border-blue-600 py-1 px-4 text-blue-500 hover:bg-blue-600 hover:text-white transition-all ease-in-out"> Ver avalúos</a>
+
+            @else
+
+                <a href="{{ route('avaluos_admin') . "?estado=nuevo" }}" class="mx-auto rounded-full border border-blue-600 py-1 px-4 text-blue-500 hover:bg-blue-600 hover:text-white transition-all ease-in-out"> Ver avalúos</a>
+
+            @endif
 
         </div>
 
@@ -34,7 +42,15 @@
 
             </div>
 
-            <a href="{{ route('mis_avaluos') . "?estado=concluido" }}" class="mx-auto rounded-full border border-green-600 py-1 px-4 text-green-500 hover:bg-green-600 hover:text-white transition-all ease-in-out"> Ver avalúos</a>
+            @if(auth()->user()->hasRole('Valuador'))
+
+                <a href="{{ route('mis_avaluos') . "?estado=concluido" }}" class="mx-auto rounded-full border border-blue-600 py-1 px-4 text-blue-500 hover:bg-blue-600 hover:text-white transition-all ease-in-out"> Ver avalúos</a>
+
+            @else
+
+                <a href="{{ route('avaluos_admin') . "?estado=concluido" }}" class="mx-auto rounded-full border border-blue-600 py-1 px-4 text-blue-500 hover:bg-blue-600 hover:text-white transition-all ease-in-out"> Ver avalúos</a>
+
+            @endif
 
         </div>
 
@@ -52,7 +68,15 @@
 
             </div>
 
-            <a href="{{ route('mis_avaluos') . "?estado=operado" }}" class="mx-auto rounded-full border border-indigo-600 py-1 px-4 text-indigo-500 hover:bg-indigo-600 hover:text-white transition-all ease-in-out"> Ver avalúos</a>
+            @if(auth()->user()->hasRole('Valuador'))
+
+                <a href="{{ route('mis_avaluos') . "?estado=operado" }}" class="mx-auto rounded-full border border-blue-600 py-1 px-4 text-blue-500 hover:bg-blue-600 hover:text-white transition-all ease-in-out"> Ver avalúos</a>
+
+            @else
+
+                <a href="{{ route('avaluos_admin') . "?estado=operado" }}" class="mx-auto rounded-full border border-blue-600 py-1 px-4 text-blue-500 hover:bg-blue-600 hover:text-white transition-all ease-in-out"> Ver avalúos</a>
+
+            @endif
 
         </div>
 
@@ -70,7 +94,15 @@
 
             </div>
 
-            <a href="{{ route('mis_avaluos') . "?estado=conciliar" }}" class="mx-auto rounded-full border border-yellow-600 py-1 px-4 text-yellow-500 hover:bg-yellow-600 hover:text-white transition-all ease-in-out"> Ver avalúos</a>
+            @if(auth()->user()->hasRole('Valuador'))
+
+                <a href="{{ route('mis_avaluos') . "?estado=conciliar" }}" class="mx-auto rounded-full border border-blue-600 py-1 px-4 text-blue-500 hover:bg-blue-600 hover:text-white transition-all ease-in-out"> Ver avalúos</a>
+
+            @else
+
+                <a href="{{ route('avaluos_admin') . "?estado=conciliar" }}" class="mx-auto rounded-full border border-blue-600 py-1 px-4 text-blue-500 hover:bg-blue-600 hover:text-white transition-all ease-in-out"> Ver avalúos</a>
+
+            @endif
 
         </div>
 

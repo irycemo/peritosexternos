@@ -169,7 +169,6 @@ class Constantes{
         'C. CONCRE., TRABES, CAST. Y C. DE CERRAM',
         'C. METALI., TRABES, CAST. Y C. DE CERRAM',
         'MUROS DE CARGA DE CONCRETO ARMADO',
-        'MUROS DE CARGA DE CONCRETO ARMADO',
     ];
 
     const MUROS = [

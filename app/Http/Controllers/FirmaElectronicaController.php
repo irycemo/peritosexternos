@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\GeneralException;
 use Imagick;
 use App\Models\File;
 use App\Models\Avaluo;
@@ -23,11 +24,19 @@ class FirmaElectronicaController extends Controller
 
         $this->resetCaratula($avaluo);
 
-        $fiel = Credential::openFiles(
-            $cer,
-            $key,
-            $password
-        );
+        try {
+
+            $fiel = Credential::openFiles(
+                $cer,
+                $key,
+                $password
+            );
+
+        } catch (\Throwable $th) {
+
+            throw new GeneralException('Error al procesar firma elecrónica, favor de verificar los archivos o contraseña.');
+
+        }
 
         $object = (object)[];
 

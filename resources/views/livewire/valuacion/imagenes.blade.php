@@ -290,7 +290,7 @@
 
     <div class="bg-white rounded-lg p-1 flex justify-end mb-5">
 
-        <div class=" mx-auto lg:w-1/2">
+        <div class="mx-auto w-full lg:w-1/2">
 
             <div>
 
