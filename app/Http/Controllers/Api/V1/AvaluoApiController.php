@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Avaluo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AvaluoRequest;
@@ -11,9 +12,9 @@ use App\Http\Resources\AvaluoResource;
 use App\Http\Controllers\AvaluoController;
 use App\Http\Requests\ConciliarPredioRequest;
 use App\Http\Requests\ConsultarAvaluosConcilar;
-use App\Http\Requests\ConsultarCartografiaRequest;
-use App\Http\Resources\AvaluoCartografiaResource;
 use App\Http\Resources\AvaluosConcilarResource;
+use App\Http\Resources\AvaluoCartografiaResource;
+use App\Http\Requests\ConsultarCartografiaRequest;
 
 class AvaluoApiController extends Controller
 {
@@ -253,13 +254,19 @@ class AvaluoApiController extends Controller
 
         try {
 
-            $avaluo->predio->update([
-                'sector' => $validated['sector'],
-                'manzana' => $validated['manzana'],
-                'predio' => $validated['predio'],
-                'edificio' => $validated['edificio'],
-                'departamento' => $validated['departamento'],
-            ]);
+            DB::transaction(function () use($avaluo, $validated){
+
+                $avaluo->predio->update([
+                    'sector' => $validated['sector'],
+                    'manzana' => $validated['manzana'],
+                    'predio' => $validated['predio'],
+                    'edificio' => $validated['edificio'],
+                    'departamento' => $validated['departamento'],
+                ]);
+
+                $avaluo->update(['estado' => 'nuevo']);
+
+            });
 
             return response()->json([
                 'data' => "Operación exitosa.",
