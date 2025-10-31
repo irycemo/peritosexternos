@@ -6,13 +6,16 @@ use App\Models\Role;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\Permission;
+use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use App\Constantes\Constantes;
 use Illuminate\Validation\Rule;
 use App\Traits\ComponentesTrait;
+use App\Mail\RegistroUsuarioMail;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class Usuarios extends Component
 {
@@ -132,12 +135,24 @@ class Usuarios extends Component
 
             DB::transaction(function () {
 
-                $this->modelo_editar->password = bcrypt('sistema');
+                if(app()->isProduction()){
+
+                    $password = Str::password(12);
+
+                }else{
+
+                    $password = 'sistema';
+
+                }
+
+                $this->modelo_editar->password = bcrypt($password);
                 $this->modelo_editar->creado_por = auth()->id();
                 $this->modelo_editar->clave = User::max('clave') + 1;
                 $this->modelo_editar->save();
 
                 $this->modelo_editar->roles()->attach($this->role);
+
+                Mail::to($this->modelo_editar->email)->send(new RegistroUsuarioMail($this->modelo_editar, $password));
 
                 $this->resetearTodo();
 
@@ -211,7 +226,20 @@ class Usuarios extends Component
 
             $usuario = User::find($id);
 
-            $usuario->password = bcrypt('sistema');
+            if(app()->isProduction()){
+
+                $password = Str::password(12);
+
+                $usuario->password = bcrypt($password);
+
+                Mail::to($usuario->email)->send(new RegistroUsuarioMail($usuario, $password));
+
+            }else{
+
+                $usuario->password = bcrypt('sistema');
+
+            }
+
             $usuario->save();
 
             $this->resetearTodo($borrado = true);
