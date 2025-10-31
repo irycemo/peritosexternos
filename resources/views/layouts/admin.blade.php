@@ -39,6 +39,8 @@
 
                     @include('layouts.sidebar-valuacion')
 
+                    @include('layouts.sidebar-consultas')
+
                 </div>
 
             </nav>

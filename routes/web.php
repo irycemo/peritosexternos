@@ -12,7 +12,10 @@ use App\Http\Controllers\ManualController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ValuacionController;
 use App\Http\Controllers\SetPasswordController;
+use App\Livewire\Consultas\Preguntas\Preguntas;
 use App\Http\Controllers\VerificacionController;
+use App\Livewire\Consultas\Preguntas\NuevaPregunta;
+use App\Http\Controllers\Preguntas\PreguntasController;
 
 Route::get('/', function () {
     return redirect('login');
@@ -38,6 +41,12 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('mis_avaluos', MisAvaluos::class)->middleware('can:Mis avaluos')->name('mis_avaluos');
 
     Route::get('valuacion/{avaluo?}', ValuacionController::class)->name('valuacion');
+
+    Route::get('preguntas_frecuentes', Preguntas::class)->middleware('permission:Preguntas')->name('preguntas_frecuentes');
+
+    Route::get('nueva_pregunta/{pregunta?}', NuevaPregunta::class)->middleware('permission:Preguntas')->name('nueva_pregunta');
+
+    Route::post('image-upload', [PreguntasController::class, 'storeImage'])->name('ckImage');
 
 });
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Pregunta;
 use App\Traits\ModelosTrait;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -69,4 +70,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function preguntasLeidas(){
+        return $this->belongsToMany(Pregunta::class);
+    }
+
 }
