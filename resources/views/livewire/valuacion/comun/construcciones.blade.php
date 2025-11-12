@@ -6,7 +6,7 @@
 
             @foreach ($construcciones as $index => $construccion)
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-3 mb-2 bg-gray-50 p-4 rounded-lg items-start">
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-3 mb-2 bg-gray-50 p-4 rounded-lg items-start" wire:key="construccion-"{{ $index }}>
 
                     <div class="flex-auto lg:col-span-1">
 

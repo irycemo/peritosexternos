@@ -141,6 +141,38 @@ class AvaluoApiController extends Controller
 
     }
 
+    public function revertirAvaluo(Request $request){
+
+        $validated = $request->validate(['id' => 'required|numeric|min:1']);
+
+        $avaluo = Avaluo::find($validated['id']);
+
+        if(!$avaluo){
+
+            return response()->json([
+                'error' => "No se encontró el avalúo.",
+            ], 404);
+
+        }
+
+        try {
+
+            $avaluo->update(['estado' => 'concluido']);
+
+            return response()->json([
+                'data' => "Operación exitosa.",
+            ], 200);
+
+        } catch (\Throwable $th) {
+
+            return response()->json([
+                'error' => "Error al operar el avalúo.",
+            ], 500);
+
+        }
+
+    }
+
     public function generarPdf(Request $request){
 
         $validated = $request->validate(['id' => 'required|numeric|min:1']);

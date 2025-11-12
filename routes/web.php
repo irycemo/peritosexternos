@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Admin\Umas;
+use Illuminate\Http\Request;
 use App\Livewire\Admin\Roles;
 use App\Livewire\Admin\Avaluos;
 use App\Livewire\Admin\Permisos;
@@ -8,7 +9,6 @@ use App\Livewire\Admin\Usuarios;
 use App\Livewire\Admin\Auditoria;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Valuacion\MisAvaluos;
-use App\Http\Controllers\ManualController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ValuacionController;
 use App\Http\Controllers\SetPasswordController;
@@ -16,12 +16,13 @@ use App\Livewire\Consultas\Preguntas\Preguntas;
 use App\Http\Controllers\VerificacionController;
 use App\Livewire\Consultas\Preguntas\NuevaPregunta;
 use App\Http\Controllers\Preguntas\PreguntasController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', function () {
     return redirect('login');
 });
 
-Route::group(['middleware' => ['auth', 'esta.activo']], function(){
+Route::group(['middleware' => ['auth', 'esta.activo', 'verified']], function(){
 
     Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -55,4 +56,14 @@ Route::get('verificacion/{firma_electronica:uuid}', VerificacionController::clas
 Route::get('setpassword/{email}', [SetPasswordController::class, 'create'])->name('setpassword');
 Route::post('setpassword', [SetPasswordController::class, 'store'])->name('setpassword.store');
 
-Route::get('manual', ManualController::class)->name('manual');
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/dashboard');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
