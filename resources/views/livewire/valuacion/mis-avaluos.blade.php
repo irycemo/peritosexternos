@@ -179,6 +179,14 @@
 
                                             @endif
 
+                                            <button
+                                                wire:click="abrirModalClonar({{ $avaluo->id }})"
+                                                wire:loading.attr="disabled"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                role="menuitem">
+                                                Clonar avalúo
+                                            </button>
+
                                         @endif
 
                                     </div>
@@ -347,6 +355,84 @@
                     <img wire:loading wire:target="concluirAvaluo" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     <span>Concluir avalúo</span>
+                </x-button-blue>
+
+                <x-button-red
+                    wire:click="$toggle('modalConcluir')"
+                    wire:loading.attr="disabled"
+                    wire:target="$toggle('modalConcluir')"
+                    type="button">
+                    Cerrar
+                </x-button-red>
+
+            </div>
+
+        </x-slot>
+
+    </x-dialog-modal>
+
+    <x-dialog-modal wire:model="modalClonar" maxWidth="sm">
+
+        <x-slot name="title">
+
+            Clonar avalúo
+
+        </x-slot>
+
+        <x-slot name="content">
+
+            <div class="lg:space-x-2 mb-2 space-y-2 lg:space-y-0 items-center justify-center" >
+
+                <div class="text-center mb-3">
+
+                    <Label class="text-base tracking-widest rounded-xl border-gray-500">Nueva cuenta predial</Label>
+
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-center gap-1 mb-5 items-end">
+
+                    <x-input-group for="localidad" label="Localidad" :error="$errors->first('localidad')" class="w-min">
+
+                        <x-input-text type="number" id="localidad" wire:model="localidad" />
+
+                    </x-input-group>
+
+                    <x-input-group for="oficina" label="Oficina" :error="$errors->first('oficina')" class="w-16">
+
+                        <x-input-text type="number" id="oficina" wire:model="oficina" />
+
+                    </x-input-group>
+
+                    <x-input-group for="tipo_predio" label="Tipo" :error="$errors->first('tipo_predio')" class="w-10">
+
+                        <x-input-text type="number" id="tipo_predio" wire:model="tipo_predio" max="2" min="1" />
+
+                    </x-input-group>
+
+                    <x-input-group for="numero_registro" label="Número de Registro" :error="$errors->first('numero_registro')" >
+
+                        <x-input-text type="number" id="numero_registro" wire:model="numero_registro" min="1"/>
+
+                    </x-input-group>
+
+                </div>
+
+            </div>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <div class="flex gap-3">
+
+                <x-button-blue
+                    wire:click="clonar"
+                    wire:loading.attr="disabled"
+                    wire:target="clonar">
+
+                    <img wire:loading wire:target="clonar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    <span>Clonar</span>
                 </x-button-blue>
 
                 <x-button-red

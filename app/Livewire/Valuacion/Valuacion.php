@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Valuacion;
 
+use App\Models\File;
 use App\Models\Avaluo;
 use App\Models\Predio;
 use App\Models\Persona;
@@ -12,7 +13,9 @@ use App\Traits\BuscarPersonaTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
+use Illuminate\Support\Facades\Http;
 use App\Services\SGCService\SGCService;
+use Illuminate\Support\Facades\Storage;
 
 class Valuacion extends Component
 {
@@ -140,8 +143,6 @@ class Valuacion extends Component
 
                 if(count($this->colindancias)) $this->cargarColindancias();
 
-
-
                 $avaluo = Avaluo::create([
                     'año' => now()->format('Y'),
                     'folio' => (Avaluo::where('año', now()->format('Y'))->where('usuario', auth()->user()->clave)->max('folio') ?? 0) + 1,
@@ -150,6 +151,8 @@ class Valuacion extends Component
                     'estado' => in_array($this->predio->sector, [88,99]) ? 'conciliar' : 'nuevo',
                     'creado_por' => auth()->id()
                 ]);
+
+                $this->generarImagenesLocalizacion();
 
                 $avaluo->audits()->latest()->first()->update(['tags' => 'Generó avalúo con folio: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario]);
 
@@ -292,6 +295,80 @@ class Valuacion extends Component
             $this->editar = true;
 
         }
+
+    }
+
+    public function generarImagenesLocalizacion(){
+
+        $apiKey = config('services.google.maps_key');
+
+        $ancho = 500;
+        $alto = 500;
+        $centro = "{$this->predio->lat},{$this->predio->lon}";
+
+        $zoomMacro = 13;
+        $urlMacro = "https://maps.googleapis.com/maps/api/staticmap?" . http_build_query([
+            'center' => $centro,
+            'zoom' => $zoomMacro,
+            'size' => "{$ancho}x{$alto}",
+            'maptype' => 'roadmap',
+            'markers' => "color:red|{$centro}",
+            'key' => $apiKey,
+            'format' => 'jpg'
+        ]);
+
+        $zoomMicro = 17;
+        $urlMicro = "https://maps.googleapis.com/maps/api/staticmap?" . http_build_query([
+            'center' => $centro,
+            'zoom' => $zoomMicro,
+            'size' => "{$ancho}x{$alto}",
+            'maptype' => 'roadmap',
+            'markers' => "color:red|{$centro}",
+            'key' => $apiKey,
+            'format' => 'jpg'
+        ]);
+
+        $responseMacro = Http::timeout(30)->get($urlMacro);
+
+        if (!$responseMacro->successful()) {
+            throw new GeneralException('Error al obtener imagen de macrolocalización');
+        }
+
+
+        $responseMicro = Http::timeout(30)->get($urlMicro);
+
+        if (!$responseMicro->successful()) {
+            throw new GeneralException('Error al obtener imagen de microlocalización');
+        }
+
+        $timestamp = now()->timestamp;
+        $nombreMacro = "macro_{$this->predio->lat}{$this->predio->lon}{$timestamp}.jpg";
+        $nombreMicro = "micro_{$this->predio->lat}{$this->predio->lon}{$timestamp}.jpg";
+
+        if(app()->isProduction()){
+
+            Storage::disk('s3')->putFileAs('peritos_externos/imagenes/', $responseMacro->body(), $nombreMacro, 'private');
+
+            Storage::disk('s3')->putFileAs('peritos_externos/imagenes/', $responseMicro->body(), $nombreMicro, 'private');
+
+        }else{
+
+            Storage::disk('avaluos')->put($nombreMacro, $responseMacro->body());
+            Storage::disk('avaluos')->put($nombreMicro, $responseMicro->body());
+
+        }
+
+        File::create([
+            'avaluo_id' => $this->predio->avaluo->id,
+            'url' => $nombreMacro,
+            'descripcion' => 'macrolocalizacion'
+        ]);
+
+        File::create([
+            'avaluo_id' => $this->predio->avaluo->id,
+            'url' => $nombreMicro,
+            'descripcion' => 'microlocalizacion'
+        ]);
 
     }
 

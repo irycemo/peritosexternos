@@ -42,4 +42,8 @@ return [
         'consulta_cuenta_predial' => env('SGC_CONSULTA_CUENTA_PREDIAL')
     ],
 
+    'google' => [
+        'maps_key' => env('GOOGLE_MAPS_API_KEY'),
+    ],
+
 ];

@@ -277,4 +277,25 @@ class Avaluo extends Model implements Auditable
 
     }
 
+    public function anexo(){
+
+        $anexo = $this->imagenes()->where('descripcion', 'anexo')->first();
+
+        if(config('services.ses.flag')){
+
+            return $anexo
+                ? Storage::disk('s3')->temporaryUrl('peritos_externos/imagenes/' . $anexo->url, now()->addMinutes(10))
+                : Storage::disk('public')->url('img/logo.png');
+
+        }else{
+
+            return $anexo
+                ? Storage::disk('avaluos')->url($anexo->url)
+                : Storage::disk('public')->url('img/logo.png');
+            ;
+
+        }
+
+    }
+
 }

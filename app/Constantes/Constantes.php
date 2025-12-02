@@ -158,7 +158,7 @@ class Constantes{
     const CIMENTACION = [
         'NO APLICA',
         'MAMPOSTERIA',
-        'ZAPATA ASILADA',
+        'ZAPATA AISLADA',
         'ZAPATAS CORRIDAS',
         'LOSA DE CIMENTACION',
     ];
@@ -179,7 +179,7 @@ class Constantes{
         'PIEDRA O ADOBE',
         'TABIQUE Y/O TABICON',
         'TABIQUE Y CONCRETO',
-        'COCRETO ARMADO',
+        'CONCRETO ARMADO',
         'MAMPOSTERÍA'
     ];
 
@@ -243,7 +243,7 @@ class Constantes{
 
     const PISOS = [
         'NO APLICA',
-        'CEMENTO',
+        'FIRME DE CONCRETO',
         'MADERA',
         'MOSAICO',
         'CERAMICA',
@@ -369,6 +369,7 @@ class Constantes{
         'CONSULTORIO MEDICO',
         'CONVENTO',
         'CUARTEL DE BOMBEROS',
+        'DEPARTAMENTO',
         'DEPOSITO DE AGUA',
         'DIREC DE TRANSITO',
         'DISPENSARIO',
