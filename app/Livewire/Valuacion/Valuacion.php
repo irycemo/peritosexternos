@@ -152,7 +152,7 @@ class Valuacion extends Component
                     'creado_por' => auth()->id()
                 ]);
 
-                $this->generarImagenesLocalizacion();
+                /* $this->generarImagenesLocalizacion(); */
 
                 $avaluo->audits()->latest()->first()->update(['tags' => 'Generó avalúo con folio: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario]);
 
