@@ -345,6 +345,8 @@ class Valuacion extends Component
         $nombreMacro = "macro_{$this->predio->lat}{$this->predio->lon}{$timestamp}.jpg";
         $nombreMicro = "micro_{$this->predio->lat}{$this->predio->lon}{$timestamp}.jpg";
 
+        info($responseMacro);
+
         if(app()->isProduction()){
 
             Storage::disk('s3')->putFileAs('peritos_externos/imagenes/', $responseMacro->body(), $nombreMacro, 'private');
