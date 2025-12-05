@@ -152,7 +152,7 @@ class Valuacion extends Component
                     'creado_por' => auth()->id()
                 ]);
 
-                /* $this->generarImagenesLocalizacion(); */
+                $this->generarImagenesLocalizacion();
 
                 $avaluo->audits()->latest()->first()->update(['tags' => 'Generó avalúo con folio: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario]);
 
@@ -347,13 +347,9 @@ class Valuacion extends Component
 
         if(app()->isProduction()){
 
-            Storage::put('livewire-tmp/'. $nombreMacro, $responseMacro->body());
+            Storage::disk('s3')->put('peritos_externos/imagenes/' . $nombreMacro,  $responseMacro->body());
 
-            Storage::disk('s3')->putFileAs('peritos_externos/imagenes/', file_get_contents(Storage::path('livewire-tmp/'. $nombreMacro)), $nombreMacro, 'private');
-
-            Storage::put('livewire-tmp/'. $nombreMicro, $responseMicro->body());
-
-            Storage::disk('s3')->putFileAs('peritos_externos/imagenes/', file_get_contents(Storage::path('livewire-tmp/'. $nombreMicro)), $nombreMicro, 'private');
+            Storage::disk('s3')->put('peritos_externos/imagenes/' . $nombreMicro, $responseMicro->body());
 
         }else{
 
