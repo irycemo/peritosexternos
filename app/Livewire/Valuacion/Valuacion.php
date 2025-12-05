@@ -345,13 +345,15 @@ class Valuacion extends Component
         $nombreMacro = "macro_{$this->predio->lat}{$this->predio->lon}{$timestamp}.jpg";
         $nombreMicro = "micro_{$this->predio->lat}{$this->predio->lon}{$timestamp}.jpg";
 
-        info($responseMacro);
-
         if(app()->isProduction()){
 
-            Storage::disk('s3')->putFileAs('peritos_externos/imagenes/', $responseMacro->body(), $nombreMacro, 'private');
+            Storage::put('livewire-tmp/'. $nombreMacro, $responseMacro->body());
 
-            Storage::disk('s3')->putFileAs('peritos_externos/imagenes/', $responseMicro->body(), $nombreMicro, 'private');
+            Storage::disk('s3')->putFileAs('peritos_externos/imagenes/', file_get_contents(Storage::path('livewire-tmp/'. $nombreMacro)), $nombreMacro, 'private');
+
+            Storage::put('livewire-tmp/'. $nombreMicro, $responseMicro->body());
+
+            Storage::disk('s3')->putFileAs('peritos_externos/imagenes/', file_get_contents(Storage::path('livewire-tmp/'. $nombreMicro)), $nombreMicro, 'private');
 
         }else{
 
