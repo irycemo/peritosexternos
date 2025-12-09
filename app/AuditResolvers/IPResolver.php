@@ -7,7 +7,7 @@ use OwenIt\Auditing\Contracts\Resolver;
 
 class IPResolver implements Resolver
 {
-    public static function resolve(Auditable $auditable)
+    public static function resolve_(Auditable $auditable)
     {
 
         if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown")) {
@@ -33,6 +33,42 @@ class IPResolver implements Resolver
         }
 
         return(substr($ip,0,44));
+
+    }
+
+    public static function resolve(Auditable $auditable) {
+
+        $ip_keys = array(
+            'HTTP_CF_CONNECTING_IP', // Cloudflare
+            'HTTP_X_FORWARDED_FOR',
+            'HTTP_CLIENT_IP',
+            'HTTP_X_REAL_IP',
+            'REMOTE_ADDR'
+        );
+
+        foreach ($ip_keys as $key) {
+
+            if (isset($_SERVER[$key]) && !empty($_SERVER[$key])) {
+
+                $ip_addresses = explode(',', $_SERVER[$key]);
+
+                foreach ($ip_addresses as $ip) {
+
+                    $ip = trim($ip);
+
+                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_RES_RANGE | FILTER_FLAG_IPV4)) {
+
+                        return(substr($ip,0,44));
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        return $_SERVER['REMOTE_ADDR'];
 
     }
 }

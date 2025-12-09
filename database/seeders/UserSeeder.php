@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'status' => 'activo',
             'email' => 'enrique_j_@hotmail.com',
             'password' => bcrypt('sistema'),
+            'email_verified_at' => now(),
         ])->assignRole('Administrador');
 
         User::create([
@@ -26,6 +27,7 @@ class UserSeeder extends Seeder
             'status' => 'activo',
             'email' => 'tomas.hernandez@plancartemorelia.edu.mx',
             'password' => bcrypt('sistema'),
+            'email_verified_at' => now(),
         ])->assignRole('Administrador');
 
         User::create([
@@ -33,6 +35,7 @@ class UserSeeder extends Seeder
             'status' => 'activo',
             'email' => 'cervantes.martin@gmail.com',
             'password' => bcrypt('sistema'),
+            'email_verified_at' => now(),
         ])->assignRole('Administrador');
 
         User::create([
@@ -40,6 +43,7 @@ class UserSeeder extends Seeder
             'status' => 'activo',
             'email' => 'mlanda64@hotmail.com',
             'password' => bcrypt('sistema'),
+            'email_verified_at' => now(),
         ])->assignRole('Administrador');
 
         User::create([
@@ -47,6 +51,7 @@ class UserSeeder extends Seeder
             'status' => 'activo',
             'email' => 'ssacat@outlook.com',
             'password' => bcrypt('sistema'),
+            'email_verified_at' => now(),
         ])->assignRole('Administrador');
 
         User::create([
@@ -54,6 +59,7 @@ class UserSeeder extends Seeder
             'status' => 'activo',
             'email' => 'scastro@michoacan.gob.mx',
             'password' => bcrypt('sistema'),
+            'email_verified_at' => now(),
         ])->assignRole('Administrador');
 
         User::create([
@@ -62,6 +68,7 @@ class UserSeeder extends Seeder
             'status' => 'activo',
             'email' => 'sistematramiteslinea@gmail.com',
             'password' => bcrypt('12345678'),
+            'email_verified_at' => now(),
         ])->assignRole('Sistemas');
 
         User::create([
@@ -70,6 +77,7 @@ class UserSeeder extends Seeder
             'status' => 'activo',
             'email' => 'sgc@gmail.com',
             'password' => bcrypt('12345678'),
+            'email_verified_at' => now(),
         ])->assignRole('Sistemas');
 
     }
