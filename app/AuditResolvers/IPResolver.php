@@ -40,9 +40,12 @@ class IPResolver implements Resolver
 
         $ip_keys = array(
             'HTTP_CF_CONNECTING_IP', // Cloudflare
+            'HTTP_X_FORWARDED',
             'HTTP_X_FORWARDED_FOR',
             'HTTP_CLIENT_IP',
             'HTTP_X_REAL_IP',
+            'HTTP_FORWARDED',
+            'HTTP_FORWARDED_FOR',
             'REMOTE_ADDR'
         );
 
