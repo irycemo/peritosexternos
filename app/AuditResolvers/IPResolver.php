@@ -46,6 +46,8 @@ class IPResolver implements Resolver
             'REMOTE_ADDR'
         );
 
+        return $_SERVER['HTTP_CLIENT_IP'];
+
         foreach ($ip_keys as $key) {
 
             if (isset($_SERVER[$key]) && !empty($_SERVER[$key])) {
