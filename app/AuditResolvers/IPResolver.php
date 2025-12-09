@@ -38,39 +38,21 @@ class IPResolver implements Resolver
 
     public static function resolve(Auditable $auditable) {
 
-        $ip_keys = array(
-            'HTTP_CF_CONNECTING_IP', // Cloudflare
-            'HTTP_X_FORWARDED_FOR',
-            'HTTP_CLIENT_IP',
-            'HTTP_X_REAL_IP',
-            'REMOTE_ADDR'
-        );
+        $client_ip = null;
 
-        return $_SERVER['HTTP_CLIENT_IP'];
-
-        foreach ($ip_keys as $key) {
-
-            if (isset($_SERVER[$key]) && !empty($_SERVER[$key])) {
-
-                $ip_addresses = explode(',', $_SERVER[$key]);
-
-                foreach ($ip_addresses as $ip) {
-
-                    $ip = trim($ip);
-
-                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_RES_RANGE | FILTER_FLAG_IPV4)) {
-
-                        return(substr($ip,0,44));
-
-                    }
-
-                }
-
-            }
-
+        if (isset($_SERVER['HTTP_CLOUDFRONT_VIEWER_ADDRESS'])) {
+            $client_ip = $_SERVER['HTTP_CLOUDFRONT_VIEWER_ADDRESS'];
+        } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            // Fallback for older setups or other proxies, though CloudFront-Viewer-Address is preferred
+            $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+            $client_ip = trim($ips[0]); // The first IP is generally the client's
+        } elseif (isset($_SERVER['REMOTE_ADDR'])) {
+            // Fallback if no proxy headers are present (e.g., direct access)
+            $client_ip = $_SERVER['REMOTE_ADDR'];
         }
 
-        return $_SERVER['REMOTE_ADDR'];
+        return(substr($client_ip,0,44));
+
 
     }
 }
