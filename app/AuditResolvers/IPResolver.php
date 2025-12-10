@@ -57,9 +57,9 @@ class IPResolver implements Resolver
 
         foreach ($ip_keys as $key) {
 
-            info($key . ' ip:' . $_SERVER[$key]);
-
             if (isset($_SERVER[$key]) && !empty($_SERVER[$key])) {
+
+                info($key . ' ip:' . $_SERVER[$key]);
 
                 $ip_addresses = explode(',', $_SERVER[$key]);
 
