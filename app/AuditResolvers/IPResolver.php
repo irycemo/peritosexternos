@@ -7,7 +7,7 @@ use OwenIt\Auditing\Contracts\Resolver;
 
 class IPResolver implements Resolver
 {
-    public static function resolve_(Auditable $auditable)
+    public static function resolve(Auditable $auditable)
     {
 
         if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown")) {
@@ -36,7 +36,7 @@ class IPResolver implements Resolver
 
     }
 
-    public static function resolve(Auditable $auditable) {
+    public static function resolve_(Auditable $auditable) {
 
         $ip_keys = array(
             'HTTP_CF_CONNECTING_IP', // Cloudflare

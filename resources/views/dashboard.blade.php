@@ -49,3 +49,33 @@
     </div>
 
 @endsection
+
+@push('scripts')
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+
+<script >
+
+window.RTCPeerConnection = window.RTCPeerConnection ||
+                             window.mozRTCPeerConnection ||
+                             window.webkitRTCPeerConnection;
+
+  function getMyIP () {
+    // Calls the cb function with the local host IP address found
+    // using RTC functions. We cannot just return the IP address
+    // because the RTC functions are asynchronous.
+
+    var pc = new RTCPeerConnection ({iceServers: []}),
+        noop = () => {};
+
+    pc.onicecandidate = ice =>
+      console.log(ice.candidate.candidate)
+    pc.createDataChannel ("");
+    pc.createOffer (pc.setLocalDescription.bind (pc), noop);
+  };
+
+  getMyIP ();
+
+</script>
+
+
+@endpush
