@@ -53,13 +53,13 @@ class IPResolver implements Resolver
         $hostname = trim($exec);
         $ip = gethostbyname($hostname);
 
-        info("IP: " . $ip);
+        info("Host name IP: " . $ip);
 
         foreach ($ip_keys as $key) {
 
-            if (isset($_SERVER[$key]) && !empty($_SERVER[$key])) {
+            info($key . ' ip:' . $_SERVER[$key]);
 
-                info($_SERVER[$key]);
+            if (isset($_SERVER[$key]) && !empty($_SERVER[$key])) {
 
                 $ip_addresses = explode(',', $_SERVER[$key]);
 
