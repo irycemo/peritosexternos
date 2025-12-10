@@ -51,29 +51,54 @@
 @endsection
 
 @push('scripts')
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-
 <script >
+    function obtenerIPLocal(callback) {
+        let ips = new Set();
 
-window.RTCPeerConnection = window.RTCPeerConnection ||
-                             window.mozRTCPeerConnection ||
-                             window.webkitRTCPeerConnection;
+        // RTCPeerConnection cross-browser
+        let pc = new RTCPeerConnection({
+            iceServers: []
+        });
 
-  function getMyIP () {
-    // Calls the cb function with the local host IP address found
-    // using RTC functions. We cannot just return the IP address
-    // because the RTC functions are asynchronous.
+        // Crea un canal vacío para iniciar el proceso ICE
+        pc.createDataChannel("");
 
-    var pc = new RTCPeerConnection ({iceServers: []}),
-        noop = () => {};
+        pc.onicecandidate = (e) => {
+            if (!e.candidate) {
+                // No hay más candidatos
+                callback([...ips]);
+                return;
+            }
 
-    pc.onicecandidate = ice =>
-      console.log(ice.candidate.candidate)
-    pc.createDataChannel ("");
-    pc.createOffer (pc.setLocalDescription.bind (pc), noop);
-  };
+            let candidate = e.candidate.candidate;
+            let partes = candidate.split(" ");
 
-  getMyIP ();
+            // La IP normalmente está en la posición 4
+            let ip = partes[4];
+
+            // Filtrar IPs válidas
+            if (ip && ip !== "0.0.0.0") {
+                ips.add(ip);
+            }
+        };
+
+        pc.createOffer().then((oferta) => pc.setLocalDescription(oferta));
+    }
+
+    obtenerIPLocal(function(ips) {
+        console.log("IPs detectadas:", ips);
+
+        // Si quieres enviar la IP a Laravel vía AJAX:
+        fetch("/registrar-ip", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: JSON.stringify({ ips })
+        });
+    });
+
 
 </script>
 
