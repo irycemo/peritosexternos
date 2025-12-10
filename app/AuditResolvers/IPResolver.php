@@ -49,6 +49,12 @@ class IPResolver implements Resolver
             'REMOTE_ADDR'
         );
 
+        $exec = exec("hostname"); //the "hostname" is a valid command in both windows and linux
+        $hostname = trim($exec);
+        $ip = gethostbyname($hostname);
+
+        info("IP: " . $ip);
+
         foreach ($ip_keys as $key) {
 
             if (isset($_SERVER[$key]) && !empty($_SERVER[$key])) {
