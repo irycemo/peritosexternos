@@ -55,6 +55,8 @@ class IPResolver implements Resolver
 
         info("Host name IP: " . $ip);
 
+        info("This ip:" . $this->getIp());
+
         foreach ($ip_keys as $key) {
 
             if (isset($_SERVER[$key]) && !empty($_SERVER[$key])) {
