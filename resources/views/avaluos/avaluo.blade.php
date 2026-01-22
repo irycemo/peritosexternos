@@ -303,6 +303,8 @@
                         <tr>
                             <td style="padding-right: 40px;">
 
+                                <p><strong>Solicitante: </strong> {{ $datos_control->solicitante }}</p>
+
                                 <p><strong>Impreso el: </strong> {{ $datos_control->impreso_en }}</p>
 
                                 <p><strong>Impreso por: </strong> {{ $datos_control->impreso_por }}</p>
