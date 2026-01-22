@@ -37,6 +37,16 @@
 
     @include('livewire.valuacion.comun.errores')
 
+    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl text-center">
+
+        <x-input-group for="solicitante" label="Solicitante" :error="$errors->first('solicitante')" class="w-fit mx-auto">
+
+            <x-input-text id="solicitante" wire:model="solicitante" />
+
+        </x-input-group>
+
+    </div>
+
     <div class="bg-white rounded-lg p-3 flex justify-end  shadow-xl">
 
         @if(!$editar)

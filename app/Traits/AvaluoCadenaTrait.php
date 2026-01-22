@@ -214,6 +214,7 @@ trait AvaluoCadenaTrait
         $object->año = $avaluo->año;
         $object->folio = $avaluo->folio;
         $object->usuario = $avaluo->usuario;
+        $object->solicitante = $avaluo->solicitante;
         $object->clasificacion_zona = $avaluo->clasificacion_zona;
         $object->construccion_dominante = $avaluo->construccion_dominante;
         $object->agua = $avaluo->agua;

@@ -15,6 +15,7 @@ use App\Http\Controllers\SetPasswordController;
 use App\Livewire\Consultas\Preguntas\Preguntas;
 use App\Http\Controllers\VerificacionController;
 use App\Livewire\Consultas\Preguntas\NuevaPregunta;
+use App\Livewire\Consutas\AcuerdosValor\AcuerdosValor;
 use App\Http\Controllers\Preguntas\PreguntasController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -43,7 +44,9 @@ Route::group(['middleware' => ['auth', 'esta.activo', 'verified']], function(){
 
     Route::get('valuacion/{avaluo?}', ValuacionController::class)->name('valuacion');
 
-    Route::get('preguntas_frecuentes', Preguntas::class)->middleware('permission:Preguntas')->name('preguntas_frecuentes');
+    Route::get('acuerdos_valores', AcuerdosValor::class)->name('acuerdos_valores');
+
+    Route::get('preguntas_frecuentes', Preguntas::class)->name('preguntas_frecuentes');
 
     Route::get('nueva_pregunta/{pregunta?}', NuevaPregunta::class)->middleware('permission:Preguntas')->name('nueva_pregunta');
 

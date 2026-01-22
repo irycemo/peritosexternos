@@ -92,18 +92,27 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Registrado</span>
 
+                            <p class="mt-2">
 
-                            <span class="font-semibold">@if($avaluo->creadoPor != null)Registrado por: {{$avaluo->creadoPor->name}} @else Registro: @endif</span> <br>
+                                <span class="font-semibold">@if($avaluo->creadoPor != null)Registrado por: {{$avaluo->creadoPor->name}} @else Registro: @endif</span> <br>
 
-                            {{ $avaluo->created_at }}
+                                {{ $avaluo->created_at }}
+
+                            </p>
 
                         </x-table.cell>
 
                         <x-table.cell>
 
-                            <span class="font-semibold">@if($avaluo->actualizadoPor != null)Actualizado por: {{$avaluo->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Actualizado</span>
 
-                            {{ $avaluo->updated_at }}
+                            <p class="mt-2">
+
+                                <span class="font-semibold">@if($avaluo->actualizadoPor != null)Actualizado por: {{$avaluo->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
+
+                                {{ $avaluo->updated_at }}
+
+                            </p>
 
                         </x-table.cell>
 
@@ -111,85 +120,81 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Acciones</span>
 
-                            <div class="flex justify-center lg:justify-start gap-2">
+                            <div class="ml-3 relative" x-data="{ open_drop_down:false }">
 
-                                <div class="ml-3 relative" x-data="{ open_drop_down:false }">
+                                <div>
 
-                                    <div>
+                                    <button x-on:click="open_drop_down=true" type="button" class="rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
 
-                                        <button x-on:click="open_drop_down=true" type="button" class="rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                        </svg>
 
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                                            </svg>
+                                    </button>
 
-                                        </button>
+                                </div>
 
-                                    </div>
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
-                                    <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                    @if($avaluo->predio)
 
-                                        @if($avaluo->predio)
-
-                                            @if($avaluo->firmaElectronica)
-
-                                                <button
-                                                    wire:click="reimprimir('{{ $avaluo->firmaElectronica->uuid }}')"
-                                                    wire:loading.attr="disabled"
-                                                    class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                                    role="menuitem">
-                                                    Reimprimir
-                                                </button>
-
-                                            @else
-
-                                                <button
-                                                    wire:click="imprimir({{ $avaluo->id }})"
-                                                    wire:loading.attr="disabled"
-                                                    class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                                    role="menuitem">
-                                                    Imprimir
-                                                </button>
-
-                                            @endif
-
-                                            @if(in_array($avaluo->estado, ['impreso']))
-
-                                                <button
-                                                    wire:click="reactivarAvaluo({{ $avaluo->id }})"
-                                                    wire:loading.attr="disabled"
-                                                    class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                                    role="menuitem">
-                                                    Reactivar avalúo
-                                                </button>
-
-                                            @endif
-
-                                            @if(in_array($avaluo->estado, ['nuevo', 'impreso', 'conciliar']))
-
-                                                <a href="{{ route('valuacion', $avaluo->id) }}" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100" role="menuitem">Ver</a>
-
-                                                <button
-                                                    wire:click="abrirModalConcluir({{ $avaluo->id }})"
-                                                    wire:loading.attr="disabled"
-                                                    class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                                    role="menuitem">
-                                                    Concluir avalúo
-                                                </button>
-
-                                            @endif
+                                        @if($avaluo->firmaElectronica)
 
                                             <button
-                                                wire:click="abrirModalClonar({{ $avaluo->id }})"
+                                                wire:click="reimprimir('{{ $avaluo->firmaElectronica->uuid }}')"
                                                 wire:loading.attr="disabled"
                                                 class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                                 role="menuitem">
-                                                Clonar avalúo
+                                                Reimprimir
+                                            </button>
+
+                                        @else
+
+                                            <button
+                                                wire:click="imprimir({{ $avaluo->id }})"
+                                                wire:loading.attr="disabled"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                role="menuitem">
+                                                Imprimir
                                             </button>
 
                                         @endif
 
-                                    </div>
+                                        @if(in_array($avaluo->estado, ['impreso']))
+
+                                            <button
+                                                wire:click="reactivarAvaluo({{ $avaluo->id }})"
+                                                wire:loading.attr="disabled"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                role="menuitem">
+                                                Reactivar avalúo
+                                            </button>
+
+                                        @endif
+
+                                        @if(in_array($avaluo->estado, ['nuevo', 'impreso', 'conciliar']))
+
+                                            <a href="{{ route('valuacion', $avaluo->id) }}" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100" role="menuitem">Ver</a>
+
+                                            <button
+                                                wire:click="abrirModalConcluir({{ $avaluo->id }})"
+                                                wire:loading.attr="disabled"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                role="menuitem">
+                                                Concluir avalúo
+                                            </button>
+
+                                        @endif
+
+                                        <button
+                                            wire:click="abrirModalClonar({{ $avaluo->id }})"
+                                            wire:loading.attr="disabled"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            role="menuitem">
+                                            Clonar avalúo
+                                        </button>
+
+                                    @endif
 
                                 </div>
 
@@ -241,19 +246,39 @@
 
         <x-slot name="title">
 
-            Firma electrónica
+            Concluir avalúo
 
         </x-slot>
 
         <x-slot name="content">
 
-            <div class="flex flex-col md:flex-row justify-between gap-3 mb-3">
+            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Contraseña</label>
 
-                <x-input-group for="contraseña" label="Contraseña" :error="$errors->first('contraseña')" class="w-full">
+            <div class="relative flex-1 col-span-4 mb-2" x-data="{ show: true }">
+                <input class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring-1 focus:ring-indigo-200 focus:ring-opacity-50"
+                        id="password"
+                        :type="show ? 'password' : 'text'"
+                        name="password"
+                        wire:model="contraseña"/>
 
-                    <x-input-text  id="contraseña" wire:model="contraseña" />
+                <button type="button" class="flex absolute inset-y-0 right-0 items-center px-3" @click="show = !show" :class="{'hidden': !show, 'block': show }">
+                    <!-- Heroicon name: eye -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </button>
+                <button type="button" class="flex absolute inset-y-0 right-0 items-center px-3" @click="show = !show" :class="{'block': !show, 'hidden': show }">
+                    <!-- Heroicon name: eye-slash -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                    </svg>
+                </button>
+            </div>
 
-                </x-input-group>
+            <div>
+
+                @error('contraseña') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
             </div>
 

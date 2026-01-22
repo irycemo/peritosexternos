@@ -32,6 +32,8 @@ class Valuacion extends Component
     public $propietarios = [];
     public $colindancias = [];
 
+    public $solicitante;
+
     public Predio $predio;
 
     protected function rules(){
@@ -72,6 +74,7 @@ class Valuacion extends Component
             'predio.zutm' => 'nullable',
             'predio.lat' => 'required',
             'predio.lon' => 'required',
+            'solicitante' => 'required',
          ];
     }
 
@@ -149,7 +152,8 @@ class Valuacion extends Component
                     'usuario' => auth()->user()->clave,
                     'predio_id' => $this->predio->id,
                     'estado' => in_array($this->predio->sector, [88,99]) ? 'conciliar' : 'nuevo',
-                    'creado_por' => auth()->id()
+                    'creado_por' => auth()->id(),
+                    'solicitante' => $this->solicitante,
                 ]);
 
                 $this->generarImagenesLocalizacion();
@@ -261,6 +265,7 @@ class Valuacion extends Component
 
                 $avaluo->update([
                     'actualizado_por' => auth()->user()->id,
+                    'solicitante' => $this->solicitante,
                     'estado' => 'nuevo'
                 ]);
 
@@ -291,6 +296,8 @@ class Valuacion extends Component
             $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
 
             $this->predio = $avaluo->predio;
+
+            $this->solicitante = $avaluo->solicitante;
 
             $this->editar = true;
 

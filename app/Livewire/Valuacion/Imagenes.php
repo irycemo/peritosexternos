@@ -9,6 +9,7 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -26,6 +27,7 @@ class Imagenes extends Component
     public $microlocalizacion;
     public $poligonoDwg;
     public $poligonoImagen;
+    public $anexo;
     public $observaciones;
 
     public $predio;
@@ -33,15 +35,16 @@ class Imagenes extends Component
 
     protected function rules(){
         return [
-            'fachada' => 'required|image|max:5000|mimes:jpeg,png,jpg',
-            'foto2' => 'required|image|max:5000|mimes:jpeg,png,jpg',
-            'foto3' => 'required|image|max:5000|mimes:jpeg,png,jpg',
-            'foto4' => 'required|image|max:5000|mimes:jpeg,png,jpg',
-            'macrolocalizacion' => 'required|image|max:5000|mimes:jpeg,png,jpg',
-            'microlocalizacion' => 'required|image|max:5000|mimes:jpeg,png,jpg',
-            'poligonoDwg' => 'required|mimes:dwg',
-            'poligonoImagen' => 'required|image|max:5000|mimes:jpeg,png,jpg',
+            'fachada' => [Rule::requiredIf($this->predio->avaluo->fachada() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'foto2' => [Rule::requiredIf($this->predio->avaluo->foto2() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'foto3' => [Rule::requiredIf($this->predio->avaluo->foto3() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'foto4' => [Rule::requiredIf($this->predio->avaluo->foto4() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'macrolocalizacion' => [Rule::requiredIf($this->predio->avaluo->macrolocalizacion() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'microlocalizacion' => [Rule::requiredIf($this->predio->avaluo->microlocalizacion() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'poligonoDwg' => [Rule::requiredIf($this->predio->avaluo->poligonoDwg() == null),'nullable','mimes:dwg'],
+            'poligonoImagen' => [Rule::requiredIf($this->predio->avaluo->poligonoImagen() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
             'predio' => 'required',
+            'anexo' => 'nullable|mimes:pdf',
             'predio.avaluo.observaciones' => 'nullable',
          ];
     }
@@ -164,6 +167,12 @@ class Imagenes extends Component
                 if($this->poligonoDwg){
 
                     $this->procesarImagen($this->poligonoDwg,'poligonoDwg');
+
+                }
+
+                if($this->anexo){
+
+                    $this->procesarImagen($this->anexo,'anexo');
 
                 }
 

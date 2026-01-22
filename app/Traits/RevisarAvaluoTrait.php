@@ -74,6 +74,12 @@ trait RevisarAvaluoTrait
 
         }
 
+        if(!File::where('avaluo_id', $this->avaluo->id)->where('descripcion', 'poligonoImagen')->first()){
+
+            throw new GeneralException("El avalúo no tiene representación del poligono.");
+
+        }
+
         if($this->avaluo->predio->valor_catastral == null){
 
             throw new GeneralException("El avalúo no tiene valor catastral.");

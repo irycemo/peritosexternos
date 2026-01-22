@@ -1,4 +1,4 @@
-<div x-data="{openRoles:true, openDistritos:true}">
+<div>
 
     <p class="uppercase text-md text-rojo mb-4 tracking-wider">Valuación</p>
 

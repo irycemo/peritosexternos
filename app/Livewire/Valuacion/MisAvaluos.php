@@ -25,7 +25,6 @@ class MisAvaluos extends Component
     use RevisarAvaluoTrait;
     use WithFileUploads;
 
-
     public Avaluo $modelo_editar;
 
     public $avaluo;
@@ -318,7 +317,8 @@ class MisAvaluos extends Component
     #[Computed]
     public function avaluos(){
 
-        return Avaluo::with('predio.propietarios.persona', 'creadoPor', 'actualizadoPor', 'firmaElectronica')
+        return Avaluo::select('id', 'predio_id', 'año', 'folio', 'usuario', 'estado', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+                            ->with('predio.propietarios.persona', 'creadoPor:id,name', 'actualizadoPor:id,name', 'firmaElectronica:id,avaluo_id,uuid')
                             ->where('creado_por', auth()->id())
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);

@@ -73,4 +73,22 @@
 
     </div>
 
+    @if($predio->lat)
+
+        <div class="flex items-center gap-2 justify-center">
+
+            <a href="{{ 'http://mapa.catastro.michoacan.gob.mx:8080/index.html?pzoom=20&plat=' . $predio->lat . '&plon=' . $predio->lon }}" title="SIG" target="_blank">
+                <img class="h-12 cursor-pointer" src="{{ asset('storage/img/sig.png') }}" alt="SIG">
+            </a>
+
+            <a href="{{ 'https://www.google.com/maps/?q=' . $predio->lat . ',' . $predio->lon . '&z=5&t=k' }}" title="Google" target="_blank">
+
+                <img class="h-12 cursor-pointer" src="{{ asset('storage/img/google.png') }}" alt="Google">
+
+            </a>
+
+        </div>
+
+    @endif
+
 </div>

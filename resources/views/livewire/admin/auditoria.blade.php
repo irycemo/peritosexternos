@@ -1,6 +1,6 @@
 <div class="">
 
-    <div class="mb-5">
+    <div class="mb-2 lg:mb-5">
 
         <x-header>Auditoria</x-header>
 
