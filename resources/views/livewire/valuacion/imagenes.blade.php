@@ -351,7 +351,13 @@
 
             <div class="bg-white rounded-lg p-1 px-4 flex flex-col text-center">
 
-                <div class="mb-3">
+                <div class="mb-3  border border-gray-300 rounded-lg p-3">
+
+                    @if($predio?->avaluo->poligonoDwg())
+
+                        <x-link-blue class="w-fit mx-auto" href="{{ $predio->avaluo->poligonoDwg() }}" target="_blank">Ver archivo</x-link-blue>
+
+                    @endif
 
                     <p>Representación del poligono (DWG)</p>
 
@@ -370,7 +376,13 @@
 
                 </div>
 
-                <div>
+                <div class=" border border-gray-300 rounded-lg p-3">
+
+                    @if($predio?->avaluo->anexo())
+
+                        <x-link-blue class="w-fit mx-auto" href="{{ $predio->avaluo->anexo() }}" target="_blank">Ver archivo</x-link-blue>
+
+                    @endif
 
                     <p>Anexo</p>
 

@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('avaluo_id');
+            $table->string('fileable_id');
+            $table->string('fileable_type');
             $table->string('url');
             $table->string('descripcion')->nullable();
             $table->timestamps();
+
+            $table->index(['fileable_id', 'fileable_type'], 'morph_index');
         });
     }
 

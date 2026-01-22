@@ -60,13 +60,13 @@ class Imagenes extends Component
     #[On('cargarPredio')]
     public function cargarPredio($id){
 
-        $this->predio = Predio::with('avaluo.imagenes')->find($id);
+        $this->predio = Predio::with('avaluo')->find($id);
 
     }
 
     public function procesarImagen($imagen, $descripcion){
 
-        $file = File::where('avaluo_id', $this->predio->avaluo->id)
+        $file = $this->predio->avaluo->imagenes()
                         ->where('descripcion' , $descripcion)
                         ->first();
 
@@ -85,9 +85,10 @@ class Imagenes extends Component
         if(!$file)
 
             File::create([
-                            'avaluo_id' => $this->predio->avaluo->id,
-                            'url' => $url,
-                            'descripcion' => $descripcion
+                        'fileable_type' => 'App\Models\Avaluo',
+                        'fileable_id' => $this->predio->avaluo->id,
+                        'url' => $url,
+                        'descripcion' => $descripcion
                         ]);
 
         else{

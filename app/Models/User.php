@@ -4,11 +4,13 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\File;
 use App\Models\Pregunta;
 use App\Traits\ModelosTrait;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -74,6 +76,26 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function preguntasLeidas(){
         return $this->belongsToMany(Pregunta::class);
+    }
+
+    public function imagenes(){
+        return $this->morphMany(File::class, 'fileable');
+    }
+
+    public function ineFrente(){
+        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'ineFrente');
+    }
+
+    public function ineReverso(){
+        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'ineReverso');
+    }
+
+    public function cedulaProfesional(){
+        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'cedulaProfesional');
+    }
+
+    public function cedulaEspecialidad(){
+        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'cedulaEspecialidad');
     }
 
 }
