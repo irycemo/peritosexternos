@@ -51,6 +51,7 @@ class PeritoRefrendo extends Component
                     'año' => $tramite['data']['año'],
                     'folio' => $tramite['data']['folio'],
                     'usuario' => $tramite['data']['usuario'],
+                    'tramite_id_sgc' => $tramite['data']['id'],
                     'linea_captura' => $tramite['data']['tipo_tramite'] == 'exento' ? 'Exento' : $tramite['data']['linea_de_captura'],
                     'estado' => 'activo',
                 ]);
