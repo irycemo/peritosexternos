@@ -10,6 +10,38 @@
 
                 <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
 
+                <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
+
+                    <option value="">Estado</option>
+                    <option value="nuevo">Nuevo</option>
+                    <option value="conciliacion">Conciliación</option>
+                    <option value="concluido">Concluido</option>
+                    <option value="operado">Operado</option>
+
+                </select>
+
+                <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
+
+                    @foreach ($años as $año)
+
+                        <option value="{{ $año }}">{{ $año }}</option>
+
+                    @endforeach
+
+                </select>
+
+                <input type="number" wire:model.live.debounce.500mse="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
+
+                <input type="number" wire:model.live.debounce.500mse="filters.usuario" placeholder="Usuario" class="bg-white rounded-full text-sm w-24">
+
+                <input type="number" wire:model.live.debounce.500mse="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
+
+                <input type="number" wire:model.live.debounce.500mse="filters.oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
+
+                <input type="number" wire:model.live.debounce.500mse="filters.tipo" placeholder="Tipo" class="bg-white rounded-full text-sm w-24">
+
+                <input type="number" wire:model.live.debounce.500mse="filters.registro" placeholder="Registro" class="bg-white rounded-full text-sm w-24">
+
                 <x-input-select class="bg-white rounded-full text-sm w-min" wire:model.live="pagination">
 
                     <option value="10">10</option>

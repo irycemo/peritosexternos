@@ -252,7 +252,7 @@
 
         <div class="flex justify-end">
 
-            @if($predio?->avaluo?->estado === 'nuevo')
+            @if(in_array($predio?->avaluo?->estado, ['nuevo', 'conciliar']))
 
                 <x-button-green
                     wire:click="guardarConstrucciones"

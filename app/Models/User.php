@@ -6,11 +6,11 @@ namespace App\Models;
 
 use App\Models\File;
 use App\Models\Pregunta;
+use App\Models\Refrendo;
 use App\Traits\ModelosTrait;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -76,6 +76,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function preguntasLeidas(){
         return $this->belongsToMany(Pregunta::class);
+    }
+
+    public function refrendos(){
+        return $this->hasMany(Refrendo::class);
     }
 
     public function imagenes(){

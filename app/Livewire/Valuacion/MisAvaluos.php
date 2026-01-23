@@ -6,6 +6,7 @@ use App\Models\Avaluo;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use App\Constantes\Constantes;
 use App\Models\FirmaElectronica;
 use App\Traits\ComponentesTrait;
 use Livewire\Attributes\Computed;
@@ -40,6 +41,20 @@ class MisAvaluos extends Component
     public $oficina;
     public $tipo_predio;
     public $numero_registro;
+
+    public $años;
+    public $filters = [
+        'año' => '',
+        'folio' => '',
+        'usuario' => '',
+        'estado' => '',
+        'localidad' => '',
+        'oficina' => '',
+        'tipo' => '',
+        'registro' => ''
+    ];
+
+    public function updatedFilters() { $this->resetPage(); }
 
     public function crearModeloVacio(){
         return Avaluo::make();
@@ -320,8 +335,43 @@ class MisAvaluos extends Component
         return Avaluo::select('id', 'predio_id', 'año', 'folio', 'usuario', 'estado', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
                             ->with('predio.propietarios.persona', 'creadoPor:id,name', 'actualizadoPor:id,name', 'firmaElectronica:id,avaluo_id,uuid')
                             ->where('creado_por', auth()->id())
+                            ->where('año', $this->filters['año'])
+                            ->when(strlen($this->filters['estado']) > 0, function($q){
+                                $q->where('estado', $this->filters['estado']);
+                            })
+                            ->when(strlen($this->filters['folio']) > 0, function($q){
+                                $q->where('folio', $this->filters['folio']);
+                            })
+                            ->when(strlen($this->filters['localidad']) > 0, function($q){
+                                $q->whereHas('predio', function($q){
+                                    $q->where('localidad', $this->filters['localidad']);
+                                });
+                            })
+                            ->when(strlen($this->filters['oficina']) > 0, function($q){
+                                $q->whereHas('predio', function($q){
+                                    $q->where('oficina', $this->filters['oficina']);
+                                });
+                            })
+                            ->when(strlen($this->filters['tipo']) > 0, function($q){
+                                $q->whereHas('predio', function($q){
+                                    $q->where('tipo_predio', $this->filters['tipo']);
+                                });
+                            })
+                            ->when(strlen($this->filters['registro']) > 0, function($q){
+                                $q->whereHas('predio', function($q){
+                                    $q->where('numero_registro', $this->filters['registro']);
+                                });
+                            })
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
+
+    }
+
+    public function mount(){
+
+        $this->años = Constantes::AÑOS;
+
+        $this->filters['año'] = now()->year;
 
     }
 

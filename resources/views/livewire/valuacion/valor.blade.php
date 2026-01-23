@@ -123,7 +123,7 @@
 
     <div class="bg-white rounded-lg p-3 flex justify-end mt-5  shadow-xl">
 
-        @if($predio?->avaluo?->estado === 'nuevo')
+        @if(in_array($predio?->avaluo?->estado, ['nuevo', 'conciliar']))
 
             <x-button-green
                 wire:click="guardar"

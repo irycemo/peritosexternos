@@ -39,7 +39,9 @@ return [
 
     'sgc' => [
         'token' => env('SGC_TOKEN'),
-        'consulta_cuenta_predial' => env('SGC_CONSULTA_CUENTA_PREDIAL')
+        'consulta_cuenta_predial' => env('SGC_CONSULTA_CUENTA_PREDIAL'),
+        'consulta_tramite_refrendo' => env('SGC_CONSULTA_TRAMITE_REFRENDO'),
+        'crear_tramite_refrendo' => env('SGC_CREAR_TRAMITE_REFRENDO'),
     ],
 
     'google' => [

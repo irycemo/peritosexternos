@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth', 'esta.activo', 'verified']], function(){
     /* Valuación */
     Route::get('mis_avaluos', MisAvaluos::class)->middleware('can:Mis avaluos')->name('mis_avaluos');
 
-    Route::get('valuacion/{avaluo?}', ValuacionController::class)->name('valuacion');
+    Route::get('valuacion/{avaluo?}', ValuacionController::class)->middleware(['refrendo_activo', 'documentacion_completa'])->name('valuacion');
 
     Route::get('acuerdos_valores', AcuerdosValor::class)->name('acuerdos_valores');
 

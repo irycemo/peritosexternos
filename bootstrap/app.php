@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Middleware\DocumentacionCompletaMiddleware;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\EstaActivoMiddleware;
+use App\Http\Middleware\RefrendoActivoMiddleware;
 use Spatie\Permission\Middleware\RoleMiddleware;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -21,6 +23,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'esta.activo' => EstaActivoMiddleware::class,
             'role'=> RoleMiddleware::class,
             'permission' => PermissionMiddleware::class,
+            'documentacion_completa' => DocumentacionCompletaMiddleware::class,
+            'refrendo_activo' => RefrendoActivoMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
