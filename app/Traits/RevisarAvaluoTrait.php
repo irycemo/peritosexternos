@@ -32,49 +32,49 @@ trait RevisarAvaluoTrait
         }
 
         /* Fotos */
-        if(!File::where('avaluo_id', $this->avaluo->id)->where('descripcion', 'fachada')->first()){
+        if(!File::where('fileable_id', $this->avaluo->id)->where('fileable_type', 'App\Models\Avaluo')->where('descripcion', 'fachada')->first()){
 
             throw new GeneralException("El avalúo no tiene imagen de fachada.");
 
         }
 
-        if(!File::where('avaluo_id', $this->avaluo->id)->where('descripcion', 'foto2')->first()){
+        if(!File::where('fileable_id', $this->avaluo->id)->where('fileable_type', 'App\Models\Avaluo')->where('descripcion', 'foto2')->first()){
 
             throw new GeneralException("El avalúo no tiene imagen de foto 2.");
 
         }
 
-        if(!File::where('avaluo_id', $this->avaluo->id)->where('descripcion', 'foto3')->first()){
+        if(!File::where('fileable_id', $this->avaluo->id)->where('fileable_type', 'App\Models\Avaluo')->where('descripcion', 'foto3')->first()){
 
             throw new GeneralException("El avalúo no tiene imagen de foto 3.");
 
         }
 
-        if(!File::where('avaluo_id', $this->avaluo->id)->where('descripcion', 'foto4')->first()){
+        if(!File::where('fileable_id', $this->avaluo->id)->where('fileable_type', 'App\Models\Avaluo')->where('descripcion', 'foto4')->first()){
 
             throw new GeneralException("El avalúo no tiene imagen de foto 4.");
 
         }
 
-        if(!File::where('avaluo_id', $this->avaluo->id)->where('descripcion', 'macrolocalizacion')->first()){
+        if(!File::where('fileable_id', $this->avaluo->id)->where('fileable_type', 'App\Models\Avaluo')->where('descripcion', 'macrolocalizacion')->first()){
 
             throw new GeneralException("El avalúo no tiene imagen de macrolocalización.");
 
         }
 
-        if(!File::where('avaluo_id', $this->avaluo->id)->where('descripcion', 'microlocalizacion')->first()){
+        if(!File::where('fileable_id', $this->avaluo->id)->where('fileable_type', 'App\Models\Avaluo')->where('descripcion', 'microlocalizacion')->first()){
 
             throw new GeneralException("El avalúo no tiene imagen de microlocalización.");
 
         }
 
-        if(!File::where('avaluo_id', $this->avaluo->id)->where('descripcion', 'poligonoDwg')->first()){
+        if(!File::where('fileable_id', $this->avaluo->id)->where('fileable_type', 'App\Models\Avaluo')->where('descripcion', 'poligonoDwg')->first()){
 
             throw new GeneralException("El avalúo no tiene poligono DWG.");
 
         }
 
-        if(!File::where('avaluo_id', $this->avaluo->id)->where('descripcion', 'poligonoImagen')->first()){
+        if(!File::where('fileable_id', $this->avaluo->id)->where('fileable_type', 'App\Models\Avaluo')->where('descripcion', 'poligonoImagen')->first()){
 
             throw new GeneralException("El avalúo no tiene representación del poligono.");
 

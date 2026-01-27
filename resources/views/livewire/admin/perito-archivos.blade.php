@@ -15,7 +15,7 @@
 
                 <div>
 
-                    <input type="file" id="ine_frente" class="hidden" wire:model.live="ine_frente" x-ref="ine_frente" ccept="image/png, image/jpeg, image/jpg"/>
+                    <input type="file" id="ine_frente" class="hidden" wire:model.live="ine_frente" x-ref="ine_frente" accept="image/png, image/jpeg, image/jpg"/>
 
                     <x-label for="ine_frente" value="INE Frente" />
 
@@ -25,7 +25,7 @@
 
                 <div>
 
-                    @if($ine_frente)
+                    @if(in_array($ine_frente?->getClientOriginalExtension(), ['png', 'jpg', 'jpeg', 'gif']))
 
                         <a href="{{ $ine_frente->temporaryUrl() }}" target="_blank">
 
@@ -61,7 +61,7 @@
 
                 <div>
 
-                    <input type="file" id="ine_reverso" class="hidden" wire:model.live="ine_reverso" x-ref="ine_reverso" ccept="image/png, image/jpeg, image/jpg"/>
+                    <input type="file" id="ine_reverso" class="hidden" wire:model.live="ine_reverso" x-ref="ine_reverso" accept="image/png, image/jpeg, image/jpg"/>
 
                     <x-label for="ine_reverso" value="INE Reverso" />
 
@@ -71,7 +71,7 @@
 
                 <div>
 
-                    @if($ine_reverso)
+                    @if(in_array($ine_reverso?->getClientOriginalExtension(), ['png', 'jpg', 'jpeg', 'gif']))
 
                         <a href="{{ $ine_reverso->temporaryUrl() }}" target="_blank">
 
@@ -107,7 +107,7 @@
 
                 <div>
 
-                    <input type="file" id="cedula_profesional" class="hidden" wire:model.live="cedula_profesional" x-ref="cedula_profesional" ccept="image/png, image/jpeg, image/jpg"/>
+                    <input type="file" id="cedula_profesional" class="hidden" wire:model.live="cedula_profesional" x-ref="cedula_profesional" accept="image/png, image/jpeg, image/jpg"/>
 
                     <x-label for="cedula_profesional" value="Cédula profesional" />
 
@@ -117,7 +117,7 @@
 
                 <div>
 
-                    @if($cedula_profesional)
+                    @if(in_array($cedula_profesional?->getClientOriginalExtension(), ['png', 'jpg', 'jpeg', 'gif']))
 
                         <a href="{{ $cedula_profesional->temporaryUrl() }}" target="_blank">
 
@@ -153,7 +153,7 @@
 
                 <div>
 
-                    <input type="file" id="cedula_especialidad" class="hidden" wire:model.live="cedula_especialidad" x-ref="cedula_especialidad" ccept="image/png, image/jpeg, image/jpg"/>
+                    <input type="file" id="cedula_especialidad" class="hidden" wire:model.live="cedula_especialidad" x-ref="cedula_especialidad" accept="image/png, image/jpeg, image/jpg"/>
 
                     <x-label for="cedula_especialidad" value="Cédula de especialidad" />
 
@@ -163,7 +163,7 @@
 
                 <div>
 
-                    @if($cedula_especialidad)
+                    @if(in_array($cedula_especialidad?->getClientOriginalExtension(), ['png', 'jpg', 'jpeg', 'gif']))
 
                         <a href="{{ $cedula_especialidad->temporaryUrl() }}" target="_blank">
 

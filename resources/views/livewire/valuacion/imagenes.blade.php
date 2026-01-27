@@ -10,7 +10,7 @@
 
                 <p>Fachada</p>
 
-                @if($fachada)
+                @if(in_array($fachada?->getClientOriginalExtension(), ['png', 'jpg', 'jpeg', 'gif']))
 
                     <a href="{{ $fachada->temporaryUrl() }}" data-lightbox="imagen" data-title="Fachada">
 
@@ -59,7 +59,7 @@
 
                 <p>Fotografía 2</p>
 
-                @if($foto2)
+                @if(in_array($foto2?->getClientOriginalExtension(), ['png', 'jpg', 'jpeg', 'gif']))
 
                     <a href="{{ $foto2->temporaryUrl() }}" data-lightbox="imagen" data-title="Foto 2">
 
@@ -108,7 +108,7 @@
 
                 <p>Fotografía 3</p>
 
-                @if($foto3)
+                @if(in_array($foto3?->getClientOriginalExtension(), ['png', 'jpg', 'jpeg', 'gif']))
 
                     <a href="{{ $foto3->temporaryUrl() }}" data-lightbox="imagen" data-title="Foto 3">
 
@@ -157,7 +157,7 @@
 
                 <p>Fotografía 4</p>
 
-                @if($foto4)
+                @if(in_array($foto4?->getClientOriginalExtension(), ['png', 'jpg', 'jpeg', 'gif']))
 
                     <a href="{{  $foto4->temporaryUrl() }}" data-lightbox="imagen" data-title="Foto 4">
 
@@ -206,7 +206,7 @@
 
                 <p>Macrolocalización</p>
 
-                @if($macrolocalizacion)
+                @if(in_array($macrolocalizacion?->getClientOriginalExtension(), ['png', 'jpg', 'jpeg', 'gif']))
 
                     <a href="{{ $macrolocalizacion->temporaryUrl() }}" data-lightbox="imagen" data-title="Macrolocalización">
 
@@ -255,7 +255,7 @@
 
                 <p>Microlocalización</p>
 
-                @if($microlocalizacion)
+                @if(in_array($microlocalizacion?->getClientOriginalExtension(), ['png', 'jpg', 'jpeg', 'gif']))
 
                     <a href="{{ $microlocalizacion->temporaryUrl() }}" data-lightbox="imagen" data-title="Microlocalización">
 
@@ -304,7 +304,7 @@
 
                 <p>Representación del poligono (Imagen)</p>
 
-                @if($poligonoImagen)
+                @if(in_array($poligonoImagen?->getClientOriginalExtension(), ['png', 'jpg', 'jpeg', 'gif']))
 
                     <a href="{{ $poligonoImagen->temporaryUrl() }}" data-lightbox="imagen" data-title="Representación del poligono">
 

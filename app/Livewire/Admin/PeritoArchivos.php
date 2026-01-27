@@ -9,6 +9,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class PeritoArchivos extends Component
 {
@@ -22,11 +23,17 @@ class PeritoArchivos extends Component
 
     protected function rules(){
         return [
-            'ine_frente' => ['nullable','image','max:2000','mimes:jpeg,png,jpg'],
-            'ine_reverso' => ['nullable','image','max:2000','mimes:jpeg,png,jpg'],
-            'cedula_profesional' => ['nullable','image','max:2000','mimes:jpeg,png,jpg'],
-            'cedula_especialidad' => ['nullable','image','max:2000','mimes:jpeg,png,jpg'],
+            'ine_frente' => ['nullable','image','max:2000'],
+            'ine_reverso' => ['nullable','image','max:2000'],
+            'cedula_profesional' => ['nullable','image','max:2000'],
+            'cedula_especialidad' => ['nullable','image','max:2000'],
         ];
+    }
+
+    public function updating($field, $value){
+
+        $this->validate();
+
     }
 
     public function guardar(){

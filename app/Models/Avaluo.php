@@ -187,7 +187,7 @@ class Avaluo extends Model implements Auditable
 
         $poligonoDwg = $this->imagenes()->where('descripcion', 'poligonoDwg')->first();
 
-        return $poligonoDwg->getLink();
+        return $poligonoDwg?->getLink();
 
     }
 
