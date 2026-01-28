@@ -182,7 +182,7 @@ class MisAvaluos extends Component
 
             return response()->streamDownload(
                 fn () => print($pdf->output()),
-                $this->avaluo->predio->cuentaPredial() . '-certificado_de_registro.pdf'
+                $this->avaluo->predio->cuentaPredial() . '-avaluo.pdf'
             );
 
         } catch (GeneralException $ex) {
