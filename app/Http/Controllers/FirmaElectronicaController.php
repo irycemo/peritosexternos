@@ -199,7 +199,8 @@ class FirmaElectronicaController extends Controller
         }
 
         File::create([
-            'avaluo_id' => $firma_electronica->avaluo->id,
+            'fileable_type' => 'App\Models\Avaluo',
+            'fileable_id'=> $firma_electronica->avaluo->id,
             'descripcion' => 'avaluo',
             'url' => $nombre . '.jpg'
         ]);
