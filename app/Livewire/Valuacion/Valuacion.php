@@ -367,13 +367,15 @@ class Valuacion extends Component
         }
 
         File::create([
-            'avaluo_id' => $this->predio->avaluo->id,
+            'fileable_type' => 'App\Models\Avaluo',
+            'fileable_id' => $this->predio->avaluo->id,
             'url' => $nombreMacro,
             'descripcion' => 'macrolocalizacion'
         ]);
 
         File::create([
-            'avaluo_id' => $this->predio->avaluo->id,
+            'fileable_type' => 'App\Models\Avaluo',
+            'fileable_id' => $this->predio->avaluo->id,
             'url' => $nombreMicro,
             'descripcion' => 'microlocalizacion'
         ]);

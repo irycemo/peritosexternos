@@ -5,8 +5,8 @@
     <table>
 
         <tbody>
-                <tr>
-                    <td style="font-size:12px;">
+                <tr >
+                    <td style="font-size:12px; width: 50%">
 
                         <div>
 
@@ -17,7 +17,7 @@
                         </div>
 
                     </td>
-                    <td style="font-size:12px;">
+                    <td style="font-size:12px; width: 50%">
                         <div>
 
                             <p style="margin-bottom: 10px;">Fotografía 2</p>
@@ -29,7 +29,7 @@
                 </tr>
 
                 <tr>
-                    <td style="font-size:12px;">
+                    <td style="font-size:12px; width: 50%">
                         <div>
 
                             <p style="margin-bottom: 10px;">Fotografía 3</p>
@@ -38,7 +38,7 @@
 
                         </div>
                     </td>
-                    <td style="font-size:12px;">
+                    <td style="font-size:12px; width: 50%">
                         <div>
 
                             <p style="margin-bottom: 10px;">Fotografía 4</p>
@@ -50,7 +50,7 @@
                 </tr>
 
                 <tr>
-                    <td style="font-size:12px;">
+                    <td style="font-size:12px; width: 50%">
                         <div>
 
                             <p style="margin-bottom: 10px;">Macrolocalización</p>
@@ -59,7 +59,7 @@
 
                         </div>
                     </td>
-                    <td style="font-size:12px;">
+                    <td style="font-size:12px; width: 50%">
                         <div>
 
                             <p style="margin-bottom: 10px;">Microlocalización</p>
@@ -71,7 +71,7 @@
                 </tr>
 
                 <tr>
-                    <td style="font-size:12px;">
+                    <td style="font-size:12px; width: 50%">
                         <div>
 
                             <p style="margin-bottom: 10px;">Representación del polígono</p>
@@ -79,6 +79,9 @@
                             <img class="imagenes" src="{{ $poligonoImagen }}" alt="Representación del polígono">
 
                         </div>
+                    </td>
+
+                    <td style="font-size:12px; width: 50%">
                     </td>
                 </tr>
         </tbody>

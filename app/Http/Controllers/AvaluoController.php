@@ -13,6 +13,7 @@ class AvaluoController extends Controller
 
         $datos_control = (object)[];
 
+        $datos_control->solicitante = $predio->avaluo->solicitante;
         $datos_control->impreso_por = auth()->user()->name;
         $datos_control->impreso_en = now()->format('d/m/Y H:i:s');
 
