@@ -19,7 +19,7 @@
         "league/flysystem-aws-s3-v3": "^3.0",
         "livewire/livewire": "^3.0",
         "opcodesio/log-viewer": "^3.17",
-        "orangehill/iseed": "^3.1",
+        "orangehill/iseed": "^3.7",
         "org_heigl/ghostscript": "^2.4",
         "owen-it/laravel-auditing": "^14.0",
         "phpcfdi/credentials": "^1.3",

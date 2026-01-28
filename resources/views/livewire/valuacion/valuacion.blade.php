@@ -37,11 +37,17 @@
 
     @include('livewire.valuacion.comun.errores')
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl text-center">
+    <div class="flex gap-3 justify-center mb-5 bg-white rounded-lg p-2 shadow-xl text-center">
 
-        <x-input-group for="solicitante" label="Solicitante" :error="$errors->first('solicitante')" class="w-fit mx-auto">
+        <x-input-group for="solicitante" label="Solicitante" :error="$errors->first('solicitante')" class="w-fit ">
 
             <x-input-text id="solicitante" wire:model="solicitante" />
+
+        </x-input-group>
+
+        <x-input-group for="predio.superficie_notarial" label="Superficie notarial" :error="$errors->first('predio.superficie_notarial')" class="w-fit ">
+
+            <x-input-text id="predio.superficie_notarial" wire:model="predio.superficie_notarial" />
 
         </x-input-group>
 

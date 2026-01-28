@@ -7,6 +7,7 @@ use App\Livewire\Admin\Avaluos;
 use App\Livewire\Admin\Permisos;
 use App\Livewire\Admin\Usuarios;
 use App\Livewire\Admin\Auditoria;
+use App\Livewire\Admin\AcuerdoValor;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Valuacion\MisAvaluos;
 use App\Http\Controllers\DashboardController;
@@ -15,9 +16,9 @@ use App\Http\Controllers\SetPasswordController;
 use App\Livewire\Consultas\Preguntas\Preguntas;
 use App\Http\Controllers\VerificacionController;
 use App\Livewire\Consultas\Preguntas\NuevaPregunta;
-use App\Livewire\Consutas\AcuerdosValor\AcuerdosValor;
 use App\Http\Controllers\Preguntas\PreguntasController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Livewire\Consultas\AcuerdosValor\AcuerdosValorConsulta;
 
 Route::get('/', function () {
     return redirect('login');
@@ -37,6 +38,8 @@ Route::group(['middleware' => ['auth', 'esta.activo', 'verified']], function(){
 
     Route::get('avaluos_admin', Avaluos::class)->middleware('can:Avaluos')->name('avaluos_admin');
 
+    Route::get('acuerdos_valores', AcuerdoValor::class)->name('acuerdos_valores');
+
     Route::get('umas', Umas::class)->middleware('can:Umas')->name('umas');
 
     /* Valuación */
@@ -44,7 +47,7 @@ Route::group(['middleware' => ['auth', 'esta.activo', 'verified']], function(){
 
     Route::get('valuacion/{avaluo?}', ValuacionController::class)->middleware(['refrendo_activo', 'documentacion_completa'])->name('valuacion');
 
-    Route::get('acuerdos_valores', AcuerdosValor::class)->name('acuerdos_valores');
+    Route::get('acuerdos_valores_consulta', AcuerdosValorConsulta::class)->name('acuerdos_valores_consulta');
 
     Route::get('preguntas_frecuentes', Preguntas::class)->name('preguntas_frecuentes');
 

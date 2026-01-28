@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
-        $this->call(ValoresUnitariosConstruccionsTableSeeder::class);
         $this->call(ValoresUnitariosRusticosTableSeeder::class);
         $this->call(UmaSeeder::class);
-
         $this->call(ValorUnitarioConstruccionsTableSeeder::class);
+        $this->call(FactorIncrementosTableSeeder::class);
+        $this->call(AcuerdoValorsTableSeeder::class);
     }
 }
