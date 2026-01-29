@@ -154,6 +154,7 @@ class Constantes{
         'UNO Y DOS NIVELES  (IND. LIGERA Y MEDIA)',
         'UNO Y DOS NIVELES  (IND. MEDIA - PESADA)',
         'DOS Y TRES NIVELES (MEDIA - SUPERIOR)',
+        'SIN CONSTRUCCIÓN'
     ];
 
     const CIMENTACION = [

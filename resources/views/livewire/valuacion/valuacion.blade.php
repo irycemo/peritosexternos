@@ -47,7 +47,7 @@
 
         <x-input-group for="predio.superficie_notarial" label="Superficie notarial" :error="$errors->first('predio.superficie_notarial')" class="w-fit ">
 
-            <x-input-text id="predio.superficie_notarial" wire:model="predio.superficie_notarial" />
+            <x-input-text type="number" id="predio.superficie_notarial" wire:model="predio.superficie_notarial" />
 
         </x-input-group>
 

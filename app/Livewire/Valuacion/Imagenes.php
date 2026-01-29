@@ -31,21 +31,22 @@ class Imagenes extends Component
     public $observaciones;
 
     public $predio;
+    public $avaluo;
     public $avaluo_id;
 
     protected function rules(){
         return [
-            'fachada' => [Rule::requiredIf($this->predio->avaluo->fachada() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
-            'foto2' => [Rule::requiredIf($this->predio->avaluo->foto2() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
-            'foto3' => [Rule::requiredIf($this->predio->avaluo->foto3() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
-            'foto4' => [Rule::requiredIf($this->predio->avaluo->foto4() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
-            'macrolocalizacion' => [Rule::requiredIf($this->predio->avaluo->macrolocalizacion() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
-            'microlocalizacion' => [Rule::requiredIf($this->predio->avaluo->microlocalizacion() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
-            'poligonoDwg' => [Rule::requiredIf($this->predio->avaluo->poligonoDwg() == null),'nullable','mimes:dwg'],
-            'poligonoImagen' => [Rule::requiredIf($this->predio->avaluo->poligonoImagen() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'fachada' => [Rule::requiredIf($this->avaluo->fachada() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'foto2' => [Rule::requiredIf($this->avaluo->foto2() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'foto3' => [Rule::requiredIf($this->avaluo->foto3() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'foto4' => [Rule::requiredIf($this->avaluo->foto4() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'macrolocalizacion' => [Rule::requiredIf($this->avaluo->macrolocalizacion() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'microlocalizacion' => [Rule::requiredIf($this->avaluo->microlocalizacion() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'poligonoDwg' => [Rule::requiredIf($this->avaluo->poligonoDwg() == null),'nullable','mimes:dwg'],
+            'poligonoImagen' => [Rule::requiredIf($this->avaluo->poligonoImagen() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
             'predio' => 'required',
             'anexo' => 'nullable|mimes:pdf',
-            'predio.avaluo.observaciones' => 'nullable',
+            'avaluo.observaciones' => 'nullable',
          ];
     }
 
@@ -66,7 +67,7 @@ class Imagenes extends Component
 
     public function procesarImagen($imagen, $descripcion){
 
-        $file = $this->predio->avaluo->imagenes()
+        $file = $this->avaluo->imagenes()
                         ->where('descripcion' , $descripcion)
                         ->first();
 
@@ -86,7 +87,7 @@ class Imagenes extends Component
 
             File::create([
                         'fileable_type' => 'App\Models\Avaluo',
-                        'fileable_id' => $this->predio->avaluo->id,
+                        'fileable_id' => $this->avaluo->id,
                         'url' => $url,
                         'descripcion' => $descripcion
                         ]);
@@ -177,13 +178,13 @@ class Imagenes extends Component
 
                 }
 
-                $this->predio->avaluo->save();
+                $this->avaluo->save();
 
-                $this->predio->audits()->latest()->first()->update(['tags' => 'Actualizó imágenes']);
-
-                $this->dispatch('mostrarMensaje', ['success', "La información se guardó con éxito."]);
+                $this->avaluo->audits()->latest()->first()->update(['tags' => 'Actualizó imágenes']);
 
             });
+
+            $this->dispatch('mostrarMensaje', ['success', "La información se guardó con éxito."]);
 
         } catch (\Throwable $th) {
 
@@ -197,9 +198,9 @@ class Imagenes extends Component
 
         if($this->avaluo_id){
 
-            $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
+            $this->avaluo = Avaluo::find($this->avaluo_id);
 
-            $this->cargarPredio($avaluo->predio_id);
+            $this->cargarPredio($this->avaluo->predio_id);
 
         }
 

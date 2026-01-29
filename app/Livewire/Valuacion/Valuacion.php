@@ -52,7 +52,7 @@ class Valuacion extends Component
             'predio.tipo_predio' => 'required|numeric|min:1|max:2',
             'predio.oficina' => 'required|numeric|min:1',
             'predio.estado' => 'required',
-            'predio.superficie_notarial' => 'nullable',
+            'predio.superficie_notarial' => 'nullable|numeric',
             'predio.tipo_asentamiento' => 'required',
             'predio.nombre_asentamiento' => 'required',
             'predio.tipo_vialidad' => 'required',

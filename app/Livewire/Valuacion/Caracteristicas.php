@@ -7,6 +7,7 @@ use App\Models\Bloque;
 use App\Models\Predio;
 use Livewire\Component;
 use App\Constantes\Constantes;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -56,7 +57,7 @@ class Caracteristicas extends Component
             'avaluo.energia_electrica' => 'nullable',
             'avaluo.alumbrado_publico' => 'nullable',
             'avaluo.banqueta' => 'nullable',
-            'bloques' => 'array|required',
+            'bloques' => ['array', Rule::requiredIf($this->avaluo->construccion_dominante !== 'SIN CONSTRUCCIÓN')],
             'bloques.*.cimentacion' => 'required',
             'bloques.*.estructura' => 'required',
             'bloques.*.muros' => 'required',
@@ -84,7 +85,7 @@ class Caracteristicas extends Component
 
     protected $messages = [
         'predio.required' => 'Primero debe cargar el avaluo',
-        'bloques.required' => 'Debe haber al menos un bloque'
+        /* 'bloques.required' => 'Debe haber al menos un bloque' */
     ];
 
     protected $validationAttributes  = [
@@ -130,6 +131,8 @@ class Caracteristicas extends Component
     public function cargarBloques($avaluo){
 
         $this->reset('bloques');
+
+        $avaluo->load('bloques');
 
         foreach ($avaluo->bloques as $bloque) {
 
@@ -274,8 +277,6 @@ class Caracteristicas extends Component
 
         $this->predio = Predio::with('avaluo')->find($id);
 
-        $this->avaluo = $this->predio->avaluo;
-
         $this->cargarBloques($this->avaluo);
 
     }
@@ -416,6 +417,7 @@ class Caracteristicas extends Component
         }
 
     }
+
     public function render()
     {
         return view('livewire.valuacion.caracteristicas');

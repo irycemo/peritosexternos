@@ -22,9 +22,9 @@
 
                     @if($predio)
 
-                        <a href="{{ $predio->avaluo->fachada() }}" data-lightbox="imagen" data-title="Fachada">
+                        <a href="{{ $avaluo->fachada() }}" data-lightbox="imagen" data-title="Fachada">
 
-                            <img class="h-20 w-20 mx-auto my-3" src="{{ $predio->avaluo->fachada() }}" alt="Fachada">
+                            <img class="h-20 w-20 mx-auto my-3" src="{{ $avaluo->fachada() }}" alt="Fachada">
 
                         </a>
 
@@ -71,9 +71,9 @@
 
                     @if($predio)
 
-                        <a href="{{ $predio->avaluo->foto2() }}" data-lightbox="imagen" data-title="Foto 2">
+                        <a href="{{ $avaluo->foto2() }}" data-lightbox="imagen" data-title="Foto 2">
 
-                            <img class="h-20 w-20 mx-auto my-3" src="{{ $predio->avaluo->foto2() }}" alt="Foto 2">
+                            <img class="h-20 w-20 mx-auto my-3" src="{{ $avaluo->foto2() }}" alt="Foto 2">
 
                         </a>
 
@@ -120,9 +120,9 @@
 
                     @if($predio)
 
-                        <a href="{{ $predio->avaluo->foto3() }}" data-lightbox="imagen" data-title="Foto 3">
+                        <a href="{{ $avaluo->foto3() }}" data-lightbox="imagen" data-title="Foto 3">
 
-                            <img class="h-20 w-20 mx-auto my-3" src="{{ $predio->avaluo->foto3() }}" alt="Foto 3">
+                            <img class="h-20 w-20 mx-auto my-3" src="{{ $avaluo->foto3() }}" alt="Foto 3">
 
                         </a>
 
@@ -169,9 +169,9 @@
 
                     @if($predio)
 
-                        <a href="{{  $predio->avaluo->foto4() }}" data-lightbox="imagen" data-title="Foto 4">
+                        <a href="{{  $avaluo->foto4() }}" data-lightbox="imagen" data-title="Foto 4">
 
-                            <img class="h-20 w-20 mx-auto my-3" src="{{ $predio->avaluo->foto4() }}" alt="Foto 4">
+                            <img class="h-20 w-20 mx-auto my-3" src="{{ $avaluo->foto4() }}" alt="Foto 4">
 
                         </a>
 
@@ -218,9 +218,9 @@
 
                       @if($predio)
 
-                        <a href="{{ $predio->avaluo->macrolocalizacion() }}" data-lightbox="imagen" data-title="Macrolocalización">
+                        <a href="{{ $avaluo->macrolocalizacion() }}" data-lightbox="imagen" data-title="Macrolocalización">
 
-                            <img class="h-20 w-20 mx-auto my-3" src="{{ $predio->avaluo->macrolocalizacion() }}" alt="Macrolocalización">
+                            <img class="h-20 w-20 mx-auto my-3" src="{{ $avaluo->macrolocalizacion() }}" alt="Macrolocalización">
 
                         </a>
 
@@ -267,9 +267,9 @@
 
                     @if($predio)
 
-                        <a href="{{ $predio->avaluo->microlocalizacion() }}" data-lightbox="imagen" data-title="Microlocalización">
+                        <a href="{{ $avaluo->microlocalizacion() }}" data-lightbox="imagen" data-title="Microlocalización">
 
-                            <img class="h-20 w-20 mx-auto my-3" src="{{ $predio->avaluo->microlocalizacion() }}" alt="Microlocalización">
+                            <img class="h-20 w-20 mx-auto my-3" src="{{ $avaluo->microlocalizacion() }}" alt="Microlocalización">
 
                         </a>
 
@@ -316,9 +316,9 @@
 
                     @if($predio)
 
-                        <a href="{{ $predio->avaluo->poligonoImagen() }}" data-lightbox="imagen" data-title="Representación del poligono">
+                        <a href="{{ $avaluo->poligonoImagen() }}" data-lightbox="imagen" data-title="Representación del poligono">
 
-                            <img class="h-20 w-20 mx-auto my-3" src="{{ $predio->avaluo->poligonoImagen() }}" alt="Representación del poligono">
+                            <img class="h-20 w-20 mx-auto my-3" src="{{ $avaluo->poligonoImagen() }}" alt="Representación del poligono">
 
                         </a>
 
@@ -355,7 +355,7 @@
 
                     @if($predio?->avaluo->poligonoDwg())
 
-                        <x-link-blue class="w-fit mx-auto" href="{{ $predio->avaluo->poligonoDwg() }}" target="_blank">Ver archivo</x-link-blue>
+                        <x-link-blue class="w-fit mx-auto" href="{{ $avaluo->poligonoDwg() }}" target="_blank">Ver archivo</x-link-blue>
 
                     @endif
 
@@ -380,7 +380,7 @@
 
                     @if($predio?->avaluo->anexo())
 
-                        <x-link-blue class="w-fit mx-auto" href="{{ $predio->avaluo->anexo() }}" target="_blank">Ver archivo</x-link-blue>
+                        <x-link-blue class="w-fit mx-auto" href="{{ $avaluo->anexo() }}" target="_blank">Ver archivo</x-link-blue>
 
                     @endif
 
@@ -419,13 +419,13 @@
 
             <div>
 
-                <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="predio.avaluo.observaciones"></textarea>
+                <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="avaluo.observaciones"></textarea>
 
             </div>
 
             <div>
 
-                @error('predio.avaluo.observaciones') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                @error('avaluo.observaciones') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
             </div>
 
