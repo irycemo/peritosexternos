@@ -63,6 +63,12 @@ class Imagenes extends Component
 
         $this->predio = Predio::with('avaluo')->find($id);
 
+        if(! $this->avaluo){
+
+            $this->avaluo = $this->predio->avaluo;
+
+        }
+
     }
 
     public function procesarImagen($imagen, $descripcion){
@@ -210,4 +216,5 @@ class Imagenes extends Component
     {
         return view('livewire.valuacion.imagenes');
     }
+
 }
