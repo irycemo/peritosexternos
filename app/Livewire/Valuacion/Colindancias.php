@@ -3,7 +3,6 @@
 namespace App\Livewire\Valuacion;
 
 use App\Models\Avaluo;
-use App\Models\Predio;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use App\Constantes\Constantes;
@@ -45,10 +44,12 @@ class Colindancias extends Component
         'medidas.*.descripcion' => 'descripción',
     ];
 
-    #[On('cargarPredio')]
-    public function cargarPredio($id){
+    #[On('cargarAvaluo')]
+    public function cargarAvaluo($id){
 
-        $this->predio = Predio::with('propietarios.persona')->find($id);
+        $avaluo = Avaluo::find($id);
+
+        $this->predio = $avaluo->predio;
 
         $this->cargarColindancias($this->predio);
 
@@ -90,7 +91,7 @@ class Colindancias extends Component
 
             $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
 
-            $this->cargarPredio($avaluo->predio_id);
+            $this->predio = $avaluo->predio;
 
         }
 

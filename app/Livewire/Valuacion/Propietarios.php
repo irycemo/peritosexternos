@@ -3,7 +3,6 @@
 namespace App\Livewire\Valuacion;
 
 use App\Models\Avaluo;
-use App\Models\Predio;
 use Livewire\Component;
 use App\Models\Propietario;
 use Livewire\Attributes\On;
@@ -17,10 +16,14 @@ class Propietarios extends Component
 
     protected $listeners = ['refresh'];
 
-    #[On('cargarPredio')]
-    public function cargarPredio($id){
+    #[On('cargarAvaluo')]
+    public function cargarAvaluo($id){
 
-        $this->predio = Predio::with('propietarios.persona')->find($id);
+        $avaluo = Avaluo::find($id);
+
+        $this->predio = $avaluo->predio;
+
+        $this->predio->load('propietarios.persona');
 
         $this->dispatch('cargarModelo', [get_class($this->predio), $this->predio->id]);
 
@@ -59,7 +62,7 @@ class Propietarios extends Component
 
             $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
 
-            $this->cargarPredio($avaluo->predio_id);
+            $this->predio = $avaluo->predio;
 
         }
 

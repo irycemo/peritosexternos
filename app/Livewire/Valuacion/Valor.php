@@ -63,10 +63,12 @@ class Valor extends Component
         'construccionesComun.*.valor_clasificacion_construccion' => 'valor de clasificación',
     ];
 
-    #[On('cargarPredio')]
-    public function cargarPredio($id){
+    #[On('cargarAvaluo')]
+    public function cargarAvaluo($id){
 
-        $this->predio = Predio::with('avaluo')->find($id);
+        $avaluo = Avaluo::find($id);
+
+        $this->predio = $avaluo->predio;
 
         $this->cargarTerrenos();
 
@@ -162,7 +164,7 @@ class Valor extends Component
 
             $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
 
-            $this->cargarPredio($avaluo->predio_id);
+            $this->predio = $avaluo->predio;
 
         }
 

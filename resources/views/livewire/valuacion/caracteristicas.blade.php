@@ -579,7 +579,7 @@
 
     <div class="bg-white rounded-lg p-4 flex justify-end shadow-xl">
 
-        @if(in_array($predio?->avaluo?->estado, ['nuevo', 'conciliar']))
+        @if(in_array($avaluo?->estado, ['nuevo', 'conciliar']))
 
             <x-button-green
                 wire:click="guardar"

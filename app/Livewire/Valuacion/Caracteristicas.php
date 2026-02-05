@@ -44,7 +44,7 @@ class Caracteristicas extends Component
 
     public $bloques = [];
 
-    protected $listeners = ['cargarPredio'];
+    protected $listeners = ['cargarAvaluo'];
 
     protected function rules(){
         return [
@@ -273,9 +273,9 @@ class Caracteristicas extends Component
 
     }
 
-    public function cargarPredio($id){
+    public function cargarAvaluo($id){
 
-        $this->predio = Predio::with('avaluo')->find($id);
+        $this->avaluo = Avaluo::find($id);
 
         $this->cargarBloques($this->avaluo);
 
@@ -334,6 +334,7 @@ class Caracteristicas extends Component
             DB::transaction(function () {
 
                 $this->avaluo->actualizado_por = auth()->id();
+
                 $this->avaluo->save();
 
                 $this->predio->save();
@@ -409,7 +410,7 @@ class Caracteristicas extends Component
 
             $this->avaluo = Avaluo::with('predio')->find($this->avaluo_id);
 
-            $this->cargarPredio($this->avaluo->predio_id);
+            $this->predio = $this->avaluo->predio;
 
         }else{
 

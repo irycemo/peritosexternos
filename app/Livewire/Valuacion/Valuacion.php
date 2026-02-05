@@ -163,11 +163,11 @@ class Valuacion extends Component
 
                 $this->dispatch('mostrarMensaje', ['success', "El avaluo se creó con el folio " . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario . '.']);
 
+                $this->dispatch('cargarAvaluo', $avaluo->id);
+
             });
 
             $this->editar = true;
-
-            $this->dispatch('cargarPredio', $this->predio->id);
 
         } catch (\Throwable $th) {
 

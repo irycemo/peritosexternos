@@ -58,16 +58,12 @@ class Imagenes extends Component
         'predio.avaluo.observaciones' => 'observaciones',
     ];
 
-    #[On('cargarPredio')]
-    public function cargarPredio($id){
+    #[On('cargarAvaluo')]
+    public function cargarAvaluo($id){
 
-        $this->predio = Predio::with('avaluo')->find($id);
+        $this->avaluo = Avaluo::find($id);
 
-        if(! $this->avaluo){
-
-            $this->avaluo = $this->predio->avaluo;
-
-        }
+        $this->predio = $this->avaluo->predio;
 
     }
 
@@ -206,7 +202,7 @@ class Imagenes extends Component
 
             $this->avaluo = Avaluo::find($this->avaluo_id);
 
-            $this->cargarPredio($this->avaluo->predio_id);
+            $this->predio = $this->avaluo->predio;
 
         }
 
