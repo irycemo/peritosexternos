@@ -64,6 +64,8 @@ class Propietarios extends Component
 
             $this->predio = $avaluo->predio;
 
+            $this->predio->load('propietarios.persona');
+
         }
 
     }
