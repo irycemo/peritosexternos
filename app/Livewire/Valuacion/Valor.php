@@ -4,7 +4,6 @@ namespace App\Livewire\Valuacion;
 
 use App\Models\Uma;
 use App\Models\Avaluo;
-use App\Models\Predio;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use App\Traits\TerrenosTrait;
@@ -165,6 +164,14 @@ class Valor extends Component
             $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
 
             $this->predio = $avaluo->predio;
+
+            $this->cargarTerrenos();
+
+            $this->cargarConstrucciones();
+
+            $this->cargarTerrenosComun();
+
+            $this->cargarConstruccionesComun();
 
         }
 
