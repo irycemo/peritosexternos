@@ -136,8 +136,11 @@ trait TerrenosTrait
 
                 $this->predio->update([
                     'superficie_terreno' => $sum2,
-                    'valor_total_terreno' => $sum + $this->predio->terrenos->sum('valor_terreno'),
+                    'superficie_total_terreno' => $sum2 + $this->predio->terrenosComun->sum('superficie_proporcional'),
+                    'valor_total_terreno' => $sum + $this->predio->terrenosComun->sum('valor_terreno_comun'),
                 ]);
+
+                $this->predio->refresh();
 
                 $this->dispatch('mostrarMensaje', ['success', "Los terrenos se guardaron con éxito"]);
 

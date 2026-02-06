@@ -131,10 +131,12 @@ trait ConstruccionesComunTrait
 
                 $this->predio->area_comun_construccion = $sum2;
                 $this->predio->valor_construccion_comun = $sum;
-
+                $this->predio->superficie_total_construccion = $sum2 + $this->predio->construccionesComun->sum('superficie');
                 $this->predio->valor_total_construccion = $this->predio->superficie_construccion + $sum;
 
                 $this->predio->save();
+
+                $this->predio->refresh();
 
                 $this->dispatch('mostrarMensaje', ['success', "La información de condominio se guardó con éxito"]);
 
