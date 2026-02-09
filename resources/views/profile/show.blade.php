@@ -47,9 +47,9 @@
                     <x-section-border />
                 </div>
 
-                <div class="mt-10 sm:mt-0">
+                {{-- <div class="mt-10 sm:mt-0">
                     @livewire('admin.perito-refrendo')
-                </div>
+                </div> --}}
 
             </div>
         </div>

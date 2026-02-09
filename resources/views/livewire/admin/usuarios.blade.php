@@ -48,6 +48,7 @@
                 <x-table.heading sortable wire:click="sortBy('email')" :direction="$sort === 'email' ? $direction : null">Correo</x-table.heading>
                 <x-table.heading >Rol</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('asociacion')" :direction="$sort === 'asociacion' ? $direction : null">Asociación</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('clave')" :direction="$sort === 'clave' ? $direction : null">Clave</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('status')" :direction="$sort === 'status' ? $direction : null">Estado</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
@@ -100,6 +101,14 @@
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Asociación</span>
 
                             {{ $usuario->asociacion ?? 'N/A' }}
+
+                        </x-table.cell>
+
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Clave</span>
+
+                            {{ $usuario->clave ?? 'N/A' }}
 
                         </x-table.cell>
 
@@ -301,7 +310,7 @@
 
                 </x-input-group>
 
-                <x-input-group for="modelo_editar.especialidad" label="Especialidad en valuación" :error="$errors->first('modelo_editar.especialidad')" class="w-full">
+                <x-input-group for="modelo_editar.especialidad" label="Cédula de especialidad" :error="$errors->first('modelo_editar.especialidad')" class="w-full">
 
                     <x-input-text id="modelo_editar.especialidad" wire:model="modelo_editar.especialidad" />
 
@@ -433,5 +442,87 @@
         </x-slot>
 
     </x-confirmation-modal>
+
+    <x-dialog-modal wire:model="modalPermisos">
+
+        <x-slot name="title">
+
+            Asignar permisos
+
+        </x-slot>
+
+        <x-slot name="content">
+
+            <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
+
+                <div class="flex-auto ">
+
+                    <div>
+
+                        <Label class="block text-sm font-medium leading-6 text-gray-900">Seleccione los permisos</Label>
+
+                    </div>
+
+                    <div class="overflow-y-auto ">
+
+                        @foreach($permisos as $nombre => $area)
+
+                            <p class="my-2">Área de {{ $nombre }}:</p>
+
+                            <div class="mb-2 flex flex-wrap gap-2">
+
+                                @foreach ($area as $permission)
+
+                                    <label class="border border-gray-400 text-gray-500 px-2 rounded-full py-1 text-xs flex items-center">
+
+                                        <input class="bg-white rounded" type="checkbox" wire:model.defer="listaDePermisos" value="{{ $permission['id'] }}">
+
+                                        <p class="ml-2">{{ $permission['name'] }}</p>
+
+                                    </label>
+
+                                @endforeach
+
+                            </div>
+
+                            <hr>
+
+                        @endforeach
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <div class="flex gap-3">
+
+                <x-button-blue
+                    wire:click="asignar"
+                    wire:loading.attr="disabled"
+                    wire:target="asignar">
+
+                    <img wire:loading wire:target="asignar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    Asignar
+                </x-button-blue>
+
+                <x-button-red
+                    wire:click="resetearTodo"
+                    wire:loading.attr="disabled"
+                    wire:target="resetearTodo"
+                    type="button">
+                    Cerrar
+                </x-button-red>
+
+            </div>
+
+        </x-slot>
+
+    </x-dialog-modal>
 
 </div>

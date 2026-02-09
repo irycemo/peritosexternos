@@ -6,7 +6,6 @@ use App\Models\Role;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\Permission;
-use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use App\Constantes\Constantes;
 use Illuminate\Validation\Rule;
@@ -176,14 +175,35 @@ class Usuarios extends Component
 
         $this->validate();
 
-        if($this->revisarUsuariosUnicos()) return;
+        if(User::where('name', $this->modelo_editar->name)->first()){
 
+            $this->dispatch('mostrarMensaje', ['warning', "El usuario " . $this->modelo_editar->name . " ya esta registrado."]);
+
+            $this->resetearTodo();
+
+            return;
+
+        }
         try{
 
             DB::transaction(function () {
 
                 $this->modelo_editar->actualizado_por = auth()->user()->id;
                 $this->modelo_editar->save();
+
+                if($this->modelo_editar->wasChanged('email')){
+
+                    $this->modelo_editar->update(['password' => bcrypt('sistema')]);
+
+                    Mail::to($this->modelo_editar->email)->send(new RegistroUsuarioMail($this->modelo_editar));
+
+                    if(app()->isProduction()){
+
+                        event(new Registered($this->modelo_editar));
+
+                    }
+
+                }
 
                 $this->modelo_editar->roles()->sync($this->role);
 
@@ -231,11 +251,7 @@ class Usuarios extends Component
 
             $usuario->password = bcrypt('sistema');
 
-            if(app()->isProduction()){
-
-                Mail::to($usuario->email)->send(new RegistroUsuarioMail($usuario));
-
-            }
+            Mail::to($usuario->email)->send(new RegistroUsuarioMail($usuario));
 
             $usuario->save();
 
@@ -249,12 +265,6 @@ class Usuarios extends Component
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
         }
-
-    }
-
-    public function revisarUsuariosUnicos(){
-
-        $role = Role::find($this->role)->first();
 
     }
 
@@ -284,7 +294,8 @@ class Usuarios extends Component
                         ->where(function($q){
                             $q->where('name', 'LIKE', '%' . $this->search . '%')
                                 ->orWhere('clave', 'LIKE', '%' . $this->search . '%')
-                                ->orWhere('email', 'LIKE', '%' . $this->search . '%');
+                                ->orWhere('email', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('asociacion', 'LIKE', '%' . $this->search . '%');
                         })
                         ->when($this->filters['rol'], fn($q, $rol) => $q->whereHas('roles', function($q) use($rol){ $q->where('name', $rol); }))
                         ->orderBy($this->sort, $this->direction)
