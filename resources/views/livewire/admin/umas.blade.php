@@ -44,6 +44,8 @@
                 <x-table.heading sortable wire:click="sortBy('diario')" :direction="$sort === 'diario' ? $direction : null" >Diario</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('mensual')" :direction="$sort === 'mensual' ? $direction : null" >Mensual</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('anual')" :direction="$sort === 'anual' ? $direction : null" >Anual</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('minimo_urbano')" :direction="$sort === 'minimo_urbano' ? $direction : null" >M. Urbano</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('minimo_rustico')" :direction="$sort === 'minimo_rustico' ? $direction : null" >M. Rustico</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
                 <x-table.heading >Acciones</x-table.heading>
@@ -85,6 +87,22 @@
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Anual</span>
 
                             ${{ number_format($uma->anual, 2) }}
+
+                        </x-table.cell>
+
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">M. Urbano</span>
+
+                            ${{ number_format($uma->minimo_urbano, 2) }}
+
+                        </x-table.cell>
+
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">M. Rustico</span>
+
+                            ${{ number_format($uma->minimo_rustico, 2) }}
 
                         </x-table.cell>
 
