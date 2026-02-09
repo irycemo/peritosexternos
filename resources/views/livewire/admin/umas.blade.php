@@ -242,7 +242,7 @@
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
-                    <x-input-group for="modelo_editar.mensual" label="Mnsual" :error="$errors->first('modelo_editar.mensual')" class="w-full">
+                    <x-input-group for="modelo_editar.mensual" label="Mensual" :error="$errors->first('modelo_editar.mensual')" class="w-full">
 
                         <x-input-text type="number" id="modelo_editar.mensual" wire:model="modelo_editar.mensual" />
 
@@ -251,6 +251,22 @@
                     <x-input-group for="modelo_editar.anual" label="Anual" :error="$errors->first('modelo_editar.anual')" class="w-full">
 
                         <x-input-text type="number" id="modelo_editar.anual" wire:model="modelo_editar.anual" />
+
+                    </x-input-group>
+
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
+
+                    <x-input-group for="modelo_editar.minimo_urbano" label="M. urbano" :error="$errors->first('modelo_editar.minimo_urbano')" class="w-full">
+
+                        <x-input-text type="number" id="modelo_editar.minimo_urbano" wire:model="modelo_editar.mensual" />
+
+                    </x-input-group>
+
+                    <x-input-group for="modelo_editar.minimo_rustico" label="M. rustico" :error="$errors->first('modelo_editar.minimo_rustico')" class="w-full">
+
+                        <x-input-text type="number" id="modelo_editar.minimo_rustico" wire:model="modelo_editar.minimo_rustico" />
 
                     </x-input-group>
 
