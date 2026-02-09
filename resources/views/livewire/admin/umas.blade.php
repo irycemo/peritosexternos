@@ -260,7 +260,7 @@
 
                     <x-input-group for="modelo_editar.minimo_urbano" label="M. urbano" :error="$errors->first('modelo_editar.minimo_urbano')" class="w-full">
 
-                        <x-input-text type="number" id="modelo_editar.minimo_urbano" wire:model="modelo_editar.mensual" />
+                        <x-input-text type="number" id="modelo_editar.minimo_urbano" wire:model="modelo_editar.minimo_urbano" />
 
                     </x-input-group>
 
