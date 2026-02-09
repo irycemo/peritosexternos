@@ -27,10 +27,6 @@ return Application::configure(basePath: dirname(__DIR__))
             'refrendo_activo' => RefrendoActivoMiddleware::class,
         ]);
 
-        $middleware->trustProxies(
-            at: '*',
-        );
-
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
