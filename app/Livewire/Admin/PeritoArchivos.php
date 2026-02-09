@@ -9,7 +9,6 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\ValidationException;
 
 class PeritoArchivos extends Component
 {
@@ -50,19 +49,19 @@ class PeritoArchivos extends Component
 
                 }
 
-                if($this->ine_frente){
+                if($this->ine_reverso){
 
                     $this->procesarImagen($this->ine_reverso, 'ineReverso');
 
                 }
 
-                if($this->ine_frente){
+                if($this->cedula_profesional){
 
                     $this->procesarImagen($this->cedula_profesional, 'cedulaProfesional');
 
                 }
 
-                if($this->ine_frente){
+                if($this->cedula_especialidad){
 
                     $this->procesarImagen($this->cedula_especialidad, 'cedulaEspecialidad');
 
