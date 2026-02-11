@@ -88,20 +88,32 @@ class User extends Authenticatable implements Auditable, MustVerifyEmail
         return $this->morphMany(File::class, 'fileable');
     }
 
-    public function ineFrente(){
-        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'ineFrente');
+    public function actaNacimiento(){
+        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'actaNacimiento');
     }
 
-    public function ineReverso(){
-        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'ineReverso');
+    public function comprobanteRecidencia(){
+        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'comprobanteRecidencia');
     }
 
-    public function cedulaProfesional(){
-        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'cedulaProfesional');
+    public function curriculum(){
+        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'curriculum');
     }
 
     public function cedulaEspecialidad(){
         return $this->morphOne(File::class, 'fileable')->where('descripcion', 'cedulaEspecialidad');
+    }
+
+    public function fianza(){
+        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'fianza');
+    }
+
+    public function pagoCredencial(){
+        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'pagoCredencial');
+    }
+
+    public function registroAsociacion(){
+        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'registroAsociacion');
     }
 
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a877527f65e02ace4bfb9e44e51177d2",
+    "content-hash": "646309d8b4a317cf02063f3d83d4485b",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -1660,81 +1660,6 @@
                 }
             ],
             "time": "2025-08-22T14:27:06+00:00"
-        },
-        {
-            "name": "laravel-foundry/trusted-proxies",
-            "version": "v0.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel-foundry/trusted-proxies.git",
-                "reference": "ae7773052e926694fdcc1b6ecdc060d43cb99f35"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel-foundry/trusted-proxies/zipball/ae7773052e926694fdcc1b6ecdc060d43cb99f35",
-                "reference": "ae7773052e926694fdcc1b6ecdc060d43cb99f35",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/http": "^10.0 || ^11.0 || ^12.0",
-                "illuminate/support": "^10.0 || ^11.0 || ^12.0",
-                "php": ">=8.2"
-            },
-            "require-dev": {
-                "ergebnis/composer-normalize": "^2.48",
-                "laravel/pint": "^1.0",
-                "orchestra/testbench": "^8.0 || ^9.0 || ^10.0",
-                "phpunit/phpunit": "^10.0 || ^11.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "LaravelFoundry\\TrustedProxies\\Provider\\TrustedProxiesServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "LaravelFoundry\\TrustedProxies\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Frugan",
-                    "email": "dev@frugan.it",
-                    "homepage": "https://github.com/frugan-dev",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel trusted proxies configuration for applications behind CDNs, load balancers, or Docker networks. Supports Cloudflare, AWS CloudFront, Fastly, Docker Swarm, and custom proxies.",
-            "homepage": "https://github.com/laravel-foundry/trusted-proxies",
-            "keywords": [
-                "aws-cloudfront",
-                "cloudflare",
-                "docker",
-                "docker-swarm",
-                "fastly",
-                "laravel",
-                "proxy",
-                "trusted-proxies"
-            ],
-            "support": {
-                "docs": "https://github.com/laravel-foundry/trusted-proxies#readme",
-                "issues": "https://github.com/laravel-foundry/trusted-proxies/issues",
-                "source": "https://github.com/laravel-foundry/trusted-proxies"
-            },
-            "funding": [
-                {
-                    "url": "https://buymeacoff.ee/frugan",
-                    "type": "custom"
-                }
-            ],
-            "time": "2026-01-23T04:13:23+00:00"
         },
         {
             "name": "laravel/fortify",

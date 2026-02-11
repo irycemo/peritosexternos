@@ -15,17 +15,23 @@ class PeritoArchivos extends Component
 
     use WithFileUploads;
 
-    public $ine_frente;
-    public $ine_reverso;
-    public $cedula_profesional;
+    public $acta_nacimiento;
+    public $comprobante_recidencia;
+    public $curriculum;
     public $cedula_especialidad;
+    public $fianza;
+    public $pago_credencial;
+    public $registro_asociacion;
 
     protected function rules(){
         return [
-            'ine_frente' => ['nullable','image','max:2000'],
-            'ine_reverso' => ['nullable','image','max:2000'],
-            'cedula_profesional' => ['nullable','image','max:2000'],
-            'cedula_especialidad' => ['nullable','image','max:2000'],
+            'acta_nacimiento' => ['nullable','max:2000', 'mimes:pdf'],
+            'comprobante_recidencia' => ['nullable','max:2000', 'mimes:pdf'],
+            'curriculum' => ['nullable', 'max:2000', 'mimes:pdf'],
+            'cedula_especialidad' => ['nullable','max:2000', 'mimes:pdf'],
+            'fianza' => ['nullable','max:2000', 'mimes:pdf'],
+            'pago_credencial' => ['nullable','max:2000', 'mimes:pdf'],
+            'registro_asociacion' => ['nullable','max:2000', 'mimes:pdf'],
         ];
     }
 
@@ -43,27 +49,45 @@ class PeritoArchivos extends Component
 
             DB::transaction(function () {
 
-                if($this->ine_frente){
+                if($this->acta_nacimiento){
 
-                    $this->procesarImagen($this->ine_frente, 'ineFrente');
-
-                }
-
-                if($this->ine_reverso){
-
-                    $this->procesarImagen($this->ine_reverso, 'ineReverso');
+                    $this->procesarImagen($this->acta_nacimiento, 'actaNacimiento');
 
                 }
 
-                if($this->cedula_profesional){
+                if($this->comprobante_recidencia){
 
-                    $this->procesarImagen($this->cedula_profesional, 'cedulaProfesional');
+                    $this->procesarImagen($this->comprobante_recidencia, 'comprobanteRecidencia');
+
+                }
+
+                if($this->curriculum){
+
+                    $this->procesarImagen($this->curriculum, 'curriculum');
 
                 }
 
                 if($this->cedula_especialidad){
 
                     $this->procesarImagen($this->cedula_especialidad, 'cedulaEspecialidad');
+
+                }
+
+                if($this->fianza){
+
+                    $this->procesarImagen($this->fianza, 'fianza');
+
+                }
+
+                if($this->pago_credencial){
+
+                    $this->procesarImagen($this->pago_credencial, 'pagoCredencial');
+
+                }
+
+                if($this->registro_asociacion){
+
+                    $this->procesarImagen($this->registro_asociacion, 'registroAsociacion');
 
                 }
 
