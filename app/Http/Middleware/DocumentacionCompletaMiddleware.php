@@ -22,25 +22,49 @@ class DocumentacionCompletaMiddleware
 
         }
 
-        if(! auth()->user()->imagenes()->where('descripcion', 'ineFrente')->first()){
+        if(! auth()->user()->imagenes()->where('descripcion', 'actaNacimiento')->first()){
 
             abort(403, "No ha cargado la documentación completa, puede hacerlo en el área de perfil de usuario.");
 
         }
 
-        if(! auth()->user()->imagenes()->where('descripcion', 'ineReverso')->first()){
+        if(! auth()->user()->imagenes()->where('descripcion', 'comprobanteRecidencia')->first()){
 
             abort(403, "No ha cargado la documentación completa, puede hacerlo en el área de perfil de usuario.");
 
         }
 
-        if(! auth()->user()->imagenes()->where('descripcion', 'cedulaProfesional')->first()){
+        if(! auth()->user()->imagenes()->where('descripcion', 'curriculum')->first()){
 
             abort(403, "No ha cargado la documentación completa, puede hacerlo en el área de perfil de usuario.");
 
         }
 
         if(! auth()->user()->imagenes()->where('descripcion', 'cedulaEspecialidad')->first()){
+
+            abort(403, "No ha cargado la documentación completa, puede hacerlo en el área de perfil de usuario.");
+
+        }
+
+        if(! auth()->user()->imagenes()->where('descripcion', 'fianza')->first()){
+
+            abort(403, "No ha cargado la documentación completa, puede hacerlo en el área de perfil de usuario.");
+
+        }
+
+        if(! auth()->user()->imagenes()->where('descripcion', 'pagoCredencial')->first()){
+
+            abort(403, "No ha cargado la documentación completa, puede hacerlo en el área de perfil de usuario.");
+
+        }
+
+        if(! auth()->user()->imagenes()->where('descripcion', 'registroAsociacion')->first()){
+
+            abort(403, "No ha cargado la documentación completa, puede hacerlo en el área de perfil de usuario.");
+
+        }
+
+        if(! auth()->user()->imagenes()->where('descripcion', 'foto')->first()){
 
             abort(403, "No ha cargado la documentación completa, puede hacerlo en el área de perfil de usuario.");
 

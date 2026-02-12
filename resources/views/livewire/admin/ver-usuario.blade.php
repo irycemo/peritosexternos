@@ -43,7 +43,15 @@
 
         <div class="col-span-1 lg:col-span-3">
 
-            <img class="rounded-lg h-80 mx-auto" src="{{ $user->foto->getLink() }}" alt="Foto">
+            @if($user->foto)
+
+                <img class="rounded-lg h-80 mx-auto" src="{{ $user->foto->getLink() }}" alt="Foto">
+
+            @else
+
+                <img class="rounded-lg h-80 mx-auto" src="{{ asset('storage/img/unknown_user.png') }}" alt="Foto">
+
+            @endif
 
         </div>
 
