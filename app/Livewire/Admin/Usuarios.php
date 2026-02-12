@@ -42,7 +42,7 @@ class Usuarios extends Component
         return [
             'modelo_editar.name' => 'required',
             'modelo_editar.email' => 'required|email|unique:users,email,' . $this->modelo_editar->id,
-            'modelo_editar.status' => 'required|in:activo,inactivo',
+            'modelo_editar.status' => 'required|in:activo,inactivo,revision',
             'role' => 'required',
             'modelo_editar.clave' => Rule::requiredIf($this->role != 4),
             'modelo_editar.cedula' => Rule::requiredIf($this->role != 4),
@@ -175,15 +175,6 @@ class Usuarios extends Component
 
         $this->validate();
 
-        if(User::where('name', $this->modelo_editar->name)->first()){
-
-            $this->dispatch('mostrarMensaje', ['warning', "El usuario " . $this->modelo_editar->name . " ya esta registrado."]);
-
-            $this->resetearTodo();
-
-            return;
-
-        }
         try{
 
             DB::transaction(function () {

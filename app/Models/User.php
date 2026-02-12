@@ -40,6 +40,8 @@ class User extends Authenticatable implements Auditable, MustVerifyEmail
         'name',
         'email',
         'password',
+        'status',
+        'actualizado_por'
     ];
 
     /**
@@ -114,6 +116,10 @@ class User extends Authenticatable implements Auditable, MustVerifyEmail
 
     public function registroAsociacion(){
         return $this->morphOne(File::class, 'fileable')->where('descripcion', 'registroAsociacion');
+    }
+
+    public function foto(){
+        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'foto');
     }
 
 }

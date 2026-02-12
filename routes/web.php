@@ -17,6 +17,8 @@ use App\Livewire\Consultas\Preguntas\Preguntas;
 use App\Http\Controllers\VerificacionController;
 use App\Livewire\Consultas\Preguntas\NuevaPregunta;
 use App\Http\Controllers\Preguntas\PreguntasController;
+use App\Livewire\Admin\VerAvaluo;
+use App\Livewire\Admin\VerUsuario;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Livewire\Consultas\AcuerdosValor\AcuerdosValorConsulta;
 
@@ -24,8 +26,9 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-Route::group(['middleware' => ['auth', 'esta.activo', 'verified']], function(){
+Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
+    /* Administración */
     Route::get('dashboard', DashboardController::class)->name('dashboard');
 
     Route::get('roles', Roles::class)->middleware('can:Lista de roles')->name('roles');
@@ -34,9 +37,13 @@ Route::group(['middleware' => ['auth', 'esta.activo', 'verified']], function(){
 
     Route::get('usuarios', Usuarios::class)->middleware('can:Lista de usuarios')->name('usuarios');
 
+    Route::get('ver_usuario/{user}', VerUsuario::class)->middleware('can:Lista de usuarios')->name('ver_usuario');
+
     Route::get('auditoria', Auditoria::class)->middleware('can:Auditoria')->name('auditoria');
 
     Route::get('avaluos_admin', Avaluos::class)->middleware('can:Avaluos')->name('avaluos_admin');
+
+    Route::get('avaluo/{avaluo}', VerAvaluo::class)->middleware('can:Avaluos')->name('ver_avaluo');
 
     Route::get('acuerdos_valores', AcuerdoValor::class)->name('acuerdos_valores');
 
@@ -47,6 +54,7 @@ Route::group(['middleware' => ['auth', 'esta.activo', 'verified']], function(){
 
     Route::get('valuacion/{avaluo?}', ValuacionController::class)->middleware(['refrendo_activo', 'documentacion_completa'])->name('valuacion');
 
+    /* Consultas */
     Route::get('acuerdos_valores_consulta', AcuerdosValorConsulta::class)->name('acuerdos_valores_consulta');
 
     Route::get('preguntas_frecuentes', Preguntas::class)->name('preguntas_frecuentes');

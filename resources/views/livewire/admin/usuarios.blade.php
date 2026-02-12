@@ -120,6 +120,10 @@
 
                                 <span class="bg-green-400 py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($usuario->status) }}</span>
 
+                            @elseif($usuario->status == 'revision')
+
+                                <span class="bg-yellow-400 py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($usuario->status) }}</span>
+
                             @else
 
                                 <span class="bg-red-400 py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($usuario->status) }}</span>
@@ -175,6 +179,13 @@
                                 </div>
 
                                 <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+
+                                    <a
+                                        href="{{ route('ver_usuario', $usuario) }}"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        role="menuitem">
+                                        Ver usuario
+                                    </a>
 
                                     @can('Reestablecer contraseña')
 
@@ -343,8 +354,18 @@
                     <x-input-select id="modelo_editar.status" wire:model="modelo_editar.status" class="w-full">
 
                         <option value="">Seleccione una opción</option>
-                        <option value="activo">Activo</option>
-                        <option value="inactivo">Inactivo</option>
+
+                        @if(auth()->user()->hasRole('Administrador'))
+
+                            <option value="activo">Activo</option>
+                            <option value="inactivo">Inactivo</option>
+                            <option value="revision">Revisión</option>
+
+                        @else
+
+                            <option value="revision">Revisión</option>
+
+                        @endif
 
                     </x-input-select>
 

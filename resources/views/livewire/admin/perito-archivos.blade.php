@@ -9,52 +9,6 @@
 
     <x-slot name="form">
 
-        {{-- <div class="border border-gray-300 rounded-lg p-3 w-full col-span-6">
-
-            <div class="flex justify-between items-center">
-
-                <div>
-
-                    <input type="file" id="ine_frente" class="hidden" wire:model.live="ine_frente" x-ref="ine_frente" accept="application/pdf"/>
-
-                    <x-label for="ine_frente" value="INE Frente" />
-
-                    <x-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.ine_frente.click()">Seleccione el archivo</x-secondary-button>
-
-                </div>
-
-                <div>
-
-                    @if(in_array($ine_frente?->getClientOriginalExtension(), ['png', 'jpg', 'jpeg', 'gif']))
-
-                        <a href="{{ $ine_frente->temporaryUrl() }}" target="_blank">
-
-                            <img class="h-10 w-10 mx-auto my-3" src="{{ $ine_frente->temporaryUrl() ?? asset('storage/img/ico.png') }}" alt="Foto 3">
-
-                        </a>
-
-                    @else
-
-                        <a href="{{ auth()->user()->ineFrente?->getLink() ?? asset('storage/img/ico.png') }}" target="_blank">
-
-                            <img class="h-10 w-10 mx-auto my-3" src="{{ auth()->user()->ineFrente?->getLink() ?? asset('storage/img/ico.png') }}" alt="Foto 3">
-
-                        </a>
-
-                    @endif
-
-                </div>
-
-            </div>
-
-            <div>
-
-                @error('ine_frente') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-            </div>
-
-        </div> --}}
-
         <div class="border border-gray-300 rounded-lg p-3 w-full col-span-6">
 
             <div class="flex justify-between items-center">
@@ -426,16 +380,82 @@
 
         </div>
 
+        <div class="border border-gray-300 rounded-lg p-3 w-full col-span-6">
+
+            <div class="flex justify-between items-center">
+
+                <div>
+
+                    <input type="file" id="foto" class="hidden" wire:model.live="foto" x-ref="foto" accept="image"/>
+
+                    <div class="flex items-center gap-3">
+
+                        <x-label for="foto" value="Foto infantil" />
+
+                        <a href="{{ asset('storage/img/foto.png') }}" target="_blank">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                            </svg>
+
+                        </a>
+
+                    </div>
+
+                    <x-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.foto.click()">Seleccione el archivo</x-secondary-button>
+
+                </div>
+
+                <div>
+
+                    @if(in_array($foto?->getClientOriginalExtension(), ['png', 'jpg', 'jpeg', 'gif']))
+
+                        <a href="{{ $foto->temporaryUrl() }}" target="_blank">
+
+                            <img class="h-10 w-10 mx-auto my-3" src="{{ $foto->temporaryUrl() ?? asset('storage/img/ico.png') }}" alt="Foto 3">
+
+                        </a>
+
+                    @else
+
+                        <a href="{{ auth()->user()->foto?->getLink() ?? asset('storage/img/ico.png') }}" target="_blank">
+
+                            <img class="h-10 w-10 mx-auto my-3" src="{{ auth()->user()->foto?->getLink() ?? asset('storage/img/ico.png') }}" alt="Foto 3">
+
+                        </a>
+
+                    @endif
+
+                </div>
+
+            </div>
+
+            <small>Foto tamaño infantil con fondo blanco.</small>
+
+            <div>
+
+                @error('foto') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+            </div>
+
+        </div>
+
     </x-slot>
 
     <x-slot name="actions">
-        <x-action-message class="me-3" on="saved">
-            {{ __('Saved.') }}
-        </x-action-message>
 
-        <x-button wire:loading.attr="disabled" >
-            {{ __('Save') }}
-        </x-button>
+        @if(auth()->user()->status === 'revision')
+
+            <x-action-message class="me-3" on="saved">
+                {{ __('Saved.') }}
+            </x-action-message>
+
+            <x-button wire:loading.attr="disabled" >
+                {{ __('Save') }}
+            </x-button>
+
+        @endif
+
     </x-slot>
 
 </x-form-section>

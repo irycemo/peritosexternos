@@ -22,7 +22,6 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('cedula')->nullable();
-            $table->string('especialidad')->nullable();
             $table->string('asociacion')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');

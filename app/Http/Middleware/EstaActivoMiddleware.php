@@ -16,7 +16,7 @@ class EstaActivoMiddleware
     public function handle(Request $request, Closure $next): Response
     {
 
-        if(auth()->user()->status == 'inactivo'){
+        if(auth()->user()->status === 'inactivo'){
 
             if(auth()->user()){
 

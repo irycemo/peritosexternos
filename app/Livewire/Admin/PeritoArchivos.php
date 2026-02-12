@@ -22,6 +22,7 @@ class PeritoArchivos extends Component
     public $fianza;
     public $pago_credencial;
     public $registro_asociacion;
+    public $foto;
 
     protected function rules(){
         return [
@@ -32,6 +33,7 @@ class PeritoArchivos extends Component
             'fianza' => ['nullable','max:2000', 'mimes:pdf'],
             'pago_credencial' => ['nullable','max:2000', 'mimes:pdf'],
             'registro_asociacion' => ['nullable','max:2000', 'mimes:pdf'],
+            'foto' => ['nullable','max:2000', 'image'],
         ];
     }
 
@@ -88,6 +90,12 @@ class PeritoArchivos extends Component
                 if($this->registro_asociacion){
 
                     $this->procesarImagen($this->registro_asociacion, 'registroAsociacion');
+
+                }
+
+                if($this->foto){
+
+                    $this->procesarImagen($this->foto, 'foto');
 
                 }
 

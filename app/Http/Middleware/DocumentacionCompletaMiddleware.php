@@ -46,6 +46,12 @@ class DocumentacionCompletaMiddleware
 
         }
 
+        if(auth()->user()->status === 'revision'){
+
+            abort(403, "Tu cuenta esta en revisión, contacta al administrador.");
+
+        }
+
         return $next($request);
 
     }

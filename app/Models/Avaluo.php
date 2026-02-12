@@ -70,10 +70,6 @@ class Avaluo extends Model implements Auditable
         return $this->belongsTo(Predio::class, 'predio_id');
     }
 
-    public function asignadoA(){
-        return $this->belongsTo(User::class, 'asignado_a');
-    }
-
     public function imagenes(){
         return $this->morphMany(File::class, 'fileable');
     }
