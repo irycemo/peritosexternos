@@ -42,10 +42,18 @@ return [
         'consulta_cuenta_predial' => env('SGC_CONSULTA_CUENTA_PREDIAL'),
         'consulta_tramite_refrendo' => env('SGC_CONSULTA_TRAMITE_REFRENDO'),
         'crear_tramite_refrendo' => env('SGC_CREAR_TRAMITE_REFRENDO'),
+        'acreditar_pago' => env('SGC_ACREDITAR_PAGO'),
     ],
 
     'google' => [
         'maps_key' => env('GOOGLE_MAPS_API_KEY'),
+    ],
+
+    'sap' => [
+        'concepto' => env('SAP_CONCEPTO'),
+        'secret_key' => env('SAP_SECRET_KEY'),
+        'secret_iv' => env('SAP_SECRET_IV'),
+        'link_pago_linea' => env('SAP_PAGO_LINEA_URL'),
     ],
 
 ];

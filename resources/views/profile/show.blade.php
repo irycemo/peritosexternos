@@ -47,9 +47,13 @@
                     <x-section-border />
                 </div>
 
-                <div class="mt-10 sm:mt-0">
-                    @livewire('admin.perito-refrendo')
-                </div>
+                @if(auth()->user()->status === 'activo')
+
+                    <div class="mt-10 sm:mt-0">
+                        @livewire('admin.perito-refrendo')
+                    </div>
+
+                @endif
 
             </div>
         </div>

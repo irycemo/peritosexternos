@@ -2,6 +2,24 @@
 
 @section('content')
 
+    @if (isset($query['error']))
+
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg font-semibold relative text-center mb-6" role="alert">
+
+            <span class="block sm:inline">{{ $query['error'] }}</span>
+
+        </div>
+
+    @elseif (isset($query['success']))
+
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg font-semibold relative text-center mb-6" role="alert">
+
+            <span class="block sm:inline">{{ $query['success'] }}</span>
+
+        </div>
+
+    @endif
+
     <div class=" mb-10">
 
         <h2 class="text-2xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500  mb-6  bg-white">Estadísticas de avalúos</h2>

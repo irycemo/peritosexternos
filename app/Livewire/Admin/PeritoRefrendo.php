@@ -2,22 +2,35 @@
 
 namespace App\Livewire\Admin;
 
-use Livewire\Component;
-use App\Models\Refrendo;
 use App\Constantes\Constantes;
-use Livewire\Attributes\Computed;
+use App\Exceptions\GeneralException;
+use App\Mail\EnviarTramiteMail;
+use App\Models\Refrendo;
+use App\Services\SGCService\SGCService;
+use App\Traits\SapTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Exceptions\GeneralException;
-use App\Services\SGCService\SGCService;
+use Illuminate\Support\Facades\Mail;
+use Livewire\Attributes\Computed;
+use Livewire\Component;
 
 class PeritoRefrendo extends Component
 {
+
+    use SapTrait;
 
     public $años;
     public $año;
     public $folio;
     public $usuario;
+
+    public $pdf;
+
+    public $token;
+    public $linea_de_captura;
+    public $monto;
+    public $fecha_vencimiento;
+    public $link_pago_linea;
 
     protected function rules(){
         return [
@@ -77,11 +90,31 @@ class PeritoRefrendo extends Component
 
             DB::transaction(function () {
 
-                (new SGCService())->crearTramiteRefrendo(auth()->user()->name, auth()->user()->clave, auth()->user()->email);
+                $data = (new SGCService())->crearTramiteRefrendo(auth()->user()->name, auth()->user()->clave, auth()->user()->email);
+
+                $this->pdf = $data['pdf'];
+
+                $this->linea_de_captura = $data['data']['linea_de_captura'];
+                $this->monto = $data['data']['monto'];
+                $this->fecha_vencimiento = $data['data']['fecha_vencimiento'];
+
+                if($data['nuevo']){
+
+                    $titulo = 'Trámite de refrendo anual.';
+
+                    Mail::to(auth()->user()->email)->send(new EnviarTramiteMail($titulo, $data));
+
+                    $this->dispatch('mostrarMensaje', ['success', 'El trámite se creó con éxito, la información se envió a su correo electrónico.']);
+
+                }else{
+
+                    $this->dispatch('mostrarMensaje', ['warning', 'Ya tiene registrado un trámite de refrendo anual.']);
+
+                }
+
+                $this->token = $this->encrypt_decrypt("encrypt", $this->linea_de_captura . $this->monto . config('services.sap.concepto') . $this->fecha_vencimiento);
 
             });
-
-            $this->dispatch('mostrarMensaje', ['success', 'El trámite se creó con éxito, la información se envió a su correo electrónico.']);
 
         } catch (GeneralException $ex) {
 
@@ -111,11 +144,31 @@ class PeritoRefrendo extends Component
 
     }
 
+    public function descargarOrdenPago(){
+
+        try {
+
+            $pdf = base64_decode($this->pdf);
+
+            return response()->streamDownload(
+                fn () => print($pdf),
+                'refrendo.pdf'
+            );
+
+        } catch (\Throwable $th) {
+            Log::error("Error al descargar orden de pago de refrendo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+        }
+
+    }
+
     public function mount(){
 
         $this->años = Constantes::AÑOS;
 
         $this->año = now()->year;
+
+        $this->link_pago_linea = config('services.sap.link_pago_linea');
 
     }
 

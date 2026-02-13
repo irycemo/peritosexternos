@@ -43,6 +43,23 @@ class VerUsuario extends Component
 
     public function activarPerito(){
 
+        if(
+            ! $this->user->actaNacimiento ||
+            ! $this->user->comprobanteRecidencia ||
+            ! $this->user->curriculum ||
+            ! $this->user->cedulaEspecialidad ||
+            ! $this->user->fianza ||
+            ! $this->user->pagoCredencial ||
+            ! $this->user->registroAsociacion ||
+            ! $this->user->foto
+        ){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El perito no ha completado su documentación."]);
+
+            return;
+
+        }
+
         try {
 
             DB::transaction(function () {

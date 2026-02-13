@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\AcreditarPagoController;
 use App\Http\Controllers\Api\V1\AvaluoApiController;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -28,3 +29,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('conciliar_predio', [AvaluoApiController::class, 'conciliarPredio']);
 
 });
+
+Route::post('acreditar_pago', AcreditarPagoController::class)->name('acredita_pago');

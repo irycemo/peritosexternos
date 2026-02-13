@@ -31,13 +31,17 @@
 
                 <div x-data="{openRoles:true, openDistritos:true, openValores:true, openPredios:true}" class="mb-5">
 
-                    @if(auth()->user()->hasRole('Administrador'))
+                    @if(auth()->user()->hasRole(['Administrador', 'Coordinador']))
 
                         @include('layouts.sidebar-administrador')
 
                     @endif
 
-                    @include('layouts.sidebar-valuacion')
+                    @if(! auth()->user()->hasRole(['Coordinador']))
+
+                        @include('layouts.sidebar-valuacion')
+
+                    @endif
 
                     @include('layouts.sidebar-consultas')
 

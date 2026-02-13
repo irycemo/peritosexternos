@@ -44,10 +44,10 @@ class Usuarios extends Component
             'modelo_editar.email' => 'required|email|unique:users,email,' . $this->modelo_editar->id,
             'modelo_editar.status' => 'required|in:activo,inactivo,revision',
             'role' => 'required',
-            'modelo_editar.clave' => Rule::requiredIf($this->role != 4),
-            'modelo_editar.cedula' => Rule::requiredIf($this->role != 4),
-            'modelo_editar.especialidad' => Rule::requiredIf($this->role != 4),
-            'modelo_editar.asociacion' => Rule::requiredIf($this->role != 4),
+            'modelo_editar.clave' => Rule::requiredIf($this->role === 2),
+            'modelo_editar.cedula' => Rule::requiredIf($this->role === 2),
+            'modelo_editar.especialidad' => Rule::requiredIf($this->role === 2),
+            'modelo_editar.asociacion' => Rule::requiredIf($this->role === 2),
          ];
     }
 

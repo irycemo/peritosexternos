@@ -1,4 +1,4 @@
-<x-form-section submit="crearTramite">
+<x-section submit="crearTramite">
     <x-slot name="title">
         Refrendo
     </x-slot>
@@ -50,7 +50,7 @@
 
         </div>
 
-        <div class="mb-3  border border-gray-300 rounded-lg p-3 w-full col-span-6 overflow-auto">
+        <div class="mb-3  border border-gray-300 rounded-lg p-3 w-full col-span-6 overflow-auto space-y-4">
 
             <table class="w-full table-fixed">
 
@@ -84,13 +84,57 @@
 
         </div>
 
+        <div class="w-full col-span-6">
+
+            @if($pdf)
+
+                <div class="space-y-3">
+
+                    <x-button-red
+                        wire:click="descargarOrdenPago"
+                        wire:loading.attr="disabled"
+                        class="mx-auto">
+
+                        <img wire:loading wire:target="descargarOrdenPago" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                        Descargar orden de pago
+                    </x-button-red>
+
+                    <form action="{{ $link_pago_linea }}" method="post" class="w-full">
+
+                        <input type="hidden" name="concepto" value="{{ config('services.sap.concepto') }}">
+                        <input type="hidden" name="lcaptura" value="{{ $linea_de_captura }}">
+                        <input type="hidden" name="monto" value="{{ $monto }}">
+                        <input type="hidden" name="urlRetorno" value="{{ route('acredita_pago') }}">
+                        <input type="hidden" name="fecha_vencimiento" value="{{ $fecha_vencimiento }}">
+                        <input type="hidden" name="tkn" value="{{ $token }}">
+
+                        <x-button-blue
+                            wire:loading.attr="disabled"
+                            type="submit"
+                            class="mx-auto">
+
+                            <img wire:loading wire:target="pagarEnLinea" class="h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                            <p>Pagar en linea</p>
+
+                        </x-button-blue>
+
+                    </form>
+
+                </div>
+
+            @endif
+
+        </div>
+
     </x-slot>
 
     <x-slot name="actions">
 
-        <x-button wire:loading.attr="disabled" >
+        <x-button wire:click="crearTramite" wire:loading.attr="disabled" >
             Generar trámite de refrendo
         </x-button>
     </x-slot>
 
-</x-form-section>
+</x-section>
