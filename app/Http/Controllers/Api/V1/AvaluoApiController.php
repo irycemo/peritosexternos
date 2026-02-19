@@ -111,7 +111,7 @@ class AvaluoApiController extends Controller
 
     public function operarAvaluo(Request $request){
 
-        $validated = $request->validate(['id' => 'required|numeric|min:1']);
+        $validated = $request->validate(['id' => 'required|numeric|min:1', 'entidad' => 'required|string']);
 
         $avaluo = Avaluo::find($validated['id']);
 
@@ -125,7 +125,7 @@ class AvaluoApiController extends Controller
 
         try {
 
-            $avaluo->update(['estado' => 'operado']);
+            $avaluo->update(['estado' => 'operado', 'entidad' => $validated['entidad']]);
 
             return response()->json([
                 'data' => "Operación exitosa.",

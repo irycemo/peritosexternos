@@ -332,7 +332,7 @@ class MisAvaluos extends Component
     #[Computed]
     public function avaluos(){
 
-        return Avaluo::select('id', 'predio_id', 'año', 'folio', 'usuario', 'estado', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+        return Avaluo::select('id', 'predio_id', 'año', 'folio', 'usuario', 'estado', 'entidad', 'creado_por', 'actualizado_por', 'created_at', 'updated_at', 'solicitante')
                             ->with('predio.propietarios.persona', 'creadoPor:id,name', 'actualizadoPor:id,name', 'firmaElectronica:id,avaluo_id,uuid')
                             ->where('creado_por', auth()->id())
                             ->where('año', $this->filters['año'])

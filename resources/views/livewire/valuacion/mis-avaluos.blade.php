@@ -1,10 +1,10 @@
 <div class="">
 
-    <div class="mb-6">
+    <div class="mb-2 lg:mb-5">
 
         <x-header>Mis avaluos</x-header>
 
-        <div class="flex justify-between">
+        <div class="flex gap-3 overflow-auto p-1">
 
             <div class="flex gap-3">
 
@@ -66,6 +66,8 @@
                 <x-table.heading sortable wire:click="sortBy('estado')" :direction="$sort === 'estado' ? $direction : null" >Estado</x-table.heading>
                 <x-table.heading >Cuenta predial</x-table.heading>
                 <x-table.heading >Propietario</x-table.heading>
+                <x-table.heading >Solicitante</x-table.heading>
+                <x-table.heading >Entidad</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
                 <x-table.heading >Acciones</x-table.heading>
@@ -78,77 +80,65 @@
 
                     <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $avaluo->id }}">
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Año</span>
+                        <x-table.cell title="Año">
 
                             {{ $avaluo->año }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Folio</span>
+                        <x-table.cell  title="Folio">
 
                             {{ $avaluo->folio }}-{{ $avaluo->usuario }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Estado</span>
+                        <x-table.cell title="Estado">
 
                             <span class="bg-{{ $avaluo->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($avaluo->estado) }}</span>
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Cuenta predial</span>
+                        <x-table.cell title="Cuenta predial">
 
                             {{ $avaluo->predio->cuentaPredial() }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
+                        <x-table.cell title="Propietario">
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Propietario</span>
-
-                            <p class="mt-2">{{ $avaluo->predio->primerPropietario() }}</p>
+                            {{ $avaluo->predio->primerPropietario() }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
+                        <x-table.cell title="Solicitante">
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Registrado</span>
-
-                            <p class="mt-2">
-
-                                <span class="font-semibold">@if($avaluo->creadoPor != null)Registrado por: {{$avaluo->creadoPor->name}} @else Registro: @endif</span> <br>
-
-                                {{ $avaluo->created_at }}
-
-                            </p>
+                            {{ $avaluo->solicitante }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
+                        <x-table.cell  title="Entidad">
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Actualizado</span>
-
-                            <p class="mt-2">
-
-                                <span class="font-semibold">@if($avaluo->actualizadoPor != null)Actualizado por: {{$avaluo->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
-
-                                {{ $avaluo->updated_at }}
-
-                            </p>
+                            {{ $avaluo->entidad ?? 'N/A' }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
+                        <x-table.cell title="Registrado">
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Acciones</span>
+                            <span class="font-semibold">@if($avaluo->creadoPor != null)Registrado por: {{$avaluo->creadoPor->name}} @else Registro: @endif</span> <br>
+
+                            {{ $avaluo->created_at }}
+
+                        </x-table.cell>
+
+                        <x-table.cell title="Actualizado">
+
+                            <span class="font-semibold">@if($avaluo->actualizadoPor != null)Actualizado por: {{$avaluo->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
+
+                            {{ $avaluo->updated_at }}
+
+                        </x-table.cell>
+
+                        <x-table.cell title="Acciones">
 
                             <div class="ml-3 relative" x-data="{ open_drop_down:false }">
 

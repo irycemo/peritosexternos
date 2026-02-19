@@ -77,79 +77,59 @@
 
                     <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $audit->id }}">
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Usuario</span>
+                        <x-table.cell title="Usuario">
 
                             {{ $audit->user->name ?? 'N/A' }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
+                        <x-table.cell title="Evento">
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Evento</span>
+                            @if( $audit->event  == 'updated')
+                                Actualización
+                            @elseif($audit->event  == 'created' )
+                                Creado
+                            @elseif($audit->event  == 'deleted')
+                                Borrado
+                            @elseif($audit->event  == 'attach' || $audit->event  == 'sync')
+                                Relacionado
+                            @endif
 
-                            <p class="mt-2">
-
-                                @if( $audit->event  == 'updated')
-                                    Actualización
-                                @elseif($audit->event  == 'created' )
-                                    Creado
-                                @elseif($audit->event  == 'deleted')
-                                    Borrado
-                                @elseif($audit->event  == 'attach' || $audit->event  == 'sync')
-                                    Relacionado
-                                @endif
-
-                                : {{ $audit->tags }}
-
-                            </p>
+                            : {{ $audit->tags }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Modelo</span>
+                        <x-table.cell title="Modelo">
 
                             {{ Str::substr($audit->auditable_type, 11) }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">ID</span>
+                        <x-table.cell title="ID">
 
                             {{ $audit->auditable_id }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">IP</span>
+                        <x-table.cell title="IP">
 
                             {{ $audit->ip_address }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Registrado</span>
+                        <x-table.cell title="Registrado">
 
                             {{ $audit->created_at }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Actualizado</span>
+                        <x-table.cell title="Actualizado">
 
                             {{ $audit->updated_at }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Acciones</span>
+                        <x-table.cell title="Acciones">
 
                             <div class="flex justify-center lg:justify-start gap-2">
 

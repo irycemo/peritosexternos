@@ -127,7 +127,7 @@ class Avaluos extends Component
     #[Computed]
     public function avaluos(){
 
-        return Avaluo::select('id', 'predio_id', 'año', 'folio', 'usuario', 'estado', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+        return Avaluo::select('id', 'predio_id', 'año', 'folio', 'usuario', 'estado', 'entidad', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
                         ->with('predio.propietarios.persona', 'creadoPor:id,name', 'actualizadoPor:id,name', 'firmaElectronica:id,avaluo_id,uuid')
                         ->where('año', $this->filters['año'])
                         ->when(strlen($this->filters['estado']) > 0, function($q){
