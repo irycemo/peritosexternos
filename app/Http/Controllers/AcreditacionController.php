@@ -24,8 +24,6 @@ class AcreditacionController extends Controller
                                 $q->where('name', 'Director general');
                             })->first();
 
-        $object = (object)[];
-
         $datos_control = (object)[];
 
         $datos_control->perito_nombre = $user->name;
@@ -33,18 +31,16 @@ class AcreditacionController extends Controller
         $datos_control->perito_direccion = $user->direccion;
         $datos_control->impreso_en = now()->locale('es')->translatedFormat('l d \d\e F');
 
-        $object->datos_control = $datos_control;
-
         $fielDirector = Credential::openFiles(Storage::disk('efirmas')->path($director->efirma->cer),
                                                 Storage::disk('efirmas')->path($director->efirma->key),
                                                 $director->efirma->contraseña
                                             );
 
-        $firmaDirector = $fielDirector->sign(json_encode($object));
+        $firmaDirector = $fielDirector->sign(json_encode($datos_control));
 
         $firma_electronica = FirmaElectronica::create([
             'estado' => 'activo',
-            'cadena_original' => json_encode($object),
+            'cadena_original' => json_encode($datos_control),
             'cadena_encriptada' => base64_encode($firmaDirector),
             'user_id' => $user->id,
         ]);
