@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->string('estado');
-            $table->foreignId('avaluo_id')->constrained();
+            $table->foreignId('avaluo_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->mediumText('cadena_original');
             $table->text('cadena_encriptada')->nullable();
             $table->text('observaciones')->nullable();

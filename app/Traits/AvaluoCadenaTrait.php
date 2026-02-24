@@ -262,7 +262,7 @@ trait AvaluoCadenaTrait
 
                         if(app()->isProduction()){
 
-                            Storage::disk('s3')->delete($imagen->url);
+                            Storage::disk('s3')->delete(config('services.ses.ruta_caratulas') . $imagen->url);
 
                         }else{
 

@@ -17,6 +17,7 @@ use App\Livewire\Consultas\Preguntas\Preguntas;
 use App\Http\Controllers\VerificacionController;
 use App\Livewire\Consultas\Preguntas\NuevaPregunta;
 use App\Http\Controllers\Preguntas\PreguntasController;
+use App\Livewire\Admin\Efirmas;
 use App\Livewire\Admin\VerAvaluo;
 use App\Livewire\Admin\VerUsuario;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -36,6 +37,8 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('permisos', Permisos::class)->middleware('can:Lista de permisos')->name('permisos');
 
     Route::get('usuarios', Usuarios::class)->middleware('can:Lista de usuarios')->name('usuarios');
+
+    Route::get('efirmas', Efirmas::class)->middleware('can:Lista de usuarios')->name('efirmas');
 
     Route::get('ver_usuario/{user}', VerUsuario::class)->middleware('can:Lista de usuarios')->name('ver_usuario');
 

@@ -4,19 +4,21 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Efirma;
 use App\Models\File;
+use App\Models\FirmaElectronica;
 use App\Models\Pregunta;
 use App\Models\Refrendo;
 use App\Traits\ModelosTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Laravel\Sanctum\HasApiTokens;
-use Laravel\Jetstream\HasProfilePhoto;
-use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Notifications\Notifiable;
-use OwenIt\Auditing\Contracts\Auditable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Jetstream\HasProfilePhoto;
+use Laravel\Sanctum\HasApiTokens;
+use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements Auditable
 {
@@ -86,6 +88,10 @@ class User extends Authenticatable implements Auditable
         return $this->hasMany(Refrendo::class);
     }
 
+    public function refrendoActivo(){
+        return $this->refrendos()->where('año', now()->year)->where('estado', 'activo');
+    }
+
     public function imagenes(){
         return $this->morphMany(File::class, 'fileable');
     }
@@ -120,6 +126,14 @@ class User extends Authenticatable implements Auditable
 
     public function foto(){
         return $this->morphOne(File::class, 'fileable')->where('descripcion', 'foto');
+    }
+
+    public function acreditacion(){
+        return $this->hasOne(FirmaElectronica::class)->where('estado', 'activo');
+    }
+
+    public function efirma(){
+        return $this->hasOne(Efirma::class);
     }
 
 }

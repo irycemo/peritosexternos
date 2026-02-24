@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Models\Avaluo;
-use Illuminate\Support\Str;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class FirmaElectronica extends Model
 {
@@ -28,6 +29,10 @@ class FirmaElectronica extends Model
 
     public function avaluo(){
         return $this->belongsTo(Avaluo::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
 }

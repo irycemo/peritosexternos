@@ -24,6 +24,8 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
         'ruta_archivos' => 'peritos_externos/imagenes/',
+        'ruta_caratulas' => 'peritos_externos/caratulas/',
+        'ruta_acreditaciones' => 'peritos_externos/acreditaciones/',
     ],
 
     'resend' => [

@@ -45,9 +45,10 @@ class Usuarios extends Component
             'modelo_editar.status' => 'required|in:activo,inactivo,revision',
             'role' => 'required',
             'modelo_editar.clave' => Rule::requiredIf($this->role === 2),
-            'modelo_editar.cedula' => Rule::requiredIf($this->role === 2),
-            'modelo_editar.especialidad' => Rule::requiredIf($this->role === 2),
+            'modelo_editar.cedula' => 'nullable',
+            'modelo_editar.especialidad' => 'nullable',
             'modelo_editar.asociacion' => Rule::requiredIf($this->role === 2),
+            'modelo_editar.direccion' => Rule::requiredIf($this->role === 2),
          ];
     }
 

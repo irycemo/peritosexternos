@@ -68,6 +68,14 @@ return [
             'throw' => false,
         ],
 
+        'acreditaciones' => [
+            'driver' => 'local',
+            'root' => storage_path('app/acreditaciones'),
+            'url' => env('APP_URL').'/acreditaciones',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         'caratulas' => [
             'driver' => 'local',
             'root' => storage_path('app/caratulas'),
@@ -80,6 +88,14 @@ return [
             'driver' => 'local',
             'root' => storage_path('app/preguntas'),
             'url' => env('APP_URL').'/preguntas',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'efirmas' => [
+            'driver' => 'local',
+            'root' => storage_path('app/efirmas'),
+            'url' => env('APP_URL').'/efirmas',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -100,8 +116,10 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
         public_path('avaluos') => storage_path('app/avaluos'),
+        public_path('acreditaciones') => storage_path('app/acreditaciones'),
         public_path('caratulas') => storage_path('app/caratulas'),
         public_path('preguntas') => storage_path('app/preguntas'),
+        public_path('efirmas') => storage_path('app/efirmas'),
     ],
 
 ];

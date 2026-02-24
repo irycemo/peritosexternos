@@ -293,7 +293,7 @@
 
             <div class="flex flex-col md:flex-row justify-between gap-3 mb-3">
 
-                <x-input-group for="modelo_editar.cedula" label="Cédula profesional" :error="$errors->first('modelo_editar.cedula')" class="w-full">
+                {{-- <x-input-group for="modelo_editar.cedula" label="Cédula profesional" :error="$errors->first('modelo_editar.cedula')" class="w-full">
 
                     <x-input-text id="modelo_editar.cedula" wire:model="modelo_editar.cedula" />
 
@@ -303,7 +303,7 @@
 
                     <x-input-text id="modelo_editar.especialidad" wire:model="modelo_editar.especialidad" />
 
-                </x-input-group>
+                </x-input-group> --}}
 
                 <x-input-group for="modelo_editar.asociacion" label="Asociación" :error="$errors->first('modelo_editar.asociacion')" class="w-full">
 
@@ -359,6 +359,16 @@
                         @endforeach
 
                     </x-input-select>
+
+                </x-input-group>
+
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between gap-3 mb-3">
+
+                <x-input-group for="modelo_editar.direccion" label="Dirección" :error="$errors->first('modelo_editar.direccion')" class="w-full">
+
+                    <x-input-text id="modelo_editar.direccion" wire:model="modelo_editar.direccion" />
 
                 </x-input-group>
 

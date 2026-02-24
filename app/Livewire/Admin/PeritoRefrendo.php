@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Constantes\Constantes;
 use App\Exceptions\GeneralException;
+use App\Http\Controllers\AcreditacionController;
 use App\Mail\EnviarTramiteMail;
 use App\Models\Refrendo;
 use App\Services\SGCService\SGCService;
@@ -162,6 +163,34 @@ class PeritoRefrendo extends Component
 
     }
 
+    public function imprimirAcreditacion(){
+
+        try {
+
+            $acreditacion = auth()->user()->acreditacion;
+
+            if(! $acreditacion){
+
+                $pdf = (new AcreditacionController)->generarAcreditacion(auth()->user());
+
+            }else{
+
+                $pdf = (new AcreditacionController)->reimprimirAcreditacion($acreditacion);
+
+            }
+
+            return response()->streamDownload(
+                fn () => print($pdf->output()),
+                'acreditacion.pdf'
+            );
+
+        } catch (\Throwable $th) {
+            Log::error("Error al generar acreditación por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+        }
+
+    }
+
     public function mount(){
 
         $this->años = Constantes::AÑOS;
@@ -176,4 +205,5 @@ class PeritoRefrendo extends Component
     {
         return view('livewire.admin.perito-refrendo');
     }
+
 }

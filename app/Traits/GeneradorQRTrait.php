@@ -13,10 +13,10 @@ use Endroid\QrCode\Builder\Builder;
 trait GeneradorQRTrait
 {
 
-    public function generadorQr($ferima_electronica)
+    public function generadorQr($firma_electronica)
     {
 
-        $rute = route('verificacion', $ferima_electronica);
+        $rute = route('verificacion', $firma_electronica);
 
         $builder = new Builder(
             writer: new PngWriter(),

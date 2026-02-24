@@ -132,9 +132,20 @@
 
     <x-slot name="actions">
 
-        <x-button wire:click="crearTramite" wire:loading.attr="disabled" >
-            Generar trámite de refrendo
-        </x-button>
+        @if(! auth()->user()->refrendoActivo)
+
+            <x-button wire:click="crearTramite" wire:loading.attr="disabled" >
+                Generar trámite de refrendo
+            </x-button>
+
+        @else
+
+            <x-button wire:click="imprimirAcreditacion" wire:loading.attr="disabled" >
+                Imprimir certificación
+            </x-button>
+
+        @endif
+
     </x-slot>
 
 </x-section>
