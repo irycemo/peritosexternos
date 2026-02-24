@@ -132,7 +132,7 @@
 
     <x-slot name="actions">
 
-        @if(! auth()->user()->refrendoActivo)
+        @if(! auth()->user()->refrendoActivo->count())
 
             <x-button wire:click="crearTramite" wire:loading.attr="disabled" >
                 Generar trámite de refrendo
