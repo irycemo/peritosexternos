@@ -132,6 +132,10 @@ class User extends Authenticatable implements Auditable
         return $this->hasOne(FirmaElectronica::class)->where('estado', 'activo');
     }
 
+    public function acreditacionUrl(){
+        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'acreditacion');
+    }
+
     public function efirma(){
         return $this->hasOne(Efirma::class);
     }

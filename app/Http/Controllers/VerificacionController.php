@@ -18,14 +18,29 @@ class VerificacionController extends Controller
 
         }
 
-        if(app()->isProduction()){
+        if($firma_electronica->avaluo){
 
-            return redirect(Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_caratulas') . $firma_electronica->avaluo->caratula(), now()->addMinutes(10)));
+            if(app()->isProduction()){
 
+                return redirect(Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_caratulas') . $firma_electronica->avaluo->caratula(), now()->addMinutes(10)));
 
-        }else{
+            }else{
 
-            return redirect(Storage::disk('caratulas')->url($firma_electronica->avaluo->caratula()));
+                return redirect(Storage::disk('caratulas')->url($firma_electronica->avaluo->caratula()));
+
+            }
+
+        }elseif($firma_electronica->user){
+
+            if(app()->isProduction()){
+
+                return redirect(Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_acreditaciones') . $firma_electronica->user->acreditacionUrl->url, now()->addMinutes(10)));
+
+            }else{
+
+                return redirect(Storage::disk('acreditaciones')->url($firma_electronica->user->acreditacionUrl->url));
+
+            }
 
         }
 

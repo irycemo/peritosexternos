@@ -29,9 +29,19 @@
 
                             <h2 class="mt-6 text-xl font-semibold text-gray-900">Verificación de documento</h2>
 
-                            <p class="mt-4 text-gray-500 text-sm leading-relaxed">
-                                El Instituto Registral y Catastral verifica la siguiente información contenida en el avalúo: <strong>{{ $firma_electronica->avaluo->año }} - {{ $firma_electronica->avaluo->folio }} - {{ $firma_electronica->avaluo->usuario }}</strong>.
-                            </p>
+                            @if($firma_electronica->avaluo)
+
+                                <p class="mt-4 text-gray-500 text-sm leading-relaxed">
+                                    El Instituto Registral y Catastral verifica la siguiente información contenida en el avalúo: <strong>{{ $firma_electronica->avaluo->año }} - {{ $firma_electronica->avaluo->folio }} - {{ $firma_electronica->avaluo->usuario }}</strong>.
+                                </p>
+
+                            @elseif($firma_electronica->user)
+
+                                <p class="mt-4 text-gray-500 text-sm leading-relaxed">
+                                    El Instituto Registral y Catastral verifica la siguiente información contenida en la acreditación.
+                                </p>
+
+                            @endif
 
                         </div>
 
@@ -47,21 +57,43 @@
 
                 <div class="scale-100 p-6 bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 text-center space-y-3">
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
+                    @if($firma_electronica->avaluo)
 
-                        <strong>Cuenta predial</strong>
+                            <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                        <p class="text-gray-500 text-sm leading-relaxed">{{ $firma_electronica->avaluo->predio->cuentaPredial() }}</p>
+                                <strong>Cuenta predial</strong>
 
-                    </div>
+                                <p class="text-gray-500 text-sm leading-relaxed">{{ $firma_electronica->avaluo->predio->cuentaPredial() }}</p>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
+                            </div>
 
-                        <strong>Clave catastral</strong>
+                            <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                        <p class="text-gray-500 text-sm leading-relaxed">{{ $firma_electronica->avaluo->predio->claveCatastral() }}</p>
+                                <strong>Clave catastral</strong>
 
-                    </div>
+                                <p class="text-gray-500 text-sm leading-relaxed">{{ $firma_electronica->avaluo->predio->claveCatastral() }}</p>
+
+                            </div>
+
+                    @elseif($firma_electronica->user)
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <strong>Nombre del perito</strong>
+
+                            <p class="text-gray-500 text-sm leading-relaxed">{{ $firma_electronica->datos_control->perito_nombre }}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <strong>Clave del perito</strong>
+
+                            <p class="text-gray-500 text-sm leading-relaxed">{{ $firma_electronica->datos_control->perito_clave }}</p>
+
+                        </div>
+
+                    @endif
 
                     <div class="rounded-lg bg-gray-100 py-1 px-2 mt-3">
 
