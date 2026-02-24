@@ -14,7 +14,12 @@ class VerificacionController extends Controller
 
             $firma_electronica->load('avaluo.predio');
 
-            return view('verificacion', compact('firma_electronica'));
+            $datos_control = json_decode($firma_electronica->cadena_original);
+
+            return view('verificacion', [
+                'firma_electronica' => $firma_electronica,
+                'datos_control' => $datos_control
+            ]);
 
         }
 

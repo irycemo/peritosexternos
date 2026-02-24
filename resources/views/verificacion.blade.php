@@ -81,7 +81,7 @@
 
                             <strong>Nombre del perito</strong>
 
-                            <p class="text-gray-500 text-sm leading-relaxed">{{ $firma_electronica->datos_control->perito_nombre }}</p>
+                            <p class="text-gray-500 text-sm leading-relaxed">{{ $datos_control->perito_nombre }}</p>
 
                         </div>
 
@@ -89,7 +89,7 @@
 
                             <strong>Clave del perito</strong>
 
-                            <p class="text-gray-500 text-sm leading-relaxed">{{ $firma_electronica->datos_control->perito_clave }}</p>
+                            <p class="text-gray-500 text-sm leading-relaxed">{{ $datos_control->perito_clave }}</p>
 
                         </div>
 
