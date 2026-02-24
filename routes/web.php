@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
     Route::get('usuarios', Usuarios::class)->middleware('can:Lista de usuarios')->name('usuarios');
 
-    Route::get('efirmas', Efirmas::class)->middleware('can:Lista de usuarios')->name('efirmas');
+    Route::get('e_firmas', Efirmas::class)->middleware('can:Lista de usuarios')->name('e_firmas');
 
     Route::get('ver_usuario/{user}', VerUsuario::class)->middleware('can:Lista de usuarios')->name('ver_usuario');
 
