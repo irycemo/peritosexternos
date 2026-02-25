@@ -25,9 +25,9 @@ trait GeneradorQRTrait
             data: $rute,
             encoding: new Encoding('UTF-8'),
             errorCorrectionLevel: ErrorCorrectionLevel::High,
-            size: 100,
+            size: 150,
             margin: 0,
-            roundBlockSizeMode: RoundBlockSizeMode::Margin,
+            roundBlockSizeMode: RoundBlockSizeMode::None,
             labelText: 'Escanea para verificar',
             labelFont: new OpenSans(7),
             labelAlignment: LabelAlignment::Center
