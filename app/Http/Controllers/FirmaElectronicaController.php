@@ -194,6 +194,8 @@ class FirmaElectronicaController extends Controller
 
         }else{
 
+            info($nombre);
+
             file_put_contents("caratulas/" . $nombre . '.jpg', $combined);
 
         }
