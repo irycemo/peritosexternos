@@ -69,19 +69,22 @@ class FirmaElectronicaController extends Controller
         info($avaluo->microlocalizacion());
         info($avaluo->poligonoImagen());
 
+        $imageData = base64_encode(file_get_contents($avaluo->fachada()));
+        $src = 'data:image/png;base64,' . $imageData;
+
         $pdf = Pdf::setOptions(['isRemoteEnabled' => true])->loadView('avaluos.avaluo', [
             'datos_control' => $datos_control,
             'avaluo' => $object->avaluo,
             'predio' => $avaluo->predio,
             'qr' => $qr,
             'firma_electronica' => $firma_electronica,
-            'fachada' => $avaluo->fachada(),
-            'foto2' => $avaluo->foto2(),
-            'foto3' => $avaluo->foto3(),
-            'foto4' => $avaluo->foto4(),
-            'macrolocalizacion' => $avaluo->macrolocalizacion(),
-            'microlocalizacion' => $avaluo->microlocalizacion(),
-            'poligonoImagen' => $avaluo->poligonoImagen(),
+            'fachada' => $src,
+            'foto2' => null,
+            'foto3' => null,
+            'foto4' => null,
+            'macrolocalizacion' => null,
+            'microlocalizacion' => null,
+            'poligonoImagen' => null,
         ]);
 
         $pdf->render();
