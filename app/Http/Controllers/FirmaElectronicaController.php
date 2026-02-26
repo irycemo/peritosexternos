@@ -67,13 +67,13 @@ class FirmaElectronicaController extends Controller
             'predio' => $avaluo->predio,
             'qr' => $qr,
             'firma_electronica' => $firma_electronica,
-            'fachada' => $firma_electronica->avaluo->fachada(),
-            'foto2' => $firma_electronica->avaluo->foto2(),
-            'foto3' => $firma_electronica->avaluo->foto3(),
-            'foto4' => $firma_electronica->avaluo->foto4(),
-            'macrolocalizacion' => $firma_electronica->avaluo->macrolocalizacion(),
-            'microlocalizacion' => $firma_electronica->avaluo->microlocalizacion(),
-            'poligonoImagen' => $firma_electronica->avaluo->poligonoImagen(),
+            'fachada' => $avaluo->fachada(),
+            'foto2' => $avaluo->foto2(),
+            'foto3' => $avaluo->foto3(),
+            'foto4' => $avaluo->foto4(),
+            'macrolocalizacion' => $avaluo->macrolocalizacion(),
+            'microlocalizacion' => $avaluo->microlocalizacion(),
+            'poligonoImagen' => $avaluo->poligonoImagen(),
         ]);
 
         $pdf->render();
@@ -127,7 +127,7 @@ class FirmaElectronicaController extends Controller
 
     public function crearImagenConMarcaDeAgua($object, $qr, $firma_electronica){
 
-        $pdf = Pdf::loadView('avaluos.avaluo', [
+        $pdf = Pdf::setOptions(['isRemoteEnabled' => true])->loadView('avaluos.avaluo', [
             'datos_control' => $object->datos_control,
             'qr' => $qr,
             'predio' => $firma_electronica->avaluo->predio,
