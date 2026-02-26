@@ -69,7 +69,7 @@ class FirmaElectronicaController extends Controller
         info($avaluo->microlocalizacion());
         info($avaluo->poligonoImagen());
 
-        $pdf = Pdf::loadView('avaluos.avaluo', [
+        $pdf = Pdf::setOptions(['isRemoteEnabled' => true])->loadView('avaluos.avaluo', [
             'datos_control' => $datos_control,
             'avaluo' => $object->avaluo,
             'predio' => $avaluo->predio,
