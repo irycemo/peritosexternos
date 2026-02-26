@@ -59,7 +59,7 @@ class FirmaElectronicaController extends Controller
 
         $qr = $this->generadorQr($firma_electronica->uuid);
 
-        $this->crearImagenConMarcaDeAgua($object, $qr, $firma_electronica);
+        /* $this->crearImagenConMarcaDeAgua($object, $qr, $firma_electronica); */
 
         info($avaluo->fachada());
         info($avaluo->foto2());
@@ -69,22 +69,19 @@ class FirmaElectronicaController extends Controller
         info($avaluo->microlocalizacion());
         info($avaluo->poligonoImagen());
 
-        $imageData = base64_encode(file_get_contents($avaluo->fachada()));
-        $src = 'data:image/png;base64,' . $imageData;
-
         $pdf = Pdf::setOptions(['isRemoteEnabled' => true])->loadView('avaluos.avaluo', [
             'datos_control' => $datos_control,
             'avaluo' => $object->avaluo,
             'predio' => $avaluo->predio,
             'qr' => $qr,
             'firma_electronica' => $firma_electronica,
-            'fachada' => $src,
-            'foto2' => null,
-            'foto3' => null,
-            'foto4' => null,
-            'macrolocalizacion' => null,
-            'microlocalizacion' => null,
-            'poligonoImagen' => null,
+            'fachada' => $firma_electronica->avaluo->fachada(),
+            'foto2' => $firma_electronica->avaluo->foto2(),
+            'foto3' => $firma_electronica->avaluo->foto3(),
+            'foto4' => $firma_electronica->avaluo->foto4(),
+            'macrolocalizacion' => $firma_electronica->avaluo->macrolocalizacion(),
+            'microlocalizacion' => $firma_electronica->avaluo->microlocalizacion(),
+            'poligonoImagen' => $firma_electronica->avaluo->poligonoImagen(),
         ]);
 
         $pdf->render();

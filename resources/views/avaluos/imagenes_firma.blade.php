@@ -12,7 +12,7 @@
 
                             <p style="margin-bottom: 10px;">Fachada</p>
 
-                            <img class="imagenes" src="{{ $fachada }}" alt="Fachada">
+                            <img class="imagenes" src="{{ $imagenes->fachada() }}" alt="Fachada">
 
                         </div>
 
