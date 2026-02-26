@@ -59,15 +59,7 @@ class FirmaElectronicaController extends Controller
 
         $qr = $this->generadorQr($firma_electronica->uuid);
 
-        /* $this->crearImagenConMarcaDeAgua($object, $qr, $firma_electronica); */
-
-        info($avaluo->fachada());
-        info($avaluo->foto2());
-        info($avaluo->foto3());
-        info($avaluo->foto4());
-        info($avaluo->macrolocalizacion());
-        info($avaluo->microlocalizacion());
-        info($avaluo->poligonoImagen());
+        $this->crearImagenConMarcaDeAgua($object, $qr, $firma_electronica);
 
         $pdf = Pdf::setOptions(['isRemoteEnabled' => true])->loadView('avaluos.avaluo', [
             'datos_control' => $datos_control,
