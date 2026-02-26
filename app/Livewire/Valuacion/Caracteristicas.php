@@ -277,6 +277,8 @@ class Caracteristicas extends Component
 
         $this->avaluo = Avaluo::find($id);
 
+        $this->predio = $this->avaluo->predio;
+
         $this->cargarBloques($this->avaluo);
 
     }
@@ -408,9 +410,7 @@ class Caracteristicas extends Component
 
         if($this->avaluo_id){
 
-            $this->avaluo = Avaluo::with('predio')->find($this->avaluo_id);
-
-            $this->predio = $this->avaluo->predio;
+            $this->cargarAvaluo($this->avaluo_id);
 
         }else{
 
