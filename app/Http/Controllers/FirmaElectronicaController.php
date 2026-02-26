@@ -61,6 +61,14 @@ class FirmaElectronicaController extends Controller
 
         $this->crearImagenConMarcaDeAgua($object, $qr, $firma_electronica);
 
+        info($avaluo->fachada());
+        info($avaluo->foto2());
+        info($avaluo->foto3());
+        info($avaluo->foto4());
+        info($avaluo->macrolocalizacion());
+        info($avaluo->microlocalizacion());
+        info($avaluo->poligonoImagen());
+
         $pdf = Pdf::loadView('avaluos.avaluo', [
             'datos_control' => $datos_control,
             'avaluo' => $object->avaluo,
