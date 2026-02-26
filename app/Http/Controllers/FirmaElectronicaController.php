@@ -61,6 +61,8 @@ class FirmaElectronicaController extends Controller
 
         $this->crearImagenConMarcaDeAgua($object, $qr, $firma_electronica);
 
+        $pdf = null;
+
         $pdf = Pdf::setOptions(['isRemoteEnabled' => true])->loadView('avaluos.avaluo', [
             'datos_control' => $datos_control,
             'avaluo' => $object->avaluo,
@@ -193,8 +195,6 @@ class FirmaElectronicaController extends Controller
             Storage::disk('s3')->put(config('services.ses.ruta_caratulas') . $nombre . '.jpg', $combined);
 
         }else{
-
-            info($nombre);
 
             file_put_contents("caratulas/" . $nombre . '.jpg', $combined);
 
