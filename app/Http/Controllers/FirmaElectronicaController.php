@@ -129,6 +129,8 @@ class FirmaElectronicaController extends Controller
 
     public function crearImagenConMarcaDeAgua(FirmaElectronica $firma_electronica){
 
+        http_clear_last_response_headers();
+
         $object = json_decode($firma_electronica->cadena_original);
 
         $qr = $this->generadorQr($firma_electronica->uuid);
