@@ -17,6 +17,7 @@ use App\Exceptions\GeneralException;
 use App\Services\SGCService\SGCService;
 use App\Http\Controllers\AvaluoController;
 use App\Http\Controllers\FirmaElectronicaController;
+use App\Traits\GeneradorQRTrait;
 
 class MisAvaluos extends Component
 {
@@ -25,6 +26,7 @@ class MisAvaluos extends Component
     use WithPagination;
     use RevisarAvaluoTrait;
     use WithFileUploads;
+    use GeneradorQRTrait;
 
     public Avaluo $modelo_editar;
 
