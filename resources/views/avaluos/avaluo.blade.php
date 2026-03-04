@@ -255,7 +255,7 @@
 
                     <table style="margin-top: 20px">
 
-                        <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $datos_control->valuador }}</p>
+                        <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center">{{ $datos_control->valuador }}</p>
                         <p style="text-align: center;" >Valuador</p>
 
                     </table>

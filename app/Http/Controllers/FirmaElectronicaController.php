@@ -129,11 +129,34 @@ class FirmaElectronicaController extends Controller
 
     public function crearImagenConMarcaDeAgua(FirmaElectronica $firma_electronica){
 
-        $pdf = $this->reimprimirAvaluo($firma_electronica);
+        $object = json_decode($firma_electronica->cadena_original);
+
+        $qr = $this->generadorQr($firma_electronica->uuid);
+
+        $pdf = Pdf::setOptions(['isRemoteEnabled' => true])->loadView('avaluos.avaluo', [
+            'datos_control' => $object->datos_control,
+            'qr' => $qr,
+            'predio' => $firma_electronica->avaluo->predio,
+            'avaluo' => $object->avaluo,
+            'firma_electronica' => $firma_electronica,
+            'fachada' => $firma_electronica->avaluo->fachada(),
+            'foto2' => $firma_electronica->avaluo->foto2(),
+            'foto3' => $firma_electronica->avaluo->foto3(),
+            'foto4' => $firma_electronica->avaluo->foto4(),
+            'macrolocalizacion' => $firma_electronica->avaluo->macrolocalizacion(),
+            'microlocalizacion' => $firma_electronica->avaluo->microlocalizacion(),
+            'poligonoImagen' => $firma_electronica->avaluo->poligonoImagen(),
+        ]);
+
+        $pdf->render();
 
         $dom_pdf = $pdf->getDomPDF();
 
         $canvas = $dom_pdf->get_canvas();
+
+        $canvas->page_text(480, 745, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
+
+        $canvas->page_text(35, 745, $object->avaluo->año .'-' .$object->avaluo->folio . '-' . $object->avaluo->usuario, null, 9, array(1, 1, 1));
 
         $canvas->page_script(function ($pageNumber, $pageCount, $canvas, $fontMetrics) {
             $w = $canvas->get_width();
