@@ -86,7 +86,7 @@ class FirmaElectronicaController extends Controller
 
         $canvas->page_text(35, 745, 'Avalúo - ' . $avaluo->año .'-' . $avaluo->folio .'-' . $avaluo->usuario, null, 9, array(1, 1, 1));
 
-        /* $this->crearImagenConMarcaDeAgua($object, $qr, $firma_electronica); */
+        $this->crearImagenConMarcaDeAgua($firma_electronica);
 
         return $pdf;
 
@@ -135,7 +135,7 @@ class FirmaElectronicaController extends Controller
 
         $qr = $this->generadorQr($firma_electronica->uuid);
 
-        $pdf = Pdf::setOptions(['isRemoteEnabled' => false])->loadView('avaluos.avaluo', [
+        $pdf = Pdf::setOptions(['isRemoteEnabled' => true])->loadView('avaluos.avaluo', [
             'datos_control' => $object->datos_control,
             'qr' => $qr,
             'predio' => $firma_electronica->avaluo->predio,
