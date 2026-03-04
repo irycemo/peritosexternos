@@ -86,7 +86,7 @@ class FirmaElectronicaController extends Controller
 
         $canvas->page_text(35, 745, 'Avalúo - ' . $avaluo->año .'-' . $avaluo->folio .'-' . $avaluo->usuario, null, 9, array(1, 1, 1));
 
-        $this->crearImagenConMarcaDeAgua($object, $qr, $firma_electronica);
+        /* $this->crearImagenConMarcaDeAgua($object, $qr, $firma_electronica); */
 
         return $pdf;
 
