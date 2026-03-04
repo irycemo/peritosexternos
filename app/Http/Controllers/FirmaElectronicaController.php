@@ -135,13 +135,13 @@ class FirmaElectronicaController extends Controller
             'predio' => $firma_electronica->avaluo->predio,
             'avaluo' => $object->avaluo,
             'firma_electronica' => $firma_electronica,
-            'fachada' => $firma_electronica->avaluo->fachada(),
-            'foto2' => $firma_electronica->avaluo->foto2(),
-            'foto3' => $firma_electronica->avaluo->foto3(),
-            'foto4' => $firma_electronica->avaluo->foto4(),
-            'macrolocalizacion' => $firma_electronica->avaluo->macrolocalizacion(),
-            'microlocalizacion' => $firma_electronica->avaluo->microlocalizacion(),
-            'poligonoImagen' => $firma_electronica->avaluo->poligonoImagen(),
+            'fachada' => null,
+            'foto2' => null,
+            'foto3' => null,
+            'foto4' => null,
+            'macrolocalizacion' => null,
+            'microlocalizacion' => null,
+            'poligonoImagen' => null,
         ]);
 
         $pdf->render();
