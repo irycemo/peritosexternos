@@ -178,11 +178,7 @@ class MisAvaluos extends Component
 
                 $firma_electronica = $this->avaluo->firmaElectronica;
 
-                $object = json_decode($firma_electronica->cadena_original);
-
-                $qr = $this->generadorQr($firma_electronica->uuid);
-
-                (new FirmaElectronicaController())->crearImagenConMarcaDeAgua($object, $qr, $firma_electronica);
+                (new FirmaElectronicaController())->crearImagenConMarcaDeAgua($firma_electronica);
 
                 $this->avaluo->update(['estado' => 'concluido']);
 
