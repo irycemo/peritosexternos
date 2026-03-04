@@ -135,6 +135,8 @@ class FirmaElectronicaController extends Controller
 
         $qr = $this->generadorQr($firma_electronica->uuid);
 
+        info($firma_electronica->avaluo->fachada());
+
         $pdf = Pdf::setOptions(['isRemoteEnabled' => true])->loadView('avaluos.avaluo', [
             'datos_control' => $object->datos_control,
             'qr' => $qr,
