@@ -174,6 +174,14 @@ class MisAvaluos extends Component
 
                 $pdf = (new FirmaElectronicaController())->firmarElectronicamente($this->avaluo, $this->cer->getRealPath(), $this->key->getRealPath(), $this->contraseña);
 
+                $firma_electronica = $this->avaluo->firmaElectronica;
+
+                $object = json_decode($firma_electronica->cadena_original);
+
+                $qr = $this->generadorQr($firma_electronica->uuid);
+
+                (new FirmaElectronicaController())->crearImagenConMarcaDeAgua($object, $qr, $firma_electronica);
+
                 $this->avaluo->update(['estado' => 'concluido']);
 
             });
