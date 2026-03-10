@@ -109,7 +109,7 @@
                         <input type="hidden" name="fecha_vencimiento" value="{{ $fecha_vencimiento }}">
                         <input type="hidden" name="tkn" value="{{ $token }}">
 
-                        <x-button-blue
+                        {{-- <x-button-blue
                             wire:loading.attr="disabled"
                             type="submit"
                             class="mx-auto">
@@ -118,7 +118,7 @@
 
                             <p>Pagar en linea</p>
 
-                        </x-button-blue>
+                        </x-button-blue> --}}
 
                     </form>
 
