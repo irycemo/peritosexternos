@@ -1,27 +1,29 @@
 <?php
 
-use App\Livewire\Admin\Umas;
-use Illuminate\Http\Request;
-use App\Livewire\Admin\Roles;
-use App\Livewire\Admin\Avaluos;
-use App\Livewire\Admin\Permisos;
-use App\Livewire\Admin\Usuarios;
-use App\Livewire\Admin\Auditoria;
-use App\Livewire\Admin\AcuerdoValor;
-use Illuminate\Support\Facades\Route;
-use App\Livewire\Valuacion\MisAvaluos;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ValuacionController;
-use App\Http\Controllers\SetPasswordController;
-use App\Livewire\Consultas\Preguntas\Preguntas;
-use App\Http\Controllers\VerificacionController;
-use App\Livewire\Consultas\Preguntas\NuevaPregunta;
 use App\Http\Controllers\Preguntas\PreguntasController;
+use App\Http\Controllers\SetPasswordController;
+use App\Http\Controllers\ValuacionController;
+use App\Http\Controllers\VerificacionController;
+use App\Livewire\Admin\AcuerdoValor;
+use App\Livewire\Admin\Auditoria;
+use App\Livewire\Admin\Avaluos;
 use App\Livewire\Admin\Efirmas;
+use App\Livewire\Admin\Permisos;
+use App\Livewire\Admin\Roles;
+use App\Livewire\Admin\Umas;
+use App\Livewire\Admin\Usuarios;
+use App\Livewire\Admin\ValoresUnitariosConstruccion;
+use App\Livewire\Admin\ValoresUnitariosRusticos;
 use App\Livewire\Admin\VerAvaluo;
 use App\Livewire\Admin\VerUsuario;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Livewire\Consultas\AcuerdosValor\AcuerdosValorConsulta;
+use App\Livewire\Consultas\Preguntas\NuevaPregunta;
+use App\Livewire\Consultas\Preguntas\Preguntas;
+use App\Livewire\Valuacion\MisAvaluos;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect('login');
@@ -51,6 +53,10 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('acuerdos_valores', AcuerdoValor::class)->name('acuerdos_valores');
 
     Route::get('umas', Umas::class)->middleware('can:Umas')->name('umas');
+
+    Route::get('valores_unitarios_construccion', ValoresUnitariosConstruccion::class)->middleware('permission:Lista de valores unitarios')->name('unitarios_construccion');
+
+    Route::get('valores_unitarios_rusticos', ValoresUnitariosRusticos::class)->middleware('permission:Lista de valores unitarios')->name('unitarios_rusticos');
 
     /* Valuación */
     Route::get('mis_avaluos', MisAvaluos::class)->middleware('can:Mis avaluos')->name('mis_avaluos');

@@ -9,7 +9,7 @@ class Constantes{
         'Permisos',
         'Usuarios',
         'Avalúos',
-        'Umas',
+        'Valores',
         'Consultas',
         'Acuerdos',
         'Valuación',
