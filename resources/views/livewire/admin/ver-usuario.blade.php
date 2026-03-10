@@ -18,14 +18,18 @@
 
         <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
-            <button
-                wire:click="activarPerito"
-                wire:loading.attr="disabled"
-                wire:confirm="¿Esta seguro que desea activar al perito?"
-                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                role="menuitem">
-                Autorizar perito
-            </button>
+            @can('Autorizar perito')
+
+                <button
+                    wire:click="activarPerito"
+                    wire:loading.attr="disabled"
+                    wire:confirm="¿Esta seguro que desea activar al perito?"
+                    class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                    role="menuitem">
+                    Autorizar perito
+                </button>
+
+            @endcan
 
             <button
                 wire:click="$toggle('modal_rechazar')"
