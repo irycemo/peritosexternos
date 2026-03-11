@@ -68,6 +68,28 @@ class ValoresUnitariosConstruccion extends Component
 
     }
 
+    public function borrar(){
+
+        try{
+
+            $valor = ValorUnitarioConstruccion::find($this->selected_id);
+
+            $valor->delete();
+
+            $this->resetearTodo($borrado = true);
+
+            $this->dispatch('mostrarMensaje', ['success', "El valor se eliminó con éxito."]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al borrar valor unitario de construcción por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+            $this->resetearTodo();
+
+        }
+
+    }
+
     #[Computed]
     public function valores(){
 

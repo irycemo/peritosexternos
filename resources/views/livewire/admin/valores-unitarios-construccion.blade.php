@@ -112,6 +112,15 @@
                                         Editar
                                     </button>
 
+                                    <button
+                                        wire:click="abrirModalBorrar({{ $valor->id }})"
+                                        wire:target="abrirModalBorrar({{ $valor->id }})"
+                                        wire:loading.attr="disabled"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        role="menuitem">
+                                        Borrar
+                                    </button>
+
                                 </div>
 
                             </div>
@@ -233,5 +242,37 @@
         </x-slot>
 
     </x-dialog-modal>
+
+    <x-confirmation-modal wire:model="modalBorrar" maxWidth="sm">
+
+        <x-slot name="title">
+            Eliminar valor
+        </x-slot>
+
+        <x-slot name="content">
+            ¿Esta seguro que desea eliminar el valor? No sera posible recuperar la información.
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <x-secondary-button
+                wire:click="$toggle('modalBorrar')"
+                wire:loading.attr="disabled"
+            >
+                No
+            </x-secondary-button>
+
+            <x-danger-button
+                class="ml-2"
+                wire:click="borrar"
+                wire:loading.attr="disabled"
+                wire:target="borrar"
+            >
+                Borrar
+            </x-danger-button>
+
+        </x-slot>
+
+    </x-confirmation-modal>
 
 </div>
