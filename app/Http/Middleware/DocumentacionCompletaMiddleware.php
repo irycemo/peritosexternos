@@ -52,11 +52,11 @@ class DocumentacionCompletaMiddleware
 
         }
 
-        if(! auth()->user()->imagenes()->where('descripcion', 'pagoCredencial')->first()){
+        /* if(! auth()->user()->imagenes()->where('descripcion', 'pagoCredencial')->first()){
 
             abort(403, "No ha cargado la documentación completa, puede hacerlo en el área de perfil de usuario.");
 
-        }
+        } */
 
         if(! auth()->user()->imagenes()->where('descripcion', 'registroAsociacion')->first()){
 

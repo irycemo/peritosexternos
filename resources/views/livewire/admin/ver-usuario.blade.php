@@ -232,7 +232,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 flex justify-between items-center">
+                {{-- <div class="rounded-lg bg-gray-100 py-1 px-2 flex justify-between items-center">
 
                     <strong>Pago de renovación de credencial</strong>
 
@@ -255,7 +255,7 @@
 
                     @endif
 
-                </div>
+                </div> --}}
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2 flex justify-between items-center">
 

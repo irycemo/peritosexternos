@@ -274,7 +274,7 @@
 
         </div>
 
-        <div class="border border-gray-300 rounded-lg p-3 w-full col-span-6">
+       {{--  <div class="border border-gray-300 rounded-lg p-3 w-full col-span-6">
 
             <div class="flex justify-between items-center">
 
@@ -325,7 +325,7 @@
 
             </div>
 
-        </div>
+        </div> --}}
 
         <div class="border border-gray-300 rounded-lg p-3 w-full col-span-6">
 

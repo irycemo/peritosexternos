@@ -49,7 +49,6 @@ class VerUsuario extends Component
             ! $this->user->curriculum ||
             ! $this->user->cedulaEspecialidad ||
             ! $this->user->fianza ||
-            ! $this->user->pagoCredencial ||
             ! $this->user->registroAsociacion ||
             ! $this->user->foto
         ){
