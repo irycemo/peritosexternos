@@ -285,7 +285,7 @@
 
                 <x-input-group for="modelo_editar.clave" label="Clave del perito" :error="$errors->first('modelo_editar.clave')" class="w-full">
 
-                    <x-input-text id="modelo_editar.clave" wire:model="modelo_editar.clave" />
+                    <x-input-text type="number" id="modelo_editar.clave" wire:model="modelo_editar.clave" />
 
                 </x-input-group>
 

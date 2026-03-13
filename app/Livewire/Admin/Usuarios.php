@@ -42,6 +42,7 @@ class Usuarios extends Component
         return [
             'modelo_editar.name' => 'required',
             'modelo_editar.email' => 'required|email|unique:users,email,' . $this->modelo_editar->id,
+            'modelo_editar.clave' => 'required|numeric|unique:users,clave,' . $this->modelo_editar->id,
             'modelo_editar.status' => 'required|in:activo,inactivo,revision',
             'role' => 'required',
             'modelo_editar.clave' => Rule::requiredIf($this->role === 2),
@@ -143,7 +144,7 @@ class Usuarios extends Component
 
                 $this->modelo_editar->password = bcrypt('sistema');
                 $this->modelo_editar->creado_por = auth()->id();
-                $this->modelo_editar->clave = User::max('clave') + 1;
+                /* $this->modelo_editar->clave = User::max('clave') + 1; */
                 $this->modelo_editar->save();
 
                 $this->modelo_editar->roles()->attach($this->role);
