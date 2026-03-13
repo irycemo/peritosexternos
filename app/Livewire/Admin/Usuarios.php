@@ -42,10 +42,9 @@ class Usuarios extends Component
         return [
             'modelo_editar.name' => 'required',
             'modelo_editar.email' => 'required|email|unique:users,email,' . $this->modelo_editar->id,
-            'modelo_editar.clave' => 'required|numeric|unique:users,clave,' . $this->modelo_editar->id,
+            'modelo_editar.clave' => [Rule::requiredIf($this->role === 2), 'numeric', 'unique:users,clave,' . $this->modelo_editar->id,],
             'modelo_editar.status' => 'required|in:activo,inactivo,revision',
             'role' => 'required',
-            'modelo_editar.clave' => Rule::requiredIf($this->role === 2),
             'modelo_editar.cedula' => 'nullable',
             'modelo_editar.asociacion' => Rule::requiredIf($this->role === 2),
             'modelo_editar.direccion' => Rule::requiredIf($this->role === 2),
