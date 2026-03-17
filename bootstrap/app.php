@@ -24,7 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'role'=> RoleMiddleware::class,
             'permission' => PermissionMiddleware::class,
             'documentacion_completa' => DocumentacionCompletaMiddleware::class,
-            'refrendo_activo' => RefrendoActivoMiddleware::class,
+            /* 'refrendo_activo' => RefrendoActivoMiddleware::class, */
         ]);
 
     })
