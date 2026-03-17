@@ -98,6 +98,12 @@ class SGCService{
                                 ]
                             );
 
+                            info(config('services.sgc.token'));
+
+                            info(config('services.sgc.crear_tramite_refrendo'));
+
+                            info($response);
+
         if($response->status() !== 200){
 
             Log::error("Error al crear trámite de refrendo. " . $response);
