@@ -1,10 +1,14 @@
 <?php
 
 use App\Models\FactorIncremento;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schedule;
+use Illuminate\Support\Facades\Schema;
+
+Schedule::command('backup:clean')->daily()->at('01:00');
+Schedule::command('backup:run')->daily()->at('01:30');
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
