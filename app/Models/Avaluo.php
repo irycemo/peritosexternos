@@ -92,7 +92,7 @@ class Avaluo extends Model implements Auditable
         $fachada = $this->imagenes()->where('descripcion', 'fachada')->first();
 
         return $fachada
-            ? Storage::disk('avaluos')->url($fachada->url)
+            ? $fachada->getLink()
             : Storage::disk('public')->url('img/escudo_guinda.png');
 
     }
@@ -102,7 +102,7 @@ class Avaluo extends Model implements Auditable
         $foto2 = $this->imagenes()->where('descripcion', 'foto2')->first();
 
         return $foto2
-            ? Storage::disk('avaluos')->url($foto2->url)
+            ? $foto2->getLink()
             : Storage::disk('public')->url('img/logo.png');
 
     }
@@ -112,7 +112,7 @@ class Avaluo extends Model implements Auditable
         $foto3 = $this->imagenes()->where('descripcion', 'foto3')->first();
 
         return $foto3
-            ? Storage::disk('avaluos')->url($foto3->url)
+            ? $foto3->getLink()
             : Storage::disk('public')->url('img/logo.png');
 
     }
@@ -122,7 +122,7 @@ class Avaluo extends Model implements Auditable
         $foto4 = $this->imagenes()->where('descripcion', 'foto4')->first();
 
         return $foto4
-            ? Storage::disk('avaluos')->url($foto4->url)
+            ? $foto4->getLink()
             : Storage::disk('public')->url('img/logo.png');
 
     }
@@ -132,7 +132,7 @@ class Avaluo extends Model implements Auditable
         $macrolocalizacion = $this->imagenes()->where('descripcion', 'macrolocalizacion')->first();
 
         return $macrolocalizacion
-                ? Storage::disk('avaluos')->url($macrolocalizacion->url)
+                ? $macrolocalizacion->getLink()
                 : Storage::disk('public')->url('img/logo.png');
 
     }
@@ -142,7 +142,7 @@ class Avaluo extends Model implements Auditable
         $microlocalizacion = $this->imagenes()->where('descripcion', 'microlocalizacion')->first();
 
         return $microlocalizacion
-                ? Storage::disk('avaluos')->url($microlocalizacion->url)
+                ? $microlocalizacion->getLink()
                 : Storage::disk('public')->url('img/logo.png');
 
     }
