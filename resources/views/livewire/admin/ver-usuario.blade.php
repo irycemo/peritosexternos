@@ -134,7 +134,7 @@
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2 flex justify-between items-center">
 
-                    <strong>Comprobante de recidencia</strong>
+                    <strong>Comprobante de residencia</strong>
 
                     @if($user->comprobanteRecidencia)
 

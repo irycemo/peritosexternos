@@ -70,7 +70,7 @@
 
                     <input type="file" id="comprobante_recidencia" class="hidden" wire:model.live="comprobante_recidencia" x-ref="comprobante_recidencia" accept="application/pdf"/>
 
-                    <x-label for="comprobante_recidencia" value="Comprobante de recidencia" />
+                    <x-label for="comprobante_recidencia" value="Comprobante de residencia" />
 
                     <x-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.comprobante_recidencia.click()">Seleccione el archivo</x-secondary-button>
 

@@ -16,11 +16,11 @@
 
                 <div class="space-y-1">
 
-                    <input placeholder="X" type="text" class="bg-white rounded text-xs w-40 @error('predio.xutm') border-red-500 @enderror" wire:model.blur="predio.xutm">
+                    <input placeholder="X" type="text" class="bg-white rounded text-xs w-40 @error('predio.xutm') border-red-500 @enderror" wire:model.lazy="predio.xutm">
 
-                    <input placeholder="Y" type="text" class="bg-white rounded text-xs w-40 @error('predio.yutm') border-red-500 @enderror" wire:model.blur="predio.yutm">
+                    <input placeholder="Y" type="text" class="bg-white rounded text-xs w-40 @error('predio.yutm') border-red-500 @enderror" wire:model.lazy="predio.yutm">
 
-                    <select class="bg-white rounded text-xs" wire:model.blur="predio.zutm">
+                    <select class="bg-white rounded text-xs" wire:model.lazy="predio.zutm">
 
                         <option value="" selected>Z</option>
                         <option value="13" selected>13</option>
@@ -48,9 +48,9 @@
 
                 <div class="space-y-1">
 
-                    <input placeholder="Lat" type="number" class="bg-white rounded text-xs w-40 @error('predio.lat') border-red-500 @enderror" wire:model.blur="predio.lat">
+                    <input placeholder="Lat" type="number" class="bg-white rounded text-xs w-40 @error('predio.lat') border-red-500 @enderror" wire:model.lazy="predio.lat">
 
-                    <input placeholder="Lon" type="number" class="bg-white rounded text-xs w-40 @error('predio.lon') border-red-500 @enderror" wire:model.blur="predio.lon">
+                    <input placeholder="Lon" type="number" class="bg-white rounded text-xs w-40 @error('predio.lon') border-red-500 @enderror" wire:model.lazy="predio.lon">
 
                 </div>
 

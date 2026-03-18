@@ -215,7 +215,7 @@
 
                     <x-table.row>
 
-                        <x-table.cell colspan="9">
+                        <x-table.cell colspan="10">
 
                             <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
 
@@ -235,7 +235,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="9" class="bg-gray-50">
+                    <x-table.cell colspan="10" class="bg-gray-50">
 
                         {{ $this->avaluos->links()}}
 

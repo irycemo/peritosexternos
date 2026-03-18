@@ -42,8 +42,8 @@ trait CoordenadasTrait
 
             }else{
 
-                $this->predio->lat = $ll['attr']['lat'];
-                $this->predio->lon = $ll['attr']['lon'];
+                $this->predio->lat = strval($ll['attr']['lat']);
+                $this->predio->lon = strval($ll['attr']['lon']);
 
             }
 
