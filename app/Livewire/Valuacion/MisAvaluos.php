@@ -331,6 +331,34 @@ class MisAvaluos extends Component
 
     }
 
+    public function borrarAvaluo(Avaluo $avaluo){
+
+        try {
+
+            $avaluo->bloques()->delete();
+
+            $avaluo->firmaElectronica()->delete();
+
+            foreach($avaluo->imagenes as $imagen){
+
+
+
+            }
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al crear avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+    }
+
     #[Computed]
     public function avaluos(){
 
@@ -381,5 +409,6 @@ class MisAvaluos extends Component
     {
         return view('livewire.valuacion.mis-avaluos')->extends('layouts.admin');
     }
+
 }
 

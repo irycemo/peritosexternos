@@ -2,9 +2,15 @@
 
 <p class="parrafo">
 
+    <strong>Folio:</strong> {{ $avaluo->año }}-{{ $avaluo->folio }}-{{ $avaluo->usuario }};
+
     <strong>Cuenta predial:</strong> {{ $avaluo->predio->cuenta_predial }};
 
     <strong>Clave catastral:</strong> {{ $avaluo->predio->clave_catastral }};
+
+</p>
+
+<p class="parrafo">
 
     @if ($avaluo->predio->codigo_postal)
         <strong>CÓDIGO POSTAL:</strong> {{ $avaluo->predio->codigo_postal }};

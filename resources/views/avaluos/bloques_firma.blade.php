@@ -61,156 +61,42 @@
 
     <p style="text-align: center; margin-top: 20px;"><strong>Obra negra</strong></p>
 
-    <table class="no-break">
+    <p class="parrafo">
 
-        <thead>
+        <strong>Cimentación:</strong> {{ $bloque->cimentacion }};
+        <strong>Estructura:</strong> {{ $bloque->estructura }};
+        <strong>Muros:</strong> {{ $bloque->muros }};
+        <strong>Entrepisos:</strong> {{ $bloque->entrepiso }};
+        <strong>Techo:</strong> {{ $bloque->techo }};
 
-            <tr>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Cimentación</th>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Estructura</th>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Muros</th>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Entrepisos</th>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Techo</th>
-            </tr>
-
-        </thead>
-
-        <tbody style="border-right: 1px solid black;">
-
-            <tr>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->cimentacion }}</p>
-                </td>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->estructura }}</p>
-                </td>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->muros }}</p>
-                </td>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->entrepiso }}</p>
-                </td>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->techo }}</p>
-                </td>
-            </tr>
-
-        </tbody>
-
-    </table>
+    </p>
 
     <p style="text-align: center; margin-top: 20px;"><strong>Acabados</strong></p>
 
-    <table class="no-break">
+    <p class="parrafo">
 
-        <thead>
+        <strong>Plafones:</strong> {{ $bloque->plafones }};
+        <strong>Vidriería:</strong> {{ $bloque->vidrieria }};
+        <strong>Lambrines:</strong> {{ $bloque->lambrines }};
+        <strong>Pisos:</strong> {{ $bloque->pisos }};
+        <strong>Herrería:</strong> {{ $bloque->herreria }};
+        <strong>Pintura:</strong> {{ $bloque->pintura }};
+        <strong>Carpintería:</strong> {{ $bloque->carpinteria }};
+        <strong>Aplanados:</strong> {{ $bloque->aplanados }};
+        <strong>PiRecubrimientoos:</strong> {{ $bloque->recubrimiento_especial }};
 
-            <tr>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Plafones</th>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Vidriería</th>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Lambrines</th>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Pisos</th>
-            </tr>
-
-        </thead>
-
-        <tbody>
-
-            <tr>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->plafones }}</p>
-                </td>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->vidrieria }}</p>
-                </td>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->lambrines }}</p>
-                </td>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->pisos }}</p>
-                </td>
-            </tr>
-
-        </tbody>
-
-    </table>
-
-    <table class="no-break">
-
-        <thead>
-
-            <tr>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Herrería</th>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Pintura</th>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Carpintería</th>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Aplanados</th>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Recubrimiento especial</th>
-            </tr>
-
-        </thead>
-
-        <tbody>
-
-            <tr>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->herreria }}</p>
-                </td>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->pintura }}</p>
-                </td>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->carpinteria }}</p>
-                </td>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->aplanados }}</p>
-                </td>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->recubrimiento_especial }}</p>
-                </td>
-            </tr>
-
-        </tbody>
-
-    </table>
+    </p>
 
     <p style="text-align: center; margin-top: 20px;"><strong>Instalaciones</strong></p>
 
-    <table class="no-break">
+    <p class="parrafo">
 
-        <thead>
+        <strong>Hidráulica:</strong> {{ $bloque->hidraulica }};
+        <strong>Sanitaria:</strong> {{ $bloque->sanitaria }};
+        <strong>Eléctrica:</strong> {{ $bloque->electrica }};
+        <strong>Gas:</strong> {{ $bloque->gas }};
+        <strong>Especiales:</strong> {{ $bloque->especiales }};
 
-            <tr>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Hidráulica</th>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Sanitaria</th>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Eléctrica</th>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Gas</th>
-                <th style="padding: 0 5px 0 5px; text-align: center;">Especiales</th>
-            </tr>
-
-        </thead>
-
-        <tbody>
-
-            <tr>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->hidraulica }}</p>
-                </td>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->sanitaria }}</p>
-                </td>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->electrica }}</p>
-                </td>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->gas }}</p>
-                </td>
-                <td style="padding: 0 10px 0 10px; text-align: center;">
-                    <p>{{ $bloque->especiales }}</p>
-                </td>
-            </tr>
-
-        </tbody>
-
-    </table>
+    </p>
 
 @endforeach
