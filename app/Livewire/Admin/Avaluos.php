@@ -124,6 +124,58 @@ class Avaluos extends Component
 
     }
 
+    public function borrarAvaluo(Avaluo $avaluo){
+
+        try {
+
+            DB::transaction(function () use($avaluo){
+
+                $avaluo->bloques()->delete();
+
+                $avaluo->firmaElectronica()->delete();
+
+                foreach($avaluo->imagenes as $imagen){
+
+                    if(app()->isProduction()){
+
+                        if (Storage::disk('s3')->exists($imagen->url)) {
+
+                            Storage::disk('s3')->delete($imagen->url);
+
+                        }
+
+                    }else{
+
+                        if (Storage::disk('avaluos')->exists($imagen->url)) {
+
+                            Storage::disk('avaluos')->delete($imagen->url);
+
+                        }
+
+                    }
+
+                    $imagen->delete();
+
+                }
+
+                $avaluo->delete();
+
+            });
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al crear avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+    }
+
     #[Computed]
     public function avaluos(){
 

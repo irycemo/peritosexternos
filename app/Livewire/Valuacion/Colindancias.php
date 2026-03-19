@@ -93,6 +93,8 @@ class Colindancias extends Component
 
             $this->predio = $avaluo->predio;
 
+            $this->cargarColindancias($this->predio);
+
         }
 
     }

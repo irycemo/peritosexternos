@@ -2,22 +2,23 @@
 
 namespace App\Livewire\Valuacion;
 
-use App\Models\Avaluo;
-use Livewire\Component;
-use Livewire\WithPagination;
-use Livewire\WithFileUploads;
 use App\Constantes\Constantes;
+use App\Exceptions\GeneralException;
+use App\Http\Controllers\AvaluoController;
+use App\Http\Controllers\FirmaElectronicaController;
+use App\Models\Avaluo;
 use App\Models\FirmaElectronica;
+use App\Services\SGCService\SGCService;
 use App\Traits\ComponentesTrait;
-use Livewire\Attributes\Computed;
+use App\Traits\GeneradorQRTrait;
 use App\Traits\RevisarAvaluoTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Exceptions\GeneralException;
-use App\Services\SGCService\SGCService;
-use App\Http\Controllers\AvaluoController;
-use App\Http\Controllers\FirmaElectronicaController;
-use App\Traits\GeneradorQRTrait;
+use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Computed;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class MisAvaluos extends Component
 {
@@ -335,15 +336,39 @@ class MisAvaluos extends Component
 
         try {
 
-            $avaluo->bloques()->delete();
+            DB::transaction(function () use($avaluo){
 
-            $avaluo->firmaElectronica()->delete();
+                $avaluo->bloques()->delete();
 
-            foreach($avaluo->imagenes as $imagen){
+                $avaluo->firmaElectronica()->delete();
 
+                foreach($avaluo->imagenes as $imagen){
 
+                    if(app()->isProduction()){
 
-            }
+                        if (Storage::disk('s3')->exists($imagen->url)) {
+
+                            Storage::disk('s3')->delete($imagen->url);
+
+                        }
+
+                    }else{
+
+                        if (Storage::disk('avaluos')->exists($imagen->url)) {
+
+                            Storage::disk('avaluos')->delete($imagen->url);
+
+                        }
+
+                    }
+
+                    $imagen->delete();
+
+                }
+
+                $avaluo->delete();
+
+            });
 
         } catch (GeneralException $ex) {
 
