@@ -73,7 +73,7 @@
 
     </div>
 
-    @if($predio->lat)
+    @if(isset($predio->lat))
 
         <div class="flex items-center gap-2 justify-center">
 
