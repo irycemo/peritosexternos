@@ -93,7 +93,13 @@ class AvaluoApiController extends Controller
 
         try {
 
-            $avaluo->update(['estado' => 'nuevo']);
+            DB::transaction(function () use($avaluo){
+
+                $avaluo->update(['estado' => 'nuevo']);
+
+                $avaluo->firmaElectronica->update(['estado' => 'cancelado']);
+
+            });
 
             return response()->json([
                 'data' => "Reactivación exitosa.",

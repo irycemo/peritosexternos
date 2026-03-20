@@ -158,7 +158,7 @@
 
                                     @if($avaluo->predio)
 
-                                        @if($avaluo->firmaElectronica)
+                                        @if($avaluo->firmaElectronica && $avaluo->estado == 'concluido')
 
                                             <button
                                                 wire:click="reimprimir('{{ $avaluo->firmaElectronica->uuid }}')"
