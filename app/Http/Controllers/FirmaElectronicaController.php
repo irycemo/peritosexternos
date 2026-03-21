@@ -61,7 +61,7 @@ class FirmaElectronicaController extends Controller
 
         $pdf = null;
 
-        $pdf = Pdf::setOptions(['isRemoteEnabled' => true])->loadView('avaluos.avaluo', [
+        $pdf = Pdf::loadView('avaluos.avaluo', [
             'datos_control' => $datos_control,
             'avaluo' => $object->avaluo,
             'predio' => $avaluo->predio,
@@ -135,7 +135,7 @@ class FirmaElectronicaController extends Controller
 
         $qr = $this->generadorQr($firma_electronica->uuid);
 
-        $pdf = Pdf::setOptions(['isRemoteEnabled' => true])->loadView('avaluos.avaluo', [
+        $pdf = Pdf::loadView('avaluos.avaluo', [
             'datos_control' => $object->datos_control,
             'qr' => $qr,
             'predio' => $firma_electronica->avaluo->predio,

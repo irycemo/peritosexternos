@@ -15,6 +15,40 @@ trait ConstruccionesComunTrait
 
         $i = explode('.', $index);
 
+        if($i[1] === 'valores'){
+
+            if($this->construccionesComun[$i[0]]['valores'] === "" ){
+
+                $this->construccionesComun[$i[0]]['uso'] = null;
+
+                $this->construccionesComun[$i[0]]['tipo'] = null;
+
+                $this->construccionesComun[$i[0]]['estado'] = null;
+
+                $this->construccionesComun[$i[0]]['calidad'] = null;
+
+                $this->construccionesComun[$i[0]]['valor_unitario'] = null;
+
+                return;
+
+            }
+
+            $aux = json_decode($this->construccionesComun[$i[0]]['valores'], true);
+
+            $this->construccionesComun[$i[0]]['uso'] = $aux['uso'];
+
+            $this->construccionesComun[$i[0]]['tipo'] = $aux['tipo'];
+
+            $this->construccionesComun[$i[0]]['estado'] = $aux['estado'];
+
+            $this->construccionesComun[$i[0]]['calidad'] = $aux['calidad'];
+
+            $this->construccionesComun[$i[0]]['valor_unitario'] = $aux['valor'];
+
+        }
+
+        $this->construccionesComun[$i[0]]['valor_clasificacion_construccion'] = $this->valores_construccion->where('uso', $this->construcciones[$i[0]]['uso'])->where('calidad', $this->construcciones[$i[0]]['calidad'])->where('estado', $this->construcciones[$i[0]]['estado'])->first()->valor;
+
         if(isset($this->construccionesComun[$i[0]]['indiviso_construccion'])){
 
             if(!is_numeric($this->construccionesComun[$i[0]]['indiviso_construccion']) || $this->construccionesComun[$i[0]]['indiviso_construccion'] > 100 || $this->construccionesComun[$i[0]]['indiviso_construccion'] < 0){
@@ -46,7 +80,7 @@ trait ConstruccionesComunTrait
 
     public function agregarConstruccionComun(){
 
-        $this->construccionesComun[] = ['area_comun_construccion' => null, 'indiviso_construccion' => null, 'superficie_proporcional' => null, 'valor_clasificacion_construccion' => null, 'id' => null, 'valor_construccion_comun' => null,];
+        $this->construccionesComun[] = ['area_comun_construccion' => null, 'indiviso_construccion' => null, 'superficie_proporcional' => null, 'valor_clasificacion_construccion' => null, 'id' => null, 'valor_construccion_comun' => null, 'valores' => null, 'uso' => null, 'tipo' => null, 'categoria' => null, 'calidad' => null, 'estado' => null];
 
     }
 
@@ -71,14 +105,6 @@ trait ConstruccionesComunTrait
     }
 
     public function guardarConstruccionComun(){
-
-        if($this->predio?->avaluo?->estado == 'notificado'){
-
-            $this->dispatch('mostrarMensaje', ['error', "No puedes modificar un avalúo notificado."]);
-
-            return;
-
-        }
 
         $this->validate([
             'predio' => 'required',
@@ -107,6 +133,10 @@ trait ConstruccionesComunTrait
                             'superficie_proporcional' => $construccion['superficie_proporcional'],
                             'valor_clasificacion_construccion' => $construccion['valor_clasificacion_construccion'],
                             'valor_construccion_comun' => $construccion['valor_construccion_comun'],
+                            'uso' => $construccion['uso'],
+                            'tipo' => $construccion['tipo'],
+                            'calidad' => $construccion['calidad'],
+                            'estado' => $construccion['estado'],
                         ]);
 
                         $this->construccionesComun[$key]['id'] = $aux->id;
@@ -119,6 +149,10 @@ trait ConstruccionesComunTrait
                             'superficie_proporcional' => $construccion['superficie_proporcional'],
                             'valor_clasificacion_construccion' => $construccion['valor_clasificacion_construccion'],
                             'valor_construccion_comun' => $construccion['valor_construccion_comun'],
+                            'uso' => $construccion['uso'],
+                            'tipo' => $construccion['tipo'],
+                            'calidad' => $construccion['calidad'],
+                            'estado' => $construccion['estado'],
                         ]);
 
                     }
@@ -155,6 +189,8 @@ trait ConstruccionesComunTrait
 
         foreach ($this->predio->construccionesComun as $construccion) {
 
+            $valores = $this->valores_construccion->where('uso', $construccion['uso'])->where('calidad', $construccion['calidad'])->where('estado', $construccion['estado'])->first();
+
             $this->construccionesComun[] = [
                 'id' => $construccion->id,
                 'area_comun_construccion' => $construccion->area_comun_construccion,
@@ -162,6 +198,11 @@ trait ConstruccionesComunTrait
                 'indiviso_construccion' => $construccion->indiviso_construccion,
                 'valor_clasificacion_construccion' => $construccion->valor_clasificacion_construccion,
                 'valor_construccion_comun' => $construccion->valor_construccion_comun,
+                'tipo' => $construccion->tipo,
+                'uso' => $construccion->uso,
+                'calidad' => $construccion->calidad,
+                'estado' => $construccion->estado,
+                'valores' => json_encode($valores)
             ];
         }
 

@@ -18,13 +18,13 @@
 
                         <div>
 
-                            <select class="bg-white rounded text-xs w-full" wire:model.blur="construccionesComun.{{ $index }}.valor_clasificacion_construccion">
+                            <select class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.valores">
 
                                 <option value="" selected>Seleccione una opción</option>
 
                                 @foreach ($valores_construccion as $item)
 
-                                    <option value="{{ $item->valor }}" selected>{{ $item->tipo }}{{ $item->uso }}{{ $item->calidad }}{{ $item->estado }} - ${{ number_format($item->valor, 2) }}</option>
+                                    <option value="{{ $item }}" selected>{{ $item->tipo }}{{ $item->uso }}{{ $item->estado }}{{ $item->calidad }} - ${{ number_format($item->valor, 2) }}</option>
 
                                 @endforeach
 
@@ -34,7 +34,7 @@
 
                         <div>
 
-                            @error('construccionesComun.' . $index . '.valor_clasificacion_construccion') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                            @error('construccionesComun.{{ $index }}.valores') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                         </div>
 
@@ -50,7 +50,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construccionesComun.{{ $index }}.area_comun_construccion">
+                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.area_comun_construccion">
 
                         </div>
 
@@ -72,7 +72,7 @@
 
                         <div>
 
-                            <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.blur="construccionesComun.{{ $index }}.indiviso_construccion">
+                            <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.indiviso_construccion">
 
                         </div>
 
@@ -94,7 +94,7 @@
 
                         <div>
 
-                            <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.blur="construccionesComun.{{ $index }}.superficie_proporcional" readonly>
+                            <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.superficie_proporcional" readonly>
 
                         </div>
 
@@ -116,7 +116,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construccionesComun.{{ $index }}.valor_construccion_comun" readonly>
+                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.valor_construccion_comun" readonly>
 
                         </div>
 

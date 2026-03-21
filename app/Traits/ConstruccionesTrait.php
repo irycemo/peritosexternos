@@ -174,6 +174,8 @@ trait ConstruccionesTrait
 
         foreach ($this->predio->construcciones as $construccion) {
 
+            $valores = $this->valores_construccion->where('uso', $construccion['uso'])->where('calidad', $construccion['calidad'])->where('estado', $construccion['estado'])->first();
+
             $this->construcciones[] = [
                 'id' => $construccion->id,
                 'referencia' => $construccion->referencia,
@@ -184,7 +186,8 @@ trait ConstruccionesTrait
                 'uso' => $construccion->uso,
                 'calidad' => $construccion->calidad,
                 'estado' => $construccion->estado,
-                'valor_construccion' => $construccion->valor_construccion
+                'valor_construccion' => $construccion->valor_construccion,
+                'valores' => json_encode($valores)
             ];
         }
 
