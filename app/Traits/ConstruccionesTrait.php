@@ -57,7 +57,7 @@ trait ConstruccionesTrait
 
     public function agregarConstruccion(){
 
-        $this->construcciones[] = ['superficie' => null, 'niveles' => null, 'referencia' => null, 'id' => null, 'valor_unitario' => null, 'valores' => null, 'uso' => null, 'tipo' => null, 'categoria' => null, 'calidad' => null, 'valor_construccion' => null];
+        $this->construcciones[] = ['superficie' => null, 'niveles' => null, 'referencia' => null, 'id' => null, 'valor_unitario' => null, 'valores' => null, 'uso' => null, 'tipo' => null, 'estado' => null, 'calidad' => null, 'valor_construccion' => null];
 
     }
 
