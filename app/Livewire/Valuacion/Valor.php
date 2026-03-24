@@ -94,6 +94,12 @@ class Valor extends Component
 
     }
 
+    public function updatedPredioSuperficieTotalTerreno(){
+
+        $this->valor_esquina = $this->predio->valor_total_terreno * 0.10;
+
+    }
+
     public function guardar(){
 
         if($this->predio?->avaluo?->estado == 'notificado'){
