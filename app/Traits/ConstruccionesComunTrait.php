@@ -47,7 +47,7 @@ trait ConstruccionesComunTrait
 
         }
 
-        $this->construccionesComun[$i[0]]['valor_clasificacion_construccion'] = $this->valores_construccion->where('uso', $this->construcciones[$i[0]]['uso'])->where('calidad', $this->construcciones[$i[0]]['calidad'])->where('estado', $this->construcciones[$i[0]]['estado'])->first()->valor;
+        $this->construccionesComun[$i[0]]['valor_clasificacion_construccion'] = $this->valores_construccion->where('tipo', $this->construcciones[$i[0]]['tipo'])->where('uso', $this->construcciones[$i[0]]['uso'])->where('calidad', $this->construcciones[$i[0]]['calidad'])->where('estado', $this->construcciones[$i[0]]['estado'])->first()->valor;
 
         if(isset($this->construccionesComun[$i[0]]['indiviso_construccion'])){
 
