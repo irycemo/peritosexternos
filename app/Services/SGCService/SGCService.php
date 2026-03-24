@@ -46,7 +46,7 @@ class SGCService{
 
     }
 
-    public function buscarTramiteRefrendo(int $año, int $folio, int $usuario):array
+    public function buscarTramiteRefrendo(int $año, int $folio, int $usuario, string $nombre, int $clave):array
     {
 
         $response = Http::withToken(config('services.sgc.token'))
@@ -57,7 +57,9 @@ class SGCService{
                                 [
                                     'año' => $año,
                                     'folio' => $folio,
-                                    'usuario' => $usuario
+                                    'usuario' => $usuario,
+                                    'solicitante' => $nombre,
+                                    'clave' => $clave
                                 ]
                             );
 

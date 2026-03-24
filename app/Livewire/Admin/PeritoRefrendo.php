@@ -59,7 +59,7 @@ class PeritoRefrendo extends Component
 
             DB::transaction(function () {
 
-                $tramite = (new SGCService())->buscarTramiteRefrendo($this->año, $this->folio, $this->usuario);
+                $tramite = (new SGCService())->buscarTramiteRefrendo($this->año, $this->folio, $this->usuario, auth()->user()->name, auth()->user()->clave);
 
                 auth()->user()->refrendos()->create([
                     'año' => $tramite['data']['año'],
