@@ -29,6 +29,8 @@ class Valor extends Component
     public $valores_rusticos;
     public $valores_construccion;
 
+    public $valor_esquina;
+
     protected function rules(){
         return [
             'predio' => 'required',
@@ -119,10 +121,11 @@ class Valor extends Component
 
             if($this->predio->ubicacion_en_manzana == 'ESQUINA'){
 
-                $this->predio->valor_catastral = ($this->predio->valor_total_terreno + $this->predio->valor_total_construccion) +
-                                                    ($this->predio->valor_total_terreno + $this->predio->valor_total_construccion) * 0.15;
+                $this->predio->valor_catastral =    $this->predio->valor_total_terreno + $this->valor_esquina +
+                                                    $this->predio->valor_total_construccion;
 
             }
+
 
             $this->predio->valor_catastral = $this->revisarValorMinimo($this->predio->valor_catastral);
 
@@ -172,6 +175,12 @@ class Valor extends Component
             $this->cargarTerrenosComun();
 
             $this->cargarConstruccionesComun();
+
+            if($this->predio->ubicacion_en_manzana == 'ESQUINA'){
+
+                $this->valor_esquina = $this->predio->valor_total_terreno * 0.10;
+
+            }
 
         }
 

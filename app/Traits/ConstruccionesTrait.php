@@ -153,7 +153,7 @@ trait ConstruccionesTrait
 
                 $this->predio->update([
                     'superficie_construccion' => $sum2,
-                    'valor_total_construccion' => $sum,
+                    'valor_total_construccion' => $sum + $this->predio->construccionesComun->sum('valor_construccion_comun'),
                     'superficie_total_construccion' => $sum2 + $this->predio->construccionesComun->sum('superficie_proporcional')
                 ]);
 
