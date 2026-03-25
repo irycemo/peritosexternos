@@ -60,6 +60,11 @@ trait AvaluoCadenaTrait
             $item->superficie = $construccion->superficie;
             $item->valor_unitario = $construccion->valor_unitario;
             $item->valor_construccion = $construccion->valor_construccion;
+            $item->tipo = $construccion->tipo;
+            $item->uso = $construccion->uso;
+            $item->estado = $construccion->estado;
+            $item->calidad = $construccion->calidad;
+            $item->valor_unitario = $construccion->valor_unitario;
 
             $construcciones->push($item);
 
@@ -78,6 +83,11 @@ trait AvaluoCadenaTrait
             $item->indiviso_construccion = $construccionComun->indiviso_construccion;
             $item->valor_clasificacion_construccion = $construccionComun->valor_clasificacion_construccion;
             $item->valor_construccion_comun = $construccionComun->valor_construccion_comun;
+            $item->tipo = $construccion->tipo;
+            $item->uso = $construccion->uso;
+            $item->estado = $construccion->estado;
+            $item->calidad = $construccion->calidad;
+            $item->valor_unitario = $construccion->valor_unitario;
 
             $construccionesComun->push($item);
 
