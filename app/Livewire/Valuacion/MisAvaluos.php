@@ -8,8 +8,10 @@ use App\Http\Controllers\AvaluoController;
 use App\Http\Controllers\FirmaElectronicaController;
 use App\Models\Avaluo;
 use App\Models\FirmaElectronica;
+use App\Models\Persona;
 use App\Services\SGCService\SGCService;
 use App\Services\TramitesLineaService\TramitesLineaService;
+use App\Traits\BuscarPersonaTrait;
 use App\Traits\ComponentesTrait;
 use App\Traits\GeneradorQRTrait;
 use App\Traits\RevisarAvaluoTrait;
@@ -29,6 +31,7 @@ class MisAvaluos extends Component
     use RevisarAvaluoTrait;
     use WithFileUploads;
     use GeneradorQRTrait;
+    use BuscarPersonaTrait;
 
     public Avaluo $modelo_editar;
 
@@ -305,23 +308,50 @@ class MisAvaluos extends Component
 
         $predio->save();
 
-        foreach($this->avaluo->predio->propietarios as $propietario){
+        foreach($data['data']['propietarios'] as $propietario){
 
-            $propietario_nuevo = $propietario->replicate();
+            $persona = $this->buscarPersona(
+                $propietario['persona']['rfc'],
+                $propietario['persona']['curp'],
+                $propietario['persona']['tipo'],
+                $propietario['persona']['nombre'],
+                $propietario['persona']['ap_materno'],
+                $propietario['persona']['ap_paterno'],
+                $propietario['persona']['razon_social']
+            );
 
-            $propietario_nuevo->predio_id = $predio->id;
+            if(!$persona){
 
-            $propietario_nuevo->save();
+                $persona = Persona::create([
+                    'tipo' => $propietario['persona']['tipo'],
+                    'nombre' => $propietario['persona']['nombre'],
+                    'multiple_nombre' => $propietario['persona']['multiple_nombre'],
+                    'ap_paterno' => $propietario['persona']['ap_paterno'],
+                    'ap_materno' => $propietario['persona']['ap_materno'],
+                    'curp' => $propietario['persona']['curp'],
+                    'rfc' => $propietario['persona']['rfc'],
+                    'razon_social' => $propietario['persona']['razon_social'],
+                    'fecha_nacimiento' => $propietario['persona']['fecha_nacimiento'],
+                    'nacionalidad' => $propietario['persona']['nacionalidad'],
+                    'estado_civil' => $propietario['persona']['estado_civil'],
+                    'calle' => $propietario['persona']['calle'],
+                    'numero_exterior' => $propietario['persona']['numero_exterior'],
+                    'numero_interior' => $propietario['persona']['numero_interior'],
+                    'colonia' => $propietario['persona']['colonia'],
+                    'entidad' => $propietario['persona']['entidad'],
+                    'municipio' => $propietario['persona']['municipio'],
+                    'ciudad' => $propietario['persona']['ciudad'],
+                    'cp' => $propietario['persona']['cp']
+                ]);
 
-        }
+            }
 
-        foreach($this->avaluo->predio->colindancias as $colindancia){
-
-            $propietario_nuevo = $colindancia->replicate();
-
-            $propietario_nuevo->predio_id = $predio->id;
-
-            $propietario_nuevo->save();
+            $predio->propietarios()->create([
+                'persona_id' => $persona->id,
+                'porcentaje_propiedad' => $propietario['porcentaje_propiedad'],
+                'porcentaje_nuda' => $propietario['porcentaje_nuda'],
+                'porcentaje_usufructo' => $propietario['porcentaje_usufructo'],
+            ]);
 
         }
 
