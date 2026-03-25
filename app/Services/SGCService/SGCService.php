@@ -26,8 +26,6 @@ class SGCService{
 
         if($response->status() !== 200){
 
-            Log::error("Error al consultar predio. " . $response);
-
             $data = json_decode($response, true);
 
             if(isset($data['error'])){
@@ -64,8 +62,6 @@ class SGCService{
                             );
 
         if($response->status() !== 200){
-
-            Log::error("Error al consultar trámite de refrendo. " . $response);
 
             $data = json_decode($response, true);
 

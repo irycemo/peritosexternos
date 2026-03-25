@@ -169,6 +169,10 @@ class Valuacion extends Component
 
             $this->editar = true;
 
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
         } catch (\Throwable $th) {
 
             Log::error("Error al crear avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
@@ -275,6 +279,10 @@ class Valuacion extends Component
                 $this->dispatch('mostrarMensaje', ['success', "El avalúo se actualizó con éxito."]);
 
             });
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
 
         } catch (\Throwable $th) {
             Log::error("Error al crear predio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
