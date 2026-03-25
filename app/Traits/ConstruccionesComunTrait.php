@@ -159,7 +159,7 @@ trait ConstruccionesComunTrait
 
                     $sum = $sum + (float)$construccion['valor_construccion_comun'];
 
-                    $sum2 = $sum2 + (float)$construccion['area_comun_construccion'];
+                    $sum2 = $sum2 + (float)$construccion['superficie_proporcional'];
 
                 }
 

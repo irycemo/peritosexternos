@@ -127,7 +127,7 @@ trait TerrenosComunTrait
 
                     $sum = $sum + (float)$terreno['valor_terreno_comun'];
 
-                    $sum2 = $sum2 + (float)$terreno['area_terreno_comun'];
+                    $sum2 = $sum2 + (float)$terreno['superficie_proporcional'];
 
                 }
 
