@@ -9,6 +9,7 @@ use App\Http\Controllers\FirmaElectronicaController;
 use App\Models\Avaluo;
 use App\Models\FirmaElectronica;
 use App\Services\SGCService\SGCService;
+use App\Services\TramitesLineaService\TramitesLineaService;
 use App\Traits\ComponentesTrait;
 use App\Traits\GeneradorQRTrait;
 use App\Traits\RevisarAvaluoTrait;
@@ -241,6 +242,42 @@ class MisAvaluos extends Component
         } catch (\Throwable $th) {
 
             Log::error("Error al clonar avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+    }
+
+    public function corregirAvaluo(Avaluo $avaluo){
+
+
+        try {
+
+            DB::transaction(function () use ($avaluo){
+
+                $avaluo->firmaElectronica->update(['estado' => 'cancelado',  'observaciones' => 'Cancelado por corrección']);
+
+                $avaluo->update(['estado'=> 'nuevo', 'actualizado_por' => auth()->id()]);
+
+                $avaluo->audits()->latest()->first()->update(['tags' => 'Reactivó avalúo']);
+
+                (new TramitesLineaService())->desvincularAvaluo($avaluo->id);
+
+            });
+
+            $this->dispatch('mostrarMensaje', ['success', 'El avalúo se clono con éxito']);
+
+            $this->reset(['localidad', 'oficina', 'tipo_predio', 'numero_registro', 'modalClonar']);
+
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al corregir avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
 
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
 

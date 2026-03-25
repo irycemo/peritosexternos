@@ -168,13 +168,26 @@
                                                 Reimprimir
                                             </button>
 
-                                            <a
-                                                href="{{ $avaluo->anexo() }}"
-                                                target="_blank"
+                                            @if($avaluo->imagenes()->where('descripcion', 'anexo')->first())
+
+                                                <a
+                                                    href="{{ $avaluo->anexo() }}"
+                                                    target="_blank"
+                                                    class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                    role="menuitem">
+                                                    Anexo
+                                                </a>
+
+                                            @endif
+
+                                            <button
+                                                wire:confirm="¿Esta seguro que desea corregir el avalúo?"
+                                                wire:click="corregirAvaluo({{ $avaluo->id }})"
+                                                wire:loading.attr="disabled"
                                                 class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                                 role="menuitem">
-                                                Anexo
-                                            </a>
+                                                Corregir
+                                            </button>
 
                                         @else
 

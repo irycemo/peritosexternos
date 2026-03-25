@@ -58,4 +58,9 @@ return [
         'link_pago_linea' => env('SAP_PAGO_LINEA_URL'),
     ],
 
+    'tramites_linea' => [
+        'token' => env('SISTEMA_TRAMIES_LINEA_TOKEN'),
+        'desvincular_avaluo' => env('SISTEMA_TRAMIES_LINEA_CONSULTA_CUENTA_PREDIAL'),
+    ],
+
 ];
