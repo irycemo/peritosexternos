@@ -53,6 +53,8 @@ trait BuscarPersonaTrait
 
             }
 
+        }
+
         return $persona;
 
     }
