@@ -171,9 +171,9 @@
 
                 <tr>
                     <td style="padding-right: 40px;">
-                        @if(isset($construccionComun->valor_unitario))
+                        @if(isset($construccionComun->valor_clasificacion_construccion))
 
-                            <p style="margin:0;">{{ $construccionComun->tipo }}{{ $construccionComun->uso }}{{ $construccionComun->estado }}{{ $construccionComun->calidad }} - {{ $construccionComun->valor_unitario }}</p>
+                            <p style="margin:0;">{{ $construccionComun->tipo }}{{ $construccionComun->uso }}{{ $construccionComun->estado }}{{ $construccionComun->calidad }} - {{ $construccionComun->valor_clasificacion_construccion }}</p>
                         @endif
                     </td>
                     <td style="padding-right: 40px;">
@@ -184,9 +184,6 @@
                     </td>
                     <td style="padding-right: 40px;">
                         <p style="margin:0;">{{ $construccionComun->indiviso_construccion }}</p>
-                    </td>
-                    <td style="padding-right: 40px;">
-                        <p style="margin:0;">{{ $construccionComun->valor_clasificacion_construccion }}</p>
                     </td>
                     <td style="padding-right: 40px;">
                         <p style="margin:0;">${{ number_format($construccionComun->valor_construccion_comun, 2) }}</p>

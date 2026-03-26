@@ -80,7 +80,7 @@ trait ConstruccionesComunTrait
 
     public function agregarConstruccionComun(){
 
-        $this->construccionesComun[] = ['area_comun_construccion' => null, 'indiviso_construccion' => null, 'superficie_proporcional' => null, 'valor_clasificacion_construccion' => null, 'id' => null, 'valor_construccion_comun' => null, 'valores' => null, 'uso' => null, 'tipo' => null, 'calidad' => null, 'estado' => null, 'valor_unitario' => null];
+        $this->construccionesComun[] = ['area_comun_construccion' => null, 'indiviso_construccion' => null, 'superficie_proporcional' => null, 'valor_clasificacion_construccion' => null, 'id' => null, 'valor_construccion_comun' => null, 'valores' => null, 'uso' => null, 'tipo' => null, 'calidad' => null, 'estado' => null];
 
     }
 
@@ -133,7 +133,6 @@ trait ConstruccionesComunTrait
                             'superficie_proporcional' => $construccion['superficie_proporcional'],
                             'valor_clasificacion_construccion' => $construccion['valor_clasificacion_construccion'],
                             'valor_construccion_comun' => $construccion['valor_construccion_comun'],
-                            'valor_unitario' => $construccion['valor_unitario'],
                             'uso' => $construccion['uso'],
                             'tipo' => $construccion['tipo'],
                             'calidad' => $construccion['calidad'],
@@ -150,7 +149,6 @@ trait ConstruccionesComunTrait
                             'superficie_proporcional' => $construccion['superficie_proporcional'],
                             'valor_clasificacion_construccion' => $construccion['valor_clasificacion_construccion'],
                             'valor_construccion_comun' => $construccion['valor_construccion_comun'],
-                            'valor_unitario' => $construccion['valor_unitario'],
                             'uso' => $construccion['uso'],
                             'tipo' => $construccion['tipo'],
                             'calidad' => $construccion['calidad'],
