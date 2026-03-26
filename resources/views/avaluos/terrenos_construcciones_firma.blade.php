@@ -118,7 +118,11 @@
 
                 <tr>
                     <td style="padding-right: 40px;">
-                        <p style="margin:0;">{{ $construccion->tipo }}{{ $construccion->uso }}{{ $construccion->estado }}{{ $construccion->calidad }} - {{ $construccion->valor_unitario }}</p>
+                        @if(isset($construccion->valor_unitario))
+
+                            <p style="margin:0;">{{ $construccion->tipo }}{{ $construccion->uso }}{{ $construccion->estado }}{{ $construccion->calidad }} - {{ $construccion->valor_unitario }}</p>
+
+                        @endif
                     </td>
                     <td style="padding-right: 40px;">
                         <p style="margin:0;">{{ $construccion->referencia }}</p>
@@ -166,9 +170,12 @@
             @foreach ($avaluo->predio->construccionesComun as $construccionComun)
 
                 <tr>
-                    <td style="padding-right: 40px;">
-                        <p style="margin:0;">{{ $construccionComun->tipo }}{{ $construccionComun->uso }}{{ $construccionComun->estado }}{{ $construccionComun->calidad }} - {{ $construccionComun->valor_unitario }}</p>
-                    </td>
+                    @if(isset($construccionComun->valor_unitario))
+
+                        <td style="padding-right: 40px;">
+                            <p style="margin:0;">{{ $construccionComun->tipo }}{{ $construccionComun->uso }}{{ $construccionComun->estado }}{{ $construccionComun->calidad }} - {{ $construccionComun->valor_unitario }}</p>
+                        </td>
+                    @endif
                     <td style="padding-right: 40px;">
                         <p style="margin:0;">{{ $construccionComun->area_comun_construccion }}</p>
                     </td>
