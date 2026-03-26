@@ -170,12 +170,12 @@
             @foreach ($avaluo->predio->construccionesComun as $construccionComun)
 
                 <tr>
-                    @if(isset($construccionComun->valor_unitario))
+                    <td style="padding-right: 40px;">
+                        @if(isset($construccionComun->valor_unitario))
 
-                        <td style="padding-right: 40px;">
                             <p style="margin:0;">{{ $construccionComun->tipo }}{{ $construccionComun->uso }}{{ $construccionComun->estado }}{{ $construccionComun->calidad }} - {{ $construccionComun->valor_unitario }}</p>
-                        </td>
-                    @endif
+                        @endif
+                    </td>
                     <td style="padding-right: 40px;">
                         <p style="margin:0;">{{ $construccionComun->area_comun_construccion }}</p>
                     </td>
