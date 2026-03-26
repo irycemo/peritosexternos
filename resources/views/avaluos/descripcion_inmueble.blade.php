@@ -4,7 +4,7 @@
 
     <strong>Superficie de terreno total:</strong>  {{ $predio->superficie_total_terreno }} @if($predio->tipo_predio == 1) Metros cuadrados; @else Hectáreas; @endif
 
-    @if ($predio->superficie_construccion)
+    @if ($predio->superficie_total_construccion)
 
         <strong>Superficie de construcción total:</strong> {{ $predio->superficie_total_construccion }} @if($predio->tipo_predio == 1) Metros cuadrados; @else Hectáreas; @endif
 
