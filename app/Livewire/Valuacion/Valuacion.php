@@ -202,8 +202,8 @@ class Valuacion extends Component
         foreach($this->propietarios as $propietario){
 
             $persona = $this->buscarPersona(
-                                                null,
-                                                null,
+                                                $propietario['persona']['rfc'],
+                                                $propietario['persona']['curp'],
                                                 $propietario['persona']['tipo'],
                                                 $propietario['persona']['nombre'],
                                                 $propietario['persona']['ap_materno'],
