@@ -159,7 +159,6 @@
                 <th style="padding-right: 10px;">Superficie</th>
                 <th style="padding-right: 10px;">superficie proporcional</th>
                 <th style="padding-right: 10px;">Indiviso</th>
-                <th style="padding-right: 10px;">Valor de clasificación</th>
                 <th style="padding-right: 10px;">Valor construcción</th>
             </tr>
 
