@@ -28,6 +28,7 @@ class Auditoria extends Component
     public $modelos = [
         'User' => 'App\Models\User',
         'Avaluo' => 'App\Models\Avaluo',
+        'Predio' => 'App\Models\Predio',
     ];
 
     public function ver(Audit $audit){
