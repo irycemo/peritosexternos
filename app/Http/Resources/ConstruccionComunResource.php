@@ -21,6 +21,10 @@ class ConstruccionComunResource extends JsonResource
             'superficie_proporcional' => $this->superficie_proporcional,
             'valor_clasificacion_construccion' => $this->valor_clasificacion_construccion,
             'valor_construccion_comun' => $this->valor_construccion_comun,
+            'tipo' => $this->tipo,
+            'uso' => $this->uso,
+            'estado' => $this->estado,
+            'calidad' => $this->calidad,
         ];
 
     }
