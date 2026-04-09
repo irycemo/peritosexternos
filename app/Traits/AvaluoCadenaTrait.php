@@ -169,7 +169,7 @@ trait AvaluoCadenaTrait
         $predio->tipo_predio = $avaluo->predio->tipo_predio;
         $predio->status = $avaluo->predio->status;
         $predio->curt = $avaluo->predio->curt;
-        $predio->superficie_construccion = $avaluo->predio->superficie_construccion;
+        $predio->superficie_construccion = $avaluo->predio->superficie_construccion_formateada;
         $predio->area_comun_terreno = $avaluo->predio->area_comun_terreno;
         $predio->area_comun_construccion = $avaluo->predio->area_comun_construccion;
         $predio->valor_terreno_comun = $avaluo->predio->valor_terreno_comun;
@@ -211,11 +211,11 @@ trait AvaluoCadenaTrait
         $predio->construcciones = $construcciones;
         $predio->construccionesComun = $construccionesComun;
         $predio->ubicacion_en_manzana  = $avaluo->predio->ubicacion_en_manzana;
-        $predio->superficie_terreno = $avaluo->predio->superficie_terreno;
-        $predio->superficie_notarial = $avaluo->predio->superficie_notarial;
-        $predio->superficie_judicial = $avaluo->predio->superficie_judicial;
-        $predio->superficie_total_construccion = $avaluo->predio->superficie_total_construccion;
-        $predio->superficie_total_terreno = $avaluo->predio->superficie_total_terreno;
+        $predio->superficie_terreno = $avaluo->predio->superficie_terreno_formateada;
+        $predio->superficie_notarial = $avaluo->predio->superficie_notarial_formateada;
+        $predio->superficie_judicial = $avaluo->predio->superficie_judicial_formateada;
+        $predio->superficie_total_construccion = $avaluo->predio->superficie_total_construccion_formateada;
+        $predio->superficie_total_terreno = $avaluo->predio->superficie_total_terreno_formateada;
 
         $object = (object)[];
 
