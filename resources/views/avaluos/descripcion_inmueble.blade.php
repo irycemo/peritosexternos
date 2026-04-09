@@ -4,18 +4,18 @@
 
     <strong>Superficie de terreno total:</strong>  {{ $predio->superficie_total_terreno_formateada }} @if($predio->tipo_predio == 1) Metros cuadrados; @else Hectáreas; @endif
 
-    @if ($predio->superficie_total_construccion)
-
-        <strong>Superficie de construcción total:</strong> {{ $predio->superficie_total_construccion_formateada }} @if($predio->tipo_predio == 1) Metros cuadrados; @else Hectáreas; @endif
-
-    @endif
-
     @if ($predio->superficie_judicial)
         <strong>superficie judicial:</strong>  {{ $predio->superficie_judicial_formateada }};
     @endif
 
     @if ($predio->superficie_notarial)
         <strong>superficie notarial:</strong> {{ $predio->superficie_notarial_formateada }};
+    @endif
+
+    @if ($predio->superficie_total_construccion)
+
+        <strong>Superficie de construcción total:</strong> {{ $predio->superficie_total_construccion_formateada }} Metros cuadrados;
+
     @endif
 
 </p>
