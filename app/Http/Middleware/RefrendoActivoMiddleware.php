@@ -16,7 +16,7 @@ class RefrendoActivoMiddleware
     public function handle(Request $request, Closure $next): Response
     {
 
-        if(auth()->user()->hasRole(['Administrador'])){
+        if(auth()->user()->hasRole(['Administrador']) || auth()->user()->clave >= 10000){
 
             return $next($request);
 
