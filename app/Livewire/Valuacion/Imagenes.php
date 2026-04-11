@@ -36,14 +36,14 @@ class Imagenes extends Component
 
     protected function rules(){
         return [
-            'fachada' => [Rule::requiredIf($this->avaluo->fachada() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
-            'foto2' => [Rule::requiredIf($this->avaluo->foto2() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
-            'foto3' => [Rule::requiredIf($this->avaluo->foto3() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
-            'foto4' => [Rule::requiredIf($this->avaluo->foto4() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
-            'macrolocalizacion' => [Rule::requiredIf($this->avaluo->macrolocalizacion() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
-            'microlocalizacion' => [Rule::requiredIf($this->avaluo->microlocalizacion() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
-            'poligonoDwg' => [Rule::requiredIf($this->avaluo->poligonoDwg() == null),'nullable','mimes:dwg'],
-            'poligonoImagen' => [Rule::requiredIf($this->avaluo->poligonoImagen() == null),'nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'fachada' => ['nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'foto2' => ['nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'foto3' => ['nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'foto4' => ['nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'macrolocalizacion' => ['nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'microlocalizacion' => ['nullable','image','max:5000','mimes:jpeg,png,jpg'],
+            'poligonoDwg' => ['nullable','mimes:dwg'],
+            'poligonoImagen' => ['nullable','image','max:5000','mimes:jpeg,png,jpg'],
             'predio' => 'required',
             'anexo' => 'nullable|mimes:pdf',
             'avaluo.observaciones' => 'nullable',
