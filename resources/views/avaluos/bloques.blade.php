@@ -17,7 +17,7 @@
             <th style="padding: 0 5px 0 5px; text-align: center;">Drenaje</th>
             <th style="padding: 0 5px 0 5px; text-align: center;">Pavimento</th>
             <th style="padding: 0 5px 0 5px; text-align: center;">Energía eléctrica</th>
-            <th style="padding: 0 5px 0 5px; text-align: center;">Alumbrado púlico</th>
+            <th style="padding: 0 5px 0 5px; text-align: center;">Alumbrado público</th>
             <th style="padding: 0 5px 0 5px; text-align: center;">Banqueta</th>
         </tr>
 
@@ -83,7 +83,7 @@
         <strong>Pintura:</strong> {{ $bloque->pintura }};
         <strong>Carpintería:</strong> {{ $bloque->carpinteria }};
         <strong>Aplanados:</strong> {{ $bloque->aplanados }};
-        <strong>PiRecubrimientoos:</strong> {{ $bloque->recubrimiento_especial }};
+        <strong>Recubrimientos:</strong> {{ $bloque->recubrimiento_especial }};
 
     </p>
 
