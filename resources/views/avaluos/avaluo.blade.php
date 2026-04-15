@@ -281,8 +281,6 @@
 
                                 <p><strong>Solicitante: </strong> {{ $avaluo->solicitante }}</p>
 
-                                <p><strong>Solicitante: </strong> {{ $datos_control->solicitante }}</p>
-
                                 <p><strong>Impreso el:</strong> {{ $datos_control->impreso_en }}</p>
 
                                 <p><strong>Impreso por:</strong> {{ $datos_control->valuador }}</p>
