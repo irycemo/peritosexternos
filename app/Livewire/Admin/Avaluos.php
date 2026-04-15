@@ -3,19 +3,20 @@
 namespace App\Livewire\Admin;
 
 use App\Constantes\Constantes;
-use App\Models\Avaluo;
-use Livewire\Component;
-use Livewire\WithPagination;
-use App\Models\FirmaElectronica;
-use App\Traits\ComponentesTrait;
-use App\Traits\AvaluoCadenaTrait;
-use Livewire\Attributes\Computed;
-use App\Traits\RevisarAvaluoTrait;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\AvaluoController;
 use App\Http\Controllers\FirmaElectronicaController;
+use App\Models\Avaluo;
+use App\Models\FirmaElectronica;
+use App\Traits\AvaluoCadenaTrait;
+use App\Traits\ComponentesTrait;
+use App\Traits\RevisarAvaluoTrait;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Computed;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class Avaluos extends Component
 {
