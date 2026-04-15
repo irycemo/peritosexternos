@@ -279,6 +279,8 @@
                             </td>
                             <td style="padding-right: 40px;">
 
+                                <p><strong>Solicitante: </strong> {{ $avaluo->solicitante }}</p>
+
                                 <p><strong>Solicitante: </strong> {{ $datos_control->solicitante }}</p>
 
                                 <p><strong>Impreso el:</strong> {{ $datos_control->impreso_en }}</p>
