@@ -14,7 +14,7 @@
 
                     <option value="">Estado</option>
                     <option value="nuevo">Nuevo</option>
-                    <option value="conciliacion">Conciliación</option>
+                    <option value="conciliar">Conciliación</option>
                     <option value="concluido">Concluido</option>
                     <option value="operado">Operado</option>
 
