@@ -36,7 +36,7 @@ trait RevisarAvaluoTrait
 
             $construccionComun = $this->avaluo->predio->construccionesComun->first();
 
-            if(! $construccionComun?->uso){
+            if($construccionComun && $construccionComun->uso){
 
                 throw new GeneralException("Las construcciones en común no estan completas, es necesario completar la información.");
 
