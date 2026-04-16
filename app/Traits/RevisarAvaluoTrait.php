@@ -31,6 +31,19 @@ trait RevisarAvaluoTrait
 
         }
 
+
+        if($this->avaluo->predio->edificio > 0){
+
+            $construccionComun = $this->avaluo->predio->construccionesComun->first();
+
+            if(! $construccionComun?->uso){
+
+                throw new GeneralException("Las construcciones en común no estan completas, es necesario completar la información.");
+
+            }
+
+        }
+
         if(auth()->user()->clave < 10000){
 
             /* Fotos */
