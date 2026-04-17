@@ -187,11 +187,11 @@
 
                 <tr>
                     <td style="padding-right: 40px;">
-                        @if($construccion->uso == 1)
+                        @if($construccionComun->uso == 1)
 
                             <p style="margin:0;">HABITACIONAL</p>
 
-                        @elseif($construccion->uso == 2)
+                        @elseif($construccionComun->uso == 2)
 
                             <p style="margin:0;">COMERCIAL</p>
 

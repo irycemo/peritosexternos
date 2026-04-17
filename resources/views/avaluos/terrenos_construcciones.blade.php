@@ -103,6 +103,7 @@
         <thead>
 
             <tr>
+                <th style="padding-right: 10px;">Uso</th>
                 <th style="padding-right: 10px;">Clasificación</th>
                 <th style="padding-right: 10px;">referencia</th>
                 <th style="padding-right: 10px;">superficie</th>
@@ -117,6 +118,21 @@
             @foreach ($predio->construcciones as $construccion)
 
                 <tr>
+                    <td style="padding-right: 40px;">
+                        @if($construccion->uso == 1)
+
+                            <p style="margin:0;">HABITACIONAL</p>
+
+                        @elseif($construccion->uso == 2)
+
+                            <p style="margin:0;">COMERCIAL</p>
+
+                        @else
+
+                            <p style="margin:0;">INDUSTRIAL</p>
+
+                        @endif
+                    </td>
                     <td style="padding-right: 40px;">
                         @if(isset($construccion->valor_unitario))
 
@@ -155,6 +171,7 @@
         <thead>
 
             <tr>
+                <th style="padding-right: 10px;">Uso</th>
                 <th style="padding-right: 10px;">Clasificación</th>
                 <th style="padding-right: 10px;">Superficie</th>
                 <th style="padding-right: 10px;">superficie proporcional</th>
@@ -169,6 +186,21 @@
             @foreach ($predio->construccionesComun as $construccionComun)
 
                 <tr>
+                    <td style="padding-right: 40px;">
+                        @if($construccionComun->uso == 1)
+
+                            <p style="margin:0;">HABITACIONAL</p>
+
+                        @elseif($construccionComun->uso == 2)
+
+                            <p style="margin:0;">COMERCIAL</p>
+
+                        @else
+
+                            <p style="margin:0;">INDUSTRIAL</p>
+
+                        @endif
+                    </td>
                     <td style="padding-right: 40px;">
                         @if(isset($construccionComun->valor_clasificacion_construccion))
 
