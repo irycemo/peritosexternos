@@ -264,8 +264,6 @@ class Valuacion extends Component
 
             DB::transaction(function () {
 
-                $this->predio->save();
-
                 $avaluo = Avaluo::where('predio_id', $this->predio->id)->first();
 
                 $avaluo->update([
@@ -276,7 +274,19 @@ class Valuacion extends Component
 
                 $avaluo->audits()->latest()->first()->update(['tags' => 'Actualizó datos de identificación del inmueble']);
 
+                if($this->predio->isDirty('lat') || $this->predio->isDirty('lon')){
+
+                    $this->borrarImagenesLocalizacion($avaluo);
+
+                    $this->generarImagenesLocalizacion();
+
+                }
+
+                $this->predio->save();
+
                 $this->dispatch('mostrarMensaje', ['success', "El avalúo se actualizó con éxito."]);
+
+                $this->dispatch('cargarAvaluo', $avaluo->id);
 
             });
 
@@ -309,6 +319,36 @@ class Valuacion extends Component
             $this->solicitante = $avaluo->solicitante;
 
             $this->editar = true;
+
+        }
+
+    }
+
+    public function borrarImagenesLocalizacion(Avaluo $avaluo){
+
+        $imagenes_localizacion = $avaluo->imagenes()->whereIn('descripcion', ['macrolocalizacion', 'microlocalizacion'])->get();
+
+        foreach($imagenes_localizacion as $imagen){
+
+            if(app()->isProduction()){
+
+                if (Storage::disk('s3')->exists($imagen->url)) {
+
+                    Storage::disk('s3')->delete($imagen->url);
+
+                }
+
+            }else{
+
+                if (Storage::disk('avaluos')->exists($imagen->url)) {
+
+                    Storage::disk('avaluos')->delete($imagen->url);
+
+                }
+
+            }
+
+            $imagen->delete();
 
         }
 
