@@ -223,11 +223,42 @@ class MisAvaluos extends Component
                 $nuevo_avaluo->estado = 'nuevo';
                 $nuevo_avaluo->save();
 
+                foreach($this->avaluo->predio->colindancias as $colindancia){
+
+                    $nueva_colindancia = $colindancia->replicate();
+                    $nueva_colindancia->predio_id = $predio_id;
+                    $nueva_colindancia->save();
+
+                }
+
                 foreach($this->avaluo->bloques as $bloque){
 
                     $nuevo_bloque = $bloque->replicate();
                     $nuevo_bloque->avaluo_id = $nuevo_avaluo->id;
                     $nuevo_bloque->save();
+
+                }
+
+                foreach($this->avaluo->imagenes as $imagen){
+
+                    if(app()->isProduction()){
+
+                        $nombre = '2' . $imagen->url;
+
+                        Storage::disk('s3')->copy(config('services.ses.ruta_archivos') . $imagen->url, config('services.ses.ruta_archivos') .  $nombre);
+
+                    }else{
+
+                        $nombre = '2' . $imagen->url;
+
+                        Storage::disk('avaluos')->copy($imagen->url, $nombre);
+
+                    }
+
+                    $nueva_imagen = $imagen->replicate();
+                    $nueva_imagen->url = $nombre;
+                    $nueva_imagen->fileable_id = $nuevo_avaluo->id;
+                    $nueva_imagen->save();
 
                 }
 
