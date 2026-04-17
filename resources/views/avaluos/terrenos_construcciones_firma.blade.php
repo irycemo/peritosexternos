@@ -119,24 +119,26 @@
 
                 <tr>
                     <td style="padding-right: 40px;">
-                        @if($construccion->uso == 1)
+                        @if(isset($construccion->uso))
+                            @if($construccion->uso == 1)
 
-                            <p style="margin:0;">HABITACIONAL</p>
+                                <p style="margin:0;">HABITACIONAL</p>
 
-                        @elseif($construccion->uso == 2)
+                            @elseif($construccion->uso == 2)
 
-                            <p style="margin:0;">COMERCIAL</p>
+                                <p style="margin:0;">COMERCIAL</p>
 
-                        @else
+                            @else
 
-                            <p style="margin:0;">INDUSTRIAL</p>
+                                <p style="margin:0;">INDUSTRIAL</p>
 
+                            @endif
                         @endif
                     </td>
                     <td style="padding-right: 40px;">
                         @if(isset($construccion->valor_unitario))
 
-                            <p style="margin:0;">{{ $construccion->tipo }}{{ $construccion->uso }}{{ $construccion->estado }}{{ $construccion->calidad }} - {{ $construccion->valor_unitario }}</p>
+                            <p style="margin:0;">@if(isset($construccion->uso)){{ $construccion->tipo }}{{ $construccion->uso }}{{ $construccion->estado }}{{ $construccion->calidad }} -@endif {{ $construccion->valor_unitario }}</p>
 
                         @endif
                     </td>
@@ -187,24 +189,28 @@
 
                 <tr>
                     <td style="padding-right: 40px;">
-                        @if($construccionComun->uso == 1)
+                        @if(isset($construccionComun->uso))
 
-                            <p style="margin:0;">HABITACIONAL</p>
+                            @if($construccionComun->uso == 1)
 
-                        @elseif($construccionComun->uso == 2)
+                                <p style="margin:0;">HABITACIONAL</p>
 
-                            <p style="margin:0;">COMERCIAL</p>
+                            @elseif($construccionComun->uso == 2)
 
-                        @else
+                                <p style="margin:0;">COMERCIAL</p>
 
-                            <p style="margin:0;">INDUSTRIAL</p>
+                            @else
+
+                                <p style="margin:0;">INDUSTRIAL</p>
+
+                            @endif
 
                         @endif
                     </td>
                     <td style="padding-right: 40px;">
                         @if(isset($construccionComun->valor_clasificacion_construccion))
 
-                            <p style="margin:0;">{{ $construccionComun->tipo }}{{ $construccionComun->uso }}{{ $construccionComun->estado }}{{ $construccionComun->calidad }} - {{ $construccionComun->valor_clasificacion_construccion }}</p>
+                            <p style="margin:0;">@if(isset($construccionComun->uso)) {{ $construccionComun->tipo }}{{ $construccionComun->uso }}{{ $construccionComun->estado }}{{ $construccionComun->calidad }} - @endif {{ $construccionComun->valor_clasificacion_construccion }}</p>
 
                         @endif
                     </td>
