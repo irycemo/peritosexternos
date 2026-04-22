@@ -35,6 +35,10 @@
                                     El Instituto Registral y Catastral verifica la siguiente información contenida en el avalúo: <strong>{{ $firma_electronica->avaluo->año }} - {{ $firma_electronica->avaluo->folio }} - {{ $firma_electronica->avaluo->usuario }}</strong>.
                                 </p>
 
+                                <p class="mt-4 text-gray-500 text-sm leading-relaxed">
+                                    Con dentificador para validación: {{ $firma_electronica->uuid }}
+                                </p>
+
                             @elseif($firma_electronica->user)
 
                                 <p class="mt-4 text-gray-500 text-sm leading-relaxed">
@@ -58,14 +62,6 @@
                 <div class="scale-100 p-6 bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 text-center space-y-3">
 
                     @if($firma_electronica->avaluo)
-
-                            <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                                <strong>Identificador para validación</strong>
-
-                                <p class="text-gray-500 text-sm leading-relaxed">{{ $firma_electronica->uuid }}</p>
-
-                            </div>
 
                             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
