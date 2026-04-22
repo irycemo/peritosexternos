@@ -208,6 +208,13 @@ class MisAvaluos extends Component
 
     public function clonar(){
 
+        $this->validate([
+            'localidad' => 'required',
+            'oficina' => 'required',
+            'tipo_predio' => 'required',
+            'numero_registro' => 'required',
+        ]);
+
         try {
 
             DB::transaction(function () {
@@ -312,6 +319,81 @@ class MisAvaluos extends Component
         } catch (\Throwable $th) {
 
             Log::error("Error al corregir avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+    }
+
+    public function actualizarPropietarios(Avaluo $avaluo){
+
+        try {
+
+            DB::transaction(function () use($avaluo){
+
+                $avaluo->predio->propietarios()->delete();
+
+                $data = (new SGCService())->consultarPredio($avaluo->predio->localidad, $avaluo->predio->oficina, $avaluo->predio->tipo_predio,$avaluo->predio->numero_registro);
+
+                foreach($data['data']['propietarios'] as $propietario){
+
+                    $persona = $this->buscarPersona(
+                        $propietario['persona']['rfc'],
+                        $propietario['persona']['curp'],
+                        $propietario['persona']['tipo'],
+                        $propietario['persona']['nombre'],
+                        $propietario['persona']['ap_materno'],
+                        $propietario['persona']['ap_paterno'],
+                        $propietario['persona']['razon_social']
+                    );
+
+                    if(!$persona){
+
+                        $persona = Persona::create([
+                            'tipo' => $propietario['persona']['tipo'],
+                            'nombre' => $propietario['persona']['nombre'],
+                            'multiple_nombre' => $propietario['persona']['multiple_nombre'],
+                            'ap_paterno' => $propietario['persona']['ap_paterno'],
+                            'ap_materno' => $propietario['persona']['ap_materno'],
+                            'curp' => $propietario['persona']['curp'],
+                            'rfc' => $propietario['persona']['rfc'],
+                            'razon_social' => $propietario['persona']['razon_social'],
+                            'fecha_nacimiento' => $propietario['persona']['fecha_nacimiento'],
+                            'nacionalidad' => $propietario['persona']['nacionalidad'],
+                            'estado_civil' => $propietario['persona']['estado_civil'],
+                            'calle' => $propietario['persona']['calle'],
+                            'numero_exterior' => $propietario['persona']['numero_exterior'],
+                            'numero_interior' => $propietario['persona']['numero_interior'],
+                            'colonia' => $propietario['persona']['colonia'],
+                            'entidad' => $propietario['persona']['entidad'],
+                            'municipio' => $propietario['persona']['municipio'],
+                            'ciudad' => $propietario['persona']['ciudad'],
+                            'cp' => $propietario['persona']['cp']
+                        ]);
+
+                    }
+
+                    $avaluo->predio->propietarios()->create([
+                        'persona_id' => $persona->id,
+                        'porcentaje_propiedad' => $propietario['porcentaje_propiedad'],
+                        'porcentaje_nuda' => $propietario['porcentaje_nuda'],
+                        'porcentaje_usufructo' => $propietario['porcentaje_usufructo'],
+                    ]);
+
+                }
+
+            });
+
+            $this->dispatch('mostrarMensaje', ['success', 'Los propietarios se actualizaron con éxito']);
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al actualizar propietarios por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
 
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
 
