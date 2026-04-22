@@ -61,6 +61,14 @@
 
                             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
+                                <strong>Identificador para validación</strong>
+
+                                <p class="text-gray-500 text-sm leading-relaxed">{{ $firma_electronica->uuid }}</p>
+
+                            </div>
+
+                            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
                                 <strong>Cuenta predial</strong>
 
                                 <p class="text-gray-500 text-sm leading-relaxed">{{ $firma_electronica->avaluo->predio->cuentaPredial() }}</p>

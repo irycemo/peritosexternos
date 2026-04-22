@@ -285,6 +285,8 @@
 
                                 <p><strong>Impreso por:</strong> {{ $datos_control->valuador }}</p>
 
+                                <p><strong>Identificador para validación:</strong> {{ $firma_electronica->uuid }}</p>
+
                             </td>
                         </tr>
                     </tbody>
