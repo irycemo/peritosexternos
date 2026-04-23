@@ -235,6 +235,28 @@ class Valuacion extends Component
                     'cp' => $propietario['persona']['cp']
                 ]);
 
+            }else{
+
+                $persona->update([
+                    'tipo' => $propietario['persona']['tipo'],
+                    'nombre' => $propietario['persona']['nombre'],
+                    'multiple_nombre' => $propietario['persona']['multiple_nombre'],
+                    'ap_paterno' => $propietario['persona']['ap_paterno'],
+                    'ap_materno' => $propietario['persona']['ap_materno'],
+                    'razon_social' => $propietario['persona']['razon_social'],
+                    'fecha_nacimiento' => $propietario['persona']['fecha_nacimiento'],
+                    'nacionalidad' => $propietario['persona']['nacionalidad'],
+                    'estado_civil' => $propietario['persona']['estado_civil'],
+                    'calle' => $propietario['persona']['calle'],
+                    'numero_exterior' => $propietario['persona']['numero_exterior'],
+                    'numero_interior' => $propietario['persona']['numero_interior'],
+                    'colonia' => $propietario['persona']['colonia'],
+                    'entidad' => $propietario['persona']['entidad'],
+                    'municipio' => $propietario['persona']['municipio'],
+                    'ciudad' => $propietario['persona']['ciudad'],
+                    'cp' => $propietario['persona']['cp']
+                ]);
+
             }
 
             $this->predio->propietarios()->create([
