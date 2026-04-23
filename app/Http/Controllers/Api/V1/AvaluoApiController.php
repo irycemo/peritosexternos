@@ -40,7 +40,7 @@ class AvaluoApiController extends Controller
         if(! in_array($avaluo->estado, ['concluido', 'operado'])){
 
             return response()->json([
-                'error' => "El avalúo debe estar concluido, solicite al valuador lo concluyas.",
+                'error' => "El avalúo debe estar concluido, solicite al valuador lo concluya.",
             ], 401);
 
         }
@@ -65,7 +65,7 @@ class AvaluoApiController extends Controller
 
         }
 
-        if($avaluo->estado != 'concluido'){
+        if(! in_array($avaluo->estado, ['concluido', 'operado'])){
 
             return response()->json([
                 'error' => "El avalúo debe estar concluido, solicite al valuador lo concluya.",
