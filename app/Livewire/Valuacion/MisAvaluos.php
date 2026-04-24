@@ -252,7 +252,15 @@ class MisAvaluos extends Component
 
                         $nombre = '2' . $imagen->url;
 
-                        Storage::disk('s3')->copy(config('services.ses.ruta_archivos') . $imagen->url, config('services.ses.ruta_archivos') .  $nombre);
+                        if (Storage::disk('s3')->exists(config('services.ses.ruta_archivos') . $imagen->url)){
+
+                            Storage::disk('s3')->copy(config('services.ses.ruta_archivos') . $imagen->url, config('services.ses.ruta_archivos') .  $nombre);
+
+                        }else{
+
+                            return;
+
+                        }
 
                     }else{
 

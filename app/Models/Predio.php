@@ -64,7 +64,7 @@ class Predio extends Model implements Auditable
     public function primerPropietario(){
 
         if($this->propietarios()->first())
-            return $this->propietarios()->first()->persona->nombre . ' ' . $this->propietarios()->first()->persona->ap_paterno . ' ' . $this->propietarios()->first()->persona->ap_materno;
+            return $this->propietarios()->first()->persona->nombre . ' ' . $this->propietarios()->first()->persona->ap_paterno . ' ' . $this->propietarios()->first()->persona->ap_materno . ' ' . $this->propietarios()->first()->persona->razon_social;
         else
             return null;
     }

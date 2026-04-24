@@ -74,6 +74,12 @@ trait TerrenosTrait
 
         $this->terrenos = array_values($this->terrenos);
 
+        if(! count($this->terrenos)){
+
+            $this->agregarTerreno();
+
+        }
+
     }
 
     public function guardarTerrenos(){
