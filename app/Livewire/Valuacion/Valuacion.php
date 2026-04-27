@@ -308,8 +308,6 @@ class Valuacion extends Component
 
                 $this->dispatch('mostrarMensaje', ['success', "El avalúo se actualizó con éxito."]);
 
-                $this->dispatch('cargarAvaluo', $avaluo->id);
-
             });
 
         } catch (GeneralException $ex) {
