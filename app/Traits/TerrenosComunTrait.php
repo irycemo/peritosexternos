@@ -155,6 +155,8 @@ trait TerrenosComunTrait
 
     public function cargarTerrenosComun(){
 
+        $this->reset('terrenosComun');
+
         foreach ($this->predio->terrenosComun as $terreno) {
 
             $this->terrenosComun[] = [

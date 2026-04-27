@@ -172,6 +172,8 @@ trait ConstruccionesTrait
 
     public function cargarConstrucciones(){
 
+        $this->reset('construcciones');
+
         foreach ($this->predio->construcciones as $construccion) {
 
             $valores = $this->valores_construccion->where('tipo', $construccion['tipo'])->where('uso', $construccion['uso'])->where('calidad', $construccion['calidad'])->where('estado', $construccion['estado'])->first();

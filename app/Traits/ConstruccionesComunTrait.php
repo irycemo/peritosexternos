@@ -187,6 +187,8 @@ trait ConstruccionesComunTrait
 
     public function cargarConstruccionesComun(){
 
+        $this->reset('construccionesComun');
+
         foreach ($this->predio->construccionesComun as $construccion) {
 
             $valores = $this->valores_construccion->where('tipo', $construccion['tipo'])->where('uso', $construccion['uso'])->where('calidad', $construccion['calidad'])->where('estado', $construccion['estado'])->first();

@@ -161,6 +161,8 @@ trait TerrenosTrait
 
     public function cargarTerrenos(){
 
+        $this->reset('terrenos');
+
         foreach ($this->predio->terrenos as $terreno) {
 
             $this->terrenos[] = [
