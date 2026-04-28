@@ -87,7 +87,7 @@ class Avaluo extends Model implements Auditable
     }
 
     public function caratula(){
-        return $this->imagenes()->where('descripcion', 'avaluo')->first()->url;
+        return $this->imagenes()->where('descripcion', 'avaluo')->orderBy('created_at', 'desc')->first()->url;
     }
 
 
