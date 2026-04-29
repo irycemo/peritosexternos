@@ -97,7 +97,7 @@ class AvaluoApiController extends Controller
 
                 $avaluo->update(['estado' => 'nuevo']);
 
-                $avaluo->firmaElectronica->update(['estado' => 'cancelado']);
+                $avaluo->firmaElectronica?->update(['estado' => 'cancelado']);
 
             });
 
