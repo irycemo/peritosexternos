@@ -202,8 +202,8 @@ class Constantes{
 
     CONST TECHOS = [
         'NO APLICA',
-        'BOVEDA  CATALANA',
-        'MADERA   ',
+        'BOVEDA CATALANA',
+        'MADERA',
         'LOSA RETICULAR',
         'LOSA DE CONCRETO  REFORZADO',
         'ESTRUCTURA METALICA O MIXTA',
@@ -217,7 +217,7 @@ class Constantes{
         'LAMINA GALVANIZADA',
         'LAMINA DE ASBESTO-CEMENTO',
         'LAMINA DE CARTON-ASBESTO-CEMENTO',
-
+        'LOZA DE CONCRETO'
     ];
 
     const PLAFONES = [
