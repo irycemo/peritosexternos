@@ -8,6 +8,21 @@
 
     <x-header>Avaluo</x-header>
 
+    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto flex gap-5">
+
+        @if($avaluo->anexo())
+
+            <x-link-blue href="{{ $avaluo->anexo() }}" target="_blank">
+
+                <img wire:loading wire:target="verTramiteAviso" class="h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                Anexo
+            </x-link-blue>
+
+        @endif
+
+    </div>
+
     @include('admin.comun.datos_generales_avaluo')
 
     @include('admin.comun.datos_generales_predio')
