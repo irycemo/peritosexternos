@@ -305,7 +305,7 @@ class MisAvaluos extends Component
 
             DB::transaction(function () use ($avaluo){
 
-                $avaluo->firmaElectronica->update(['estado' => 'cancelado',  'observaciones' => 'Cancelado por corrección']);
+                $avaluo->firmaElectronica?->update(['estado' => 'cancelado',  'observaciones' => 'Cancelado por corrección']);
 
                 $avaluo->update(['estado'=> 'nuevo', 'actualizado_por' => auth()->id()]);
 

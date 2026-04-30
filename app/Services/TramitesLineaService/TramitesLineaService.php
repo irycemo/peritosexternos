@@ -23,7 +23,7 @@ class TramitesLineaService{
 
         if($response->status() !== 200){
 
-            Log::error("Error al desvincular avalúo. " . $response);
+            Log::info("Error al desvincular avalúo. " . $response);
 
             $data = json_decode($response, true);
 
