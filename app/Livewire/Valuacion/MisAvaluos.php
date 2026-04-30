@@ -508,16 +508,6 @@ class MisAvaluos extends Component
 
         }
 
-        foreach($this->avaluo->predio->terrenosComun as $terrenoComun){
-
-            $terreno_comun_nuevo = $terrenoComun->replicate();
-
-            $terreno_comun_nuevo->predio_id = $predio->id;
-
-            $terreno_comun_nuevo->save();
-
-        }
-
         foreach($this->avaluo->predio->construcciones as $construccion){
 
             $construccion_nueva = $construccion->replicate();
@@ -528,13 +518,27 @@ class MisAvaluos extends Component
 
         }
 
-        foreach($this->avaluo->predio->construccionesComun as $construccioneComun){
+        if($predio->edifici0 > 0){
 
-            $construccion_comun_nueva = $construccioneComun->replicate();
+            foreach($this->avaluo->predio->construccionesComun as $construccioneComun){
 
-            $construccion_comun_nueva->predio_id = $predio->id;
+                $construccion_comun_nueva = $construccioneComun->replicate();
 
-            $construccion_comun_nueva->save();
+                $construccion_comun_nueva->predio_id = $predio->id;
+
+                $construccion_comun_nueva->save();
+
+            }
+
+            foreach($this->avaluo->predio->terrenosComun as $terrenoComun){
+
+                $terreno_comun_nuevo = $terrenoComun->replicate();
+
+                $terreno_comun_nuevo->predio_id = $predio->id;
+
+                $terreno_comun_nuevo->save();
+
+            }
 
         }
 
