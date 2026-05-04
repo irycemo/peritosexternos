@@ -62,6 +62,10 @@ trait TerrenosTrait
 
         try {
 
+            $sum = null;
+
+            $sum2 = null;
+
             if($this->terrenos[$index]['id'] != null)
                 $this->predio->terrenos()->where('id', $this->terrenos[$index]['id'])->delete();
 

@@ -56,6 +56,10 @@ trait TerrenosComunTrait
 
         try {
 
+            $sum = null;
+
+            $sum2 = null;
+
             if($this->terrenosComun[$index]['id'] != null)
                 $this->predio->terrenosComun()->where('id', $this->terrenosComun[$index]['id'])->delete();
 

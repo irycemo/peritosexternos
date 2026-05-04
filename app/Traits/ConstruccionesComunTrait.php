@@ -90,6 +90,10 @@ trait ConstruccionesComunTrait
 
         try {
 
+            $sum = null;
+
+            $sum2 = null;
+
             if($this->construccionesComun[$index]['id'] != null)
                 $this->predio->construccionesComun()->where('id', $this->construccionesComun[$index]['id'])->delete();
 

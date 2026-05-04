@@ -67,6 +67,10 @@ trait ConstruccionesTrait
 
         try {
 
+            $sum = null;
+
+            $sum2 = null;
+
             if($this->construcciones[$index]['id'] != null)
                 $this->predio->construcciones()->where('id', $this->construcciones[$index]['id'])->delete();
 
