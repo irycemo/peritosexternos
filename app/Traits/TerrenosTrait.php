@@ -65,6 +65,22 @@ trait TerrenosTrait
             if($this->terrenos[$index]['id'] != null)
                 $this->predio->terrenos()->where('id', $this->terrenos[$index]['id'])->delete();
 
+            foreach ($this->terrenos as $terreno) {
+
+                $sum = $sum + (float)$terreno['valor_terreno'];
+
+                $sum2 = $sum2 + (float)$terreno['superficie'];
+
+            }
+
+            $this->predio->update([
+                'superficie_terreno' => $sum2,
+                'superficie_total_terreno' => $sum2 + $this->predio->terrenosComun->sum('superficie_proporcional'),
+                'valor_total_terreno' => $sum + $this->predio->terrenosComun->sum('valor_terreno_comun'),
+            ]);
+
+            $this->predio->refresh();
+
         } catch (\Throwable $th) {
             Log::error("Error al borrar terreno por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);

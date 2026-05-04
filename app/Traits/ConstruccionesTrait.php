@@ -70,6 +70,22 @@ trait ConstruccionesTrait
             if($this->construcciones[$index]['id'] != null)
                 $this->predio->construcciones()->where('id', $this->construcciones[$index]['id'])->delete();
 
+            foreach ($this->construcciones as $construccion) {
+
+                $sum = $sum + (float)$construccion['valor_unitario'] * (float)$construccion['superficie'];
+
+                $sum2 = $sum2 + (float)$construccion['superficie'];
+
+            }
+
+            $this->predio->update([
+                'superficie_construccion' => $sum2,
+                'valor_total_construccion' => $sum + $this->predio->construccionesComun->sum('valor_construccion_comun'),
+                'superficie_total_construccion' => $sum2 + $this->predio->construccionesComun->sum('superficie_proporcional')
+            ]);
+
+            $this->predio->refresh();
+
         } catch (\Throwable $th) {
             Log::error("Error al borrar construccion por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);

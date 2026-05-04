@@ -93,6 +93,23 @@ trait ConstruccionesComunTrait
             if($this->construccionesComun[$index]['id'] != null)
                 $this->predio->construccionesComun()->where('id', $this->construccionesComun[$index]['id'])->delete();
 
+            foreach ($this->construccionesComun as $construccion) {
+
+                $sum = $sum + (float)$construccion['valor_construccion_comun'];
+
+                $sum2 = $sum2 + (float)$construccion['superficie_proporcional'];
+
+            }
+
+            $this->predio->area_comun_construccion = $sum2;
+            $this->predio->valor_construccion_comun = $sum;
+            $this->predio->superficie_total_construccion = $sum2 + $this->predio->construcciones->sum('superficie');
+            $this->predio->valor_total_construccion =  + $this->predio->construcciones->sum('valor_construccion') + $sum;
+
+            $this->predio->save();
+
+            $this->predio->refresh();
+
         } catch (\Throwable $th) {
             Log::error("Error al borrar construcción común por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);

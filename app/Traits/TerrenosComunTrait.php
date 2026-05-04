@@ -59,6 +59,23 @@ trait TerrenosComunTrait
             if($this->terrenosComun[$index]['id'] != null)
                 $this->predio->terrenosComun()->where('id', $this->terrenosComun[$index]['id'])->delete();
 
+            foreach ($this->terrenosComun as $terreno) {
+
+                $sum = $sum + (float)$terreno['valor_terreno_comun'];
+
+                $sum2 = $sum2 + (float)$terreno['superficie_proporcional'];
+
+            }
+
+            $this->predio->area_comun_terreno = $sum2;
+            $this->predio->valor_terreno_comun = $sum;
+            $this->predio->superficie_total_terreno =  $sum2 + $this->predio->terrenos->sum('superficie');
+            $this->predio->valor_total_terreno = $sum + $this->predio->terrenos->sum('valor_terreno');
+
+            $this->predio->save();
+
+            $this->predio->refresh();
+
         } catch (\Throwable $th) {
             Log::error("Error al borrar terreno de condominio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
