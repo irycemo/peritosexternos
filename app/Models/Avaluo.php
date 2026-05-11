@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
-use App\Models\File;
-use App\Models\User;
 use App\Models\Bloque;
-use App\Models\Predio;
-use Illuminate\Support\Str;
-use App\Traits\ModelosTrait;
+use App\Models\File;
 use App\Models\FirmaElectronica;
+use App\Models\Predio;
+use App\Models\Requerimiento;
+use App\Models\User;
+use App\Traits\ModelosTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class Avaluo extends Model implements Auditable
@@ -86,10 +87,13 @@ class Avaluo extends Model implements Auditable
         return $this->hasOne(FirmaElectronica::class)->where('estado', 'activo');
     }
 
+    public function requerimientos(){
+        return $this->morphMany(Requerimiento::class, 'requerimientoable');
+    }
+
     public function caratula(){
         return $this->imagenes()->where('descripcion', 'avaluo')->orderBy('created_at', 'desc')->first()->url;
     }
-
 
     public function fachada(){
 

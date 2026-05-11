@@ -21,7 +21,8 @@ class AvaluoCartografiaResource extends JsonResource
             'folio' => $this->folio,
             'usuario' => $this->usuario,
             'cartografia' => $this->poligonoDwg(),
-            'valuador' => $this->creadoPor->name
+            'valuador' => $this->creadoPor->name,
+            'requerimientos' => RequerimientoResource::collection($this->requerimientos)
         ];
 
     }

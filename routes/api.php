@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\AcreditarPagoController;
 use App\Http\Controllers\Api\V1\AvaluoApiController;
+use App\Http\Controllers\Api\V1\RequerimientoController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -27,6 +28,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('consultar_avaluos_conciliar', [AvaluoApiController::class, 'consultarAvaluosConciliar']);
 
     Route::post('conciliar_predio', [AvaluoApiController::class, 'conciliarPredio']);
+
+    Route::post('hacer_requerimiento', [RequerimientoController::class, 'hacerRequerimiento']);
 
 });
 

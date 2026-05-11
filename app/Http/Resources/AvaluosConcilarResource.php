@@ -36,6 +36,7 @@ class AvaluosConcilarResource extends JsonResource
             'oficina' => $this->predio->oficina,
             'tipo_predio' => $this->predio->tipo_predio,
             'numero_registro' => $this->predio->numero_registro,
+            'requerimientos' => RequerimientoResource::collection($this->requerimientos)
         ];
     }
 }

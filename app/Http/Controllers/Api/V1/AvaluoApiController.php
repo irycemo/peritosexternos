@@ -211,7 +211,7 @@ class AvaluoApiController extends Controller
 
         $validated = $request->validated();
 
-        $avaluos = Avaluo::with('imagenes', 'creadoPor:id,name')
+        $avaluos = Avaluo::with('imagenes', 'creadoPor:id,name', 'requerimientos')
                             ->where('estado', 'operado')
                             ->where('cartografia_validada', false)
                             ->when(isset($validated['año']), fn($q) => $q->where('año', $validated['año']))
@@ -228,7 +228,7 @@ class AvaluoApiController extends Controller
 
         $validated = $request->validated();
 
-        $avaluos = Avaluo::with('imagenes', 'creadoPor:id,name', 'predio')
+        $avaluos = Avaluo::with('imagenes', 'creadoPor:id,name', 'predio', 'requerimientos')
                             ->whereHas('predio', function($q){
                                 $q->whereIn('sector', [88,99]);
                             })

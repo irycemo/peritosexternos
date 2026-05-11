@@ -7,6 +7,7 @@ use App\Exceptions\GeneralException;
 use App\Http\Controllers\AvaluoController;
 use App\Http\Controllers\FirmaElectronicaController;
 use App\Models\Avaluo;
+use App\Models\File;
 use App\Models\FirmaElectronica;
 use App\Models\Persona;
 use App\Services\SGCService\SGCService;
@@ -18,6 +19,7 @@ use App\Traits\RevisarAvaluoTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -39,6 +41,7 @@ class MisAvaluos extends Component
 
     public $modalConcluir = false;
     public $modalClonar = false;
+    public $modal_archivo = false;
 
     public $contraseña;
     public $cer;
@@ -48,6 +51,8 @@ class MisAvaluos extends Component
     public $oficina;
     public $tipo_predio;
     public $numero_registro;
+
+    public $archivo;
 
     public $años;
     public $filters = [
@@ -88,6 +93,14 @@ class MisAvaluos extends Component
         $this->avaluo = $avaluo;
 
         $this->modalClonar = true;
+
+    }
+
+    public function abrirModalArchivo(Avaluo $avaluo){
+
+        $this->avaluo = $avaluo;
+
+        $this->modal_archivo = true;
 
     }
 
@@ -591,6 +604,69 @@ class MisAvaluos extends Component
         } catch (\Throwable $th) {
 
             Log::error("Error al borrar avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+    }
+
+    public function guardarArchivo(){
+
+        try {
+
+            $file = $this->avaluo->imagenes()
+                            ->where('descripcion', 'poligonoDwg')
+                            ->first();
+
+            $url = Str::random(40) . '.' . $this->archivo->getClientOriginalExtension();
+
+            if(app()->isProduction()){
+
+                Storage::disk('s3')->putFileAs('peritos_externos/imagenes/', $this->archivo, $url, 'private');
+
+            }else{
+
+                $url = $this->archivo->store('/', 'avaluos');
+
+            }
+
+            if(!$file)
+
+                File::create([
+                            'fileable_type' => 'App\Models\Avaluo',
+                            'fileable_id' => $this->avaluo->id,
+                            'url' => $url,
+                            'descripcion' => 'poligonoDwg'
+                            ]);
+
+            else{
+
+                if(app()->isProduction()){
+
+                    Storage::disk('s3')->delete('peritos_externos/imagenes/' . $file->url);
+
+                }else{
+
+                    Storage::disk('avaluos')->delete($file->url);
+
+                }
+
+                $file->update(['url' => $url]);
+
+            }
+
+            $this->dispatch('mostrarMensaje', ['success', 'El archivo se guardó con éxito.']);
+
+            $this->reset(['archivo', 'modal_archivo']);
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al guardar archivo dwg en avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
 
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
 
