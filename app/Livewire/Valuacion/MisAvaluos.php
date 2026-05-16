@@ -84,6 +84,18 @@ class MisAvaluos extends Component
 
         }
 
+        try {
+
+            $this->revisarAvaluoCompleto();
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+            return;
+
+        }
+
         $this->modalConcluir = true;
 
     }

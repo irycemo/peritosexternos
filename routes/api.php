@@ -31,6 +31,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('hacer_requerimiento', [RequerimientoController::class, 'hacerRequerimiento']);
 
+    Route::post('asociar_aviso', [AvaluoApiController::class, 'asociarAviso']);
+
 });
 
 Route::post('acreditar_pago', AcreditarPagoController::class)->name('acredita_pago');

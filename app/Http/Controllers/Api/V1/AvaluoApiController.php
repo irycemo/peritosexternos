@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AvaluoRequest;
 use App\Http\Resources\AvaluoResource;
 use App\Http\Controllers\AvaluoController;
+use App\Http\Requests\AsociarAvisoRequest;
 use App\Http\Requests\ConciliarPredioRequest;
 use App\Http\Requests\ConsultarAvaluosConcilar;
 use App\Http\Resources\AvaluosConcilarResource;
@@ -316,6 +317,43 @@ class AvaluoApiController extends Controller
 
             return response()->json([
                 'error' => "Error al conciliar predio.",
+            ], 500);
+
+        }
+
+    }
+
+    public function asociarAviso(AsociarAvisoRequest $request){
+
+        $validated = $request->validated();
+
+        $avaluo = Avaluo::find($validated['avaluo_id']);
+
+        if(!$avaluo){
+
+            return response()->json([
+                'error' => "No se encontró el avalúo.",
+            ], 404);
+
+        }
+
+        try {
+
+            $avaluo->update([
+                'entidad' => $validated['entidad'],
+                'actualizado_por' => auth()->id()
+            ]);
+
+            return response()->json([
+                'entidad' => $validated['entidad'],
+            ], 200);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al validar la cartografía." . $th);
+
+            return response()->json([
+                'error' => "Error al validar la cartografía.",
             ], 500);
 
         }
