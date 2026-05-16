@@ -16,6 +16,7 @@ use App\Http\Requests\ConsultarAvaluosConcilar;
 use App\Http\Resources\AvaluosConcilarResource;
 use App\Http\Resources\AvaluoCartografiaResource;
 use App\Http\Requests\ConsultarCartografiaRequest;
+use App\Models\FirmaElectronica;
 
 class AvaluoApiController extends Controller
 {
@@ -98,7 +99,13 @@ class AvaluoApiController extends Controller
 
                 $avaluo->update(['estado' => 'nuevo']);
 
-                $avaluo->firmaElectronica?->update(['estado' => 'cancelado']);
+                $firmas_electronicas = FirmaElectronica::where('estado', 'activo')->where('avaluo_id', $avaluo->id)->get();
+
+                foreach ($firmas_electronicas as $firma) {
+
+                    $firma->update(['estado' => 'cancelado']);
+
+                }
 
             });
 
