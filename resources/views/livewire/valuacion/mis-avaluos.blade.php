@@ -158,7 +158,7 @@
 
                                     @if($avaluo->predio)
 
-                                        @if($avaluo->firmaElectronica && $avaluo->estado == 'concluido')
+                                        @if($avaluo->firmaElectronica && in_array($avaluo->estado, ['concluido', 'operado']))
 
                                             <button
                                                 wire:click="reimprimir('{{ $avaluo->firmaElectronica->uuid }}')"
@@ -180,15 +180,6 @@
 
                                             @endif
 
-                                            <button
-                                                wire:confirm="¿Esta seguro que desea corregir el avalúo?"
-                                                wire:click="corregirAvaluo({{ $avaluo->id }})"
-                                                wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                                role="menuitem">
-                                                Corregir
-                                            </button>
-
                                         @else
 
                                             <button
@@ -197,6 +188,19 @@
                                                 class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                                 role="menuitem">
                                                 Imprimir
+                                            </button>
+
+                                        @endif
+
+                                        @if(in_array($avaluo->estado, ['concluido']))
+
+                                            <button
+                                                wire:confirm="¿Esta seguro que desea corregir el avalúo?"
+                                                wire:click="corregirAvaluo({{ $avaluo->id }})"
+                                                wire:loading.attr="disabled"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                role="menuitem">
+                                                Corregir
                                             </button>
 
                                         @endif
