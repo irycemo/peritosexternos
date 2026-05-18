@@ -340,7 +340,7 @@ class MisAvaluos extends Component
 
             });
 
-            $this->dispatch('mostrarMensaje', ['success', 'El avalúo se clono con éxito']);
+            $this->dispatch('mostrarMensaje', ['success', 'El avalúo se corrigió con éxito']);
 
             $this->reset(['localidad', 'oficina', 'tipo_predio', 'numero_registro', 'modalClonar']);
 
