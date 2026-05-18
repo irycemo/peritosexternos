@@ -235,7 +235,7 @@
                                             Clonar avalúo
                                         </button>
 
-                                        @if($avaluo->estado === 'nuevo')
+                                        @if(in_array($avaluo->estado, ['nuevo', 'conciliar']))
 
                                             <button
                                                 wire:confirm="¿Esta seguro que desea borra el avalúo? No será posible recuperar la información."
