@@ -46,7 +46,7 @@ trait TerrenosComunTrait
 
     public function agregarTerrenoComun(){
 
-        $this->terrenosComun[] = ['id' => null, 'area_terreno_comun' => null, 'superficie_proporcional' => null, 'indiviso_terreno' => null, 'valor_unitario' => null, 'valor_terreno_comun'];
+        $this->terrenosComun[] = ['id' => null, 'area_terreno_comun' => null, 'superficie_proporcional' => null, 'indiviso_terreno' => null, 'valor_unitario' => null, 'valor_terreno_comun' => null];
 
     }
 
