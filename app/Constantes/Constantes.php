@@ -483,12 +483,14 @@ class Constantes{
     const ASOCIACIONES = [
         'AABPE',
         'APROVAM',
+        'CATASTRO',
         'CIMVMAC',
         'COMIAVI',
         'INVAFAC',
         'SAIVAL',
         'SAVAC',
         'SEDUM',
+        'SEGOB',
         'SIAVAC',
         'SICIV',
     ];
