@@ -143,7 +143,11 @@ class Usuarios extends Component
 
                 $this->modelo_editar->password = bcrypt('sistema');
                 $this->modelo_editar->creado_por = auth()->id();
-                /* $this->modelo_editar->clave = User::max('clave') + 1; */
+                if(! $this->modelo_editar->clave){
+
+                    $this->modelo_editar->clave = User::max('clave') + 1;
+
+                }
                 $this->modelo_editar->save();
 
                 $this->modelo_editar->roles()->attach($this->role);
