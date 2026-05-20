@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\AcreditarPagoController;
 use App\Http\Controllers\Api\V1\AvaluoApiController;
+use App\Http\Controllers\Api\V1\ConsultasAvaluosController;
 use App\Http\Controllers\Api\V1\RequerimientoController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('hacer_requerimiento', [RequerimientoController::class, 'hacerRequerimiento']);
 
     Route::post('asociar_aviso', [AvaluoApiController::class, 'asociarAviso']);
+
+    Route::get('consultar_avaluo_folio', [ConsultasAvaluosController::class, 'consultarAvaluo']);
+
+    Route::get('consultar_avaluos', [ConsultasAvaluosController::class, 'consultarAvaluos']);
 
 });
 
