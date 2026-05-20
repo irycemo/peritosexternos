@@ -201,18 +201,22 @@
 
                                         @endif
 
-                                        @if($avaluo->estado === 'nuevo')
+                                        @can('Borrar avalúo')
 
-                                            <button
-                                                wire:confirm="¿Esta seguro que desea borra el avalúo? No será posible recuperar la información."
-                                                wire:click="borrarAvaluo({{ $avaluo->id }})"
-                                                wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                                role="menuitem">
-                                                Borrar avalúo
-                                            </button>
+                                            @if($avaluo->estado === 'nuevo')
 
-                                        @endif
+                                                <button
+                                                    wire:confirm="¿Esta seguro que desea borra el avalúo? No será posible recuperar la información."
+                                                    wire:click="borrarAvaluo({{ $avaluo->id }})"
+                                                    wire:loading.attr="disabled"
+                                                    class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                    role="menuitem">
+                                                    Borrar avalúo
+                                                </button>
+
+                                            @endif
+
+                                        @endcan
 
                                     @endif
 
