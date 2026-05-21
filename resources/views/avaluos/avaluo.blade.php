@@ -149,7 +149,17 @@
 
     <header>
 
-            <img class="encabezado" src="{{ public_path('storage/img/encabezado.png') }}" alt="encabezado">
+        @if(isset($avaluo))
+
+            <p style="text-align: right; font-size: 9px; font-weight: bold; margin: 0;">{{ 'Avalúo de perito externo ' }} {{ $avaluo->predio->cuenta_predial }}</p>
+
+        @else
+
+            <p style="text-align: right; font-size: 9px; font-weight: bold; margin: 0;">{{ 'Avalúo de perito externo ' }} {{ $predio->cuentaPredial() }}</p>
+
+        @endif
+
+        <img class="encabezado" src="{{ public_path('storage/img/encabezado.png') }}" alt="encabezado">
 
     </header>
 
