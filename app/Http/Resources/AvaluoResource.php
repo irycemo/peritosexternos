@@ -86,6 +86,7 @@ class AvaluoResource extends JsonResource
             'microlocalizacion' => $this->microlocalizacion(),
             'poligonoImagen' => $this->poligonoImagen(),
             'poligonoDwg' => $this->poligonoDwg(),
+            'anexo' => $this->anexo()
         ];
 
     }
