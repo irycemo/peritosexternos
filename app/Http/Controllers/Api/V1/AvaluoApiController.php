@@ -97,7 +97,7 @@ class AvaluoApiController extends Controller
 
             DB::transaction(function () use($avaluo){
 
-                $avaluo->update(['estado' => 'nuevo']);
+                $avaluo->update(['estado' => 'nuevo', 'actualizado_por' => auth()->id()]);
 
                 $firmas_electronicas = FirmaElectronica::where('estado', 'activo')->where('avaluo_id', $avaluo->id)->get();
 
@@ -139,7 +139,7 @@ class AvaluoApiController extends Controller
 
         try {
 
-            $avaluo->update(['estado' => 'operado', 'entidad' => $validated['entidad']]);
+            $avaluo->update(['estado' => 'operado', 'entidad' => $validated['entidad'], 'actualizado_por' => auth()->id()]);
 
             return response()->json([
                 'data' => "Operación exitosa.",
@@ -171,7 +171,7 @@ class AvaluoApiController extends Controller
 
         try {
 
-            $avaluo->update(['estado' => 'concluido']);
+            $avaluo->update(['estado' => 'concluido', 'actualizado_por' => auth()->id()]);
 
             return response()->json([
                 'data' => "Operación exitosa.",
@@ -310,7 +310,7 @@ class AvaluoApiController extends Controller
                     'departamento' => $validated['departamento'],
                 ]);
 
-                $avaluo->update(['estado' => 'nuevo']);
+                $avaluo->update(['estado' => 'nuevo', 'actualizado_por' => auth()->id()]);
 
             });
 
