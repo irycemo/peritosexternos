@@ -71,8 +71,15 @@ trait ConstruccionesTrait
 
             $sum2 = null;
 
-            if($this->construcciones[$index]['id'] != null)
+            if($this->construcciones[$index]['id'] != null){
+
                 $this->predio->construcciones()->where('id', $this->construcciones[$index]['id'])->delete();
+
+            }
+
+            unset($this->construcciones[$index]);
+
+            $this->construcciones = array_values($this->construcciones);
 
             foreach ($this->construcciones as $construccion) {
 
@@ -94,10 +101,6 @@ trait ConstruccionesTrait
             Log::error("Error al borrar construccion por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
         }
-
-        unset($this->construcciones[$index]);
-
-        $this->construcciones = array_values($this->construcciones);
 
     }
 

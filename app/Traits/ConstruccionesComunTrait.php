@@ -94,8 +94,15 @@ trait ConstruccionesComunTrait
 
             $sum2 = null;
 
-            if($this->construccionesComun[$index]['id'] != null)
+            if($this->construccionesComun[$index]['id'] != null){
+
                 $this->predio->construccionesComun()->where('id', $this->construccionesComun[$index]['id'])->delete();
+
+            }
+
+            unset($this->construccionesComun[$index]);
+
+            $this->construccionesComun = array_values($this->construccionesComun);
 
             foreach ($this->construccionesComun as $construccion) {
 
@@ -118,10 +125,6 @@ trait ConstruccionesComunTrait
             Log::error("Error al borrar construcción común por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
         }
-
-        unset($this->construccionesComun[$index]);
-
-        $this->construccionesComun = array_values($this->construccionesComun);
 
     }
 

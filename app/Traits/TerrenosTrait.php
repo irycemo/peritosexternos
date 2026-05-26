@@ -66,8 +66,15 @@ trait TerrenosTrait
 
             $sum2 = null;
 
-            if($this->terrenos[$index]['id'] != null)
+            if($this->terrenos[$index]['id'] != null){
+
                 $this->predio->terrenos()->where('id', $this->terrenos[$index]['id'])->delete();
+
+            }
+
+            unset($this->terrenos[$index]);
+
+            $this->terrenos = array_values($this->terrenos);
 
             foreach ($this->terrenos as $terreno) {
 
@@ -89,10 +96,6 @@ trait TerrenosTrait
             Log::error("Error al borrar terreno por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
         }
-
-        unset($this->terrenos[$index]);
-
-        $this->terrenos = array_values($this->terrenos);
 
         if(! count($this->terrenos)){
 
