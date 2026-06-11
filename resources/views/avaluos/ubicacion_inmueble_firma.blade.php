@@ -1,125 +1,121 @@
 <p class="separador">UBICACIÓN DEL INMUEBLE</p>
 
+<div>
+
+    @if ($avaluo->predio->tipo_vialidad)
+        <span>TIPO DE VIALIDAD: <strong>{{ $avaluo->predio->tipo_vialidad }}</strong></span>
+    @endif
+
+    @if ($avaluo->predio->nombre_vialidad)
+        <span style="padding-left: 5px;">NOMBRE DE LA VIALIDAD: <strong>{{ $avaluo->predio->nombre_vialidad }}</strong></span>
+    @endif
+
+    @if ($avaluo->predio->numero_exterior)
+        <span style="padding-left: 5px;">NÚMERO EXTERIOR: <strong>{{ $avaluo->predio->numero_exterior }}</strong></span>
+    @endif
+
+    @if ($avaluo->predio->numero_interior)
+        <span style="padding-left: 5px;">NÚMERO INTERIOR: <strong>{{ $avaluo->predio->numero_interior }}</strong></span>
+    @endif
+
+    @if ($avaluo->predio->numero_exterior_2)
+        <span style="padding-left: 5px;">número exterior 2: <strong>{{ $avaluo->predio->numero_exterior_2 }}</strong></span>
+    @endif
+
+    @if ($avaluo->predio->numero_adicional)
+        <span style="padding-left: 5px;">número adicional: <strong>{{ $avaluo->predio->numero_adicional }}</strong></span>
+    @endif
+
+    @if ($avaluo->predio->numero_adicional_2)
+        <span style="padding-left: 5px;">número adicional 2: <strong>{{ $avaluo->predio->numero_adicional_2 }}</strong></span>
+    @endif
+
+    @if ($avaluo->predio->tipo_asentamiento)
+        <span style="padding-left: 5px;">TIPO DE ASENTAMIENTO: <strong>{{ $avaluo->predio->tipo_asentamiento }}</strong></span>
+    @endif
+
+    @if ($avaluo->predio->nombre_asentamiento)
+        <span style="padding-left: 5px;">NOMBRE DEL ASENTAMIENTO: <strong>{{ $avaluo->predio->nombre_asentamiento }}</strong></span>
+    @endif
+
+    @if ($avaluo->predio->codigo_postal)
+        <span style="padding-left: 5px;">CÓDIGO POSTAL: <strong>{{ $avaluo->predio->codigo_postal }}</strong></span>
+    @endif
+
+</div>
+
 <p class="parrafo">
 
-    <strong>Folio:</strong> {{ $avaluo->año }}-{{ $avaluo->folio }}-{{ $avaluo->usuario }};
+    @if ($avaluo->predio->nombre_edificio)
+        EDIFICIO: <strong>{{ $avaluo->predio->nombre_edificio }}</strong>
+    @endif
 
-    <strong>Cuenta predial:</strong> {{ $avaluo->predio->cuenta_predial }};
+    @if ($avaluo->predio->clave_edificio)
+        clave del edificio: <strong>{{ $avaluo->predio->clave_edificio }}</strong>
+    @endif
 
-    <strong>Clave catastral:</strong> {{ $avaluo->predio->clave_catastral }};
+    @if ($avaluo->predio->departamento_edificio)
+        DEPARTAMENTO: <strong>{{ $avaluo->predio->departamento_edificio }}</strong>
+    @endif
+
+    @if ($avaluo->predio->lote_fraccionador)
+        lote del fraccionador: <strong>{{ $avaluo->predio->lote_fraccionador }}</strong>
+    @endif
+
+    @if ($avaluo->predio->manzana_fraccionador)
+        manzana del fraccionador: <strong>{{ $avaluo->predio->manzana_fraccionador }}</strong>
+    @endif
+
+    @if ($avaluo->predio->etapa_fraccionador)
+        etapa del fraccionador: <strong>{{ $avaluo->predio->etapa_fraccionador }}</strong>
+    @endif
+
+    @if ($avaluo->predio->ubicacion_en_manzana)
+        ubicación en manzana: <strong>{{ $avaluo->predio->ubicacion_en_manzana }}</strong>
+    @endif
+
+    @if ($avaluo->predio->nombre_predio)
+        Predio Rústico Denominado ó Antecedente: <strong>{{ $avaluo->predio->nombre_predio }}</strong>
+    @endif
 
 </p>
 
 <p class="parrafo">
 
-    @if ($avaluo->predio->codigo_postal)
-        <strong>CÓDIGO POSTAL:</strong> {{ $avaluo->predio->codigo_postal }};
-    @endif
-
-    @if ($avaluo->predio->tipo_asentamiento)
-        <strong>TIPO DE ASENTAMIENTO:</strong> {{ $avaluo->predio->tipo_asentamiento }};
-    @endif
-
-    @if ($avaluo->predio->nombre_asentamiento)
-        <strong>NOMBRE DEL ASENTAMIENTO:</strong> {{ $avaluo->predio->nombre_asentamiento }};
-    @endif
-
     @if ($avaluo->predio->municipio)
-        <strong>MUNICIPIO:</strong> {{ $avaluo->predio->municipio }};
+        MUNICIPIO: <strong>{{ $datos_control->municipio ?? $avaluo->predio->municipio }}</strong>
     @endif
 
     @if ($avaluo->predio->localidad)
-        <strong>LOCALIDAD:</strong> {{ $avaluo->predio->localidad }};
-    @endif
-
-    @if ($avaluo->predio->tipo_vialidad)
-        <strong>TIPO DE VIALIDAD:</strong> {{ $avaluo->predio->tipo_vialidad }};
-    @endif
-
-    @if ($avaluo->predio->nombre_vialidad)
-        <strong>NOMBRE DE LA VIALIDAD:</strong> {{ $avaluo->predio->nombre_vialidad }};
-    @endif
-
-    @if ($avaluo->predio->numero_exterior)
-        <strong>NÚMERO EXTERIOR:</strong> {{ $avaluo->predio->numero_exterior }};
-    @endif
-
-    @if ($avaluo->predio->numero_interior)
-        <strong>NÚMERO INTERIOR:</strong> {{ $avaluo->predio->numero_interior }};
-    @endif
-
-    @if ($avaluo->predio->nombre_edificio)
-        <strong>EDIFICIO:</strong> {{ $avaluo->predio->nombre_edificio }};
-    @endif
-
-    @if ($avaluo->predio->clave_edificio)
-        <strong>clave del edificio:</strong> {{ $avaluo->predio->clave_edificio }};
-    @endif
-
-    @if ($avaluo->predio->departamento_edificio)
-        <strong>DEPARTAMENTO:</strong> {{ $avaluo->predio->departamento_edificio }};
-    @endif
-
-    @if ($avaluo->predio->numero_exterior_2)
-        <strong>número exterior 2:</strong> {{ $avaluo->predio->numero_exterior_2 }};
-    @endif
-
-    @if ($avaluo->predio->numero_adicional)
-        <strong>número adicional:</strong> {{ $avaluo->predio->numero_adicional }};
-    @endif
-
-    @if ($avaluo->predio->numero_adicional_2)
-        <strong>número adicional 2:</strong> {{ $avaluo->predio->numero_adicional_2 }};
-    @endif
-
-    @if ($avaluo->predio->lote_fraccionador)
-        <strong>lote del fraccionador:</strong> {{ $avaluo->predio->lote_fraccionador }};
-    @endif
-
-    @if ($avaluo->predio->manzana_fraccionador)
-        <strong>manzana del fraccionador:</strong> {{ $avaluo->predio->manzana_fraccionador }};
-    @endif
-
-    @if ($avaluo->predio->etapa_fraccionador)
-        <strong>etapa del fraccionador:</strong> {{ $avaluo->predio->etapa_fraccionador }};
-    @endif
-
-    @if ($avaluo->predio->ubicacion_en_manzana)
-        <strong>ubicación en manzana:</strong> {{ $avaluo->predio->ubicacion_en_manzana }};
-    @endif
-
-    @if ($avaluo->predio->nombre_predio)
-        <strong>Predio Rústico Denominado ó Antecedente:</strong> {{ $avaluo->predio->nombre_predio }};
-    @endif
-
-    @if ($avaluo->predio->observaciones)
-        <strong>OBSERVACIONES:</strong> {{ $avaluo->predio->observaciones }}.
+        LOCALIDAD: <strong>{{ $datos_control->oficina ?? $avaluo->predio->localidad }}</strong>
     @endif
 
 </p>
 
 @if($avaluo->predio->xutm || $avaluo->predio->lat)
 
-    <p class="parrafo">
-        <strong>Coordenadas geográficas: </strong>
-    </p>
+    Coordenadas geográficas:
 
-    @if($avaluo->predio->xutm)
+    <table style="width: 100%;">
 
-        <p class="parrafo">
+        <tbody>
+            <tr>
+                <td style="text-align: left;">
 
-            <strong>UTM: </strong>
-            <strong>X:</strong> {{ $avaluo->predio->xutm }}, <strong>Y:</strong> {{ $avaluo->predio->yutm }},  <strong>Z:</strong> {{ $avaluo->predio->zutm }}
+                    UTM
+                    X: <strong>{{ $avaluo->predio->xutm }}</strong>, Y: <strong>{{ $avaluo->predio->yutm }}</strong>, Z: <strong>{{ $avaluo->predio->zutm }}</strong>
 
-            @if($avaluo->predio->xutm)
+                </td>
+                <td style="">
 
-                 | <strong>GEO: </strong>
-                <strong>LAT:</strong> {{ $avaluo->predio->lat }}, <strong>LON:</strong> {{ $avaluo->predio->lon }}
+                    GEO
+                    LAT: <strong>{{ $avaluo->predio->lat }}</strong>, LON: <strong>{{ $avaluo->predio->lon }}</strong>
 
-            @endif
+                </td>
+            </tr>
+        </tbody>
 
-        </p>
-
-    @endif
+    </table>
 
 @endif
+

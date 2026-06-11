@@ -2,8 +2,8 @@
 
 <p class="parrafo">
 
-    <p><strong>Clasificación de la zona:</strong> {{ $predio->avaluo->clasificacion_zona }}</p>
-    <p><strong>Tipo de construcción dominante:</strong> {{ $predio->avaluo->construccion_dominante }}</p>
+    <p>Clasificación de la zona: <strong>{{ $predio->avaluo->clasificacion_zona }}</strong></p>
+    <p>Tipo de construcción dominante: <strong>{{ $predio->avaluo->construccion_dominante }}</strong></p>
 
 </p>
 
@@ -27,25 +27,25 @@
 
         <tr>
             <td style="padding-right: 40px;">
-                <p><strong>Servicios municipales</strong></p>
+                <p>Servicios municipales</p>
             </td>
             <td style="text-align: center;">
-                {{ $predio->avaluo->agua ? 'Si' : 'No' }}
+                <strong>{{ $predio->avaluo->agua ? 'Si' : 'No' }}</strong>
             </td>
             <td style="text-align: center;">
-                {{ $predio->avaluo->drenaje ? 'Si' : 'No' }}
+                <strong>{{ $predio->avaluo->drenaje ? 'Si' : 'No' }}</strong>
             </td>
             <td style="text-align: center;">
-                {{ $predio->avaluo->drenaje ? 'Si' : 'No' }}
+                <strong>{{ $predio->avaluo->drenaje ? 'Si' : 'No' }}</strong>
             </td>
             <td style="text-align: center;">
-                {{ $predio->avaluo->energia_electrica ? 'Si' : 'No' }}
+                <strong>{{ $predio->avaluo->energia_electrica ? 'Si' : 'No' }}</strong>
             </td>
             <td style="text-align: center;">
-                {{ $predio->avaluo->alumbrado_publico ? 'Si' : 'No' }}
+                <strong>{{ $predio->avaluo->alumbrado_publico ? 'Si' : 'No' }}</strong>
             </td>
             <td style="text-align: center;">
-                {{ $predio->avaluo->banqueta ? 'Si' : 'No' }}
+                <strong>{{ $predio->avaluo->banqueta ? 'Si' : 'No' }}</strong>
             </td>
         </tr>
 
@@ -57,7 +57,7 @@
 
     <p class="separador">Bloque {{ $loop->iteration }}</p>
 
-    <strong>Uso del bloque:</strong> {{ $bloque->uso }}
+    Uso del bloque: <strong>{{ $bloque->uso }}</strong>
 
     <p style="text-align: center; margin-top: 20px;"><strong>Obra negra</strong></p>
 

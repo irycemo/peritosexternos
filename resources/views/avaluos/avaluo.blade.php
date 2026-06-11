@@ -26,7 +26,7 @@
 
 
     body{
-        margin-top: 120px;
+        margin-top: 140px;
         margin-bottom: 40px;
         counter-reset: page;
         height: 100%;
@@ -140,6 +140,7 @@
     .imagenes{
 
         max-width: 100%;
+        max-height: 50%;
 
     }
 
@@ -151,11 +152,29 @@
 
         @if(isset($avaluo))
 
-            <p style="text-align: right; font-size: 9px; font-weight: bold; margin: 0;">{{ 'Avalúo de perito externo ' }} {{ $avaluo->predio->cuenta_predial }}</p>
+            <div style="text-align: right; margin: 0px; margin-bottom: 4px;">
+
+                <span style="font-size: 11px; font-weight: bold; border-style: solid; border-color: #5E1D45; border-radius: 50%;  padding: 3px 6px 3px 6px; margin: 0px; width:80ch">Avalúo de perito externo</span>
+            </div>
+
+            <div style="text-align: right; margin: 0px;">
+
+                <span style="font-size: 11px; font-weight: bold; border-style: solid; border-color: #5E1D45; border-radius: 50%;  padding: 3px 6px 3px 6px; margin: 0px; width:80ch">Cuenta predial {{ $avaluo->predio->cuenta_predial }}</span>
+
+            </div>
 
         @else
 
-            <p style="text-align: right; font-size: 9px; font-weight: bold; margin: 0;">{{ 'Avalúo de perito externo ' }} {{ $predio->cuentaPredial() }}</p>
+            <div style="text-align: right; margin: 0px; margin-bottom: 4px;">
+
+                <span style="font-size: 11px; font-weight: bold; border-style: solid; border-color: #5E1D45; border-radius: 50%;  padding: 3px 6px 3px 6px; margin: 0px; width:80ch">Avalúo de perito externo</span>
+            </div>
+
+            <div style="text-align: right; margin: 0px;">
+
+                <span style="font-size: 11px; font-weight: bold; border-style: solid; border-color: #5E1D45; border-radius: 50%;  padding: 3px 6px 3px 6px; margin: 0px; width:80ch">Cuenta predial {{ $predio->cuentaPredial() }}</span>
+
+            </div>
 
         @endif
 
@@ -183,6 +202,33 @@
 
         @if(isset($avaluo))
 
+            <table style="margin-top: 10px; font-size: 12px; width: 100%;">
+
+                <tbody>
+                    <tr>
+                        <td style="padding-right: 40px; text-align: left;">
+
+                            Cuenta predial: <strong>{{ $avaluo->predio->cuenta_predial }}</strong>
+
+                        </td>
+                        <td style="padding-right: 40px;">
+
+                            Clave catastral: <strong>{{ $avaluo->predio->clave_catastral }}</strong>
+
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+            <p class="parrafo">
+
+                Folio de avalúo: <strong>{{ $avaluo->año }}-{{ $avaluo->folio }}-{{ $avaluo->usuario }}</strong>
+
+            </p>
+
+            @include('avaluos.propietarios_firma')
+
             @include('avaluos.ubicacion_inmueble_firma')
 
             @include('avaluos.colindancias_firma')
@@ -191,13 +237,38 @@
 
             @include('avaluos.terrenos_construcciones_firma')
 
-            @include('avaluos.propietarios_firma')
-
             @include('avaluos.bloques_firma')
 
             @include('avaluos.imagenes_firma')
 
         @else
+
+            <table style="margin-top: 10px; font-size: 12px; width: 100%;">
+
+                <tbody>
+                    <tr>
+                        <td style="padding-right: 40px; text-align: left;">
+
+                            Cuenta predial: <strong>{{ $predio->cuentaPredial() }}</strong>
+
+                        </td>
+                        <td style="padding-right: 40px;">
+
+                            Clave catastral: <strong>{{ $predio->claveCatastral() }}</strong>
+
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+            <p class="parrafo">
+
+                Folio de avalúo: <strong>{{ $predio->avaluo->año }}-{{ $predio->avaluo->folio }}-{{ $predio->avaluo->usuario }}</strong>
+
+            </p>
+
+            @include('avaluos.propietarios')
 
             @include('avaluos.ubicacion_inmueble')
 
@@ -206,8 +277,6 @@
             @include('avaluos.descripcion_inmueble')
 
             @include('avaluos.terrenos_construcciones')
-
-            @include('avaluos.propietarios')
 
             @include('avaluos.bloques')
 
@@ -289,13 +358,13 @@
                             </td>
                             <td style="padding-right: 40px;">
 
-                                <p><strong>Solicitante: </strong> {{ $avaluo->solicitante }}</p>
+                                <p>Solicitante: <strong>{{ $avaluo->solicitante }}</strong></p>
 
-                                <p><strong>Impreso el:</strong> {{ $datos_control->impreso_en }}</p>
+                                <p>Impreso el: <strong>{{ $datos_control->impreso_en }}</strong></p>
 
-                                <p><strong>Impreso por:</strong> {{ $datos_control->valuador }}</p>
+                                <p>Impreso por: <strong>{{ $datos_control->valuador }}</strong></p>
 
-                                <p><strong>Identificador para validación:</strong> {{ $firma_electronica->uuid }}</p>
+                                <p>Identificador para validación: <strong>{{ $firma_electronica->uuid }}</strong></p>
 
                             </td>
                         </tr>
@@ -317,13 +386,13 @@
                         <tr>
                             <td style="padding-right: 40px;">
 
-                                <p><strong>Solicitante: </strong> {{ $datos_control->solicitante }}</p>
+                                <p>Solicitante: <strong>{{ $datos_control->solicitante }}</strong></p>
 
-                                <p><strong>Impreso el: </strong> {{ $datos_control->impreso_en }}</p>
+                                <p>Impreso el: <strong>{{ $datos_control->impreso_en }}</strong></p>
 
-                                <p><strong>Impreso por: </strong> {{ $datos_control->impreso_por }}</p>
+                                <p>Impreso por: <strong>{{ $datos_control->impreso_por }}</strong></p>
 
-                                <p><strong>Firma del perito valuador:</strong> ___________________________________</p>
+                                <p>Firma del perito valuador: ___________________________________</p>
 
                             </td>
                         </tr>

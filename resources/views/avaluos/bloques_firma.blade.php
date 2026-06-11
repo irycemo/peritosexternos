@@ -2,8 +2,8 @@
 
 <p class="parrafo">
 
-    <p><strong>Clasificación de la zona:</strong> {{ $avaluo->clasificacion_zona }}</p>
-    <p><strong>Tipo de construcción dominante:</strong> {{ $avaluo->construccion_dominante }}</p>
+    <p>Clasificación de la zona: <strong>{{ $avaluo->clasificacion_zona }}</strong></p>
+    <p>Tipo de construcción dominante: <strong>{{ $avaluo->construccion_dominante }}</strong></p>
 
 </p>
 
@@ -27,25 +27,25 @@
 
         <tr>
             <td style="padding-right: 40px;">
-                <p><strong>Servicios municipales</strong></p>
+                <p>Servicios municipales</p>
             </td>
             <td style="text-align: center;">
-                {{ $avaluo->agua ? 'Si' : 'No' }}
+                <strong>{{ $avaluo->agua ? 'Si' : 'No' }}</strong>
             </td>
             <td style="text-align: center;">
-                {{ $avaluo->drenaje ? 'Si' : 'No' }}
+                <strong>{{ $avaluo->drenaje ? 'Si' : 'No' }}</strong>
             </td>
             <td style="text-align: center;">
-                {{ $avaluo->drenaje ? 'Si' : 'No' }}
+                <strong>{{ $avaluo->drenaje ? 'Si' : 'No' }}</strong>
             </td>
             <td style="text-align: center;">
-                {{ $avaluo->energia_electrica ? 'Si' : 'No' }}
+                <strong>{{ $avaluo->energia_electrica ? 'Si' : 'No' }}</strong>
             </td>
             <td style="text-align: center;">
-                {{ $avaluo->alumbrado_publico ? 'Si' : 'No' }}
+                <strong>{{ $avaluo->alumbrado_publico ? 'Si' : 'No' }}</strong>
             </td>
             <td style="text-align: center;">
-                {{ $avaluo->banqueta ? 'Si' : 'No' }}
+                <strong>{{ $avaluo->banqueta ? 'Si' : 'No' }}</strong>
             </td>
         </tr>
 
@@ -57,7 +57,7 @@
 
     <p class="separador">Bloque {{ $loop->iteration }}</p>
 
-    <strong>Uso del bloque:</strong> {{ $bloque->uso }}
+   Uso del bloque: <strong>{{ $bloque->uso }}</strong>
 
     <p style="text-align: center; margin-top: 20px;"><strong>Obra negra</strong></p>
 
