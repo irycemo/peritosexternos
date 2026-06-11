@@ -7,7 +7,7 @@
         <thead>
 
             <tr>
-                <th style="padding-right: 10px;">Superficie</th>
+                <th style="padding-right: 10px;">Superficie privativa</th>
                 <th style="padding-right: 10px;">Demerito</th>
                 <th style="padding-right: 10px;">Valor demeritado</th>
                 <th style="padding-right: 10px;">Valor unitario</th>
@@ -55,7 +55,7 @@
         <thead>
 
             <tr>
-                <th style="padding-right: 10px;">Superficie</th>
+                <th style="padding-right: 10px;">Superficie proporcional</th>
                 <th style="padding-right: 10px;">Indiviso</th>
                 <th style="padding-right: 10px;">Valor unitario</th>
                 <th style="padding-right: 10px;">Superficie proporcional</th>
