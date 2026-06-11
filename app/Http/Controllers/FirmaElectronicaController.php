@@ -82,9 +82,9 @@ class FirmaElectronicaController extends Controller
 
         $canvas = $dom_pdf->get_canvas();
 
-        $canvas->page_text(480, 745, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
+        $canvas->page_text(480, 960, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
 
-        $canvas->page_text(35, 745, 'Avalúo - ' . $avaluo->año .'-' . $avaluo->folio .'-' . $avaluo->usuario, null, 9, array(1, 1, 1));
+        $canvas->page_text(35, 960, 'Avalúo - ' . $avaluo->año .'-' . $avaluo->folio .'-' . $avaluo->usuario, null, 9, array(1, 1, 1));
 
         $this->crearImagenConMarcaDeAgua($firma_electronica);
 
@@ -119,9 +119,9 @@ class FirmaElectronicaController extends Controller
 
         $canvas = $dom_pdf->get_canvas();
 
-        $canvas->page_text(480, 745, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
+        $canvas->page_text(480, 960, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
 
-        $canvas->page_text(35, 745, 'Avalúo' . '-' . $object->avaluo->año .'-' .$object->avaluo->folio . '-' . $object->avaluo->usuario, null, 9, array(1, 1, 1));
+        $canvas->page_text(35, 960, 'Avalúo' . '-' . $object->avaluo->año .'-' .$object->avaluo->folio . '-' . $object->avaluo->usuario, null, 9, array(1, 1, 1));
 
         return $pdf;
 
@@ -156,9 +156,9 @@ class FirmaElectronicaController extends Controller
 
         $canvas = $dom_pdf->get_canvas();
 
-        $canvas->page_text(480, 745, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
+        $canvas->page_text(480, 960, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
 
-        $canvas->page_text(35, 745, $object->avaluo->año .'-' .$object->avaluo->folio . '-' . $object->avaluo->usuario, null, 9, array(1, 1, 1));
+        $canvas->page_text(35, 960, $object->avaluo->año .'-' .$object->avaluo->folio . '-' . $object->avaluo->usuario, null, 9, array(1, 1, 1));
 
         $canvas->page_script(function ($pageNumber, $pageCount, $canvas, $fontMetrics) {
             $w = $canvas->get_width();
