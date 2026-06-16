@@ -18,6 +18,7 @@ use App\Livewire\Admin\ValoresUnitariosRusticos;
 use App\Livewire\Admin\VerAvaluo;
 use App\Livewire\Admin\VerUsuario;
 use App\Livewire\Consultas\AcuerdosValor\AcuerdosValorConsulta;
+use App\Livewire\Consultas\PlanosValores\PlanosValores;
 use App\Livewire\Consultas\Preguntas\NuevaPregunta;
 use App\Livewire\Consultas\Preguntas\Preguntas;
 use App\Livewire\Valuacion\MisAvaluos;
@@ -65,6 +66,8 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
     /* Consultas */
     Route::get('acuerdos_valores_consulta', AcuerdosValorConsulta::class)->name('acuerdos_valores_consulta');
+
+    Route::get('planos_valores', PlanosValores::class)->name('planos_valores');
 
     Route::get('preguntas_frecuentes', Preguntas::class)->name('preguntas_frecuentes');
 
