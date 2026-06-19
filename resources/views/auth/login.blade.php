@@ -8,6 +8,12 @@
 
         <x-validation-errors class="mb-4" />
 
+        <div class="text-center">
+
+            <span class="block font-medium text-gray-700 dark:text-gray-300">Peritos Externos</span>
+
+        </div>
+
         @session('status')
             <div class="mb-4 font-medium text-sm text-green-600">
                 {{ $value }}

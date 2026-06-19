@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\FactorIncremento;
+use App\Models\User;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -110,6 +111,20 @@ Artisan::command('acuerdos', function(){
 
         info($line);
         fclose($handle);
+
+    }
+
+});
+
+Artisan::command('usuarios', function(){
+
+    $usuarios = User::all();
+
+    foreach ($usuarios as $usuario) {
+
+        if($usuario->hasRole('Administrador')) continue;
+
+        $usuario->update(['estado' => 'inactivo']);
 
     }
 
