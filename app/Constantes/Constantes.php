@@ -13,7 +13,8 @@ class Constantes{
         'Consultas',
         'Acuerdos',
         'Valuación',
-        'Efirmas'
+        'Efirmas',
+        'Revisión'
     ];
 
     const TIPO_VIALIDADES = [

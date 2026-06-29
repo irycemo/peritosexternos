@@ -21,6 +21,7 @@ use App\Livewire\Consultas\AcuerdosValor\AcuerdosValorConsulta;
 use App\Livewire\Consultas\PlanosValores\PlanosValores;
 use App\Livewire\Consultas\Preguntas\NuevaPregunta;
 use App\Livewire\Consultas\Preguntas\Preguntas;
+use App\Livewire\Revision\Revision;
 use App\Livewire\Valuacion\MisAvaluos;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -58,6 +59,9 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('valores_unitarios_construccion', ValoresUnitariosConstruccion::class)->middleware('permission:Lista de valores unitarios')->name('unitarios_construccion');
 
     Route::get('valores_unitarios_rusticos', ValoresUnitariosRusticos::class)->middleware('permission:Lista de valores unitarios')->name('unitarios_rusticos');
+
+    /* Revisión */
+    Route::get('revision', Revision::class)->middleware('permission:Revisión')->name('revision');
 
     /* Valuación */
     Route::get('mis_avaluos', MisAvaluos::class)->middleware('can:Mis avaluos')->name('mis_avaluos');
