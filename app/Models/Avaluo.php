@@ -7,7 +7,7 @@ use App\Models\File;
 use App\Models\FirmaElectronica;
 use App\Models\Predio;
 use App\Models\Requerimiento;
-use App\Models\User;
+use App\Models\Revision;
 use App\Traits\ModelosTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -179,6 +179,10 @@ class Avaluo extends Model implements Auditable
 
         return $anexo?->getLink();
 
+    }
+
+    public function revisiones(){
+        return $this->hasMany(Revision::class);
     }
 
 }
