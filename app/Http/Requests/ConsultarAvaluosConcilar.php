@@ -26,7 +26,11 @@ class ConsultarAvaluosConcilar extends FormRequest
             'usuario' => 'nullable|numeric',
             'folio' => 'nullable|numeric',
             'pagina' => 'required',
-            'pagination' => 'required'
+            'pagination' => 'required',
+            'localidad' => 'nullable',
+            'oficina' => 'nullable',
+            't_predio' => 'nullable',
+            'registro' => 'nullable',
         ];
     }
 }

@@ -236,13 +236,29 @@ class AvaluoApiController extends Controller
 
         $validated = $request->validated();
 
-        $avaluos = Avaluo::with('imagenes', 'creadoPor:id,name', 'predio', 'requerimientos')
+        $avaluos = Avaluo::with(
+                                'creadoPor:id,name',
+                                'predio:id,estado,region_catastral,municipio,zona_catastral,localidad,sector,manzana,predio,edificio,departamento,oficina,tipo_predio,numero_registro,lat,lon,xutm,yutm,zutm',
+                                'requerimientos')
                             ->whereHas('predio', function($q){
                                 $q->whereIn('sector', [88,99]);
                             })
                             ->when(isset($validated['año']), fn($q) => $q->where('año', $validated['año']))
                             ->when(isset($validated['folio']), fn($q) => $q->where('folio', $validated['folio']))
                             ->when(isset($validated['usuario']), fn($q) => $q->where('usuario', $validated['usuario']))
+                            ->when(
+                                    isset($validated['localidad']) &&
+                                    isset($validated['oficina']) &&
+                                    isset($validated['t_predio']) &&
+                                    isset($validated['registro']),
+                            function($q) use($validated){
+                                $q->whereHas('predio', function($q) use($validated){
+                                    $q->where('localidad', $validated['localidad'])
+                                        ->where('oficina', $validated['oficina'])
+                                        ->where('tipo_predio', $validated['t_predio'])
+                                        ->where('numero_registro', $validated['registro']);
+                                });
+                            })
                             ->orderBy('id', 'desc')
                             ->paginate($validated['pagination'], ['*'], 'page', $validated['pagina']);
 
