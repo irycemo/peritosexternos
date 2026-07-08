@@ -19,6 +19,14 @@ class Revision extends Component
                             ->where('creado_por', $this->perito)
                             ->first();
 
+        if(! $avaluo){
+
+            $this->dispatch('mostrarMensaje', ['warning', 'El perito no tiene avalúos operados.']);
+
+            return;
+
+        }
+
         return redirect()->route('ver_avaluo', ['avaluo' => $avaluo]);
 
     }
