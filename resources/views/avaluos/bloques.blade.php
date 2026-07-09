@@ -2,7 +2,7 @@
 
 <p class="parrafo">
 
-    <p>EL predio es habitacional: <strong>{{ $predio->es_habitacional ? 'Si' : 'No' }}</strong></p>
+    <p>Tipo de uso: <strong>{{ $predio->es_habitacional ? 'habitacional' : 'otro' }}</strong></p>
     <p>Clasificación de la zona: <strong>{{ $predio->avaluo->clasificacion_zona }}</strong></p>
     <p>Tipo de construcción dominante: <strong>{{ $predio->avaluo->construccion_dominante }}</strong></p>
 
