@@ -168,6 +168,7 @@ trait AvaluoCadenaTrait
         $predio->id = $avaluo->predio->id;
         $predio->tipo_predio = $avaluo->predio->tipo_predio;
         $predio->status = $avaluo->predio->status;
+        $predio->es_habitacional = $avaluo->predio->es_habitacional;
         $predio->curt = $avaluo->predio->curt;
         $predio->superficie_construccion = $avaluo->predio->superficie_construccion_formateada;
         $predio->area_comun_terreno = $avaluo->predio->area_comun_terreno;

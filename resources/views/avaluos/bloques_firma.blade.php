@@ -2,6 +2,9 @@
 
 <p class="parrafo">
 
+    @if(isset($avaluo->predio->es_habitacional))
+        <p>EL predio es habitacional: <strong>{{ $avaluo->predio->es_habitacional ? 'Si' : 'No' }}</strong></p>
+    @endif
     <p>Clasificación de la zona: <strong>{{ $avaluo->clasificacion_zona }}</strong></p>
     <p>Tipo de construcción dominante: <strong>{{ $avaluo->construccion_dominante }}</strong></p>
 

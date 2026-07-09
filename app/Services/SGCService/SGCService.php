@@ -118,4 +118,36 @@ class SGCService{
 
     }
 
+    public function actualizarEsHabitacional(int $localidad, int $oficina, int $tipo_predio, int $numero_registro, bool $es_habitacional){
+
+        $response = Http::withToken(config('services.sgc.token'))
+                            ->accept('application/json')
+                            ->asForm()
+                            ->post(
+                                config('services.sgc.actualizar_es_habitacional'),
+                                [
+                                    'localidad' => $localidad,
+                                    'oficina' => $oficina,
+                                    'tipo_predio' => $tipo_predio,
+                                    'numero_registro' => $numero_registro,
+                                    'es_habitacional' => $es_habitacional,
+                                ]
+                            );
+
+        if(! in_array($response->status(), [200, 201])){
+
+            $data = json_decode($response, true);
+
+            if(isset($data['error'])){
+
+                throw new GeneralException($data['error']);
+
+            }
+
+            throw new GeneralException("Error al actualizar es habitacional.");
+
+        }
+
+    }
+
 }

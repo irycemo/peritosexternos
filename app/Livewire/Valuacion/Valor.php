@@ -132,8 +132,27 @@ class Valor extends Component
 
             }
 
-
             $this->predio->valor_catastral = $this->revisarValorMinimo($this->predio->valor_catastral);
+
+            $es_habitacional = false;
+
+            if($this->predio->construcciones->count()){
+
+                $es_habitacional = $this->predio->construcciones->every(function ($construccion) {
+                    return $construccion->uso === "1";
+                });
+
+            }
+
+            if($this->predio->construccionesComun->count()){
+
+                $es_habitacional = $this->predio->construccionesComun->every(function ($construccionComun) {
+                    return $construccionComun->uso === "1";
+                });
+
+            }
+
+            $this->predio->es_habitacional = $es_habitacional;
 
             $this->predio->save();
 

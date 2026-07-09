@@ -208,6 +208,8 @@ class MisAvaluos extends Component
 
                 $this->avaluo->update(['estado' => 'concluido']);
 
+                (new SGCService)->actualizarEsHabitacional($this->avaluo->predio->localidad, $this->avaluo->predio->oficina, $this->avaluo->predio->tipo_predio, $this->avaluo->predio->numero_registro, $this->avaluo->predio->es_habitacional);
+
             });
 
             $this->reset('modalConcluir', 'cer', 'key', 'contraseña');

@@ -45,6 +45,7 @@ return [
         'consulta_tramite_refrendo' => env('SGC_CONSULTA_TRAMITE_REFRENDO'),
         'crear_tramite_refrendo' => env('SGC_CREAR_TRAMITE_REFRENDO'),
         'acreditar_pago' => env('SGC_ACREDITAR_PAGO'),
+        'actualizar_es_habitacional' => env('SGC_ACTUALIZAR_ES_HABITACIONAL'),
     ],
 
     'google' => [
