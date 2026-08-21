@@ -190,6 +190,8 @@ class MisAvaluos extends Component
 
     public function concluirAvaluo(){
 
+        set_time_limit(60);
+
         $this->validate([
             'contraseña' => 'required',
             'cer' => 'required',
