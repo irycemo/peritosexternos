@@ -9,6 +9,7 @@ use App\Http\Resources\ConstruccionResource;
 use App\Http\Resources\TerrenoComunResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\ConstruccionComunResource;
+use Illuminate\Support\Facades\Storage;
 
 class AvaluoResource extends JsonResource
 {
@@ -86,7 +87,8 @@ class AvaluoResource extends JsonResource
             'microlocalizacion' => $this->microlocalizacion(),
             'poligonoImagen' => $this->poligonoImagen(),
             'poligonoDwg' => $this->poligonoDwg(),
-            'anexo' => $this->anexo()
+            'anexo' => $this->anexo(),
+            'caratula' => Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_caratulas') . $this->caratula(), now()->addMinutes(60))
         ];
 
     }
