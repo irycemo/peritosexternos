@@ -3,9 +3,11 @@
 namespace App\Livewire\Valuacion;
 
 use App\Constantes\Constantes;
+use Illuminate\Support\Facades\Cache;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\AvaluoController;
 use App\Http\Controllers\FirmaElectronicaController;
+use App\Jobs\Avaluos\CrearCaratulaAvaluoJob;
 use App\Models\Avaluo;
 use App\Models\File;
 use App\Models\FirmaElectronica;
@@ -15,6 +17,7 @@ use App\Services\TramitesLineaService\TramitesLineaService;
 use App\Traits\BuscarPersonaTrait;
 use App\Traits\ComponentesTrait;
 use App\Traits\GeneradorQRTrait;
+use App\Traits\GuardarEnS3Trait;
 use App\Traits\RevisarAvaluoTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -34,6 +37,7 @@ class MisAvaluos extends Component
     use WithFileUploads;
     use GeneradorQRTrait;
     use BuscarPersonaTrait;
+    use GuardarEnS3Trait;
 
     public Avaluo $modelo_editar;
 
@@ -54,6 +58,11 @@ class MisAvaluos extends Component
 
     public $archivo;
 
+    public ?string $estado = null;        // 'generando' | 'listo' | 'error'
+    public ?string $claveProceso = null;  // clave de cache compartida con el job
+    public ?string $urlDescarga = null;   // URL firmada de S3 (30 min)
+    public ?string $mensajeError = null;
+
     public $años;
     public $filters = [
         'año' => '',
@@ -73,6 +82,11 @@ class MisAvaluos extends Component
     }
 
     public function abrirModalConcluir(Avaluo $avaluo){
+
+        $this->reset([
+            'estado', 'claveProceso',
+            'urlDescarga', 'mensajeError',
+        ]);
 
         $this->avaluo = $avaluo;
 
@@ -169,13 +183,29 @@ class MisAvaluos extends Component
 
     public function reimprimir(FirmaElectronica $firma_electronica){
 
+        if($firma_electronica->avaluo->pdf){
+
+            if(app()->isProduction()){
+
+                return redirect(Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_pdfs') . $firma_electronica->avaluo->pdf->url, now()->addMinutes(10)));
+
+            }else{
+
+                return redirect(Storage::disk('pdfs')->url($firma_electronica->avaluo->pdf->url));
+
+            }
+
+        }
+
         try {
 
             $pdf = (new FirmaElectronicaController())->reimprimirAvaluo($firma_electronica);
 
+            $this->guardarEnS3($firma_electronica->avaluo, $pdf);
+
             return response()->streamDownload(
                 fn () => print($pdf->output()),
-                $firma_electronica->avaluo->predio->cuentaPredial() . '-certificado_de_registro.pdf'
+                $firma_electronica->avaluo->predio->cuentaPredial() . '-avaluo_perito_externo.pdf'
             );
 
         } catch (\Throwable $th) {
@@ -190,46 +220,120 @@ class MisAvaluos extends Component
 
     public function concluirAvaluo(){
 
-        set_time_limit(60);
-
         $this->validate([
             'contraseña' => 'required',
             'cer' => 'required',
             'key' => 'required',
         ]);
 
+        $this->claveProceso = 'avaluo_' . $this->avaluo->id . '_usuario_' . auth()->id();
+
+        $actual = Cache::get($this->claveProceso);
+
+        if($actual && $actual['status'] === 'procesando'){
+
+            $this->estado = 'generando';
+
+            $this->dispatch('mostrarMensaje', ['warning', "Ya existe un proceso activo para generar este avalúo."]);
+
+            return;
+
+        }
+
+        $this->estado = 'generando';
+        $this->urlDescarga = null;
+        $this->mensajeError = null;
+
+        Cache::put($this->claveProceso, ['status' => 'procesando'], now()->addMinutes(30));
+
         try {
 
-            $this->revisarAvaluoCompleto();
-
-            $pdf = null;
-
-            DB::transaction(function () use(&$pdf){
-
-                $pdf = (new FirmaElectronicaController())->firmarElectronicamente($this->avaluo, $this->cer->getRealPath(), $this->key->getRealPath(), $this->contraseña);
-
-                $this->avaluo->update(['estado' => 'concluido']);
-
-                (new SGCService)->actualizarEsHabitacional($this->avaluo->predio->localidad, $this->avaluo->predio->oficina, $this->avaluo->predio->tipo_predio, $this->avaluo->predio->numero_registro, $this->avaluo->predio->es_habitacional);
-
-            });
-
-            $this->reset('modalConcluir', 'cer', 'key', 'contraseña');
-
-            return response()->streamDownload(
-                fn () => print($pdf->output()),
-                $this->avaluo->predio->cuentaPredial() . '-avaluo.pdf'
+            CrearCaratulaAvaluoJob::dispatch(
+                $this->avaluo,
+                auth()->user(),
+                $this->cer->getRealPath(),
+                $this->key->getRealPath(),
+                $this->contraseña,
+                $this->claveProceso
             );
-
-        } catch (GeneralException $ex) {
-
-            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al concluir avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error(
+                "Error al generar avalúo",
+                [
+                    'message' => $th->getMessage(),
+                    'avaluo_id' => $this->avaluo->id,
+                    'avaluo_foli' => $this->avaluo->folio(),
+                    'user' => auth()->user()->name,
+                    'trace' => $th->getTraceAsString()
+                ]
+            );
 
-            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+            Cache::forget($this->claveProceso);
+
+            $this->estado = 'error';
+
+            $this->mensajeError = 'No fue posible iniciar el proceso. Intenta de nuevo.';
+
+            return;
+
+        }
+
+    }
+
+    public function consultarEstado(){
+
+        if($this->estado !== 'generando' || ! $this->claveProceso){
+
+            return;
+        }
+
+        $actual = Cache::get($this->claveProceso);
+
+        if(! $actual){
+
+            // Todavía en proceso (o el worker aún no publicó el estado).
+            return;
+
+        }
+
+        if($actual['status'] === 'listo'){
+
+            $this->estado = 'listo';
+
+            if(app()->isProduction()){
+
+
+                $this->urlDescarga = Storage::disk('s3')->temporaryUrl(
+                    $actual['s3_path'],
+                    now()->addMinutes(30),
+                    [
+                        'ResponseContentType' => 'application/pdf',
+                        'ResponseContentDisposition' => 'attachment; filename="' . $actual['filename'] . '"',
+                    ]
+                );
+
+            }else{
+
+                $this->urlDescarga = Storage::disk('pdfs')->url(
+                    $actual['filename'],
+                    [
+                        'ResponseContentType' => 'application/pdf',
+                        'ResponseContentDisposition' => 'attachment; filename="' . $actual['filename'] . '"',
+                    ]
+                );
+            }
+
+            return;
+
+        }
+
+        if($actual['status'] === 'error'){
+
+            $this->estado = 'error';
+
+            $this->mensajeError = $actual['mensaje'] ?? 'No fue posible generar el certificado.';
 
         }
 

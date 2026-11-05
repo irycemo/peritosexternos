@@ -100,6 +100,14 @@ return [
             'throw' => false,
         ],
 
+        'pdfs' => [
+            'driver' => 'local',
+            'root' => storage_path('app/pdfs'),
+            'url' => env('APP_URL').'/pdfs',
+            'visibility' => 'public',
+            'throw' => true,
+        ],
+
         's3_backups' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -133,6 +141,7 @@ return [
         public_path('caratulas') => storage_path('app/caratulas'),
         public_path('preguntas') => storage_path('app/preguntas'),
         public_path('efirmas') => storage_path('app/efirmas'),
+        public_path('pdfs') => storage_path('app/pdfs'),
     ],
 
 ];

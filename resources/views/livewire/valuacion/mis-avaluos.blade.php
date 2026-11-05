@@ -444,21 +444,79 @@
 
             </div>
 
+            <div class="w-full mb-3">
+
+                @if($estado === 'generando')
+
+                    {{-- wire:poll se activa solo mientras este bloque existe; al pasar a
+                        "listo"/"error" el bloque desaparece y el polling se detiene. --}}
+                    <div
+                        wire:poll.2s="consultarEstado"
+                        class="bg-white p-6 mb-5 text-xs flex flex-col items-center gap-3 text-gray-600">
+
+                        <img class="h-4" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                        <p class="font-semibold text-base">Generando avalúo</p>
+
+                    </div>
+
+                @endif
+
+                @if($estado === 'listo' && $urlDescarga)
+
+                    <div class="bg-white p-6 mb-5 text-xs flex flex-col items-center gap-3 text-gray-700">
+
+                        <p class="font-semibold text-base text-green-700">El avalúo está listo.</p>
+
+                        <a
+                            href="{{ $urlDescarga }}"
+                            target="_blank"
+                            rel="noopener"
+                            class="bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-2 rounded">
+
+                            Descargar avalúo (PDF)
+
+                        </a>
+
+                    </div>
+
+                @endif
+
+                @if($estado === 'error')
+
+                    <div class="bg-white p-6 mb-5 text-xs flex flex-col items-center gap-3">
+
+                        <p class="font-semibold text-base text-red-700">
+                            {{ $mensajeError ?? 'No fue posible generar el avalúo.' }}
+                        </p>
+
+                    </div>
+
+                @endif
+
+            </div>
+
         </x-slot>
 
         <x-slot name="footer">
 
             <div class="flex gap-3">
 
-                <x-button-blue
-                    wire:click="concluirAvaluo"
-                    wire:loading.attr="disabled"
-                    wire:target="concluirAvaluo">
+                @if(! in_array($estado, ['generando', 'listo']))
 
-                    <img wire:loading wire:target="concluirAvaluo" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                    <button
+                        wire:click="concluirAvaluo"
+                        wire:loading.attr="disabled"
+                        :disabled="{{ $estado === 'generando' }}"
+                        class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
 
-                    <span>Concluir avalúo</span>
-                </x-button-blue>
+                        <img wire:loading wire:target="concluirAvaluo" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                        Generar avalúo
+
+                    </button>
+
+                @endif
 
                 <x-button-red
                     wire:click="$toggle('modalConcluir')"

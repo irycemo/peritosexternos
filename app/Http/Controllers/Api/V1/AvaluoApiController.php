@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Avaluo;
+use App\Http\Controllers\FirmaElectronicaController;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AvaluoRequest;
 use App\Http\Resources\AvaluoResource;
-use App\Http\Controllers\AvaluoController;
 use App\Http\Requests\AsociarAvisoRequest;
 use App\Http\Requests\ConciliarPredioRequest;
 use App\Http\Requests\ConsultarAvaluosConcilar;
@@ -17,9 +18,12 @@ use App\Http\Resources\AvaluosConcilarResource;
 use App\Http\Resources\AvaluoCartografiaResource;
 use App\Http\Requests\ConsultarCartografiaRequest;
 use App\Models\FirmaElectronica;
+use App\Traits\GuardarEnS3Trait;
 
 class AvaluoApiController extends Controller
 {
+
+    use GuardarEnS3Trait;
 
     public function consultarAvaluo(AvaluoRequest $request){
 
@@ -195,13 +199,53 @@ class AvaluoApiController extends Controller
 
         try {
 
-            $pdf = (new AvaluoController())->avaluo($avaluo->predio);
+            if($avaluo->pdf){
 
-            return response()->json([
-                'data' => [
-                    'pdf' => base64_encode($pdf->stream())
-                ]
-            ], 200);
+                if(app()->isProduction()){
+
+                    return response()->json([
+                        'data' => [
+                            'pdf' => Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_pdfs') . $avaluo->pdf->url, now()->addMinutes(10))
+                        ]
+                    ], 200);
+
+                }else{
+
+                    return response()->json([
+                        'data' => [
+                            'pdf' => Storage::disk('pdfs')->url($avaluo->pdf->url)
+                        ]
+                    ], 200);
+
+                }
+
+            }else{
+
+                $pdf = (new FirmaElectronicaController())->reimprimirAvaluo($avaluo->firmaElectronica);
+
+                $this->guardarEnS3($avaluo, $pdf);
+
+                $avaluo->refresh();
+
+                if(app()->isProduction()){
+
+                    return response()->json([
+                        'data' => [
+                            'pdf' => Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_pdfs') . $avaluo->pdf->url, now()->addMinutes(10))
+                        ]
+                    ], 200);
+
+                }else{
+
+                    return response()->json([
+                        'data' => [
+                            'pdf' => Storage::disk('pdfs')->url($avaluo->pdf->url)
+                        ]
+                    ], 200);
+
+                }
+
+            }
 
         } catch (\Throwable $th) {
 

@@ -283,6 +283,22 @@ trait AvaluoCadenaTrait
 
                     }
 
+                    if($imagen->descripcion == 'pdf'){
+
+                        if(app()->isProduction()){
+
+                            Storage::disk('s3')->delete(config('services.ses.ruta_pdfs') . $imagen->url);
+
+                        }else{
+
+                            Storage::disk('pdfs')->delete($imagen->url);
+
+                        }
+
+                        $imagen->delete();
+
+                    }
+
                 }
 
             }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\GeneralException;
+use App\Models\User;
 use Imagick;
 use App\Models\File;
 use App\Models\Avaluo;
@@ -43,7 +44,7 @@ class FirmaElectronicaController extends Controller
         $datos_control = (object)[];
 
         $datos_control->impreso_en = now()->format('d/m/Y H:i:s');
-        $datos_control->valuador = auth()->user()->name;
+        $datos_control->valuador = $avaluo->creadoPor->name;
 
         $object->datos_control = $datos_control;
         $object->avaluo = $this->crearCadena($avaluo);
@@ -174,7 +175,7 @@ class FirmaElectronicaController extends Controller
 
         Storage::disk('avaluos')->put($nombreFinal, $pdf->output());
 
-        $pdfImagen = new \Spatie\PdfToImage\Pdf('avaluos/' . $nombreFinal);
+        $pdfImagen = new \Spatie\PdfToImage\Pdf('/var/www/html/peritosexternos/storage/app/avaluos/' . $nombreFinal);
 
         $all = new Imagick();
 
@@ -182,13 +183,13 @@ class FirmaElectronicaController extends Controller
 
             $nombre_img = $nombre . '_' . $i . '.jpg';
 
-            $pdfImagen->selectPage($i)->save('avaluos/'. $nombre_img);
+            $pdfImagen->selectPage($i)->save('/var/www/html/peritosexternos/storage/app/avaluos/'. $nombre_img);
 
             $im = new Imagick(Storage::disk('avaluos')->path($nombre_img));
 
             $all->addImage($im);
 
-            unlink('avaluos/' . $nombre_img);
+            unlink('/var/www/html/peritosexternos/storage/app/avaluos/' . $nombre_img);
 
         }
 
@@ -202,7 +203,7 @@ class FirmaElectronicaController extends Controller
 
         }else{
 
-            file_put_contents("caratulas/" . $nombre . '.jpg', $combined);
+            file_put_contents("/var/www/html/peritosexternos/storage/app/caratulas/" . $nombre . '.jpg', $combined);
 
         }
 
@@ -213,7 +214,7 @@ class FirmaElectronicaController extends Controller
             'url' => $nombre . '.jpg'
         ]);
 
-        unlink('avaluos/' . $nombreFinal);
+        unlink('/var/www/html/peritosexternos/storage/app/avaluos/' . $nombreFinal);
 
     }
 

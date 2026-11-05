@@ -95,6 +95,10 @@ class Avaluo extends Model implements Auditable
         return $this->imagenes()->where('descripcion', 'avaluo')->orderBy('created_at', 'desc')->first()->url;
     }
 
+    public function pdf(){
+        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'pdf');
+    }
+
     public function fachada(){
 
         $fachada = $this->imagenes()->where('descripcion', 'fachada')->first();
@@ -183,6 +187,12 @@ class Avaluo extends Model implements Auditable
 
     public function revisiones(){
         return $this->hasMany(Revision::class);
+    }
+
+    public function folio(){
+
+        return $this->año . '-' . $this->folio . '-' . $this->usuario;
+
     }
 
 }
