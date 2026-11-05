@@ -3,6 +3,7 @@
 namespace App\Livewire\Valuacion;
 
 use App\Constantes\Constantes;
+use PhpCfdi\Credentials\Credential;
 use Illuminate\Support\Facades\Cache;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\AvaluoController;
@@ -199,6 +200,8 @@ class MisAvaluos extends Component
 
         try {
 
+
+
             $pdf = (new FirmaElectronicaController())->reimprimirAvaluo($firma_electronica);
 
             $this->guardarEnS3($firma_electronica->avaluo, $pdf);
@@ -225,6 +228,22 @@ class MisAvaluos extends Component
             'cer' => 'required',
             'key' => 'required',
         ]);
+
+        try {
+
+            Credential::openFiles(
+                $this->cer->getRealPath(),
+                $this->key->getRealPath(),
+                $this->contraseña
+            );
+
+        } catch (\Throwable $th) {
+
+            $this->dispatch('mostrarMensaje', ['warning', 'Error al procesar firma elecrónica, favor de verificar los archivos o contraseña.']);
+
+            return;
+
+        }
 
         $this->claveProceso = 'avaluo_' . $this->avaluo->id . '_usuario_' . auth()->id();
 

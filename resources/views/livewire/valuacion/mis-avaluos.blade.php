@@ -451,7 +451,7 @@
                     {{-- wire:poll se activa solo mientras este bloque existe; al pasar a
                         "listo"/"error" el bloque desaparece y el polling se detiene. --}}
                     <div
-                        wire:poll.2s="consultarEstado"
+                        wire:poll.10s="consultarEstado"
                         class="bg-white p-6 mb-5 text-xs flex flex-col items-center gap-3 text-gray-600">
 
                         <img class="h-4" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">

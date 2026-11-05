@@ -25,19 +25,11 @@ class FirmaElectronicaController extends Controller
 
         $this->resetCaratula($avaluo);
 
-        try {
-
-            $fiel = Credential::openFiles(
-                $cer,
-                $key,
-                $password
-            );
-
-        } catch (\Throwable $th) {
-
-            throw new GeneralException('Error al procesar firma elecrónica, favor de verificar los archivos o contraseña.');
-
-        }
+        $fiel = Credential::openFiles(
+            $cer,
+            $key,
+            $password
+        );
 
         $object = (object)[];
 
