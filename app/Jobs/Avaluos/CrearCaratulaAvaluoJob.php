@@ -12,7 +12,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Http\Controllers\FirmaElectronicaController;
-use Illuminate\Support\Str;
 use App\Models\File;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
@@ -120,7 +119,7 @@ class CrearCaratulaAvaluoJob implements ShouldQueue
             [
                 'message' => $exception->getMessage(),
                 'avaluo_id' => $this->avaluo->id,
-                'folio_avaluo' => $this->avaluo->folio(),
+                'folio_avaluo' => $this->avaluo->folioAvaluo(),
                 'usuario_id' => $this->user->id,
                 'trace' =>  $exception->getTraceAsString()
             ]

@@ -189,7 +189,7 @@ class Avaluo extends Model implements Auditable
         return $this->hasMany(Revision::class);
     }
 
-    public function folio(){
+    public function folioAvaluo(){
 
         return $this->año . '-' . $this->folio . '-' . $this->usuario;
 
