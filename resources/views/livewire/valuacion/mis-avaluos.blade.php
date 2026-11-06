@@ -456,7 +456,7 @@
 
                         <img class="h-4" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                        <p class="font-semibold text-base">Generando avalúo</p>
+                        <p class="font-semibold text-base">Generando pdf, esto puede tardar, no cierre esta ventana.</p>
 
                     </div>
 
@@ -466,7 +466,7 @@
 
                     <div class="bg-white p-6 mb-5 text-xs flex flex-col items-center gap-3 text-gray-700">
 
-                        <p class="font-semibold text-base text-green-700">El avalúo está listo.</p>
+                        <p class="font-semibold text-base text-green-700">El pdf está listo.</p>
 
                         <a
                             href="{{ $urlDescarga }}"
@@ -512,7 +512,7 @@
 
                         <img wire:loading wire:target="concluirAvaluo" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                        Generar avalúo
+                        Concluir avalúo
 
                     </button>
 
