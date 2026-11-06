@@ -12,7 +12,7 @@ trait GuardarEnS3Trait
     private function guardarEnS3(Avaluo $avaluo, $pdf): void
     {
 
-        $filename = 'avaluo_' . $avaluo->folio() . '_' . now()->format('Ymd_His') . '.pdf';
+        $filename = 'avaluo_' . $avaluo->folioAvaluo() . '_' . now()->format('Ymd_His') . '.pdf';
 
         $clave = config('services.ses.ruta_pdfs') . $filename;
 

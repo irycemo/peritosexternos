@@ -65,7 +65,7 @@ class CrearCaratulaAvaluoJob implements ShouldQueue
 
             $this->avaluo->update(['estado' => 'concluido']);
 
-            $nombre = 'avaluo_' . $this->avaluo->folio() . '_' . now()->format('Ymd_His') . '.pdf';
+            $nombre = 'avaluo_' . $this->avaluo->folioAvaluo() . '_' . now()->format('Ymd_His') . '.pdf';
 
             if(app()->isProduction()){
 

@@ -458,6 +458,8 @@
 
                         <p class="font-semibold text-base">Generando pdf, esto puede tardar, no cierre esta ventana.</p>
 
+                        <img wire:loading wire:target="concluirAvaluo" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
                     </div>
 
                 @endif
